@@ -3,12 +3,10 @@ import 'package:flutter/foundation.dart';
 
 /// Central place every game-feel sound effect is triggered from.
 ///
-/// Deliberately fails silently if an asset is missing rather than
-/// crashing gameplay — sound is enhancement, never a hard dependency.
-/// Until real audio assets are added under `assets/audio/` (see
-/// `assets/audio/README.md`), every call here is a safe no-op; wiring
-/// the actual playback call sites now means adding the files later is a
-/// pure asset drop, no code changes.
+/// Deliberately fails silently if an asset is missing or a platform's
+/// audio subsystem errors out, rather than crashing gameplay — sound is
+/// enhancement, never a hard dependency. See `assets/audio/README.md`
+/// for what each file is and its (CC0) provenance.
 class SoundService {
   SoundService._();
 
@@ -18,12 +16,12 @@ class SoundService {
 
   final AudioPlayer _sfxPlayer = AudioPlayer()..setReleaseMode(ReleaseMode.stop);
 
-  Future<void> playCorrect() => _play('audio/correct.mp3');
-  Future<void> playWrong() => _play('audio/wrong.mp3');
-  Future<void> playTap() => _play('audio/tap.mp3');
-  Future<void> playComplete() => _play('audio/complete.mp3');
-  Future<void> playLevelUp() => _play('audio/level_up.mp3');
-  Future<void> playAchievement() => _play('audio/achievement.mp3');
+  Future<void> playCorrect() => _play('audio/correct.wav');
+  Future<void> playWrong() => _play('audio/wrong.wav');
+  Future<void> playTap() => _play('audio/tap.wav');
+  Future<void> playComplete() => _play('audio/complete.wav');
+  Future<void> playLevelUp() => _play('audio/level_up.wav');
+  Future<void> playAchievement() => _play('audio/achievement.wav');
 
   Future<void> _play(String assetPath) async {
     if (!enabled) return;
