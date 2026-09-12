@@ -44,6 +44,10 @@ dependencies:
   # Typography
   google_fonts: ^6.2.1
 
+  # Game-feel: celebratory particle bursts and sound effects
+  confetti: ^0.8.0
+  audioplayers: ^6.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

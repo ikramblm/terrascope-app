@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../app/theme/app_colors.dart';
+import '../../domain/game_category.dart';
 import '../../domain/game_mode.dart';
 
 /// A single game mode tile in the catalog grid.
@@ -12,10 +14,17 @@ class GameModeCard extends StatelessWidget {
   final GameMode mode;
   final VoidCallback? onTap;
 
+  static Color _accentFor(GameCategory category) => switch (category) {
+        GameCategory.guess => AppColors.indigoBright,
+        GameCategory.name => AppColors.emerald,
+        GameCategory.speed => AppColors.amber,
+      };
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final available = mode.isAvailable;
+    final accent = _accentFor(mode.category);
 
     return Opacity(
       opacity: available ? 1 : 0.55,
@@ -31,7 +40,14 @@ class GameModeCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(mode.icon, color: theme.colorScheme.primary, size: 26),
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: accent.withValues(alpha: 0.16),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Icon(mode.icon, color: accent, size: 20),
+                    ),
                     if (!available)
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

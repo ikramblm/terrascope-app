@@ -1,14 +1,17 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'dart:math';
-
 import '../../../../app/router/route_paths.dart';
+import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/empty_state.dart';
+import '../../../../core/widgets/fade_slide_in.dart';
 import '../../../../data/countries/providers/country_providers.dart';
 import '../../../games/data/game_catalog.dart';
 import '../../../player/providers/player_providers.dart';
+import '../widgets/home_hero.dart';
 import '../widgets/player_stat_bar.dart';
 import '../widgets/section_card.dart';
 
@@ -23,84 +26,96 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
+        bottom: false,
         child: CustomScrollView(
           slivers: [
-            SliverPadding(
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-              sliver: SliverToBoxAdapter(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('TerraScope', style: theme.textTheme.headlineLarge),
-                        Text('Explore the world, one country at a time.',
-                            style: theme.textTheme.bodyMedium),
-                      ],
-                    ),
-                    IconButton(
-                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Settings are coming soon')),
-                      ),
-                      icon: const Icon(Icons.settings_outlined),
-                      tooltip: 'Settings',
-                    ),
-                  ],
+            SliverToBoxAdapter(
+              child: HomeHero(
+                onSettingsTap: () => ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Settings are coming soon')),
                 ),
               ),
             ),
             SliverPadding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              sliver: SliverToBoxAdapter(child: PlayerStatBar(profile: profile)),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               sliver: SliverToBoxAdapter(
-                child: ElevatedButton.icon(
-                  onPressed: () => _quickPlay(context),
-                  icon: const Icon(Icons.play_arrow_rounded),
-                  label: const Text('Quick Play'),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(56),
+                child: Transform.translate(
+                  offset: const Offset(0, -28),
+                  child: FadeSlideIn(
+                    index: 0,
+                    child: PlayerStatBar(profile: profile),
                   ),
                 ),
               ),
             ),
             SliverPadding(
-              padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+              padding: const EdgeInsets.fromLTRB(20, 4, 20, 0),
               sliver: SliverToBoxAdapter(
-                child: SectionCard(
-                  icon: Icons.today_outlined,
-                  title: 'Daily Challenge',
-                  subtitle: 'Arrives soon — same challenge for every player, every day.',
-                  accentColor: theme.colorScheme.tertiary,
-                  trailing: _ComingSoonChip(),
+                child: FadeSlideIn(
+                  index: 1,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.indigo.withValues(alpha: 0.35),
+                          blurRadius: 20,
+                          offset: const Offset(0, 8),
+                        ),
+                      ],
+                    ),
+                    child: ElevatedButton.icon(
+                      onPressed: () => _quickPlay(context),
+                      icon: const Icon(Icons.play_arrow_rounded),
+                      label: const Text('Quick Play'),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(56),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+              sliver: SliverToBoxAdapter(
+                child: FadeSlideIn(
+                  index: 2,
+                  child: SectionCard(
+                    icon: Icons.today_outlined,
+                    title: 'Daily Challenge',
+                    subtitle: 'Arrives soon — same challenge for every player, every day.',
+                    accentColor: theme.colorScheme.tertiary,
+                    trailing: _ComingSoonChip(),
+                  ),
                 ),
               ),
             ),
             SliverPadding(
               padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
               sliver: SliverToBoxAdapter(
-                child: countriesAsync.when(
-                  data: (countries) => SectionCard(
-                    icon: Icons.public,
-                    title: 'World Database Ready',
-                    subtitle: '${countries.length} countries loaded — browse every game mode',
-                    accentColor: theme.colorScheme.secondary,
-                    onTap: () => context.go(RoutePaths.games),
-                    trailing: const Icon(Icons.chevron_right),
-                  ),
-                  loading: () => const SectionCard(
-                    icon: Icons.public,
-                    title: 'Loading world database…',
-                    subtitle: 'Preparing 195 countries',
-                  ),
-                  error: (err, st) => SectionCard(
-                    icon: Icons.error_outline,
-                    title: 'Could not load country data',
-                    subtitle: '$err',
-                    accentColor: theme.colorScheme.error,
+                child: FadeSlideIn(
+                  index: 3,
+                  child: countriesAsync.when(
+                    data: (countries) => SectionCard(
+                      icon: Icons.public,
+                      title: 'World Database Ready',
+                      subtitle: '${countries.length} countries loaded — browse every game mode',
+                      accentColor: theme.colorScheme.secondary,
+                      onTap: () => context.go(RoutePaths.games),
+                      trailing: const Icon(Icons.chevron_right),
+                    ),
+                    loading: () => const SectionCard(
+                      icon: Icons.public,
+                      title: 'Loading world database…',
+                      subtitle: 'Preparing 195 countries',
+                    ),
+                    error: (err, st) => SectionCard(
+                      icon: Icons.error_outline,
+                      title: 'Could not load country data',
+                      subtitle: '$err',
+                      accentColor: theme.colorScheme.error,
+                    ),
                   ),
                 ),
               ),

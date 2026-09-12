@@ -1,8 +1,12 @@
+import 'dart:math';
+
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../data/countries/models/country.dart';
 import '../../domain/game_result.dart';
 import '../../engine/multiple_choice_engine.dart';
+import '../../sound/sound_service.dart';
 import '../widgets/answer_option_button.dart';
 import '../widgets/score_header.dart';
 import '../widgets/timer_bar.dart';
@@ -11,7 +15,7 @@ import 'game_results_view.dart';
 /// Generic screen for any "clue → pick the country" mode. Guess by Flag
 /// and Guess by Emoji are both just an [engineBuilder] (which questions)
 /// and a [promptBuilder] (how the clue renders) — everything else (timer,
-/// scoring, feedback, results) lives here once.
+/// scoring, feedback, confetti, sound, results) lives here once.
 class MultipleChoiceGameScreen extends StatefulWidget {
   const MultipleChoiceGameScreen({
     super.key,
@@ -33,6 +37,10 @@ class MultipleChoiceGameScreen extends StatefulWidget {
 class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
   late MultipleChoiceEngine _engine;
   bool _resultRecorded = false;
+  int _lastCelebratedIndex = -1;
+
+  late final ConfettiController _confettiController =
+      ConfettiController(duration: const Duration(milliseconds: 700));
 
   @override
   void initState() {
@@ -42,8 +50,18 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
   }
 
   void _onEngineTick() {
+    if (_engine.answered && _engine.currentIndex != _lastCelebratedIndex) {
+      _lastCelebratedIndex = _engine.currentIndex;
+      if (_engine.lastAnswerCorrect == true) {
+        _confettiController.play();
+        SoundService.instance.playCorrect();
+      } else {
+        SoundService.instance.playWrong();
+      }
+    }
     if (_engine.isComplete && !_resultRecorded) {
       _resultRecorded = true;
+      SoundService.instance.playComplete();
       widget.onSessionComplete(_engine.buildResult());
     }
     setState(() {});
@@ -54,6 +72,7 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
     _engine.dispose();
     setState(() {
       _resultRecorded = false;
+      _lastCelebratedIndex = -1;
       _engine = widget.engineBuilder()..addListener(_onEngineTick);
       _engine.start();
     });
@@ -63,20 +82,44 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
   void dispose() {
     _engine.removeListener(_onEngineTick);
     _engine.dispose();
+    _confettiController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
       body: SafeArea(
-        child: _engine.isComplete
-            ? GameResultsView(
-                result: _engine.buildResult(),
-                onPlayAgain: _playAgain,
-              )
-            : _QuestionView(engine: _engine, promptBuilder: widget.promptBuilder),
+        child: Stack(
+          children: [
+            _engine.isComplete
+                ? GameResultsView(
+                    result: _engine.buildResult(),
+                    onPlayAgain: _playAgain,
+                  )
+                : _QuestionView(engine: _engine, promptBuilder: widget.promptBuilder),
+            Align(
+              alignment: Alignment.topCenter,
+              child: ConfettiWidget(
+                confettiController: _confettiController,
+                blastDirection: pi / 2,
+                blastDirectionality: BlastDirectionality.explosive,
+                numberOfParticles: 18,
+                gravity: 0.4,
+                emissionFrequency: 0.9,
+                maxBlastForce: 16,
+                minBlastForce: 6,
+                colors: [
+                  theme.colorScheme.secondary,
+                  theme.colorScheme.primary,
+                  theme.colorScheme.tertiary,
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

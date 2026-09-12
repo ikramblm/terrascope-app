@@ -82,7 +82,11 @@ void main() {
       // Feedback delay + rebuild.
       await tester.pump(const Duration(milliseconds: 1300));
     }
-    await tester.pumpAndSettle();
+    // Not pumpAndSettle: the confetti package keeps an idle ticker running
+    // once its widget has been mounted (even with no particles active),
+    // so it never reports "settled" — bounded pumps instead.
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
 
     expect(find.text('Game Complete'), findsOneWidget);
     expect(find.text('Play Again'), findsOneWidget);
