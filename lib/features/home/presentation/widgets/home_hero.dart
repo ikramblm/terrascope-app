@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../../app/theme/app_colors.dart';
+import '../../../../core/widgets/globe_grid.dart';
 
 /// Home screen's gradient hero band: title, tagline, settings action, and
 /// a translucent decorative globe for visual depth — no image assets
-/// needed, just gradients + a blurred glow + one icon.
+/// needed, just a gradient, a couple of glow blobs, and a procedurally
+/// drawn globe grid.
 ///
 /// Deliberately static (not a perpetually-spinning animation): an
 /// always-repainting screen burns battery for no real payoff on a
@@ -30,36 +32,34 @@ class HomeHero extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [AppColors.indigo, Color(0xFF3A2E8F)],
+            colors: [AppColors.indigo, AppColors.grapePurple],
           ),
         ),
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            // Soft glow blob, top-right.
+            // Soft glow blobs, in two different accent hues for variety.
             Positioned(
               top: -60,
               right: -40,
-              child: Container(
-                width: 180,
-                height: 180,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.emerald.withValues(alpha: 0.18),
-                ),
-              ),
+              child: _glowBlob(AppColors.emerald, 180),
             ),
-            // Translucent globe, bottom-right, tilted for a bit of energy.
+            Positioned(
+              bottom: -50,
+              left: -30,
+              child: _glowBlob(AppColors.pink, 140),
+            ),
+            // Scattered accent dots — a playful, game-y touch.
+            const Positioned(top: 18, right: 110, child: _Dot(color: AppColors.sunYellow, size: 8)),
+            const Positioned(top: 64, right: 150, child: _Dot(color: AppColors.skyBlue, size: 6)),
+            const Positioned(bottom: 60, right: 60, child: _Dot(color: AppColors.emerald, size: 7)),
+            // Globe grid, bottom-right, tilted for a bit of energy.
             Positioned(
               bottom: -30,
               right: -10,
               child: Transform.rotate(
-                angle: -0.35,
-                child: Icon(
-                  Icons.public,
-                  size: 120,
-                  color: Colors.white.withValues(alpha: 0.10),
-                ),
+                angle: -0.2,
+                child: GlobeGrid(size: 130, color: Colors.white.withValues(alpha: 0.22)),
               ),
             ),
             Row(
@@ -92,6 +92,30 @@ class HomeHero extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _glowBlob(Color color, double size) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(shape: BoxShape.circle, color: color.withValues(alpha: 0.18)),
+    );
+  }
+}
+
+class _Dot extends StatelessWidget {
+  const _Dot({required this.color, required this.size});
+
+  final Color color;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(shape: BoxShape.circle, color: color.withValues(alpha: 0.7)),
     );
   }
 }

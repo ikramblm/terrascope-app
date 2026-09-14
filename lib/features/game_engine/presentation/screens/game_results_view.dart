@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../app/theme/app_colors.dart';
 import '../../domain/game_result.dart';
 
 /// Shared end-of-game summary — every multiple-choice mode ends here.
@@ -39,13 +40,29 @@ class GameResultsView extends StatelessWidget {
               crossAxisSpacing: 12,
               childAspectRatio: 1.6,
               children: [
-                _StatCard(label: 'Score', value: '${result.totalScore}', icon: Icons.stars_rounded),
-                _StatCard(label: 'XP Earned', value: '+${result.xpEarned}', icon: Icons.bolt),
-                _StatCard(label: 'Best Combo', value: '${result.bestCombo}x', icon: Icons.local_fire_department),
+                _StatCard(
+                  label: 'Score',
+                  value: '${result.totalScore}',
+                  icon: Icons.stars_rounded,
+                  accent: AppColors.skyBlue,
+                ),
+                _StatCard(
+                  label: 'XP Earned',
+                  value: '+${result.xpEarned}',
+                  icon: Icons.bolt,
+                  accent: AppColors.emerald,
+                ),
+                _StatCard(
+                  label: 'Best Combo',
+                  value: '${result.bestCombo}x',
+                  icon: Icons.local_fire_department,
+                  accent: AppColors.amber,
+                ),
                 _StatCard(
                   label: 'Time',
                   value: _formatDuration(result.elapsed),
                   icon: Icons.timer_outlined,
+                  accent: AppColors.grapePurple,
                 ),
               ],
             ),
@@ -76,23 +93,35 @@ class GameResultsView extends StatelessWidget {
 }
 
 class _StatCard extends StatelessWidget {
-  const _StatCard({required this.label, required this.value, required this.icon});
+  const _StatCard({required this.label, required this.value, required this.icon, required this.accent});
 
   final String label;
   final String value;
   final IconData icon;
+  final Color accent;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(color: accent.withValues(alpha: 0.35)),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: theme.colorScheme.primary),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: accent.withValues(alpha: 0.18),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, color: accent, size: 20),
+            ),
             const SizedBox(height: 8),
             Text(value, style: theme.textTheme.titleLarge),
             Text(label, style: theme.textTheme.bodySmall),
