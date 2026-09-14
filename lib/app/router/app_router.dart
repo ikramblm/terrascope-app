@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/games/presentation/screens/games_screen.dart';
 import '../../features/games/guess_emoji/presentation/screens/guess_emoji_screen.dart';
 import '../../features/games/guess_flag/presentation/screens/guess_flag_screen.dart';
+import '../../features/games/guess_outline/presentation/screens/guess_outline_screen.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
 import '../../features/leaderboard/presentation/screens/leaderboard_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
@@ -68,6 +69,11 @@ GoRouter buildAppRouter() {
       parentNavigatorKey: rootNavigatorKey,
       path: RoutePaths.guessEmoji,
       builder: (context, state) => const GuessEmojiScreen(),
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: RoutePaths.guessOutline,
+      builder: (context, state) => const GuessOutlineScreen(),
     ),
   ],
   );

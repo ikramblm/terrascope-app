@@ -35,6 +35,7 @@ const List<GameMode> kGameCatalog = [
     title: 'Guess by Outline',
     tagline: 'Recognize a country by its silhouette',
     icon: Icons.crop_free,
+    routePath: RoutePaths.guessOutline,
   ),
   GameMode(
     id: 'guess_borders',

@@ -58,3 +58,31 @@ question generator only draws correct answers from countries present in
 this file; wrong-answer options still draw from the full 195-country
 pool. Expanding coverage to more countries is a content task, not a code
 change — see `EmojiClueRepository`.
+
+## country_outlines.json
+
+Real country boundary polygons for Guess by Outline:
+`{ "cca3": [ [ [ [lon, lat], ... ], ...rings ], ...polygon parts ] }` —
+each country is a list of polygon parts (mainland plus any islands/
+exclaves), each part a list of rings (ring 0 exterior, further rings
+holes), each ring a list of `[lon, lat]` points rounded to 3 decimal
+places (~111m precision).
+
+**Provenance:** converted from the public-domain
+[Natural Earth](https://www.naturalearthdata.com/) 1:110m admin-0
+countries dataset, via the
+[world-atlas](https://github.com/topojson/world-atlas) `countries-110m.json`
+TopoJSON build (`cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json`),
+decoded and matched to our `cca3` codes by
+`scripts/convert_country_outlines.py`.
+
+**Coverage:** 166 of the 195 countries. The 110m resolution is too coarse
+to render very small nations at all (Vatican City, Monaco, Malta,
+Singapore, Liechtenstein, San Marino, and every Pacific/Caribbean
+microstate are the main gaps) — same "curated, extensible subset"
+pattern as `emoji_clues.json`. Guess by Outline's question generator only
+draws correct answers from countries present in this file; wrong-answer
+options still draw from the full 195-country pool. A higher-resolution
+source dataset (e.g. Natural Earth's 50m or 10m tables) would close most
+of the gap, at the cost of a larger bundled file — a content task, not a
+code change, if it's ever worth doing.

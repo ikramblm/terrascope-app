@@ -9,4 +9,5 @@ abstract class RoutePaths {
 
   static const String guessFlag = '/games/guess-flag';
   static const String guessEmoji = '/games/guess-emoji';
+  static const String guessOutline = '/games/guess-outline';
 }

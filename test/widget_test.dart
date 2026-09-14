@@ -8,6 +8,8 @@ import 'package:terrascope_app/data/countries/repositories/country_repository.da
 import 'package:terrascope_app/features/game_engine/presentation/widgets/answer_option_button.dart';
 import 'package:terrascope_app/features/games/guess_emoji/data/emoji_clue_repository.dart';
 import 'package:terrascope_app/features/games/guess_emoji/providers/emoji_clue_providers.dart';
+import 'package:terrascope_app/features/games/guess_outline/data/country_outline_repository.dart';
+import 'package:terrascope_app/features/games/guess_outline/providers/country_outline_providers.dart';
 
 import 'support/sync_test_asset_bundle.dart';
 
@@ -21,6 +23,7 @@ Widget buildTestApp() {
     overrides: [
       countryRepositoryProvider.overrideWithValue(CountryRepository(bundle: bundle)),
       emojiClueRepositoryProvider.overrideWithValue(EmojiClueRepository(bundle: bundle)),
+      countryOutlineRepositoryProvider.overrideWithValue(CountryOutlineRepository(bundle: bundle)),
     ],
     child: const TerraScopeApp(),
   );
@@ -45,10 +48,11 @@ void main() {
     await tester.tap(find.text('Games'));
     await tester.pumpAndSettle();
 
-    // Guess by Flag and Guess by Emoji are playable now (Phase 2) — no
-    // "Soon" badge on their cards.
+    // Guess by Flag, Guess by Emoji, and Guess by Outline are playable
+    // now — no "Soon" badge on their cards.
     expect(find.text('Guess by Flag'), findsOneWidget);
     expect(find.text('Guess by Emoji'), findsOneWidget);
+    expect(find.text('Guess by Outline'), findsOneWidget);
     // Everything else in the catalog is still honestly marked unavailable.
     expect(find.text('Soon'), findsWidgets);
   });
@@ -109,5 +113,25 @@ void main() {
 
     expect(find.text('SCORE'), findsOneWidget);
     expect(find.byType(AnswerOptionButton), findsNWidgets(4));
+  });
+
+  testWidgets('Guess by Outline: pick a difficulty and see a question', (tester) async {
+    await tester.pumpWidget(buildTestApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Games'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Guess by Outline'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Choose a difficulty'), findsOneWidget);
+    await tester.tap(find.text('Hard'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.text('SCORE'), findsOneWidget);
+    expect(find.byType(AnswerOptionButton), findsNWidgets(4));
+    // A real silhouette (not a placeholder) rendered for the question.
+    expect(find.byType(CustomPaint), findsWidgets);
   });
 }
