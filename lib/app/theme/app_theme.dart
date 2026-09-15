@@ -3,20 +3,11 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 import 'app_text_theme.dart';
 
-/// TerraScope's Material 3 theme definitions (dark is the primary/default
-/// experience; light is fully supported for system-theme users).
+/// TerraScope's Material 3 theme definitions — light is the primary,
+/// fully-designed experience (a premium mobile game, not a dashboard);
+/// dark mirrors the same language for system-dark users.
 abstract class AppTheme {
   AppTheme._();
-
-  static ThemeData get dark => _build(
-        brightness: Brightness.dark,
-        background: AppColors.darkBackground,
-        surface: AppColors.darkSurface,
-        surfaceRaised: AppColors.darkSurfaceRaised,
-        border: AppColors.darkBorder,
-        textPrimary: AppColors.darkTextPrimary,
-        textSecondary: AppColors.darkTextSecondary,
-      );
 
   static ThemeData get light => _build(
         brightness: Brightness.light,
@@ -26,6 +17,18 @@ abstract class AppTheme {
         border: AppColors.lightBorder,
         textPrimary: AppColors.lightTextPrimary,
         textSecondary: AppColors.lightTextSecondary,
+        shadowColor: AppColors.lightShadow,
+      );
+
+  static ThemeData get dark => _build(
+        brightness: Brightness.dark,
+        background: AppColors.darkBackground,
+        surface: AppColors.darkSurface,
+        surfaceRaised: AppColors.darkSurfaceRaised,
+        border: AppColors.darkBorder,
+        textPrimary: AppColors.darkTextPrimary,
+        textSecondary: AppColors.darkTextSecondary,
+        shadowColor: Colors.black,
       );
 
   static ThemeData _build({
@@ -36,17 +39,18 @@ abstract class AppTheme {
     required Color border,
     required Color textPrimary,
     required Color textSecondary,
+    required Color shadowColor,
   }) {
     final isDark = brightness == Brightness.dark;
 
     final colorScheme = ColorScheme(
       brightness: brightness,
-      primary: AppColors.indigo,
+      primary: AppColors.oceanBlue,
       onPrimary: Colors.white,
-      secondary: AppColors.emerald,
-      onSecondary: const Color(0xFF00281D),
-      tertiary: AppColors.amber,
-      onTertiary: const Color(0xFF2B1B00),
+      secondary: AppColors.green,
+      onSecondary: Colors.white,
+      tertiary: AppColors.orange,
+      onTertiary: Colors.white,
       error: AppColors.coral,
       onError: Colors.white,
       surface: surface,
@@ -55,11 +59,11 @@ abstract class AppTheme {
       onSurfaceVariant: textSecondary,
       outline: border,
       outlineVariant: border.withValues(alpha: 0.6),
-      shadow: Colors.black,
+      shadow: shadowColor,
       scrim: Colors.black,
       inverseSurface: textPrimary,
       onInverseSurface: background,
-      inversePrimary: AppColors.indigoBright,
+      inversePrimary: AppColors.skyBlue,
     );
 
     final textTheme = buildAppTextTheme(textPrimary, textSecondary);
@@ -71,6 +75,7 @@ abstract class AppTheme {
       scaffoldBackgroundColor: background,
       textTheme: textTheme,
       fontFamily: textTheme.bodyMedium?.fontFamily,
+      splashFactory: InkSparkle.splashFactory,
       appBarTheme: AppBarTheme(
         backgroundColor: background,
         foregroundColor: textPrimary,
@@ -81,55 +86,55 @@ abstract class AppTheme {
       ),
       cardTheme: CardThemeData(
         color: surfaceRaised,
-        elevation: 0,
+        elevation: isDark ? 0 : 4,
+        shadowColor: shadowColor.withValues(alpha: isDark ? 0 : 0.10),
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: border, width: 1),
+          borderRadius: BorderRadius.circular(24),
+          side: isDark ? BorderSide(color: border, width: 1) : BorderSide.none,
         ),
       ),
       dividerTheme: DividerThemeData(color: border, space: 1, thickness: 1),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: surface,
-        indicatorColor: AppColors.indigo.withValues(alpha: isDark ? 0.35 : 0.15),
+        indicatorColor: AppColors.oceanBlue.withValues(alpha: isDark ? 0.35 : 0.12),
         elevation: 0,
-        height: 68,
+        height: 64,
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
           return textTheme.labelMedium?.copyWith(
-            color: selected ? AppColors.indigoBright : textSecondary,
+            color: selected ? AppColors.oceanBlue : textSecondary,
             fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
           );
         }),
         iconTheme: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
-          return IconThemeData(
-            color: selected ? (isDark ? AppColors.indigoBright : AppColors.indigo) : textSecondary,
-          );
+          return IconThemeData(color: selected ? AppColors.oceanBlue : textSecondary);
         }),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.indigo,
+          backgroundColor: AppColors.oceanBlue,
           foregroundColor: Colors.white,
           disabledBackgroundColor: border,
           disabledForegroundColor: textSecondary,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+          elevation: 0,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           textStyle: textTheme.titleSmall,
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: textPrimary,
-          side: BorderSide(color: border),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          side: BorderSide(color: border, width: 1.5),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           textStyle: textTheme.titleSmall,
         ),
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(
-        color: AppColors.emerald,
+        color: AppColors.green,
         linearTrackColor: Colors.transparent,
       ),
       chipTheme: ChipThemeData(

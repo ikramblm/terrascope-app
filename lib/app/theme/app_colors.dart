@@ -1,62 +1,68 @@
 import 'package:flutter/material.dart';
 
-/// TerraScope brand palette.
+/// TerraScope brand palette — v2 (premium mobile game, not a dashboard).
 ///
-/// Vivid and playful on purpose — this is a game, not an analytics
-/// dashboard. Several saturated hues are used together rather than one
-/// muted "brand color" plus grayscale: blue carries brand/navigation,
-/// green carries progress/success (XP, streaks, correct answers), orange
-/// carries urgency/energy (timers, combos), and pink/purple/cyan add
-/// variety across categories, continents, and difficulty tiers so no two
-/// sections of the app read as visually identical.
+/// Light-first: a soft off-white base with a handful of confident,
+/// saturated colors doing the work, each with one job — never all seven
+/// competing on screen at once. Ocean blue is the brand/navigation
+/// color; green means correct/success; orange/yellow mean reward and
+/// urgency; coral means wrong/warning; purple marks special modes and
+/// achievements; sky blue is ocean blue's lighter sibling for secondary
+/// accents and geography motifs.
 abstract class AppColors {
   AppColors._();
 
-  static const Color indigo = Color(0xFF5B5BF7);
-  static const Color indigoBright = Color(0xFF8C8CFF);
-  static const Color emerald = Color(0xFF00E08A);
-  static const Color emeraldDim = Color(0xFF00B876);
-  static const Color amber = Color(0xFFFF9F1C);
-  static const Color coral = Color(0xFFFF3D68);
+  static const Color oceanBlue = Color(0xFF2F6FED);
+  static const Color oceanBlueDeep = Color(0xFF1B4FC4);
+  static const Color skyBlue = Color(0xFF38BDF8);
+  static const Color green = Color(0xFF22C55E);
+  static const Color greenDeep = Color(0xFF16A34A);
+  static const Color yellow = Color(0xFFFBBF24);
+  static const Color orange = Color(0xFFFB923C);
+  static const Color coral = Color(0xFFFF6B6B);
+  static const Color purple = Color(0xFF8B5CF6);
 
-  /// Extra accents for variety across category/difficulty/continent
-  /// color-coding — deliberately not funneled through just primary/
-  /// secondary/tertiary, so the app reads as colorful throughout, not
-  /// just at a couple of "branded" touchpoints.
-  static const Color skyBlue = Color(0xFF00C2FF);
-  static const Color sunYellow = Color(0xFFFFD60A);
-  static const Color grapePurple = Color(0xFFB44DFF);
-  static const Color pink = Color(0xFFFF6EC7);
-
-  // Dark theme surfaces (default TerraScope look).
-  static const Color darkBackground = Color(0xFF0A0D16);
-  static const Color darkSurface = Color(0xFF141926);
-  static const Color darkSurfaceRaised = Color(0xFF1C2233);
-  static const Color darkBorder = Color(0xFF2A3145);
-  static const Color darkTextPrimary = Color(0xFFF4F6FB);
-  static const Color darkTextSecondary = Color(0xFF9AA3B8);
-
-  // Light theme surfaces.
-  static const Color lightBackground = Color(0xFFF6F7FB);
+  // Light theme surfaces (the primary, fully-designed look).
+  static const Color lightBackground = Color(0xFFF7F8FC);
   static const Color lightSurface = Color(0xFFFFFFFF);
   static const Color lightSurfaceRaised = Color(0xFFFFFFFF);
-  static const Color lightBorder = Color(0xFFE3E6F0);
-  static const Color lightTextPrimary = Color(0xFF13152A);
-  static const Color lightTextSecondary = Color(0xFF5C6178);
+  static const Color lightBorder = Color(0xFFE9ECF5);
+  static const Color lightTextPrimary = Color(0xFF1A1D29);
+  static const Color lightTextSecondary = Color(0xFF6B7280);
+  static const Color lightShadow = Color(0xFF1B2559);
 
-  /// Continent accent colors, used consistently across map, badges, and
+  // Dark theme surfaces (same language, inverted — secondary look).
+  static const Color darkBackground = Color(0xFF0F1220);
+  static const Color darkSurface = Color(0xFF171B2C);
+  static const Color darkSurfaceRaised = Color(0xFF1F2438);
+  static const Color darkBorder = Color(0xFF2C3350);
+  static const Color darkTextPrimary = Color(0xFFF4F6FB);
+  static const Color darkTextSecondary = Color(0xFFA1A8C3);
+
+  /// Continent accent colors, used consistently across map and
   /// continent-challenge cards so a continent is always recognizable.
-  static const Color continentAfrica = Color(0xFFFF9F1C);
-  static const Color continentAsia = Color(0xFFFF3D68);
-  static const Color continentEurope = Color(0xFF5B5BF7);
-  static const Color continentNorthAmerica = Color(0xFF00E08A);
-  static const Color continentSouthAmerica = Color(0xFF00C2FF);
-  static const Color continentOceania = Color(0xFFFF6EC7);
+  static const Color continentAfrica = orange;
+  static const Color continentAsia = coral;
+  static const Color continentEurope = oceanBlue;
+  static const Color continentNorthAmerica = green;
+  static const Color continentSouthAmerica = skyBlue;
+  static const Color continentOceania = purple;
 
   /// Difficulty color-coding, shared by every difficulty picker so Easy
-  /// is always green, Medium always orange, Hard always red — a
+  /// is always green, Medium always orange, Hard always coral — a
   /// traffic-light convention players recognize instantly.
-  static const Color difficultyEasy = Color(0xFF00E08A);
-  static const Color difficultyMedium = Color(0xFFFF9F1C);
-  static const Color difficultyHard = Color(0xFFFF3D68);
+  static const Color difficultyEasy = green;
+  static const Color difficultyMedium = orange;
+  static const Color difficultyHard = coral;
+
+  /// The four Kahoot-style answer-slot colors, in fixed order — every
+  /// multiple-choice question's options get these regardless of content,
+  /// so shape+color become a second, instant way to tell options apart.
+  static const List<Color> answerSlotColors = [oceanBlue, coral, yellow, green];
+  static const List<IconData> answerSlotIcons = [
+    Icons.change_history_rounded, // triangle
+    Icons.diamond_rounded, // diamond
+    Icons.circle_rounded, // circle
+    Icons.square_rounded, // square
+  ];
 }

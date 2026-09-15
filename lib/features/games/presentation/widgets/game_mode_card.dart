@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../app/theme/app_colors.dart';
 import '../../domain/game_mode.dart';
 import 'game_category_style.dart';
 
@@ -36,7 +37,7 @@ class GameModeCard extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: accent.withValues(alpha: 0.16),
+                        color: accent.withValues(alpha: 0.14),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Icon(mode.icon, color: accent, size: 20),
@@ -45,9 +46,8 @@ class GameModeCard extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: theme.colorScheme.surface,
+                          color: theme.colorScheme.surfaceContainerHighest,
                           borderRadius: BorderRadius.circular(100),
-                          border: Border.all(color: theme.colorScheme.outline),
                         ),
                         child: Text('Soon', style: theme.textTheme.labelSmall),
                       ),
@@ -62,11 +62,38 @@ class GameModeCard extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
+                const Spacer(),
+                if (available) _DifficultyDots(accent: accent),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Every mode offers all three difficulties — this isn't a fixed rating,
+/// just a quiet visual reminder that Easy/Medium/Hard are all there.
+class _DifficultyDots extends StatelessWidget {
+  const _DifficultyDots({required this.accent});
+
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    const colors = [AppColors.difficultyEasy, AppColors.difficultyMedium, AppColors.difficultyHard];
+    return Row(
+      children: [
+        for (final c in colors) ...[
+          Container(
+            width: 6,
+            height: 6,
+            decoration: BoxDecoration(shape: BoxShape.circle, color: c),
+          ),
+          const SizedBox(width: 4),
+        ],
+      ],
     );
   }
 }

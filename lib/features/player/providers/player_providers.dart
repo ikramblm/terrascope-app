@@ -26,6 +26,8 @@ class PlayerProfileNotifier extends Notifier<PlayerProfile> {
         ...state.discoveredCountryCodes,
         ...result.correctCca3s,
       },
+      bestScore: result.totalScore > state.bestScore ? result.totalScore : state.bestScore,
+      gamesPlayed: state.gamesPlayed + 1,
       lastPlayedAt: DateTime.now(),
     );
   }

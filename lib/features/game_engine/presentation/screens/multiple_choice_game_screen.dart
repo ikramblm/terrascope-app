@@ -155,10 +155,11 @@ class _QuestionView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          for (final option in question.options) ...[
+          for (final (i, option) in question.options.indexed) ...[
             AnswerOptionButton(
               country: option,
               state: _stateFor(option),
+              slotIndex: i,
               onTap: engine.answered ? null : () => engine.submitAnswer(option),
             ),
             const SizedBox(height: 10),

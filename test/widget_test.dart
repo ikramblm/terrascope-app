@@ -34,18 +34,36 @@ void main() {
     await tester.pumpWidget(buildTestApp());
     await tester.pumpAndSettle();
 
-    expect(find.text('TerraScope'), findsOneWidget);
-    expect(find.text('Quick Play'), findsOneWidget);
-    expect(find.byType(NavigationBar), findsOneWidget);
-    // The real 195-country dataset loaded — not a stub/mock count.
+    // The Play hero card and bottom-nav destinations are the anchors of
+    // the redesigned Home screen.
+    expect(find.text('Ready to explore?'), findsOneWidget);
+    expect(find.byType(BottomAppBar), findsOneWidget);
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.text('Explore'), findsOneWidget);
+    expect(find.text('Rankings'), findsOneWidget);
+    expect(find.text('Profile'), findsOneWidget);
+    // The real 195-country dataset loaded — not a stub/mock count. Scroll
+    // to it: Home's taller redesigned layout pushes it below the fold.
+    await tester.dragUntilVisible(
+      find.textContaining('195 countries loaded'),
+      find.byType(ListView),
+      const Offset(0, -300),
+    );
+    // Newly-scrolled-into-view FadeSlideIn entrances schedule their own
+    // timers on first build — drain them with bounded pumps before the
+    // test ends (pumpAndSettle's "no more scheduled frames" heuristic
+    // doesn't reliably catch these), or the binding's "no pending
+    // timers" invariant trips at teardown.
+    await tester.pump(const Duration(milliseconds: 500));
+    await tester.pump(const Duration(milliseconds: 500));
     expect(find.textContaining('195 countries loaded'), findsOneWidget);
   });
 
-  testWidgets('Games tab lists the full catalog, unavailable modes marked Soon', (tester) async {
+  testWidgets('Explore tab lists the full catalog, unavailable modes marked Soon', (tester) async {
     await tester.pumpWidget(buildTestApp());
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Games'));
+    await tester.tap(find.text('Explore'));
     await tester.pumpAndSettle();
 
     // Guess by Flag, Guess by Emoji, and Guess by Outline are playable
@@ -61,7 +79,7 @@ void main() {
     await tester.pumpWidget(buildTestApp());
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Games'));
+    await tester.tap(find.text('Explore'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Guess by Flag'));
     await tester.pumpAndSettle();
@@ -94,14 +112,14 @@ void main() {
 
     expect(find.text('Game Complete'), findsOneWidget);
     expect(find.text('Play Again'), findsOneWidget);
-    expect(find.text('Back to Games'), findsOneWidget);
+    expect(find.text('Try Another'), findsOneWidget);
   });
 
   testWidgets('Guess by Emoji: pick a difficulty and see a question', (tester) async {
     await tester.pumpWidget(buildTestApp());
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Games'));
+    await tester.tap(find.text('Explore'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Guess by Emoji'));
     await tester.pumpAndSettle();
@@ -119,7 +137,7 @@ void main() {
     await tester.pumpWidget(buildTestApp());
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Games'));
+    await tester.tap(find.text('Explore'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Guess by Outline'));
     await tester.pumpAndSettle();

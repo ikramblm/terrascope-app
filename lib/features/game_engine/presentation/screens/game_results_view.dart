@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../app/router/route_paths.dart';
 import '../../../../app/theme/app_colors.dart';
+import '../../../games/data/quick_play.dart';
 import '../../domain/game_result.dart';
 
 /// Shared end-of-game summary — every multiple-choice mode ends here.
@@ -50,19 +52,19 @@ class GameResultsView extends StatelessWidget {
                   label: 'XP Earned',
                   value: '+${result.xpEarned}',
                   icon: Icons.bolt,
-                  accent: AppColors.emerald,
+                  accent: AppColors.green,
                 ),
                 _StatCard(
                   label: 'Best Combo',
                   value: '${result.bestCombo}x',
                   icon: Icons.local_fire_department,
-                  accent: AppColors.amber,
+                  accent: AppColors.orange,
                 ),
                 _StatCard(
                   label: 'Time',
                   value: _formatDuration(result.elapsed),
                   icon: Icons.timer_outlined,
-                  accent: AppColors.grapePurple,
+                  accent: AppColors.purple,
                 ),
               ],
             ),
@@ -75,9 +77,14 @@ class GameResultsView extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           OutlinedButton(
-            onPressed: () => context.go('/games'),
+            onPressed: () => launchQuickPlay(context),
             style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(56)),
-            child: const Text('Back to Games'),
+            child: const Text('Try Another'),
+          ),
+          const SizedBox(height: 4),
+          TextButton(
+            onPressed: () => context.go(RoutePaths.home),
+            child: const Text('Home'),
           ),
         ],
       ),
@@ -104,10 +111,7 @@ class _StatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-        side: BorderSide(color: accent.withValues(alpha: 0.35)),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

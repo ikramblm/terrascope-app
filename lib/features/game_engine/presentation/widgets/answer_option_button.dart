@@ -2,12 +2,15 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../../../../app/theme/app_colors.dart';
 import '../../../../data/countries/models/country.dart';
 
 enum AnswerOptionState { idle, correct, incorrectSelected, incorrectOther }
 
-/// One tappable answer choice. Reused by every multiple-choice mode —
-/// only the label changes (always a country name here).
+/// One tappable answer choice — Kahoot-style: each of the 4 option slots
+/// has a fixed color and shape (triangle/diamond/circle/square) regardless
+/// of content, so players can tell options apart by color+shape alone,
+/// not just by reading text. Reused by every multiple-choice mode.
 ///
 /// Reacts to its own state transitions: a satisfying scale+glow pulse on
 /// [AnswerOptionState.correct], a sharp shake on
@@ -19,11 +22,16 @@ class AnswerOptionButton extends StatefulWidget {
     required this.country,
     required this.state,
     required this.onTap,
+    required this.slotIndex,
   });
 
   final Country country;
   final AnswerOptionState state;
   final VoidCallback? onTap;
+
+  /// Position among this question's options (0-3) — picks the fixed
+  /// slot color/shape.
+  final int slotIndex;
 
   @override
   State<AnswerOptionButton> createState() => _AnswerOptionButtonState();
@@ -55,29 +63,38 @@ class _AnswerOptionButtonState extends State<AnswerOptionButton>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final slotColor = AppColors.answerSlotColors[widget.slotIndex % AppColors.answerSlotColors.length];
+    final slotIcon = AppColors.answerSlotIcons[widget.slotIndex % AppColors.answerSlotIcons.length];
 
-    Color background = theme.colorScheme.surfaceContainerHighest;
-    Color border = theme.colorScheme.outline;
-    Color foreground = theme.colorScheme.onSurface;
-    Widget? trailingIcon;
+    Color background;
+    Color foreground;
+    Color shapeColor = slotColor;
+    Color shapeBg = Colors.white;
+    IconData trailingIcon = slotIcon;
     Color? glowColor;
+    double opacity = 1;
 
     switch (widget.state) {
       case AnswerOptionState.idle:
-        break;
+        background = slotColor.withValues(alpha: 0.10);
+        foreground = theme.colorScheme.onSurface;
       case AnswerOptionState.correct:
-        background = theme.colorScheme.secondary.withValues(alpha: 0.18);
-        border = theme.colorScheme.secondary;
-        foreground = theme.colorScheme.secondary;
-        trailingIcon = Icon(Icons.check_circle, color: theme.colorScheme.secondary);
-        glowColor = theme.colorScheme.secondary;
+        background = AppColors.green;
+        foreground = Colors.white;
+        shapeColor = AppColors.green;
+        shapeBg = Colors.white;
+        trailingIcon = Icons.check_rounded;
+        glowColor = AppColors.green;
       case AnswerOptionState.incorrectSelected:
-        background = theme.colorScheme.error.withValues(alpha: 0.18);
-        border = theme.colorScheme.error;
-        foreground = theme.colorScheme.error;
-        trailingIcon = Icon(Icons.cancel, color: theme.colorScheme.error);
+        background = AppColors.coral;
+        foreground = Colors.white;
+        shapeColor = AppColors.coral;
+        shapeBg = Colors.white;
+        trailingIcon = Icons.close_rounded;
       case AnswerOptionState.incorrectOther:
+        background = slotColor.withValues(alpha: 0.10);
         foreground = theme.colorScheme.onSurfaceVariant;
+        opacity = 0.5;
     }
 
     return AnimatedBuilder(
@@ -92,33 +109,42 @@ class _AnswerOptionButtonState extends State<AnswerOptionButton>
           child: Transform.scale(scale: scale, child: child),
         );
       },
-      child: AnimatedContainer(
+      child: AnimatedOpacity(
         duration: const Duration(milliseconds: 200),
-        decoration: BoxDecoration(
-          color: background,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: border, width: widget.state == AnswerOptionState.idle ? 1 : 1.5),
-          boxShadow: glowColor == null
-              ? null
-              : [BoxShadow(color: glowColor.withValues(alpha: 0.45), blurRadius: 18, spreadRadius: 1)],
-        ),
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(16),
-            onTap: widget.onTap,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget.country.nameCommon,
-                      style: theme.textTheme.titleSmall?.copyWith(color: foreground),
+        opacity: opacity,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          decoration: BoxDecoration(
+            color: background,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: glowColor == null
+                ? null
+                : [BoxShadow(color: glowColor.withValues(alpha: 0.4), blurRadius: 18, spreadRadius: 1)],
+          ),
+          child: Material(
+            type: MaterialType.transparency,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(20),
+              onTap: widget.onTap,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 34,
+                      height: 34,
+                      decoration: BoxDecoration(color: shapeBg, shape: BoxShape.circle),
+                      child: Icon(trailingIcon, color: shapeColor, size: 18),
                     ),
-                  ),
-                  ?trailingIcon,
-                ],
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Text(
+                        widget.country.nameCommon,
+                        style: theme.textTheme.titleSmall?.copyWith(color: foreground),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

@@ -22,9 +22,9 @@ class GamesScreen extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             const ScreenHeaderBand(
-              title: 'Games',
+              title: 'Explore',
               subtitle: 'Every way to test your geography, in one place.',
-              gradientColors: [AppColors.skyBlue, AppColors.indigo],
+              gradientColors: [AppColors.skyBlue, AppColors.oceanBlue],
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
@@ -46,7 +46,7 @@ class GamesScreen extends StatelessWidget {
                               crossAxisCount: 2,
                               mainAxisSpacing: 12,
                               crossAxisSpacing: 12,
-                              mainAxisExtent: 140,
+                              mainAxisExtent: 152,
                             ),
                             children: [
                               for (final mode in kGameCatalog.where((m) => m.category == category))

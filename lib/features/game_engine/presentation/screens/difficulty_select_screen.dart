@@ -69,51 +69,46 @@ class _DifficultyTile extends StatelessWidget {
     final theme = Theme.of(context);
     final accent = _accentFor(difficulty);
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(color: accent.withValues(alpha: 0.18), blurRadius: 16, offset: const Offset(0, 6)),
-        ],
-      ),
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: accent.withValues(alpha: 0.5), width: 1.5),
-        ),
-        child: InkWell(
-          onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: accent.withValues(alpha: 0.18),
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: Icon(_iconFor(difficulty), color: accent),
-                ),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(difficulty.label, style: theme.textTheme.titleMedium),
-                      const SizedBox(height: 2),
-                      Text(
-                        '${difficulty.secondsPerQuestion}s per question · ${difficulty.basePoints} base pts',
-                        style: theme.textTheme.bodySmall,
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Row(
+          children: [
+            Container(width: 5, height: 68, color: accent),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: accent.withValues(alpha: 0.14),
+                        borderRadius: BorderRadius.circular(14),
                       ),
-                    ],
-                  ),
+                      child: Icon(_iconFor(difficulty), color: accent),
+                    ),
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(difficulty.label, style: theme.textTheme.titleMedium),
+                          const SizedBox(height: 2),
+                          Text(
+                            '${difficulty.secondsPerQuestion}s per question · ${difficulty.basePoints} base pts',
+                            style: theme.textTheme.bodySmall,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(Icons.chevron_right, color: accent),
+                  ],
                 ),
-                Icon(Icons.chevron_right, color: accent),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

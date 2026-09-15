@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/widgets/empty_state.dart';
+import '../../../../app/theme/app_colors.dart';
+import '../../../../core/widgets/fade_slide_in.dart';
+import '../../../../core/widgets/screen_header_band.dart';
+import '../../../player/domain/achievement.dart';
+import '../../../player/domain/player_profile.dart';
+import '../../../player/presentation/widgets/achievement_badge.dart';
 import '../../../player/providers/player_providers.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -11,130 +16,205 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(playerProfileProvider);
     final theme = Theme.of(context);
+    final unlockedCount = kAchievements.where((a) => a.isUnlockedFor(profile)).length;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Profile')),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
-        children: [
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
+      body: SafeArea(
+        bottom: false,
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 32),
+          children: [
+            const ScreenHeaderBand(
+              title: 'Profile',
+              subtitle: 'Your progress, your stats, your badges.',
+              gradientColors: [AppColors.oceanBlue, AppColors.purple],
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 28,
-                        backgroundColor: theme.colorScheme.primary.withValues(alpha: 0.18),
-                        child: Icon(Icons.person, color: theme.colorScheme.primary, size: 28),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Guest Explorer', style: theme.textTheme.titleLarge),
-                            const SizedBox(height: 2),
-                            Text(profile.level.label, style: theme.textTheme.bodyMedium),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                  FadeSlideIn(index: 0, child: _IdentityCard(profile: profile)),
                   const SizedBox(height: 20),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: LinearProgressIndicator(
-                      value: profile.levelProgress,
-                      minHeight: 8,
-                      backgroundColor: theme.colorScheme.outlineVariant,
+                  FadeSlideIn(
+                    index: 1,
+                    child: GridView(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 12,
+                        crossAxisSpacing: 12,
+                        mainAxisExtent: 84,
+                      ),
+                      children: [
+                        _StatTile(
+                          icon: Icons.local_fire_department_rounded,
+                          label: 'Best Streak',
+                          value: '${profile.longestStreakDays}',
+                          color: AppColors.orange,
+                        ),
+                        _StatTile(
+                          icon: Icons.public_rounded,
+                          label: 'Countries',
+                          value: '${profile.countriesDiscovered} / 195',
+                          color: AppColors.oceanBlue,
+                        ),
+                        _StatTile(
+                          icon: Icons.stars_rounded,
+                          label: 'Best Score',
+                          value: '${profile.bestScore}',
+                          color: AppColors.yellow,
+                        ),
+                        _StatTile(
+                          icon: Icons.sports_esports_rounded,
+                          label: 'Games Played',
+                          value: '${profile.gamesPlayed}',
+                          color: AppColors.purple,
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    profile.level.next == null
-                        ? '${profile.totalXp} XP · max level'
-                        : '${profile.totalXp} / ${profile.level.next!.minXp} XP to ${profile.level.next!.label}',
-                    style: theme.textTheme.bodySmall,
+                  const SizedBox(height: 28),
+                  FadeSlideIn(
+                    index: 2,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Achievements', style: theme.textTheme.headlineMedium),
+                        Text(
+                          '$unlockedCount / ${kAchievements.length}',
+                          style: theme.textTheme.bodyMedium,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  FadeSlideIn(
+                    index: 3,
+                    child: GridView(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        mainAxisExtent: 150,
+                      ),
+                      children: [
+                        for (final achievement in kAchievements)
+                          AchievementBadgeTile(
+                            achievement: achievement,
+                            unlocked: achievement.isUnlockedFor(profile),
+                          ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                child: _StatTile(
-                  icon: Icons.local_fire_department_outlined,
-                  label: 'Streak',
-                  value: '${profile.currentStreakDays}',
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _IdentityCard extends StatelessWidget {
+  const _IdentityCard({required this.profile});
+
+  final PlayerProfile profile;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final next = profile.level.next;
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 56,
+                  height: 56,
+                  decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColors.oceanBlue),
+                  alignment: Alignment.center,
+                  child: const Icon(Icons.person_rounded, color: Colors.white, size: 30),
                 ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: _StatTile(
-                  icon: Icons.public,
-                  label: 'Countries',
-                  value: '${profile.countriesDiscovered} / 195',
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Guest Explorer', style: theme.textTheme.titleLarge),
+                      const SizedBox(height: 2),
+                      Text(profile.level.label, style: theme.textTheme.bodyMedium),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 28),
-          Text('Achievements', style: theme.textTheme.headlineMedium),
-          const SizedBox(height: 12),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24),
-              child: EmptyState(
-                icon: Icons.emoji_events_outlined,
-                title: 'No achievements yet',
-                message: 'Play your first game to start unlocking achievements.',
+              ],
+            ),
+            const SizedBox(height: 20),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: LinearProgressIndicator(
+                value: profile.levelProgress,
+                minHeight: 10,
+                backgroundColor: theme.colorScheme.surfaceContainerHighest,
+                color: AppColors.green,
               ),
             ),
-          ),
-          const SizedBox(height: 28),
-          Text('Statistics', style: theme.textTheme.headlineMedium),
-          const SizedBox(height: 12),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24),
-              child: EmptyState(
-                icon: Icons.bar_chart_outlined,
-                title: 'No games played yet',
-                message: 'Your stats and personal records will show up here.',
-              ),
+            const SizedBox(height: 8),
+            Text(
+              next == null
+                  ? '${profile.totalXp} XP · max level'
+                  : '${profile.totalXp} / ${next.minXp} XP to ${next.label}',
+              style: theme.textTheme.bodySmall,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
 
 class _StatTile extends StatelessWidget {
-  const _StatTile({required this.icon, required this.label, required this.value});
+  const _StatTile({required this.icon, required this.label, required this.value, required this.color});
 
   final IconData icon;
   final String label;
   final String value;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        padding: const EdgeInsets.all(14),
+        child: Row(
           children: [
-            Icon(icon, color: theme.colorScheme.secondary),
-            const SizedBox(height: 10),
-            Text(value, style: theme.textTheme.titleLarge),
-            Text(label, style: theme.textTheme.bodySmall),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(color: color.withValues(alpha: 0.14), borderRadius: BorderRadius.circular(14)),
+              child: Icon(icon, color: color, size: 20),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(value, style: theme.textTheme.titleMedium),
+                  Text(label, style: theme.textTheme.labelSmall, maxLines: 1, overflow: TextOverflow.ellipsis),
+                ],
+              ),
+            ),
           ],
         ),
       ),

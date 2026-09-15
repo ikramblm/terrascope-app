@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-/// Bottom-navigation shell shared by the four main destinations.
+import '../../../app/theme/app_colors.dart';
+import '../../games/data/quick_play.dart';
+
+/// Bottom-navigation shell shared by the four tab destinations, plus a
+/// floating "Play" button docked in a notch between them — the single
+/// most important action in the app gets its own unmissable shape and
+/// color instead of competing as a fifth equal tab.
 ///
 /// Wraps a [StatefulShellRoute] branch so each tab keeps its own
 /// navigation stack and scroll position when switching tabs.
@@ -10,39 +16,110 @@ class AppShell extends StatelessWidget {
 
   final StatefulNavigationShell navigationShell;
 
-  static const _destinations = [
-    NavigationDestination(
-      icon: Icon(Icons.public_outlined),
-      selectedIcon: Icon(Icons.public),
-      label: 'Home',
-    ),
-    NavigationDestination(
-      icon: Icon(Icons.sports_esports_outlined),
-      selectedIcon: Icon(Icons.sports_esports),
-      label: 'Games',
-    ),
-    NavigationDestination(
-      icon: Icon(Icons.leaderboard_outlined),
-      selectedIcon: Icon(Icons.leaderboard),
-      label: 'Leaderboard',
-    ),
-    NavigationDestination(
-      icon: Icon(Icons.person_outline),
-      selectedIcon: Icon(Icons.person),
-      label: 'Profile',
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: navigationShell,
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: navigationShell.currentIndex,
-        destinations: _destinations,
-        onDestinationSelected: (index) => navigationShell.goBranch(
+      floatingActionButton: _PlayFab(onTap: () => launchQuickPlay(context)),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: _BottomBar(
+        currentIndex: navigationShell.currentIndex,
+        onSelect: (index) => navigationShell.goBranch(
           index,
           initialLocation: index == navigationShell.currentIndex,
+        ),
+      ),
+    );
+  }
+}
+
+class _PlayFab extends StatelessWidget {
+  const _PlayFab({required this.onTap});
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 64,
+      height: 64,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: AppColors.oceanBlue,
+        boxShadow: [
+          BoxShadow(color: AppColors.oceanBlue.withValues(alpha: 0.45), blurRadius: 20, offset: const Offset(0, 8)),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        shape: const CircleBorder(),
+        child: InkWell(
+          customBorder: const CircleBorder(),
+          onTap: onTap,
+          child: const Icon(Icons.play_arrow_rounded, color: Colors.white, size: 34),
+        ),
+      ),
+    );
+  }
+}
+
+class _BottomBar extends StatelessWidget {
+  const _BottomBar({required this.currentIndex, required this.onSelect});
+
+  final int currentIndex;
+  final ValueChanged<int> onSelect;
+
+  static const _items = [
+    (icon: Icons.home_rounded, label: 'Home'),
+    (icon: Icons.explore_rounded, label: 'Explore'),
+    (icon: Icons.emoji_events_rounded, label: 'Rankings'),
+    (icon: Icons.person_rounded, label: 'Profile'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return BottomAppBar(
+      shape: const CircularNotchedRectangle(),
+      notchMargin: 10,
+      height: 68,
+      padding: EdgeInsets.zero,
+      color: theme.colorScheme.surface,
+      elevation: 0,
+      child: Row(
+        children: [
+          _navItem(context, index: 0),
+          _navItem(context, index: 1),
+          const Spacer(),
+          _navItem(context, index: 2),
+          _navItem(context, index: 3),
+        ],
+      ),
+    );
+  }
+
+  Widget _navItem(BuildContext context, {required int index}) {
+    final theme = Theme.of(context);
+    final item = _items[index];
+    final selected = index == currentIndex;
+    final color = selected ? AppColors.oceanBlue : theme.colorScheme.onSurfaceVariant;
+
+    return Expanded(
+      child: InkWell(
+        onTap: () => onSelect(index),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(item.icon, color: color, size: 24),
+            const SizedBox(height: 2),
+            Text(
+              item.label,
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: color,
+                fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
+              ),
+            ),
+          ],
         ),
       ),
     );

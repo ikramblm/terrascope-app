@@ -15,6 +15,8 @@ class PlayerProfile {
     required this.currentStreakDays,
     required this.longestStreakDays,
     required this.discoveredCountryCodes,
+    required this.bestScore,
+    required this.gamesPlayed,
     this.lastPlayedAt,
   });
 
@@ -23,11 +25,19 @@ class PlayerProfile {
         currentStreakDays: 0,
         longestStreakDays: 0,
         discoveredCountryCodes: {},
+        bestScore: 0,
+        gamesPlayed: 0,
       );
 
   final int totalXp;
   final int currentStreakDays;
   final int longestStreakDays;
+
+  /// Highest `totalScore` from any single completed session.
+  final int bestScore;
+
+  /// Total completed game sessions, across every mode.
+  final int gamesPlayed;
 
   /// cca3 codes of every country this player has answered correctly at
   /// least once, across all game modes.
@@ -53,6 +63,8 @@ class PlayerProfile {
     int? currentStreakDays,
     int? longestStreakDays,
     Set<String>? discoveredCountryCodes,
+    int? bestScore,
+    int? gamesPlayed,
     DateTime? lastPlayedAt,
   }) {
     return PlayerProfile(
@@ -60,6 +72,8 @@ class PlayerProfile {
       currentStreakDays: currentStreakDays ?? this.currentStreakDays,
       longestStreakDays: longestStreakDays ?? this.longestStreakDays,
       discoveredCountryCodes: discoveredCountryCodes ?? this.discoveredCountryCodes,
+      bestScore: bestScore ?? this.bestScore,
+      gamesPlayed: gamesPlayed ?? this.gamesPlayed,
       lastPlayedAt: lastPlayedAt ?? this.lastPlayedAt,
     );
   }
