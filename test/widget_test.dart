@@ -34,29 +34,29 @@ void main() {
     await tester.pumpWidget(buildTestApp());
     await tester.pumpAndSettle();
 
-    // The Play hero card and bottom-nav destinations are the anchors of
-    // the redesigned Home screen.
-    expect(find.text('Ready to explore?'), findsOneWidget);
+    // The world-map banner title and bottom-nav destinations are the
+    // anchors of the redesigned Home screen.
+    expect(find.text('TerraScope'), findsOneWidget);
     expect(find.byType(BottomAppBar), findsOneWidget);
     expect(find.text('Home'), findsOneWidget);
     expect(find.text('Explore'), findsOneWidget);
     expect(find.text('Rankings'), findsOneWidget);
     expect(find.text('Profile'), findsOneWidget);
-    // The real 195-country dataset loaded — not a stub/mock count. Scroll
-    // to it: Home's taller redesigned layout pushes it below the fold.
+    // Every available mode gets its own big button, plus one to browse
+    // the rest — no fake/placeholder modes.
+    expect(find.text('Guess by Flag'), findsOneWidget);
+    expect(find.text('Guess by Emoji'), findsOneWidget);
+    expect(find.text('Guess by Outline'), findsOneWidget);
+    // Scroll to the last button — off the fold in the test viewport.
     await tester.dragUntilVisible(
-      find.textContaining('195 countries loaded'),
+      find.text('Explore All Games'),
       find.byType(ListView),
-      const Offset(0, -300),
+      const Offset(0, -200),
     );
-    // Newly-scrolled-into-view FadeSlideIn entrances schedule their own
-    // timers on first build — drain them with bounded pumps before the
-    // test ends (pumpAndSettle's "no more scheduled frames" heuristic
-    // doesn't reliably catch these), or the binding's "no pending
-    // timers" invariant trips at teardown.
+    // Drain the newly-scrolled-into-view FadeSlideIn's entrance timer
+    // before the test ends (see the note on this pattern below).
     await tester.pump(const Duration(milliseconds: 500));
-    await tester.pump(const Duration(milliseconds: 500));
-    expect(find.textContaining('195 countries loaded'), findsOneWidget);
+    expect(find.text('Explore All Games'), findsOneWidget);
   });
 
   testWidgets('Explore tab lists the full catalog, unavailable modes marked Soon', (tester) async {

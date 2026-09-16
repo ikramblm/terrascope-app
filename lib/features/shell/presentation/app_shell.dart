@@ -102,6 +102,9 @@ class _BottomBar extends StatelessWidget {
     final theme = Theme.of(context);
     final item = _items[index];
     final selected = index == currentIndex;
+    // One consistent accent color for the whole nav area — selection is
+    // shown by the rounded-square container filling in, not by a
+    // different color per item.
     final color = selected ? AppColors.oceanBlue : theme.colorScheme.onSurfaceVariant;
 
     return Expanded(
@@ -110,7 +113,15 @@ class _BottomBar extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(item.icon, color: color, size: 24),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: selected ? AppColors.oceanBlue.withValues(alpha: 0.12) : Colors.transparent,
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Icon(item.icon, color: color, size: 22),
+            ),
             const SizedBox(height: 2),
             Text(
               item.label,
