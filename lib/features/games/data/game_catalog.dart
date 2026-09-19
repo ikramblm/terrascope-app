@@ -43,6 +43,7 @@ const List<GameMode> kGameCatalog = [
     title: 'Guess by Borders',
     tagline: 'Identify a country from its neighbors',
     icon: Icons.hub_outlined,
+    routePath: RoutePaths.guessBorders,
   ),
   GameMode(
     id: 'guess_capital',
@@ -50,6 +51,7 @@ const List<GameMode> kGameCatalog = [
     title: 'Guess by Capital',
     tagline: 'Match a capital to its country',
     icon: Icons.location_city_outlined,
+    routePath: RoutePaths.guessCapital,
   ),
   GameMode(
     id: 'guess_clues',
@@ -80,6 +82,7 @@ const List<GameMode> kGameCatalog = [
     title: 'Name All Countries',
     tagline: 'Every country, no clock',
     icon: Icons.public,
+    routePath: RoutePaths.nameAll,
   ),
   GameMode(
     id: 'name_continent',
@@ -87,6 +90,7 @@ const List<GameMode> kGameCatalog = [
     title: 'Name by Continent',
     tagline: 'One continent at a time',
     icon: Icons.terrain_outlined,
+    routePath: RoutePaths.nameContinent,
   ),
   GameMode(
     id: 'name_letter',
@@ -94,6 +98,7 @@ const List<GameMode> kGameCatalog = [
     title: 'Name by Letter',
     tagline: 'A country for every letter',
     icon: Icons.abc,
+    routePath: RoutePaths.nameLetter,
   ),
   GameMode(
     id: 'name_category',
@@ -101,6 +106,7 @@ const List<GameMode> kGameCatalog = [
     title: 'Name by Category',
     tagline: 'Islands, landlocked, and more',
     icon: Icons.category_outlined,
+    routePath: RoutePaths.nameCategory,
   ),
   GameMode(
     id: 'name_borders_of',
@@ -115,6 +121,7 @@ const List<GameMode> kGameCatalog = [
     title: 'Name as Many as Possible',
     tagline: 'No timer, no limit',
     icon: Icons.all_inclusive,
+    routePath: RoutePaths.nameAsMany,
   ),
 
   // SPEED
