@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../domain/achievement.dart';
 
-/// One collectible badge — full color and emoji when unlocked, grayed
-/// and dimmed when not, with a small lock icon. Never hides *what* the
+/// One collectible badge — full color icon when unlocked, grayed and
+/// dimmed when not, with a small lock icon. Never hides *what* the
 /// achievement is, only celebrates having earned it.
 class AchievementBadgeTile extends StatelessWidget {
   const AchievementBadgeTile({super.key, required this.achievement, required this.unlocked});
@@ -35,9 +35,10 @@ class AchievementBadgeTile extends StatelessWidget {
                   color: unlocked ? achievement.color.withValues(alpha: 0.16) : theme.colorScheme.surface,
                 ),
                 alignment: Alignment.center,
-                child: Opacity(
-                  opacity: unlocked ? 1 : 0.35,
-                  child: Text(achievement.emoji, style: const TextStyle(fontSize: 26)),
+                child: Icon(
+                  achievement.icon,
+                  size: 26,
+                  color: unlocked ? achievement.color : theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
                 ),
               ),
               if (!unlocked)

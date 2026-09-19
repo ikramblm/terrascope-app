@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../app/router/route_paths.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/fade_slide_in.dart';
+import '../../../../core/widgets/max_width_box.dart';
 import '../../../games/data/game_catalog.dart';
 import '../widgets/game_mode_button.dart';
 import '../widgets/world_map_banner.dart';
@@ -29,7 +30,8 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         bottom: false,
-        child: ListView(
+        child: MaxWidthBox(
+          child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 12, 20, 110),
           children: [
             FadeSlideIn(index: 0, child: const WorldMapBanner(title: 'TerraScope')),
@@ -56,6 +58,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ],
+          ),
         ),
       ),
     );

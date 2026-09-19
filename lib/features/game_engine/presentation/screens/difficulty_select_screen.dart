@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../app/theme/app_colors.dart';
+import '../../../../core/widgets/max_width_box.dart';
 import '../../domain/game_difficulty.dart';
 
 /// Shared pre-game difficulty picker — every multiple-choice mode starts
@@ -24,22 +25,24 @@ class DifficultySelectScreen extends StatelessWidget {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Icon(icon, size: 48, color: theme.colorScheme.primary),
-            const SizedBox(height: 12),
-            Text(subtitle, style: theme.textTheme.bodyMedium),
-            const SizedBox(height: 28),
-            Text('Choose a difficulty', style: theme.textTheme.headlineMedium),
-            const SizedBox(height: 16),
-            for (final difficulty in GameDifficulty.values) ...[
-              _DifficultyTile(difficulty: difficulty, onTap: () => onSelect(difficulty)),
+      body: MaxWidthBox(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Icon(icon, size: 48, color: theme.colorScheme.primary),
               const SizedBox(height: 12),
+              Text(subtitle, style: theme.textTheme.bodyMedium),
+              const SizedBox(height: 28),
+              Text('Choose a difficulty', style: theme.textTheme.headlineMedium),
+              const SizedBox(height: 16),
+              for (final difficulty in GameDifficulty.values) ...[
+                _DifficultyTile(difficulty: difficulty, onTap: () => onSelect(difficulty)),
+                const SizedBox(height: 12),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );

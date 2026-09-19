@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/fade_slide_in.dart';
+import '../../../../core/widgets/max_width_box.dart';
 import '../../../../core/widgets/screen_header_band.dart';
 import '../../../player/domain/achievement.dart';
 import '../../../player/domain/player_profile.dart';
@@ -21,7 +22,8 @@ class ProfileScreen extends ConsumerWidget {
     return Scaffold(
       body: SafeArea(
         bottom: false,
-        child: ListView(
+        child: MaxWidthBox(
+          child: ListView(
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 32),
           children: [
             const ScreenHeaderBand(
@@ -45,7 +47,7 @@ class ProfileScreen extends ConsumerWidget {
                         crossAxisCount: 2,
                         mainAxisSpacing: 12,
                         crossAxisSpacing: 12,
-                        mainAxisExtent: 84,
+                        mainAxisExtent: 96,
                       ),
                       children: [
                         _StatTile(
@@ -71,6 +73,14 @@ class ProfileScreen extends ConsumerWidget {
                           label: 'Games Played',
                           value: '${profile.gamesPlayed}',
                           color: AppColors.purple,
+                        ),
+                        _StatTile(
+                          icon: Icons.track_changes_rounded,
+                          label: 'Accuracy',
+                          value: profile.totalQuestionsAnswered == 0
+                              ? '—'
+                              : '${(profile.overallAccuracy * 100).round()}%',
+                          color: AppColors.coral,
                         ),
                       ],
                     ),
@@ -99,7 +109,7 @@ class ProfileScreen extends ConsumerWidget {
                         crossAxisCount: 3,
                         mainAxisSpacing: 10,
                         crossAxisSpacing: 10,
-                        mainAxisExtent: 150,
+                        mainAxisExtent: 164,
                       ),
                       children: [
                         for (final achievement in kAchievements)
@@ -114,6 +124,7 @@ class ProfileScreen extends ConsumerWidget {
               ),
             ),
           ],
+          ),
         ),
       ),
     );

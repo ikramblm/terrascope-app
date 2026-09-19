@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../core/widgets/async_state_views.dart';
 import '../../../../../data/countries/models/country.dart';
 import '../../../../../data/countries/providers/country_providers.dart';
 import '../../../../game_engine/domain/game_difficulty.dart';
@@ -29,12 +30,10 @@ class GuessEmojiScreen extends ConsumerWidget {
     final cluesAsync = ref.watch(emojiCluesProvider);
 
     if (countriesAsync.isLoading || cluesAsync.isLoading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return const LoadingView(message: 'Loading emoji clues…');
     }
     if (countriesAsync.hasError || cluesAsync.hasError) {
-      return Scaffold(
-        body: Center(child: Text('Could not load game data: ${countriesAsync.error ?? cluesAsync.error}')),
-      );
+      return ErrorView(message: '${countriesAsync.error ?? cluesAsync.error}');
     }
 
     final countries = countriesAsync.requireValue;

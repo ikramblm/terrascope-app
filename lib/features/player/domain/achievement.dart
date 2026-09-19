@@ -10,7 +10,7 @@ import 'player_profile.dart';
 class Achievement {
   const Achievement({
     required this.id,
-    required this.emoji,
+    required this.icon,
     required this.title,
     required this.description,
     required this.color,
@@ -18,7 +18,7 @@ class Achievement {
   });
 
   final String id;
-  final String emoji;
+  final IconData icon;
   final String title;
   final String description;
   final Color color;
@@ -28,7 +28,7 @@ class Achievement {
 final List<Achievement> kAchievements = [
   Achievement(
     id: 'world_explorer',
-    emoji: '🌍',
+    icon: Icons.public_rounded,
     title: 'World Explorer',
     description: 'Discover 10 countries',
     color: AppColors.oceanBlue,
@@ -36,7 +36,7 @@ final List<Achievement> kAchievements = [
   ),
   Achievement(
     id: 'map_master',
-    emoji: '🗺️',
+    icon: Icons.map_rounded,
     title: 'Map Master',
     description: 'Discover 50 countries',
     color: AppColors.skyBlue,
@@ -44,7 +44,7 @@ final List<Achievement> kAchievements = [
   ),
   Achievement(
     id: 'geography_genius',
-    emoji: '🌎',
+    icon: Icons.travel_explore_rounded,
     title: 'Geography Genius',
     description: 'Discover 150 countries',
     color: AppColors.purple,
@@ -52,7 +52,7 @@ final List<Achievement> kAchievements = [
   ),
   Achievement(
     id: 'week_streak',
-    emoji: '🔥',
+    icon: Icons.local_fire_department_rounded,
     title: '7-Day Streak',
     description: 'Play 7 days in a row',
     color: AppColors.orange,
@@ -60,7 +60,7 @@ final List<Achievement> kAchievements = [
   ),
   Achievement(
     id: 'rising_star',
-    emoji: '⭐',
+    icon: Icons.star_rounded,
     title: 'Rising Star',
     description: 'Reach Explorer level',
     color: AppColors.yellow,
@@ -68,7 +68,7 @@ final List<Achievement> kAchievements = [
   ),
   Achievement(
     id: 'world_master',
-    emoji: '👑',
+    icon: Icons.workspace_premium_rounded,
     title: 'World Master',
     description: 'Reach the top level',
     color: AppColors.coral,
@@ -76,7 +76,7 @@ final List<Achievement> kAchievements = [
   ),
   Achievement(
     id: 'sharp_shooter',
-    emoji: '🎯',
+    icon: Icons.track_changes_rounded,
     title: 'Sharp Shooter',
     description: 'Score 500+ in one game',
     color: AppColors.green,
@@ -84,7 +84,7 @@ final List<Achievement> kAchievements = [
   ),
   Achievement(
     id: 'dedicated_player',
-    emoji: '🎮',
+    icon: Icons.sports_esports_rounded,
     title: 'Dedicated Player',
     description: 'Complete 10 games',
     color: AppColors.oceanBlueDeep,

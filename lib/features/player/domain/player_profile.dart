@@ -17,6 +17,8 @@ class PlayerProfile {
     required this.discoveredCountryCodes,
     required this.bestScore,
     required this.gamesPlayed,
+    required this.totalCorrectAnswers,
+    required this.totalQuestionsAnswered,
     this.lastPlayedAt,
   });
 
@@ -27,6 +29,8 @@ class PlayerProfile {
         discoveredCountryCodes: {},
         bestScore: 0,
         gamesPlayed: 0,
+        totalCorrectAnswers: 0,
+        totalQuestionsAnswered: 0,
       );
 
   final int totalXp;
@@ -39,6 +43,11 @@ class PlayerProfile {
   /// Total completed game sessions, across every mode.
   final int gamesPlayed;
 
+  /// Career totals behind [overallAccuracy] — summed across every
+  /// session, every mode.
+  final int totalCorrectAnswers;
+  final int totalQuestionsAnswered;
+
   /// cca3 codes of every country this player has answered correctly at
   /// least once, across all game modes.
   final Set<String> discoveredCountryCodes;
@@ -48,6 +57,12 @@ class PlayerProfile {
   int get countriesDiscovered => discoveredCountryCodes.length;
 
   PlayerLevel get level => PlayerLevel.forXp(totalXp);
+
+  /// Career accuracy across every question ever answered, in [0, 1].
+  /// `0` (not null) before the first game — displayed as "—" by the UI
+  /// rather than a misleading 0%.
+  double get overallAccuracy =>
+      totalQuestionsAnswered == 0 ? 0 : totalCorrectAnswers / totalQuestionsAnswered;
 
   /// Progress toward the next level, in [0, 1]. 1.0 (maxed) at the top tier.
   double get levelProgress {
@@ -65,6 +80,8 @@ class PlayerProfile {
     Set<String>? discoveredCountryCodes,
     int? bestScore,
     int? gamesPlayed,
+    int? totalCorrectAnswers,
+    int? totalQuestionsAnswered,
     DateTime? lastPlayedAt,
   }) {
     return PlayerProfile(
@@ -74,6 +91,8 @@ class PlayerProfile {
       discoveredCountryCodes: discoveredCountryCodes ?? this.discoveredCountryCodes,
       bestScore: bestScore ?? this.bestScore,
       gamesPlayed: gamesPlayed ?? this.gamesPlayed,
+      totalCorrectAnswers: totalCorrectAnswers ?? this.totalCorrectAnswers,
+      totalQuestionsAnswered: totalQuestionsAnswered ?? this.totalQuestionsAnswered,
       lastPlayedAt: lastPlayedAt ?? this.lastPlayedAt,
     );
   }

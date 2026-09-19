@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/fade_slide_in.dart';
+import '../../../../core/widgets/max_width_box.dart';
 import '../../../../core/widgets/screen_header_band.dart';
 import '../../data/game_catalog.dart';
 import '../../domain/game_category.dart';
@@ -18,7 +19,8 @@ class GamesScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         bottom: false,
-        child: ListView(
+        child: MaxWidthBox(
+          child: ListView(
           padding: EdgeInsets.zero,
           children: [
             const ScreenHeaderBand(
@@ -46,7 +48,7 @@ class GamesScreen extends StatelessWidget {
                               crossAxisCount: 2,
                               mainAxisSpacing: 12,
                               crossAxisSpacing: 12,
-                              mainAxisExtent: 152,
+                              mainAxisExtent: 176,
                             ),
                             children: [
                               for (final mode in kGameCatalog.where((m) => m.category == category))
@@ -65,6 +67,7 @@ class GamesScreen extends StatelessWidget {
               ),
             ),
           ],
+          ),
         ),
       ),
     );

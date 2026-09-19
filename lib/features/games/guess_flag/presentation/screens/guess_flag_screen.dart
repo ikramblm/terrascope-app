@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../core/widgets/async_state_views.dart';
 import '../../../../../data/countries/models/country.dart';
 import '../../../../../data/countries/providers/country_providers.dart';
 import '../../../../game_engine/domain/game_difficulty.dart';
@@ -24,8 +25,8 @@ class GuessFlagScreen extends ConsumerWidget {
     final countriesAsync = ref.watch(allCountriesProvider);
 
     return countriesAsync.when(
-      loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
-      error: (err, st) => Scaffold(body: Center(child: Text('Could not load countries: $err'))),
+      loading: () => const LoadingView(message: 'Loading countries…'),
+      error: (err, st) => ErrorView(message: '$err'),
       data: (countries) => DifficultySelectScreen(
         title: 'Guess by Flag',
         subtitle: 'A flag appears — name the country behind it.',

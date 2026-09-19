@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../app/theme/app_colors.dart';
+import '../../../../../core/widgets/async_state_views.dart';
 import '../../../../../data/countries/models/country.dart';
 import '../../../../../data/countries/providers/country_providers.dart';
 import '../../../../game_engine/domain/game_difficulty.dart';
@@ -32,12 +33,10 @@ class GuessOutlineScreen extends ConsumerWidget {
     final outlinesAsync = ref.watch(countryOutlinesProvider);
 
     if (countriesAsync.isLoading || outlinesAsync.isLoading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return const LoadingView(message: 'Loading country outlines…');
     }
     if (countriesAsync.hasError || outlinesAsync.hasError) {
-      return Scaffold(
-        body: Center(child: Text('Could not load game data: ${countriesAsync.error ?? outlinesAsync.error}')),
-      );
+      return ErrorView(message: '${countriesAsync.error ?? outlinesAsync.error}');
     }
 
     final countries = countriesAsync.requireValue;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/empty_state.dart';
+import '../../../../core/widgets/max_width_box.dart';
 import '../../../../core/widgets/screen_header_band.dart';
 
 /// Rankings tab.
@@ -34,7 +35,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     return Scaffold(
       body: SafeArea(
         bottom: false,
-        child: Column(
+        child: MaxWidthBox(
+          child: Column(
           children: [
             const ScreenHeaderBand(
               title: 'Rankings',
@@ -74,6 +76,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
               ),
             ),
           ],
+          ),
         ),
       ),
     );

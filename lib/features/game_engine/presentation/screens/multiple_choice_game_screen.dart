@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/widgets/max_width_box.dart';
 import '../../../../data/countries/models/country.dart';
 import '../../domain/game_result.dart';
 import '../../engine/multiple_choice_engine.dart';
@@ -92,7 +93,8 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
       body: SafeArea(
-        child: Stack(
+        child: MaxWidthBox(
+          child: Stack(
           children: [
             _engine.isComplete
                 ? GameResultsView(
@@ -119,6 +121,7 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
               ),
             ),
           ],
+          ),
         ),
       ),
     );

@@ -28,6 +28,8 @@ class PlayerProfileNotifier extends Notifier<PlayerProfile> {
       },
       bestScore: result.totalScore > state.bestScore ? result.totalScore : state.bestScore,
       gamesPlayed: state.gamesPlayed + 1,
+      totalCorrectAnswers: state.totalCorrectAnswers + result.correctCount,
+      totalQuestionsAnswered: state.totalQuestionsAnswered + result.totalQuestions,
       lastPlayedAt: DateTime.now(),
     );
   }
