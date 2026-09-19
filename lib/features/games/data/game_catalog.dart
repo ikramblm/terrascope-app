@@ -131,6 +131,7 @@ const List<GameMode> kGameCatalog = [
     title: 'Country Speed Run',
     tagline: 'Fastest correct streak wins',
     icon: Icons.bolt_outlined,
+    routePath: RoutePaths.speedCountry,
   ),
   GameMode(
     id: 'speed_flag',
@@ -138,6 +139,7 @@ const List<GameMode> kGameCatalog = [
     title: 'Flag Speed Run',
     tagline: 'Flags, fast',
     icon: Icons.speed,
+    routePath: RoutePaths.speedFlag,
   ),
   GameMode(
     id: 'speed_capital',
@@ -145,10 +147,12 @@ const List<GameMode> kGameCatalog = [
     title: 'Capital Speed Run',
     tagline: 'Capitals, fast',
     icon: Icons.timer_outlined,
+    routePath: RoutePaths.speedCapital,
   ),
   GameMode(
     id: 'speed_60s',
     category: GameCategory.speed,
+    routePath: RoutePaths.speed60s,
     title: '60-Second Challenge',
     tagline: 'One minute, as many as you can',
     icon: Icons.hourglass_bottom,

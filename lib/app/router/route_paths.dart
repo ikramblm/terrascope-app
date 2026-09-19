@@ -18,4 +18,9 @@ abstract class RoutePaths {
   static const String nameContinent = '/games/name-continent';
   static const String nameCategory = '/games/name-category';
   static const String nameLetter = '/games/name-letter';
+
+  static const String speedFlag = '/games/speed-flag';
+  static const String speedCapital = '/games/speed-capital';
+  static const String speedCountry = '/games/speed-country';
+  static const String speed60s = '/games/speed-60s';
 }

@@ -13,6 +13,10 @@ import '../../features/games/name_category/presentation/screens/name_category_sc
 import '../../features/games/name_continent/presentation/screens/name_continent_screen.dart';
 import '../../features/games/name_letter/presentation/screens/name_letter_screen.dart';
 import '../../features/games/presentation/screens/games_screen.dart';
+import '../../features/games/speed_60s/presentation/screens/speed_60s_screen.dart';
+import '../../features/games/speed_capital/presentation/screens/speed_capital_screen.dart';
+import '../../features/games/speed_country/presentation/screens/speed_country_screen.dart';
+import '../../features/games/speed_flag/presentation/screens/speed_flag_screen.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
 import '../../features/leaderboard/presentation/screens/leaderboard_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
@@ -116,6 +120,26 @@ GoRouter buildAppRouter() {
       parentNavigatorKey: rootNavigatorKey,
       path: RoutePaths.nameLetter,
       builder: (context, state) => const NameLetterScreen(),
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: RoutePaths.speedFlag,
+      builder: (context, state) => const SpeedFlagScreen(),
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: RoutePaths.speedCapital,
+      builder: (context, state) => const SpeedCapitalScreen(),
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: RoutePaths.speedCountry,
+      builder: (context, state) => const SpeedCountryScreen(),
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: RoutePaths.speed60s,
+      builder: (context, state) => const Speed60sScreen(),
     ),
   ],
   );

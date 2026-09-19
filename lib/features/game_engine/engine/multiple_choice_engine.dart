@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:clock/clock.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../data/countries/models/country.dart';
@@ -20,10 +21,22 @@ class MultipleChoiceEngine extends ChangeNotifier {
   MultipleChoiceEngine({
     required this.questions,
     required this.difficulty,
+    this.suddenDeath = false,
+    this.globalTimeLimit,
   }) : timeRemaining = Duration(seconds: difficulty.secondsPerQuestion);
 
   final List<MultipleChoiceQuestion> questions;
   final GameDifficulty difficulty;
+
+  /// Speed-run mode: a single wrong (or timed-out) answer ends the
+  /// session immediately instead of advancing — [bestCombo] becomes the
+  /// run's streak length, the whole point of the mode.
+  final bool suddenDeath;
+
+  /// Speed-run mode: the session ends the instant this much real time
+  /// has elapsed, regardless of question progress — independent of the
+  /// per-question timer, which keeps ticking normally until then.
+  final Duration? globalTimeLimit;
 
   static const _tickInterval = Duration(milliseconds: 100);
 
@@ -44,7 +57,19 @@ class MultipleChoiceEngine extends ChangeNotifier {
 
   Timer? _ticker;
   Timer? _advanceTimer;
-  final Stopwatch _stopwatch = Stopwatch();
+  Timer? _globalTicker;
+
+  // Deliberately not a `Stopwatch`: `Stopwatch` reads a real monotonic
+  // clock regardless of any `fake_async` zone a test runs in, so a
+  // Stopwatch-based `elapsed` never advances under `FakeAsync.elapse` —
+  // it silently made the global-time-limit logic untestable. `clock.now()`
+  // (package:clock) is exactly `DateTime.now()` in production but honors
+  // a fake clock in tests.
+  DateTime? _startedAt;
+  Duration _elapsedAtStop = Duration.zero;
+  bool _running = false;
+
+  Duration get _clockElapsed => _running ? clock.now().difference(_startedAt!) : _elapsedAtStop;
 
   /// How long the correct/incorrect feedback stays on screen before
   /// auto-advancing to the next question.
@@ -53,10 +78,21 @@ class MultipleChoiceEngine extends ChangeNotifier {
   MultipleChoiceQuestion get currentQuestion => questions[currentIndex];
   int get totalQuestions => questions.length;
   Duration get timeAllotted => Duration(seconds: difficulty.secondsPerQuestion);
+  Duration get elapsed => _clockElapsed;
 
   void start() {
-    _stopwatch.start();
+    _startedAt = clock.now();
+    _running = true;
     _startQuestionTimer();
+    final limit = globalTimeLimit;
+    if (limit != null) {
+      _globalTicker = Timer.periodic(_tickInterval, (_) {
+        if (_clockElapsed >= limit) {
+          _globalTicker?.cancel();
+          _complete();
+        }
+      });
+    }
   }
 
   void _startQuestionTimer() {
@@ -111,7 +147,11 @@ class MultipleChoiceEngine extends ChangeNotifier {
     notifyListeners();
 
     _advanceTimer?.cancel();
-    _advanceTimer = Timer(feedbackDelay, nextQuestion);
+    if (suddenDeath && !isCorrect) {
+      _advanceTimer = Timer(feedbackDelay, _complete);
+    } else {
+      _advanceTimer = Timer(feedbackDelay, nextQuestion);
+    }
   }
 
   /// Advances to the next question, or completes the session. Safe to
@@ -130,10 +170,23 @@ class MultipleChoiceEngine extends ChangeNotifier {
     _startQuestionTimer();
   }
 
+  /// Questions actually reached — equal to [totalQuestions] (the fixed
+  /// pool size) for a normal fixed-length session, since those only
+  /// complete once every question has been reached. For a speed mode,
+  /// [totalQuestions] is really just a large safety buffer (the session
+  /// ends on sudden death or a global clock, not on exhausting the
+  /// pool), so this is what accuracy and results should be measured
+  /// against instead.
+  int get _questionsAttempted => currentIndex + 1;
+
   void _complete() {
+    if (isComplete) return;
     _ticker?.cancel();
-    _stopwatch.stop();
-    final accuracy = totalQuestions == 0 ? 0.0 : correctCount / totalQuestions;
+    _advanceTimer?.cancel();
+    _globalTicker?.cancel();
+    _elapsedAtStop = _clockElapsed;
+    _running = false;
+    final accuracy = _questionsAttempted == 0 ? 0.0 : correctCount / _questionsAttempted;
     xpEarned += ScoreCalculator.completionBonusXp(difficulty: difficulty, accuracy: accuracy);
     isComplete = true;
     notifyListeners();
@@ -144,9 +197,9 @@ class MultipleChoiceEngine extends ChangeNotifier {
       totalScore: score,
       xpEarned: xpEarned,
       correctCount: correctCount,
-      totalQuestions: totalQuestions,
+      totalQuestions: _questionsAttempted,
       bestCombo: bestCombo,
-      elapsed: _stopwatch.elapsed,
+      elapsed: _clockElapsed,
       correctCca3s: correctCca3s,
     );
   }
@@ -155,6 +208,7 @@ class MultipleChoiceEngine extends ChangeNotifier {
   void dispose() {
     _ticker?.cancel();
     _advanceTimer?.cancel();
+    _globalTicker?.cancel();
     super.dispose();
   }
 }

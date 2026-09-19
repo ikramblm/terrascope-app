@@ -48,9 +48,18 @@ dependencies:
   confetti: ^0.8.0
   audioplayers: ^6.1.0
 
+  # Testable wall-clock access (MultipleChoiceEngine's elapsed-time
+  # tracking) — honors a fake clock under `fake_async` in tests, unlike
+  # `Stopwatch`, which always reads the real clock.
+  clock: ^1.1.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  # Deterministic time control for the speed-mode engine tests (sudden
+  # death, global time limit) — real timers/delays otherwise.
+  fake_async: ^1.3.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

@@ -24,12 +24,18 @@ class MultipleChoiceGameScreen extends StatefulWidget {
     required this.engineBuilder,
     required this.promptBuilder,
     required this.onSessionComplete,
+    this.centerLabelBuilder,
   });
 
   final String title;
   final MultipleChoiceEngine Function() engineBuilder;
   final Widget Function(BuildContext context, String promptText) promptBuilder;
   final void Function(GameResult result) onSessionComplete;
+
+  /// Overrides the header's default "Question X / Y" readout — speed
+  /// modes pass a live streak count or countdown instead, since their
+  /// pre-generated question pool size isn't a meaningful target.
+  final String Function(MultipleChoiceEngine engine)? centerLabelBuilder;
 
   @override
   State<MultipleChoiceGameScreen> createState() => _MultipleChoiceGameScreenState();
@@ -101,7 +107,11 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
                     result: _engine.buildResult(),
                     onPlayAgain: _playAgain,
                   )
-                : _QuestionView(engine: _engine, promptBuilder: widget.promptBuilder),
+                : _QuestionView(
+                    engine: _engine,
+                    promptBuilder: widget.promptBuilder,
+                    centerLabelBuilder: widget.centerLabelBuilder,
+                  ),
             Align(
               alignment: Alignment.topCenter,
               child: ConfettiWidget(
@@ -129,10 +139,11 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
 }
 
 class _QuestionView extends StatelessWidget {
-  const _QuestionView({required this.engine, required this.promptBuilder});
+  const _QuestionView({required this.engine, required this.promptBuilder, this.centerLabelBuilder});
 
   final MultipleChoiceEngine engine;
   final Widget Function(BuildContext context, String promptText) promptBuilder;
+  final String Function(MultipleChoiceEngine engine)? centerLabelBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -148,6 +159,7 @@ class _QuestionView extends StatelessWidget {
             combo: engine.combo,
             questionNumber: engine.currentIndex + 1,
             totalQuestions: engine.totalQuestions,
+            centerLabel: centerLabelBuilder?.call(engine),
           ),
           const SizedBox(height: 12),
           TimerBar(remaining: engine.timeRemaining, total: engine.timeAllotted),

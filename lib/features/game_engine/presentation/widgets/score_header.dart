@@ -13,12 +13,18 @@ class ScoreHeader extends StatelessWidget {
     required this.combo,
     required this.questionNumber,
     required this.totalQuestions,
+    this.centerLabel,
   });
 
   final int score;
   final int combo;
   final int questionNumber;
   final int totalQuestions;
+
+  /// Overrides the default "Question X / Y" center readout — speed
+  /// modes show a streak count or countdown here instead, since the
+  /// underlying question pool size isn't a meaningful target for them.
+  final String? centerLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +48,7 @@ class ScoreHeader extends StatelessWidget {
           ],
         ),
         Text(
-          'Question $questionNumber / $totalQuestions',
+          centerLabel ?? 'Question $questionNumber / $totalQuestions',
           style: theme.textTheme.bodyMedium,
         ),
         _ComboBadge(combo: combo),
