@@ -85,7 +85,9 @@ class GameModeCard extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     alignment: Alignment.center,
-                    child: Icon(mode.icon, color: foreground, size: 22),
+                    child: available && mode.logoBuilder != null
+                        ? mode.logoBuilder!(context)
+                        : Icon(mode.icon, color: foreground, size: 22),
                   ),
                   const SizedBox(height: 12),
                   Text(

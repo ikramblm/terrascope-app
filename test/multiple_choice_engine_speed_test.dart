@@ -11,38 +11,42 @@ import 'package:terrascope_app/features/game_engine/engine/multiple_choice_engin
 /// would tap are shuffled per question, so there's no reliable way to
 /// force a "wrong answer" from the UI layer alone.
 Country _country(String cca3, String name) => Country(
-      cca2: cca3.substring(0, 2),
-      cca3: cca3,
-      nameCommon: name,
-      nameOfficial: name,
-      capital: null,
-      region: '',
-      subregion: '',
-      continent: '',
-      latitude: null,
-      longitude: null,
-      area: null,
-      population: null,
-      flagEmoji: '',
-      currencies: const [],
-      languages: const [],
-      borders: const [],
-      landlocked: false,
-      independent: true,
-      unMember: true,
-      altSpellings: const [],
-      landmarks: const [],
-      emojiClues: const [],
-    );
+  cca2: cca3.substring(0, 2),
+  cca3: cca3,
+  nameCommon: name,
+  nameOfficial: name,
+  capital: null,
+  region: '',
+  subregion: '',
+  continent: '',
+  latitude: null,
+  longitude: null,
+  area: null,
+  population: null,
+  flagEmoji: '',
+  currencies: const [],
+  languages: const [],
+  borders: const [],
+  landlocked: false,
+  independent: true,
+  unMember: true,
+  altSpellings: const [],
+  landmarks: const [],
+  emojiClues: const [],
+);
 
 void main() {
   final alpha = _country('AAA', 'Alpha');
   final beta = _country('BBB', 'Beta');
 
   List<MultipleChoiceQuestion> questions(int count) => List.generate(
-        count,
-        (i) => MultipleChoiceQuestion(promptText: 'q$i', correctAnswer: alpha, options: [alpha, beta]),
-      );
+    count,
+    (i) => MultipleChoiceQuestion(
+      promptText: 'q$i',
+      correctAnswer: alpha,
+      options: [alpha, beta],
+    ),
+  );
 
   test('sudden death: one wrong answer ends the session, streak preserved', () {
     fakeAsync((async) {
@@ -82,27 +86,30 @@ void main() {
     });
   });
 
-  test('global time limit ends the session even mid-question, wrong answers keep it going', () {
-    fakeAsync((async) {
-      final engine = MultipleChoiceEngine(
-        questions: questions(50),
-        difficulty: GameDifficulty.hard,
-        globalTimeLimit: const Duration(seconds: 5),
-      );
-      engine.start();
+  test(
+    'global time limit ends the session even mid-question, wrong answers keep it going',
+    () {
+      fakeAsync((async) {
+        final engine = MultipleChoiceEngine(
+          questions: questions(50),
+          difficulty: GameDifficulty.hard,
+          globalTimeLimit: const Duration(seconds: 5),
+        );
+        engine.start();
 
-      // A wrong answer does NOT end a globalTimeLimit session (only
-      // sudden death does) — it should advance like a normal quiz.
-      engine.submitAnswer(beta);
-      async.elapse(MultipleChoiceEngine.feedbackDelay);
-      expect(engine.isComplete, isFalse);
-      expect(engine.currentIndex, 1);
+        // A wrong answer does NOT end a globalTimeLimit session (only
+        // sudden death does) — it should advance like a normal quiz.
+        engine.submitAnswer(beta);
+        async.elapse(MultipleChoiceEngine.feedbackDelay);
+        expect(engine.isComplete, isFalse);
+        expect(engine.currentIndex, 1);
 
-      // The clock, not question progress, ends the session.
-      async.elapse(const Duration(seconds: 5));
-      expect(engine.isComplete, isTrue);
+        // The clock, not question progress, ends the session.
+        async.elapse(const Duration(seconds: 5));
+        expect(engine.isComplete, isTrue);
 
-      engine.dispose();
-    });
-  });
+        engine.dispose();
+      });
+    },
+  );
 }

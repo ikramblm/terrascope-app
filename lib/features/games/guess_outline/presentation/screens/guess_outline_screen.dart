@@ -62,8 +62,8 @@ class GuessOutlineScreen extends ConsumerWidget {
                   _buildEngine(eligible, countries, difficulty),
               promptBuilder: (context, promptText) => CountryOutlineShape(
                 outline: outlines[promptText]!,
-                color: Theme.of(context).colorScheme.onSurface,
-                glowColor: AppColors.skyBlue,
+                color: AppColors.green,
+                glowColor: AppColors.orange,
               ),
               onSessionComplete: (GameResult result) {
                 ref.read(playerProfileProvider.notifier).recordSession(result);

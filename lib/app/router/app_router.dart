@@ -8,6 +8,7 @@ import '../../features/games/guess_emoji/presentation/screens/guess_emoji_screen
 import '../../features/games/guess_flag/presentation/screens/guess_flag_screen.dart';
 import '../../features/games/guess_outline/presentation/screens/guess_outline_screen.dart';
 import '../../features/games/name_all/presentation/screens/name_all_screen.dart';
+import '../../features/games/name_alphabet/presentation/screens/name_alphabet_screen.dart';
 import '../../features/games/name_as_many/presentation/screens/name_as_many_screen.dart';
 import '../../features/games/name_category/presentation/screens/name_category_screen.dart';
 import '../../features/games/name_continent/presentation/screens/name_continent_screen.dart';
@@ -18,7 +19,7 @@ import '../../features/games/speed_capital/presentation/screens/speed_capital_sc
 import '../../features/games/speed_country/presentation/screens/speed_country_screen.dart';
 import '../../features/games/speed_flag/presentation/screens/speed_flag_screen.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
-import '../../features/leaderboard/presentation/screens/leaderboard_screen.dart';
+import '../../features/lists/presentation/screens/lists_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
 import '../../features/shell/presentation/app_shell.dart';
 import 'route_paths.dart';
@@ -62,8 +63,8 @@ GoRouter buildAppRouter() {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: RoutePaths.leaderboard,
-                builder: (context, state) => const LeaderboardScreen(),
+                path: RoutePaths.lists,
+                builder: (context, state) => const ListsScreen(),
               ),
             ],
           ),
@@ -128,6 +129,11 @@ GoRouter buildAppRouter() {
         parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.nameLetter,
         builder: (context, state) => const NameLetterScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.nameAlphabet,
+        builder: (context, state) => const NameAlphabetScreen(),
       ),
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,

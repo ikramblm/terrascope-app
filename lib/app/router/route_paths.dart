@@ -4,7 +4,7 @@ abstract class RoutePaths {
 
   static const String home = '/home';
   static const String games = '/games';
-  static const String leaderboard = '/leaderboard';
+  static const String lists = '/lists';
   static const String profile = '/profile';
 
   static const String guessFlag = '/games/guess-flag';
@@ -18,6 +18,7 @@ abstract class RoutePaths {
   static const String nameContinent = '/games/name-continent';
   static const String nameCategory = '/games/name-category';
   static const String nameLetter = '/games/name-letter';
+  static const String nameAlphabet = '/games/name-alphabet';
 
   static const String speedFlag = '/games/speed-flag';
   static const String speedCapital = '/games/speed-capital';

@@ -10,12 +10,17 @@ class GameModeButton extends StatelessWidget {
     required this.icon,
     required this.color,
     required this.onTap,
+    this.logoBuilder,
   });
 
   final String label;
   final IconData icon;
   final Color color;
   final VoidCallback onTap;
+
+  /// An optional bespoke visual (a flag, a colored outline, a themed
+  /// emoji) shown instead of [icon] — see [GameMode.logoBuilder].
+  final Widget Function(BuildContext context)? logoBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +54,10 @@ class GameModeButton extends StatelessWidget {
                   color: Colors.white.withValues(alpha: 0.25),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(icon, color: Colors.white, size: 22),
+                alignment: Alignment.center,
+                child:
+                    logoBuilder?.call(context) ??
+                    Icon(icon, color: Colors.white, size: 22),
               ),
               const SizedBox(width: 16),
               Expanded(

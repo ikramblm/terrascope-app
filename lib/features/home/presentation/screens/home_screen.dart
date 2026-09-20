@@ -12,20 +12,25 @@ import '../widgets/world_map_banner.dart';
 /// Home: a big colorful "this is a geography game" visual, then a short,
 /// clean list of large mode buttons. Deliberately nothing else — no
 /// stats, no cards, no secondary sections competing for attention.
+///
+/// Only the three headline modes appear here — every other mode lives
+/// one tap away in Explore, organized by category.
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
+  static const _featuredIds = ['guess_emoji', 'guess_flag', 'guess_outline'];
 
   static const _buttonColors = [
     AppColors.oceanBlue,
     AppColors.green,
     AppColors.orange,
-    AppColors.coral,
-    AppColors.purple,
   ];
 
   @override
   Widget build(BuildContext context) {
-    final featuredModes = kGameCatalog.where((m) => m.isAvailable).toList();
+    final featuredModes = [
+      for (final id in _featuredIds) kGameCatalog.firstWhere((m) => m.id == id),
+    ].where((m) => m.isAvailable).toList();
 
     return Scaffold(
       body: SafeArea(
@@ -46,6 +51,7 @@ class HomeScreen extends StatelessWidget {
                     label: mode.title,
                     icon: mode.icon,
                     color: _buttonColors[i % _buttonColors.length],
+                    logoBuilder: mode.logoBuilder,
                     onTap: () => context.push(mode.routePath!),
                   ),
                 ),
@@ -56,9 +62,7 @@ class HomeScreen extends StatelessWidget {
                 child: GameModeButton(
                   label: 'Explore All Games',
                   icon: Icons.explore_rounded,
-                  color:
-                      _buttonColors[featuredModes.length %
-                          _buttonColors.length],
+                  color: AppColors.purple,
                   onTap: () => context.go(RoutePaths.games),
                 ),
               ),

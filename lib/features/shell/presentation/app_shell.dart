@@ -80,7 +80,7 @@ class _BottomBar extends StatelessWidget {
   static const _items = [
     (icon: Icons.home_rounded, label: 'Home'),
     (icon: Icons.explore_rounded, label: 'Explore'),
-    (icon: Icons.emoji_events_rounded, label: 'Rankings'),
+    (icon: Icons.menu_book_rounded, label: 'Lists'),
     (icon: Icons.person_rounded, label: 'Profile'),
   ];
 

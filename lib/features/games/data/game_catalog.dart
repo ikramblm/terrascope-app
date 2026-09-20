@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../app/router/route_paths.dart';
 import '../domain/game_category.dart';
 import '../domain/game_mode.dart';
+import '../presentation/widgets/game_mode_logo.dart';
 
 /// The full catalog of TerraScope game modes.
 ///
@@ -11,7 +12,7 @@ import '../domain/game_mode.dart';
 /// null (rendering as "Coming soon" and disabled) until that mode's real
 /// screen ships. Nothing here is a fake/dead button: unavailable modes
 /// are visibly and honestly non-interactive.
-const List<GameMode> kGameCatalog = [
+final List<GameMode> kGameCatalog = [
   // GUESS
   GameMode(
     id: 'guess_emoji',
@@ -20,6 +21,7 @@ const List<GameMode> kGameCatalog = [
     tagline: 'A country, told in emoji',
     icon: Icons.emoji_emotions_outlined,
     routePath: RoutePaths.guessEmoji,
+    logoBuilder: (context) => const EmojiModeLogo(),
   ),
   GameMode(
     id: 'guess_flag',
@@ -28,6 +30,7 @@ const List<GameMode> kGameCatalog = [
     tagline: 'Name the country behind the flag',
     icon: Icons.flag_outlined,
     routePath: RoutePaths.guessFlag,
+    logoBuilder: (context) => const FlagModeLogo(),
   ),
   GameMode(
     id: 'guess_outline',
@@ -36,6 +39,7 @@ const List<GameMode> kGameCatalog = [
     tagline: 'Recognize a country by its silhouette',
     icon: Icons.crop_free,
     routePath: RoutePaths.guessOutline,
+    logoBuilder: (context) => const OutlineModeLogo(),
   ),
   GameMode(
     id: 'guess_borders',
@@ -122,6 +126,14 @@ const List<GameMode> kGameCatalog = [
     tagline: 'No timer, no limit',
     icon: Icons.all_inclusive,
     routePath: RoutePaths.nameAsMany,
+  ),
+  GameMode(
+    id: 'name_alphabet',
+    category: GameCategory.name,
+    title: 'Name the Alphabet',
+    tagline: 'One country per letter, A to Z',
+    icon: Icons.sort_by_alpha_rounded,
+    routePath: RoutePaths.nameAlphabet,
   ),
 
   // SPEED

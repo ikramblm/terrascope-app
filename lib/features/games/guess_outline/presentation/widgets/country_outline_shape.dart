@@ -66,7 +66,10 @@ class _CountryOutlinePainter extends CustomPainter {
 
     final lonSpan = (maxX - minX).clamp(0.0001, double.infinity);
     final latSpan = (maxY - minY).clamp(0.0001, double.infinity);
-    const padding = 12.0;
+    // Proportional to the canvas (12px at the default 220px size) rather
+    // than a fixed constant — a fixed 12px padding left zero drawable
+    // area on a small icon-sized canvas (e.g. 24px).
+    final padding = size.shortestSide * (12.0 / 220.0);
     final availableW = size.width - padding * 2;
     final availableH = size.height - padding * 2;
     final scale = (availableW / lonSpan < availableH / latSpan)

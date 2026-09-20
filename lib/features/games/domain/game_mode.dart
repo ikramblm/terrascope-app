@@ -18,6 +18,7 @@ class GameMode {
     required this.tagline,
     required this.icon,
     this.routePath,
+    this.logoBuilder,
   });
 
   final String id;
@@ -28,6 +29,12 @@ class GameMode {
 
   /// Non-null only once this mode has a real, working screen wired up.
   final String? routePath;
+
+  /// An optional bespoke visual for this mode's card/button — a real
+  /// flag, a colored country outline, a themed emoji — used in place of
+  /// the plain [icon] wherever this mode is shown. Null falls back to
+  /// [icon], which is why every mode still declares one.
+  final Widget Function(BuildContext context)? logoBuilder;
 
   bool get isAvailable => routePath != null;
 }
