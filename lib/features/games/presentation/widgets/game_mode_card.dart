@@ -1,99 +1,85 @@
 import 'package:flutter/material.dart';
 
-import '../../../../app/theme/app_colors.dart';
 import '../../domain/game_mode.dart';
-import 'game_category_style.dart';
 
-/// A single game mode tile in the catalog grid.
+/// A single game mode tile in the catalog grid — a large solid-color
+/// square, a white icon, the game's name. Nothing else: no tagline, no
+/// stats, no decoration competing with the color and the icon for
+/// attention.
 ///
-/// Unavailable modes render visibly disabled with a "Coming soon" badge —
-/// never a button that looks tappable but silently does nothing.
+/// Unavailable modes render visibly muted with a "Soon" badge — never a
+/// tile that looks tappable but silently does nothing.
 class GameModeCard extends StatelessWidget {
-  const GameModeCard({super.key, required this.mode, this.onTap});
+  const GameModeCard({super.key, required this.mode, required this.color, this.onTap});
 
   final GameMode mode;
+  final Color color;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final available = mode.isAvailable;
-    final accent = accentForCategory(mode.category);
+    final background = available ? color : theme.colorScheme.surfaceContainerHighest;
+    final foreground = available ? Colors.white : theme.colorScheme.onSurfaceVariant;
 
-    return Opacity(
-      opacity: available ? 1 : 0.55,
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: available ? onTap : null,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: accent.withValues(alpha: 0.14),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Icon(mode.icon, color: accent, size: 20),
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(28),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(28),
+        onTap: onTap,
+        child: Ink(
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            color: background,
+            borderRadius: BorderRadius.circular(28),
+            boxShadow: available
+                ? [BoxShadow(color: color.withValues(alpha: 0.30), blurRadius: 14, offset: const Offset(0, 8))]
+                : null,
+          ),
+          child: Stack(
+            children: [
+              if (!available)
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.surface,
+                      borderRadius: BorderRadius.circular(100),
                     ),
-                    if (!available)
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: theme.colorScheme.surfaceContainerHighest,
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: Text('Soon', style: theme.textTheme.labelSmall),
-                      ),
-                  ],
+                    child: Text('Soon', style: theme.textTheme.labelSmall),
+                  ),
                 ),
-                const SizedBox(height: 14),
-                Text(mode.title, style: theme.textTheme.titleSmall),
-                const SizedBox(height: 4),
-                Text(
-                  mode.tagline,
-                  style: theme.textTheme.bodySmall,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const Spacer(),
-                if (available) _DifficultyDots(accent: accent),
-              ],
-            ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    width: 44,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: foreground.withValues(alpha: available ? 0.25 : 0.12),
+                      shape: BoxShape.circle,
+                    ),
+                    alignment: Alignment.center,
+                    child: Icon(mode.icon, color: foreground, size: 22),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    mode.title,
+                    style: theme.textTheme.titleSmall?.copyWith(color: foreground),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
-    );
-  }
-}
-
-/// Every mode offers all three difficulties — this isn't a fixed rating,
-/// just a quiet visual reminder that Easy/Medium/Hard are all there.
-class _DifficultyDots extends StatelessWidget {
-  const _DifficultyDots({required this.accent});
-
-  final Color accent;
-
-  @override
-  Widget build(BuildContext context) {
-    const colors = [AppColors.difficultyEasy, AppColors.difficultyMedium, AppColors.difficultyHard];
-    return Row(
-      children: [
-        for (final c in colors) ...[
-          Container(
-            width: 6,
-            height: 6,
-            decoration: BoxDecoration(shape: BoxShape.circle, color: c),
-          ),
-          const SizedBox(width: 4),
-        ],
-      ],
     );
   }
 }

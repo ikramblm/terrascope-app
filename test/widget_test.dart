@@ -144,6 +144,8 @@ void main() {
 
     await tester.tap(find.text('Explore'));
     await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Guess by Outline'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Guess by Outline'));
     await tester.pumpAndSettle();
 
