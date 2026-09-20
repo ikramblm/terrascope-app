@@ -40,10 +40,8 @@ class ScoreHeader extends StatelessWidget {
               tween: Tween(end: score.toDouble()),
               duration: const Duration(milliseconds: 500),
               curve: Curves.easeOutCubic,
-              builder: (context, value, _) => Text(
-                '${value.round()}',
-                style: theme.textTheme.titleLarge,
-              ),
+              builder: (context, value, _) =>
+                  Text('${value.round()}', style: theme.textTheme.titleLarge),
             ),
           ],
         ),
@@ -66,7 +64,8 @@ class _ComboBadge extends StatefulWidget {
   State<_ComboBadge> createState() => _ComboBadgeState();
 }
 
-class _ComboBadgeState extends State<_ComboBadge> with SingleTickerProviderStateMixin {
+class _ComboBadgeState extends State<_ComboBadge>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 350),
@@ -94,8 +93,15 @@ class _ComboBadgeState extends State<_ComboBadge> with SingleTickerProviderState
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
-        final bounce = 1 + Curves.elasticOut.transform(_controller.value) * 0.25 * (1 - _controller.value);
-        return Transform.scale(scale: visible ? bounce.clamp(1.0, 1.3) : 1, child: child);
+        final bounce =
+            1 +
+            Curves.elasticOut.transform(_controller.value) *
+                0.25 *
+                (1 - _controller.value);
+        return Transform.scale(
+          scale: visible ? bounce.clamp(1.0, 1.3) : 1,
+          child: child,
+        );
       },
       child: AnimatedOpacity(
         opacity: visible ? 1 : 0,
@@ -113,7 +119,9 @@ class _ComboBadgeState extends State<_ComboBadge> with SingleTickerProviderState
               const SizedBox(width: 2),
               Text(
                 '${widget.combo}x',
-                style: theme.textTheme.labelLarge?.copyWith(color: theme.colorScheme.tertiary),
+                style: theme.textTheme.labelLarge?.copyWith(
+                  color: theme.colorScheme.tertiary,
+                ),
               ),
             ],
           ),

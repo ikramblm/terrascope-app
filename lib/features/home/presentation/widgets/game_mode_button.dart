@@ -33,7 +33,11 @@ class GameModeButton extends StatelessWidget {
             color: color,
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
-              BoxShadow(color: color.withValues(alpha: 0.35), blurRadius: 16, offset: const Offset(0, 8)),
+              BoxShadow(
+                color: color.withValues(alpha: 0.35),
+                blurRadius: 16,
+                offset: const Offset(0, 8),
+              ),
             ],
           ),
           child: Row(
@@ -41,14 +45,19 @@ class GameModeButton extends StatelessWidget {
               Container(
                 width: 44,
                 height: 44,
-                decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.25), shape: BoxShape.circle),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.25),
+                  shape: BoxShape.circle,
+                ),
                 child: Icon(icon, color: Colors.white, size: 22),
               ),
               const SizedBox(width: 16),
               Expanded(
                 child: Text(
                   label,
-                  style: theme.textTheme.titleLarge?.copyWith(color: Colors.white),
+                  style: theme.textTheme.titleLarge?.copyWith(
+                    color: Colors.white,
+                  ),
                 ),
               ),
               const Icon(Icons.chevron_right_rounded, color: Colors.white70),

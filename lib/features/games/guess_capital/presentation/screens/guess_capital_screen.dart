@@ -30,7 +30,9 @@ class GuessCapitalScreen extends ConsumerWidget {
       loading: () => const LoadingView(message: 'Loading countries…'),
       error: (err, st) => ErrorView(message: '$err'),
       data: (countries) {
-        final eligible = countries.where((c) => c.capital != null && c.capital!.isNotEmpty).toList();
+        final eligible = countries
+            .where((c) => c.capital != null && c.capital!.isNotEmpty)
+            .toList();
         return DifficultySelectScreen(
           title: 'Guess by Capital',
           subtitle: 'A capital city appears — name its country.',
@@ -40,14 +42,17 @@ class GuessCapitalScreen extends ConsumerWidget {
               MaterialPageRoute(
                 builder: (_) => MultipleChoiceGameScreen(
                   title: 'Guess by Capital',
-                  engineBuilder: () => _buildEngine(eligible, countries, difficulty),
+                  engineBuilder: () =>
+                      _buildEngine(eligible, countries, difficulty),
                   promptBuilder: (context, promptText) => Text(
                     promptText,
                     style: Theme.of(context).textTheme.displayMedium,
                     textAlign: TextAlign.center,
                   ),
                   onSessionComplete: (GameResult result) {
-                    ref.read(playerProfileProvider.notifier).recordSession(result);
+                    ref
+                        .read(playerProfileProvider.notifier)
+                        .recordSession(result);
                   },
                 ),
               ),

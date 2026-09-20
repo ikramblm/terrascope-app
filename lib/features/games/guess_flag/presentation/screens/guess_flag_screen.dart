@@ -37,12 +37,12 @@ class GuessFlagScreen extends ConsumerWidget {
               builder: (_) => MultipleChoiceGameScreen(
                 title: 'Guess by Flag',
                 engineBuilder: () => _buildEngine(countries, difficulty),
-                promptBuilder: (context, promptText) => Text(
-                  promptText,
-                  style: const TextStyle(fontSize: 96),
-                ),
+                promptBuilder: (context, promptText) =>
+                    Text(promptText, style: const TextStyle(fontSize: 96)),
                 onSessionComplete: (GameResult result) {
-                  ref.read(playerProfileProvider.notifier).recordSession(result);
+                  ref
+                      .read(playerProfileProvider.notifier)
+                      .recordSession(result);
                 },
               ),
             ),
@@ -52,7 +52,10 @@ class GuessFlagScreen extends ConsumerWidget {
     );
   }
 
-  MultipleChoiceEngine _buildEngine(List<Country> countries, GameDifficulty difficulty) {
+  MultipleChoiceEngine _buildEngine(
+    List<Country> countries,
+    GameDifficulty difficulty,
+  ) {
     final questions = MultipleChoiceGenerator().generate(
       pool: countries,
       distractorPool: countries,

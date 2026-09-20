@@ -10,10 +10,10 @@ class Currency {
   final String? symbol;
 
   factory Currency.fromJson(Map<String, dynamic> json) => Currency(
-        code: json['code'] as String,
-        name: json['name'] as String?,
-        symbol: json['symbol'] as String?,
-      );
+    code: json['code'] as String,
+    name: json['name'] as String?,
+    symbol: json['symbol'] as String?,
+  );
 }
 
 /// A single reusable emoji clue for "Guess by Emoji" — kept as its own
@@ -27,9 +27,9 @@ class EmojiClue {
   final int? difficulty;
 
   factory EmojiClue.fromJson(Map<String, dynamic> json) => EmojiClue(
-        emojis: json['emojis'] as String,
-        difficulty: json['difficulty'] as int?,
-      );
+    emojis: json['emojis'] as String,
+    difficulty: json['difficulty'] as int?,
+  );
 }
 
 /// A reference to a landmark image/illustration used by "Guess by
@@ -37,17 +37,21 @@ class EmojiClue {
 /// touching the country schema.
 @immutable
 class LandmarkRef {
-  const LandmarkRef({required this.name, required this.assetPath, this.attribution});
+  const LandmarkRef({
+    required this.name,
+    required this.assetPath,
+    this.attribution,
+  });
 
   final String name;
   final String assetPath;
   final String? attribution;
 
   factory LandmarkRef.fromJson(Map<String, dynamic> json) => LandmarkRef(
-        name: json['name'] as String,
-        assetPath: json['assetPath'] as String,
-        attribution: json['attribution'] as String?,
-      );
+    name: json['name'] as String,
+    assetPath: json['assetPath'] as String,
+    attribution: json['attribution'] as String?,
+  );
 }
 
 /// A single country in TerraScope's canonical dataset.

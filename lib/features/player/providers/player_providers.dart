@@ -26,10 +26,13 @@ class PlayerProfileNotifier extends Notifier<PlayerProfile> {
         ...state.discoveredCountryCodes,
         ...result.correctCca3s,
       },
-      bestScore: result.totalScore > state.bestScore ? result.totalScore : state.bestScore,
+      bestScore: result.totalScore > state.bestScore
+          ? result.totalScore
+          : state.bestScore,
       gamesPlayed: state.gamesPlayed + 1,
       totalCorrectAnswers: state.totalCorrectAnswers + result.correctCount,
-      totalQuestionsAnswered: state.totalQuestionsAnswered + result.totalQuestions,
+      totalQuestionsAnswered:
+          state.totalQuestionsAnswered + result.totalQuestions,
       lastPlayedAt: DateTime.now(),
     );
   }
@@ -37,5 +40,5 @@ class PlayerProfileNotifier extends Notifier<PlayerProfile> {
 
 final playerProfileProvider =
     NotifierProvider<PlayerProfileNotifier, PlayerProfile>(
-  PlayerProfileNotifier.new,
-);
+      PlayerProfileNotifier.new,
+    );

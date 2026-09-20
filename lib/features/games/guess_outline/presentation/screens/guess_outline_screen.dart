@@ -36,13 +36,18 @@ class GuessOutlineScreen extends ConsumerWidget {
       return const LoadingView(message: 'Loading country outlines…');
     }
     if (countriesAsync.hasError || outlinesAsync.hasError) {
-      return ErrorView(message: '${countriesAsync.error ?? outlinesAsync.error}');
+      return ErrorView(
+        message: '${countriesAsync.error ?? outlinesAsync.error}',
+      );
     }
 
     final countries = countriesAsync.requireValue;
     final outlines = outlinesAsync.requireValue;
     final byCca3 = {for (final c in countries) c.cca3: c};
-    final eligible = outlines.keys.map((cca3) => byCca3[cca3]).whereType<Country>().toList();
+    final eligible = outlines.keys
+        .map((cca3) => byCca3[cca3])
+        .whereType<Country>()
+        .toList();
 
     return DifficultySelectScreen(
       title: 'Guess by Outline',
@@ -53,7 +58,8 @@ class GuessOutlineScreen extends ConsumerWidget {
           MaterialPageRoute(
             builder: (_) => MultipleChoiceGameScreen(
               title: 'Guess by Outline',
-              engineBuilder: () => _buildEngine(eligible, countries, difficulty),
+              engineBuilder: () =>
+                  _buildEngine(eligible, countries, difficulty),
               promptBuilder: (context, promptText) => CountryOutlineShape(
                 outline: outlines[promptText]!,
                 color: Theme.of(context).colorScheme.onSurface,

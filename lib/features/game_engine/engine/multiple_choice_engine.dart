@@ -69,7 +69,8 @@ class MultipleChoiceEngine extends ChangeNotifier {
   Duration _elapsedAtStop = Duration.zero;
   bool _running = false;
 
-  Duration get _clockElapsed => _running ? clock.now().difference(_startedAt!) : _elapsedAtStop;
+  Duration get _clockElapsed =>
+      _running ? clock.now().difference(_startedAt!) : _elapsedAtStop;
 
   /// How long the correct/incorrect feedback stays on screen before
   /// auto-advancing to the next question.
@@ -186,8 +187,13 @@ class MultipleChoiceEngine extends ChangeNotifier {
     _globalTicker?.cancel();
     _elapsedAtStop = _clockElapsed;
     _running = false;
-    final accuracy = _questionsAttempted == 0 ? 0.0 : correctCount / _questionsAttempted;
-    xpEarned += ScoreCalculator.completionBonusXp(difficulty: difficulty, accuracy: accuracy);
+    final accuracy = _questionsAttempted == 0
+        ? 0.0
+        : correctCount / _questionsAttempted;
+    xpEarned += ScoreCalculator.completionBonusXp(
+      difficulty: difficulty,
+      accuracy: accuracy,
+    );
     isComplete = true;
     notifyListeners();
   }

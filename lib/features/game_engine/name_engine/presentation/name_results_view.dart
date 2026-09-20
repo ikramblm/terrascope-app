@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../app/router/route_paths.dart';
 import '../../../../app/theme/app_colors.dart';
+import '../../../../core/widgets/stat_card.dart';
 import '../../../games/data/quick_play.dart';
 import '../name_engine.dart';
 
@@ -12,7 +13,11 @@ import '../name_engine.dart';
 /// (no accuracy/combo — there's no wrong answer to be inaccurate about,
 /// just countries found or not).
 class NameResultsView extends StatelessWidget {
-  const NameResultsView({super.key, required this.engine, required this.onPlayAgain});
+  const NameResultsView({
+    super.key,
+    required this.engine,
+    required this.onPlayAgain,
+  });
 
   final NameEngine engine;
   final VoidCallback onPlayAgain;
@@ -32,7 +37,10 @@ class NameResultsView extends StatelessWidget {
             color: theme.colorScheme.tertiary,
           ),
           const SizedBox(height: 12),
-          Text(completedAll ? 'All Found!' : 'Nice Run!', style: theme.textTheme.headlineLarge),
+          Text(
+            completedAll ? 'All Found!' : 'Nice Run!',
+            style: theme.textTheme.headlineLarge,
+          ),
           const SizedBox(height: 4),
           Text(
             '${engine.foundCount} / ${engine.totalCount} countries found',
@@ -40,35 +48,37 @@ class NameResultsView extends StatelessWidget {
           ),
           const SizedBox(height: 28),
           Expanded(
-            child: GridView.count(
-              crossAxisCount: 2,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              childAspectRatio: 1.6,
+            child: GridView(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                mainAxisExtent: 128,
+              ),
               children: [
-                _StatCard(
+                StatCard(
                   label: 'Found',
                   value: '${engine.foundCount}',
                   icon: Icons.public_rounded,
-                  accent: AppColors.oceanBlue,
+                  color: AppColors.oceanBlue,
                 ),
-                _StatCard(
+                StatCard(
                   label: 'XP Earned',
                   value: '+${engine.buildResult().xpEarned}',
                   icon: Icons.bolt,
-                  accent: AppColors.green,
+                  color: AppColors.green,
                 ),
-                _StatCard(
+                StatCard(
                   label: 'Score',
                   value: '${engine.buildResult().totalScore}',
                   icon: Icons.stars_rounded,
-                  accent: AppColors.yellow,
+                  color: AppColors.yellow,
                 ),
-                _StatCard(
+                StatCard(
                   label: 'Time',
                   value: _formatDuration(engine.elapsed),
                   icon: Icons.timer_outlined,
-                  accent: AppColors.purple,
+                  color: AppColors.purple,
                 ),
               ],
             ),
@@ -76,13 +86,17 @@ class NameResultsView extends StatelessWidget {
           const SizedBox(height: 8),
           ElevatedButton(
             onPressed: onPlayAgain,
-            style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(56)),
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size.fromHeight(56),
+            ),
             child: const Text('Play Again'),
           ),
           const SizedBox(height: 10),
           OutlinedButton(
             onPressed: () => launchQuickPlay(context),
-            style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(56)),
+            style: OutlinedButton.styleFrom(
+              minimumSize: const Size.fromHeight(56),
+            ),
             child: const Text('Try Another'),
           ),
           const SizedBox(height: 4),
@@ -100,42 +114,5 @@ class NameResultsView extends StatelessWidget {
     final seconds = d.inSeconds % 60;
     if (minutes == 0) return '${seconds}s';
     return '${minutes}m ${seconds}s';
-  }
-}
-
-class _StatCard extends StatelessWidget {
-  const _StatCard({required this.label, required this.value, required this.icon, required this.accent});
-
-  final String label;
-  final String value;
-  final IconData icon;
-  final Color accent;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: accent.withValues(alpha: 0.18),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(icon, color: accent, size: 20),
-            ),
-            const SizedBox(height: 8),
-            Text(value, style: theme.textTheme.titleLarge),
-            Text(label, style: theme.textTheme.bodySmall),
-          ],
-        ),
-      ),
-    );
   }
 }

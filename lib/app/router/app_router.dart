@@ -36,112 +36,120 @@ GoRouter buildAppRouter() {
   final rootNavigatorKey = GlobalKey<NavigatorState>();
 
   return GoRouter(
-  navigatorKey: rootNavigatorKey,
-  initialLocation: RoutePaths.home,
-  routes: [
-    StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) =>
-          AppShell(navigationShell: navigationShell),
-      branches: [
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: RoutePaths.home,
-            builder: (context, state) => const HomeScreen(),
+    navigatorKey: rootNavigatorKey,
+    initialLocation: RoutePaths.home,
+    routes: [
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) =>
+            AppShell(navigationShell: navigationShell),
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: RoutePaths.home,
+                builder: (context, state) => const HomeScreen(),
+              ),
+            ],
           ),
-        ]),
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: RoutePaths.games,
-            builder: (context, state) => const GamesScreen(),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: RoutePaths.games,
+                builder: (context, state) => const GamesScreen(),
+              ),
+            ],
           ),
-        ]),
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: RoutePaths.leaderboard,
-            builder: (context, state) => const LeaderboardScreen(),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: RoutePaths.leaderboard,
+                builder: (context, state) => const LeaderboardScreen(),
+              ),
+            ],
           ),
-        ]),
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: RoutePaths.profile,
-            builder: (context, state) => const ProfileScreen(),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: RoutePaths.profile,
+                builder: (context, state) => const ProfileScreen(),
+              ),
+            ],
           ),
-        ]),
-      ],
-    ),
-    // Full-screen gameplay routes: pushed over the bottom-nav shell (not a
-    // shell branch) since a game session isn't a tab destination.
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: RoutePaths.guessFlag,
-      builder: (context, state) => const GuessFlagScreen(),
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: RoutePaths.guessEmoji,
-      builder: (context, state) => const GuessEmojiScreen(),
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: RoutePaths.guessOutline,
-      builder: (context, state) => const GuessOutlineScreen(),
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: RoutePaths.guessCapital,
-      builder: (context, state) => const GuessCapitalScreen(),
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: RoutePaths.guessBorders,
-      builder: (context, state) => const GuessBordersScreen(),
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: RoutePaths.nameAll,
-      builder: (context, state) => const NameAllScreen(),
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: RoutePaths.nameAsMany,
-      builder: (context, state) => const NameAsManyScreen(),
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: RoutePaths.nameContinent,
-      builder: (context, state) => const NameContinentScreen(),
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: RoutePaths.nameCategory,
-      builder: (context, state) => const NameCategoryScreen(),
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: RoutePaths.nameLetter,
-      builder: (context, state) => const NameLetterScreen(),
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: RoutePaths.speedFlag,
-      builder: (context, state) => const SpeedFlagScreen(),
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: RoutePaths.speedCapital,
-      builder: (context, state) => const SpeedCapitalScreen(),
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: RoutePaths.speedCountry,
-      builder: (context, state) => const SpeedCountryScreen(),
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: RoutePaths.speed60s,
-      builder: (context, state) => const Speed60sScreen(),
-    ),
-  ],
+        ],
+      ),
+      // Full-screen gameplay routes: pushed over the bottom-nav shell (not a
+      // shell branch) since a game session isn't a tab destination.
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.guessFlag,
+        builder: (context, state) => const GuessFlagScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.guessEmoji,
+        builder: (context, state) => const GuessEmojiScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.guessOutline,
+        builder: (context, state) => const GuessOutlineScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.guessCapital,
+        builder: (context, state) => const GuessCapitalScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.guessBorders,
+        builder: (context, state) => const GuessBordersScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.nameAll,
+        builder: (context, state) => const NameAllScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.nameAsMany,
+        builder: (context, state) => const NameAsManyScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.nameContinent,
+        builder: (context, state) => const NameContinentScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.nameCategory,
+        builder: (context, state) => const NameCategoryScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.nameLetter,
+        builder: (context, state) => const NameLetterScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.speedFlag,
+        builder: (context, state) => const SpeedFlagScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.speedCapital,
+        builder: (context, state) => const SpeedCapitalScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.speedCountry,
+        builder: (context, state) => const SpeedCountryScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.speed60s,
+        builder: (context, state) => const Speed60sScreen(),
+      ),
+    ],
   );
 }
 

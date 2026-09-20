@@ -7,7 +7,7 @@ import '../../domain/game_category.dart';
 /// mode cards so "Guess" is always blue, "Name" always green, "Speed"
 /// always orange, everywhere in the Games tab.
 Color accentForCategory(GameCategory category) => switch (category) {
-      GameCategory.guess => AppColors.oceanBlue,
-      GameCategory.name => AppColors.green,
-      GameCategory.speed => AppColors.orange,
-    };
+  GameCategory.guess => AppColors.oceanBlue,
+  GameCategory.name => AppColors.green,
+  GameCategory.speed => AppColors.orange,
+};

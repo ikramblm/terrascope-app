@@ -43,14 +43,18 @@ class NameCategoryScreen extends ConsumerWidget {
             subtitle: 'Under 20,000 km²',
             icon: Icons.zoom_in_map_rounded,
             color: AppColors.purple,
-            pool: countries.where((c) => c.area != null && c.area! < 20000).toList(),
+            pool: countries
+                .where((c) => c.area != null && c.area! < 20000)
+                .toList(),
           ),
           NamePoolOption(
             label: 'Large Nations',
             subtitle: 'Over 1,000,000 km²',
             icon: Icons.zoom_out_map_rounded,
             color: AppColors.green,
-            pool: countries.where((c) => c.area != null && c.area! > 1000000).toList(),
+            pool: countries
+                .where((c) => c.area != null && c.area! > 1000000)
+                .toList(),
           ),
         ];
 
@@ -60,7 +64,8 @@ class NameCategoryScreen extends ConsumerWidget {
           icon: Icons.category_outlined,
           options: options,
           gameTitleFor: (o) => 'Name ${o.label}',
-          instructionsFor: (o) => 'Type every ${o.label.toLowerCase()} country you can think of.',
+          instructionsFor: (o) =>
+              'Type every ${o.label.toLowerCase()} country you can think of.',
           onSessionComplete: (GameResult result) {
             ref.read(playerProfileProvider.notifier).recordSession(result);
           },

@@ -38,7 +38,8 @@ class MultipleChoiceGameScreen extends StatefulWidget {
   final String Function(MultipleChoiceEngine engine)? centerLabelBuilder;
 
   @override
-  State<MultipleChoiceGameScreen> createState() => _MultipleChoiceGameScreenState();
+  State<MultipleChoiceGameScreen> createState() =>
+      _MultipleChoiceGameScreenState();
 }
 
 class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
@@ -46,8 +47,9 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
   bool _resultRecorded = false;
   int _lastCelebratedIndex = -1;
 
-  late final ConfettiController _confettiController =
-      ConfettiController(duration: const Duration(milliseconds: 700));
+  late final ConfettiController _confettiController = ConfettiController(
+    duration: const Duration(milliseconds: 700),
+  );
 
   @override
   void initState() {
@@ -101,36 +103,36 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
       body: SafeArea(
         child: MaxWidthBox(
           child: Stack(
-          children: [
-            _engine.isComplete
-                ? GameResultsView(
-                    result: _engine.buildResult(),
-                    onPlayAgain: _playAgain,
-                  )
-                : _QuestionView(
-                    engine: _engine,
-                    promptBuilder: widget.promptBuilder,
-                    centerLabelBuilder: widget.centerLabelBuilder,
-                  ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: ConfettiWidget(
-                confettiController: _confettiController,
-                blastDirection: pi / 2,
-                blastDirectionality: BlastDirectionality.explosive,
-                numberOfParticles: 18,
-                gravity: 0.4,
-                emissionFrequency: 0.9,
-                maxBlastForce: 16,
-                minBlastForce: 6,
-                colors: [
-                  theme.colorScheme.secondary,
-                  theme.colorScheme.primary,
-                  theme.colorScheme.tertiary,
-                ],
+            children: [
+              _engine.isComplete
+                  ? GameResultsView(
+                      result: _engine.buildResult(),
+                      onPlayAgain: _playAgain,
+                    )
+                  : _QuestionView(
+                      engine: _engine,
+                      promptBuilder: widget.promptBuilder,
+                      centerLabelBuilder: widget.centerLabelBuilder,
+                    ),
+              Align(
+                alignment: Alignment.topCenter,
+                child: ConfettiWidget(
+                  confettiController: _confettiController,
+                  blastDirection: pi / 2,
+                  blastDirectionality: BlastDirectionality.explosive,
+                  numberOfParticles: 18,
+                  gravity: 0.4,
+                  emissionFrequency: 0.9,
+                  maxBlastForce: 16,
+                  minBlastForce: 6,
+                  colors: [
+                    theme.colorScheme.secondary,
+                    theme.colorScheme.primary,
+                    theme.colorScheme.tertiary,
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
           ),
         ),
       ),
@@ -139,7 +141,11 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
 }
 
 class _QuestionView extends StatelessWidget {
-  const _QuestionView({required this.engine, required this.promptBuilder, this.centerLabelBuilder});
+  const _QuestionView({
+    required this.engine,
+    required this.promptBuilder,
+    this.centerLabelBuilder,
+  });
 
   final MultipleChoiceEngine engine;
   final Widget Function(BuildContext context, String promptText) promptBuilder;
@@ -165,9 +171,7 @@ class _QuestionView extends StatelessWidget {
           TimerBar(remaining: engine.timeRemaining, total: engine.timeAllotted),
           const SizedBox(height: 32),
           Expanded(
-            child: Center(
-              child: promptBuilder(context, question.promptText),
-            ),
+            child: Center(child: promptBuilder(context, question.promptText)),
           ),
           const SizedBox(height: 12),
           for (final (i, option) in question.options.indexed) ...[
@@ -186,9 +190,12 @@ class _QuestionView extends StatelessWidget {
 
   AnswerOptionState _stateFor(Country option) {
     if (!engine.answered) return AnswerOptionState.idle;
-    final isCorrectOption = option.cca3 == engine.currentQuestion.correctAnswer.cca3;
+    final isCorrectOption =
+        option.cca3 == engine.currentQuestion.correctAnswer.cca3;
     if (isCorrectOption) return AnswerOptionState.correct;
     final isSelected = option.cca3 == engine.selectedAnswer?.cca3;
-    return isSelected ? AnswerOptionState.incorrectSelected : AnswerOptionState.incorrectOther;
+    return isSelected
+        ? AnswerOptionState.incorrectSelected
+        : AnswerOptionState.incorrectOther;
   }
 }

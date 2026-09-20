@@ -3,12 +3,17 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../app/router/route_paths.dart';
 import '../../../../app/theme/app_colors.dart';
+import '../../../../core/widgets/stat_card.dart';
 import '../../../games/data/quick_play.dart';
 import '../../domain/game_result.dart';
 
 /// Shared end-of-game summary — every multiple-choice mode ends here.
 class GameResultsView extends StatelessWidget {
-  const GameResultsView({super.key, required this.result, required this.onPlayAgain});
+  const GameResultsView({
+    super.key,
+    required this.result,
+    required this.onPlayAgain,
+  });
 
   final GameResult result;
   final VoidCallback onPlayAgain;
@@ -23,7 +28,9 @@ class GameResultsView extends StatelessWidget {
       child: Column(
         children: [
           Icon(
-            result.accuracy >= 0.7 ? Icons.emoji_events : Icons.flag_circle_outlined,
+            result.accuracy >= 0.7
+                ? Icons.emoji_events
+                : Icons.flag_circle_outlined,
             size: 56,
             color: theme.colorScheme.tertiary,
           ),
@@ -36,35 +43,37 @@ class GameResultsView extends StatelessWidget {
           ),
           const SizedBox(height: 28),
           Expanded(
-            child: GridView.count(
-              crossAxisCount: 2,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              childAspectRatio: 1.6,
+            child: GridView(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                mainAxisExtent: 128,
+              ),
               children: [
-                _StatCard(
+                StatCard(
                   label: 'Score',
                   value: '${result.totalScore}',
                   icon: Icons.stars_rounded,
-                  accent: AppColors.skyBlue,
+                  color: AppColors.skyBlue,
                 ),
-                _StatCard(
+                StatCard(
                   label: 'XP Earned',
                   value: '+${result.xpEarned}',
                   icon: Icons.bolt,
-                  accent: AppColors.green,
+                  color: AppColors.green,
                 ),
-                _StatCard(
+                StatCard(
                   label: 'Best Combo',
                   value: '${result.bestCombo}x',
                   icon: Icons.local_fire_department,
-                  accent: AppColors.orange,
+                  color: AppColors.orange,
                 ),
-                _StatCard(
+                StatCard(
                   label: 'Time',
                   value: _formatDuration(result.elapsed),
                   icon: Icons.timer_outlined,
-                  accent: AppColors.purple,
+                  color: AppColors.purple,
                 ),
               ],
             ),
@@ -72,13 +81,17 @@ class GameResultsView extends StatelessWidget {
           const SizedBox(height: 8),
           ElevatedButton(
             onPressed: onPlayAgain,
-            style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(56)),
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size.fromHeight(56),
+            ),
             child: const Text('Play Again'),
           ),
           const SizedBox(height: 10),
           OutlinedButton(
             onPressed: () => launchQuickPlay(context),
-            style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(56)),
+            style: OutlinedButton.styleFrom(
+              minimumSize: const Size.fromHeight(56),
+            ),
             child: const Text('Try Another'),
           ),
           const SizedBox(height: 4),
@@ -96,42 +109,5 @@ class GameResultsView extends StatelessWidget {
     final seconds = d.inSeconds % 60;
     if (minutes == 0) return '${seconds}s';
     return '${minutes}m ${seconds}s';
-  }
-}
-
-class _StatCard extends StatelessWidget {
-  const _StatCard({required this.label, required this.value, required this.icon, required this.accent});
-
-  final String label;
-  final String value;
-  final IconData icon;
-  final Color accent;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: accent.withValues(alpha: 0.18),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(icon, color: accent, size: 20),
-            ),
-            const SizedBox(height: 8),
-            Text(value, style: theme.textTheme.titleLarge),
-            Text(label, style: theme.textTheme.bodySmall),
-          ],
-        ),
-      ),
-    );
   }
 }

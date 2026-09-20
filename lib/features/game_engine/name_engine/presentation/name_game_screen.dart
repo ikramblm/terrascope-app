@@ -63,7 +63,9 @@ class _NameGameScreenState extends State<NameGameScreen> {
     setState(() {
       _feedback = matched
           ? _FeedbackKind.correct
-          : (_engine.lastSubmitWasDuplicate ? _FeedbackKind.duplicate : _FeedbackKind.wrong);
+          : (_engine.lastSubmitWasDuplicate
+                ? _FeedbackKind.duplicate
+                : _FeedbackKind.wrong);
     });
     if (matched) {
       HapticFeedback.lightImpact();
@@ -164,7 +166,10 @@ class _PlayingView extends StatelessWidget {
           const SizedBox(height: 12),
           Row(
             children: [
-              Text('${engine.foundCount} / ${engine.totalCount}', style: theme.textTheme.titleLarge),
+              Text(
+                '${engine.foundCount} / ${engine.totalCount}',
+                style: theme.textTheme.titleLarge,
+              ),
               const SizedBox(width: 8),
               Text('found', style: theme.textTheme.bodyMedium),
             ],
@@ -181,7 +186,10 @@ class _PlayingView extends StatelessWidget {
           ),
           if (engine.timeLimit != null) ...[
             const SizedBox(height: 12),
-            _TimeBar(remaining: engine.timeRemaining!, total: engine.timeLimit!),
+            _TimeBar(
+              remaining: engine.timeRemaining!,
+              total: engine.timeLimit!,
+            ),
           ],
           const SizedBox(height: 16),
           AnimatedContainer(
@@ -190,7 +198,13 @@ class _PlayingView extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               boxShadow: feedbackColor == null
                   ? null
-                  : [BoxShadow(color: feedbackColor.withValues(alpha: 0.35), blurRadius: 14, spreadRadius: 1)],
+                  : [
+                      BoxShadow(
+                        color: feedbackColor.withValues(alpha: 0.35),
+                        blurRadius: 14,
+                        spreadRadius: 1,
+                      ),
+                    ],
             ),
             child: TextField(
               controller: controller,
@@ -239,9 +253,15 @@ class _PlayingView extends StatelessWidget {
                         for (final country in engine.foundCountriesSorted)
                           Chip(
                             label: Text(country.nameCommon),
-                            backgroundColor: AppColors.green.withValues(alpha: 0.12),
+                            backgroundColor: AppColors.green.withValues(
+                              alpha: 0.12,
+                            ),
                             side: BorderSide.none,
-                            avatar: const Icon(Icons.check_circle, color: AppColors.green, size: 18),
+                            avatar: const Icon(
+                              Icons.check_circle,
+                              color: AppColors.green,
+                              size: 18,
+                            ),
                           ),
                       ],
                     ),
@@ -279,7 +299,9 @@ class _TimeBar extends StatelessWidget {
               value: fraction,
               minHeight: 6,
               backgroundColor: theme.colorScheme.surfaceContainerHighest,
-              color: urgent ? theme.colorScheme.error : theme.colorScheme.secondary,
+              color: urgent
+                  ? theme.colorScheme.error
+                  : theme.colorScheme.secondary,
             ),
           ),
         ),
@@ -287,7 +309,9 @@ class _TimeBar extends StatelessWidget {
         Text(
           '${seconds}s',
           style: theme.textTheme.labelLarge?.copyWith(
-            color: urgent ? theme.colorScheme.error : theme.colorScheme.onSurfaceVariant,
+            color: urgent
+                ? theme.colorScheme.error
+                : theme.colorScheme.onSurfaceVariant,
           ),
         ),
       ],

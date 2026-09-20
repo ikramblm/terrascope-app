@@ -41,7 +41,8 @@ class GuessBordersScreen extends ConsumerWidget {
               MaterialPageRoute(
                 builder: (_) => MultipleChoiceGameScreen(
                   title: 'Guess by Borders',
-                  engineBuilder: () => _buildEngine(eligible, countries, byCca3, difficulty),
+                  engineBuilder: () =>
+                      _buildEngine(eligible, countries, byCca3, difficulty),
                   promptBuilder: (context, promptText) => Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: Text(
@@ -51,7 +52,9 @@ class GuessBordersScreen extends ConsumerWidget {
                     ),
                   ),
                   onSessionComplete: (GameResult result) {
-                    ref.read(playerProfileProvider.notifier).recordSession(result);
+                    ref
+                        .read(playerProfileProvider.notifier)
+                        .recordSession(result);
                   },
                 ),
               ),
@@ -73,7 +76,8 @@ class GuessBordersScreen extends ConsumerWidget {
       distractorPool: fullPool,
       count: _questionsPerGame,
       difficulty: difficulty,
-      promptFor: (c) => c.borders.map((code) => byCca3[code]?.nameCommon ?? code).join(' · '),
+      promptFor: (c) =>
+          c.borders.map((code) => byCca3[code]?.nameCommon ?? code).join(' · '),
     );
     return MultipleChoiceEngine(questions: questions, difficulty: difficulty);
   }

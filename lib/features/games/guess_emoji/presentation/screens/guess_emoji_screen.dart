@@ -39,7 +39,10 @@ class GuessEmojiScreen extends ConsumerWidget {
     final countries = countriesAsync.requireValue;
     final clues = cluesAsync.requireValue;
     final byCca3 = {for (final c in countries) c.cca3: c};
-    final eligible = clues.keys.map((cca3) => byCca3[cca3]).whereType<Country>().toList();
+    final eligible = clues.keys
+        .map((cca3) => byCca3[cca3])
+        .whereType<Country>()
+        .toList();
 
     return DifficultySelectScreen(
       title: 'Guess by Emoji',
@@ -50,7 +53,8 @@ class GuessEmojiScreen extends ConsumerWidget {
           MaterialPageRoute(
             builder: (_) => MultipleChoiceGameScreen(
               title: 'Guess by Emoji',
-              engineBuilder: () => _buildEngine(eligible, countries, clues, difficulty),
+              engineBuilder: () =>
+                  _buildEngine(eligible, countries, clues, difficulty),
               promptBuilder: (context, promptText) => Text(
                 promptText,
                 style: const TextStyle(fontSize: 72),
@@ -83,7 +87,11 @@ class GuessEmojiScreen extends ConsumerWidget {
     return MultipleChoiceEngine(questions: questions, difficulty: difficulty);
   }
 
-  String _pickClue(Map<String, List<String>> clues, String cca3, Random random) {
+  String _pickClue(
+    Map<String, List<String>> clues,
+    String cca3,
+    Random random,
+  ) {
     final options = clues[cca3]!;
     return options[random.nextInt(options.length)];
   }

@@ -13,7 +13,8 @@ typedef CountryOutline = List<List<List<Offset>>>;
 /// boundary polygons converted from Natural Earth's public-domain 110m
 /// dataset (see `assets/data/README.md` for provenance and coverage).
 class CountryOutlineRepository {
-  CountryOutlineRepository({AssetBundle? bundle}) : _bundle = bundle ?? rootBundle;
+  CountryOutlineRepository({AssetBundle? bundle})
+    : _bundle = bundle ?? rootBundle;
 
   final AssetBundle _bundle;
   static const String _assetPath = 'assets/data/country_outlines.json';
@@ -30,7 +31,12 @@ class CountryOutlineRepository {
       final outline = (polygons as List<dynamic>).map((poly) {
         return (poly as List<dynamic>).map((ring) {
           return (ring as List<dynamic>)
-              .map((point) => Offset((point[0] as num).toDouble(), (point[1] as num).toDouble()))
+              .map(
+                (point) => Offset(
+                  (point[0] as num).toDouble(),
+                  (point[1] as num).toDouble(),
+                ),
+              )
               .toList();
         }).toList();
       }).toList();

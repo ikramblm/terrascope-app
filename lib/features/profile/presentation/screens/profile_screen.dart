@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/fade_slide_in.dart';
 import '../../../../core/widgets/max_width_box.dart';
-import '../../../../core/widgets/screen_header_band.dart';
+import '../../../../core/widgets/stat_card.dart';
 import '../../../player/domain/achievement.dart';
 import '../../../player/domain/player_profile.dart';
 import '../../../player/presentation/widgets/achievement_badge.dart';
@@ -17,23 +17,25 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(playerProfileProvider);
     final theme = Theme.of(context);
-    final unlockedCount = kAchievements.where((a) => a.isUnlockedFor(profile)).length;
+    final unlockedCount = kAchievements
+        .where((a) => a.isUnlockedFor(profile))
+        .length;
 
     return Scaffold(
       body: SafeArea(
         bottom: false,
         child: MaxWidthBox(
           child: ListView(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 32),
-          children: [
-            const ScreenHeaderBand(
-              title: 'Profile',
-              subtitle: 'Your progress, your stats, your badges.',
-              gradientColors: [AppColors.oceanBlue, AppColors.purple],
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: Column(
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
+            children: [
+              Text('Profile', style: theme.textTheme.headlineLarge),
+              const SizedBox(height: 4),
+              Text(
+                'Your progress, your stats, your badges.',
+                style: theme.textTheme.bodyMedium,
+              ),
+              const SizedBox(height: 20),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   FadeSlideIn(index: 0, child: _IdentityCard(profile: profile)),
@@ -43,38 +45,39 @@ class ProfileScreen extends ConsumerWidget {
                     child: GridView(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 12,
-                        crossAxisSpacing: 12,
-                        mainAxisExtent: 96,
-                      ),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 12,
+                            crossAxisSpacing: 12,
+                            mainAxisExtent: 128,
+                          ),
                       children: [
-                        _StatTile(
+                        StatCard(
                           icon: Icons.local_fire_department_rounded,
                           label: 'Best Streak',
                           value: '${profile.longestStreakDays}',
                           color: AppColors.orange,
                         ),
-                        _StatTile(
+                        StatCard(
                           icon: Icons.public_rounded,
                           label: 'Countries',
                           value: '${profile.countriesDiscovered} / 195',
                           color: AppColors.oceanBlue,
                         ),
-                        _StatTile(
+                        StatCard(
                           icon: Icons.stars_rounded,
                           label: 'Best Score',
                           value: '${profile.bestScore}',
                           color: AppColors.yellow,
                         ),
-                        _StatTile(
+                        StatCard(
                           icon: Icons.sports_esports_rounded,
                           label: 'Games Played',
                           value: '${profile.gamesPlayed}',
                           color: AppColors.purple,
                         ),
-                        _StatTile(
+                        StatCard(
                           icon: Icons.track_changes_rounded,
                           label: 'Accuracy',
                           value: profile.totalQuestionsAnswered == 0
@@ -91,7 +94,10 @@ class ProfileScreen extends ConsumerWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Achievements', style: theme.textTheme.headlineMedium),
+                        Text(
+                          'Achievements',
+                          style: theme.textTheme.headlineMedium,
+                        ),
                         Text(
                           '$unlockedCount / ${kAchievements.length}',
                           style: theme.textTheme.bodyMedium,
@@ -105,12 +111,13 @@ class ProfileScreen extends ConsumerWidget {
                     child: GridView(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
-                        mainAxisExtent: 164,
-                      ),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10,
+                            mainAxisExtent: 164,
+                          ),
                       children: [
                         for (final achievement in kAchievements)
                           AchievementBadgeTile(
@@ -122,8 +129,7 @@ class ProfileScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-            ),
-          ],
+            ],
           ),
         ),
       ),
@@ -152,9 +158,16 @@ class _IdentityCard extends StatelessWidget {
                 Container(
                   width: 56,
                   height: 56,
-                  decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColors.oceanBlue),
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.oceanBlue,
+                  ),
                   alignment: Alignment.center,
-                  child: const Icon(Icons.person_rounded, color: Colors.white, size: 30),
+                  child: const Icon(
+                    Icons.person_rounded,
+                    color: Colors.white,
+                    size: 30,
+                  ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -163,7 +176,10 @@ class _IdentityCard extends StatelessWidget {
                     children: [
                       Text('Guest Explorer', style: theme.textTheme.titleLarge),
                       const SizedBox(height: 2),
-                      Text(profile.level.label, style: theme.textTheme.bodyMedium),
+                      Text(
+                        profile.level.label,
+                        style: theme.textTheme.bodyMedium,
+                      ),
                     ],
                   ),
                 ),
@@ -185,46 +201,6 @@ class _IdentityCard extends StatelessWidget {
                   ? '${profile.totalXp} XP · max level'
                   : '${profile.totalXp} / ${next.minXp} XP to ${next.label}',
               style: theme.textTheme.bodySmall,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _StatTile extends StatelessWidget {
-  const _StatTile({required this.icon, required this.label, required this.value, required this.color});
-
-  final IconData icon;
-  final String label;
-  final String value;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: Padding(
-        padding: const EdgeInsets.all(14),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(color: color.withValues(alpha: 0.14), borderRadius: BorderRadius.circular(14)),
-              child: Icon(icon, color: color, size: 20),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(value, style: theme.textTheme.titleMedium),
-                  Text(label, style: theme.textTheme.labelSmall, maxLines: 1, overflow: TextOverflow.ellipsis),
-                ],
-              ),
             ),
           ],
         ),

@@ -37,7 +37,10 @@ class GamesScreen extends StatelessWidget {
             children: [
               Text('Explore', style: theme.textTheme.headlineLarge),
               const SizedBox(height: 4),
-              Text('Pick a mode and start playing.', style: theme.textTheme.bodyMedium),
+              Text(
+                'Pick a mode and start playing.',
+                style: theme.textTheme.bodyMedium,
+              ),
               const ExploreHeroShape(),
               const SizedBox(height: 8),
               FadeSlideIn(
@@ -56,7 +59,9 @@ class GamesScreen extends StatelessWidget {
                       GameModeCard(
                         mode: mode,
                         color: _cardColors[i % _cardColors.length],
-                        onTap: mode.isAvailable ? () => _openMode(context, mode) : null,
+                        onTap: mode.isAvailable
+                            ? () => _openMode(context, mode)
+                            : null,
                       ),
                   ],
                 ),

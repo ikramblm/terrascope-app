@@ -6,7 +6,11 @@ import '../../domain/achievement.dart';
 /// dimmed when not, with a small lock icon. Never hides *what* the
 /// achievement is, only celebrates having earned it.
 class AchievementBadgeTile extends StatelessWidget {
-  const AchievementBadgeTile({super.key, required this.achievement, required this.unlocked});
+  const AchievementBadgeTile({
+    super.key,
+    required this.achievement,
+    required this.unlocked,
+  });
 
   final Achievement achievement;
   final bool unlocked;
@@ -14,12 +18,16 @@ class AchievementBadgeTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final color = unlocked ? achievement.color : theme.colorScheme.onSurfaceVariant;
+    final color = unlocked
+        ? achievement.color
+        : theme.colorScheme.onSurfaceVariant;
 
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: unlocked ? achievement.color.withValues(alpha: 0.10) : theme.colorScheme.surfaceContainerHighest,
+        color: unlocked
+            ? achievement.color.withValues(alpha: 0.10)
+            : theme.colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -32,13 +40,19 @@ class AchievementBadgeTile extends StatelessWidget {
                 height: 52,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: unlocked ? achievement.color.withValues(alpha: 0.16) : theme.colorScheme.surface,
+                  color: unlocked
+                      ? achievement.color.withValues(alpha: 0.16)
+                      : theme.colorScheme.surface,
                 ),
                 alignment: Alignment.center,
                 child: Icon(
                   achievement.icon,
                   size: 26,
-                  color: unlocked ? achievement.color : theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                  color: unlocked
+                      ? achievement.color
+                      : theme.colorScheme.onSurfaceVariant.withValues(
+                          alpha: 0.5,
+                        ),
                 ),
               ),
               if (!unlocked)
@@ -47,8 +61,15 @@ class AchievementBadgeTile extends StatelessWidget {
                   right: -2,
                   child: Container(
                     padding: const EdgeInsets.all(3),
-                    decoration: BoxDecoration(shape: BoxShape.circle, color: theme.colorScheme.surface),
-                    child: Icon(Icons.lock_rounded, size: 12, color: theme.colorScheme.onSurfaceVariant),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: theme.colorScheme.surface,
+                    ),
+                    child: Icon(
+                      Icons.lock_rounded,
+                      size: 12,
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ),
             ],
@@ -59,7 +80,9 @@ class AchievementBadgeTile extends StatelessWidget {
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: theme.textTheme.labelMedium?.copyWith(color: unlocked ? theme.colorScheme.onSurface : color),
+            style: theme.textTheme.labelMedium?.copyWith(
+              color: unlocked ? theme.colorScheme.onSurface : color,
+            ),
           ),
           const SizedBox(height: 2),
           Text(

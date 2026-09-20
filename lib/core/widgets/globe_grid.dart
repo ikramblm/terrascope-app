@@ -6,7 +6,12 @@ import 'package:flutter/material.dart';
 /// procedurally so headers get a real "world/geography" motif instead of
 /// a flat generic icon, with zero image assets to bundle or download.
 class GlobeGrid extends StatelessWidget {
-  const GlobeGrid({super.key, required this.size, required this.color, this.strokeWidth = 1.4});
+  const GlobeGrid({
+    super.key,
+    required this.size,
+    required this.color,
+    this.strokeWidth = 1.4,
+  });
 
   final double size;
   final Color color;
@@ -44,7 +49,11 @@ class _GlobeGridPainter extends CustomPainter {
     // curvature (a flat vertical line would read as a slice, not a sphere).
     for (final widthFraction in [0.72, 0.36]) {
       canvas.drawOval(
-        Rect.fromCenter(center: center, width: radius * 2 * widthFraction, height: radius * 2),
+        Rect.fromCenter(
+          center: center,
+          width: radius * 2 * widthFraction,
+          height: radius * 2,
+        ),
         paint,
       );
     }
@@ -52,8 +61,17 @@ class _GlobeGridPainter extends CustomPainter {
     // Parallels: horizontal lines, foreshortened toward the poles.
     for (final latFraction in [-0.55, 0.0, 0.55]) {
       final y = center.dy + radius * latFraction;
-      final chord = math.sqrt(math.max(0.0, radius * radius - (radius * latFraction) * (radius * latFraction)));
-      canvas.drawLine(Offset(center.dx - chord, y), Offset(center.dx + chord, y), paint);
+      final chord = math.sqrt(
+        math.max(
+          0.0,
+          radius * radius - (radius * latFraction) * (radius * latFraction),
+        ),
+      );
+      canvas.drawLine(
+        Offset(center.dx - chord, y),
+        Offset(center.dx + chord, y),
+        paint,
+      );
     }
   }
 

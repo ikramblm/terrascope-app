@@ -58,15 +58,19 @@ class MultipleChoiceGenerator {
     required GameDifficulty difficulty,
   }) {
     final needed = optionsCount - 1;
-    final candidates = distractorPool.where((c) => c.cca3 != correct.cca3).toList();
+    final candidates = distractorPool
+        .where((c) => c.cca3 != correct.cca3)
+        .toList();
 
     List<Country> chosen;
     if (difficulty == GameDifficulty.hard) {
-      final sameContinent = candidates.where((c) => c.continent == correct.continent).toList()
-        ..shuffle(_random);
+      final sameContinent =
+          candidates.where((c) => c.continent == correct.continent).toList()
+            ..shuffle(_random);
       chosen = sameContinent.take(needed).toList();
       if (chosen.length < needed) {
-        final rest = candidates.where((c) => !chosen.contains(c)).toList()..shuffle(_random);
+        final rest = candidates.where((c) => !chosen.contains(c)).toList()
+          ..shuffle(_random);
         chosen.addAll(rest.take(needed - chosen.length));
       }
     } else {

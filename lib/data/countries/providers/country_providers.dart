@@ -15,12 +15,14 @@ final allCountriesProvider = FutureProvider<List<Country>>((ref) async {
 
 final countriesByContinentProvider =
     FutureProvider.family<List<Country>, String>((ref, continent) async {
-  final all = await ref.watch(allCountriesProvider.future);
-  return all.where((c) => c.continent == continent).toList(growable: false);
-});
+      final all = await ref.watch(allCountriesProvider.future);
+      return all.where((c) => c.continent == continent).toList(growable: false);
+    });
 
-final countryByCca3Provider =
-    FutureProvider.family<Country?, String>((ref, cca3) async {
+final countryByCca3Provider = FutureProvider.family<Country?, String>((
+  ref,
+  cca3,
+) async {
   final all = await ref.watch(allCountriesProvider.future);
   for (final c in all) {
     if (c.cca3 == cca3) return c;

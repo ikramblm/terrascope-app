@@ -14,7 +14,8 @@ class SoundService {
 
   bool enabled = true;
 
-  final AudioPlayer _sfxPlayer = AudioPlayer()..setReleaseMode(ReleaseMode.stop);
+  final AudioPlayer _sfxPlayer = AudioPlayer()
+    ..setReleaseMode(ReleaseMode.stop);
 
   Future<void> playCorrect() => _play('audio/correct.wav');
   Future<void> playWrong() => _play('audio/wrong.wav');

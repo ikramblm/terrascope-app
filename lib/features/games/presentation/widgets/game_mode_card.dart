@@ -10,7 +10,12 @@ import '../../domain/game_mode.dart';
 /// Unavailable modes render visibly muted with a "Soon" badge — never a
 /// tile that looks tappable but silently does nothing.
 class GameModeCard extends StatelessWidget {
-  const GameModeCard({super.key, required this.mode, required this.color, this.onTap});
+  const GameModeCard({
+    super.key,
+    required this.mode,
+    required this.color,
+    this.onTap,
+  });
 
   final GameMode mode;
   final Color color;
@@ -20,8 +25,12 @@ class GameModeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final available = mode.isAvailable;
-    final background = available ? color : theme.colorScheme.surfaceContainerHighest;
-    final foreground = available ? Colors.white : theme.colorScheme.onSurfaceVariant;
+    final background = available
+        ? color
+        : theme.colorScheme.surfaceContainerHighest;
+    final foreground = available
+        ? Colors.white
+        : theme.colorScheme.onSurfaceVariant;
 
     return Material(
       color: Colors.transparent,
@@ -35,7 +44,13 @@ class GameModeCard extends StatelessWidget {
             color: background,
             borderRadius: BorderRadius.circular(28),
             boxShadow: available
-                ? [BoxShadow(color: color.withValues(alpha: 0.30), blurRadius: 14, offset: const Offset(0, 8))]
+                ? [
+                    BoxShadow(
+                      color: color.withValues(alpha: 0.30),
+                      blurRadius: 14,
+                      offset: const Offset(0, 8),
+                    ),
+                  ]
                 : null,
           ),
           child: Stack(
@@ -45,7 +60,10 @@ class GameModeCard extends StatelessWidget {
                   top: 0,
                   right: 0,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: theme.colorScheme.surface,
                       borderRadius: BorderRadius.circular(100),
@@ -61,7 +79,9 @@ class GameModeCard extends StatelessWidget {
                     width: 44,
                     height: 44,
                     decoration: BoxDecoration(
-                      color: foreground.withValues(alpha: available ? 0.25 : 0.12),
+                      color: foreground.withValues(
+                        alpha: available ? 0.25 : 0.12,
+                      ),
                       shape: BoxShape.circle,
                     ),
                     alignment: Alignment.center,
@@ -70,7 +90,9 @@ class GameModeCard extends StatelessWidget {
                   const SizedBox(height: 12),
                   Text(
                     mode.title,
-                    style: theme.textTheme.titleSmall?.copyWith(color: foreground),
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      color: foreground,
+                    ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),

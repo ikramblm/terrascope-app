@@ -22,7 +22,8 @@ class NameAllScreen extends ConsumerWidget {
       error: (err, st) => ErrorView(message: '$err'),
       data: (countries) => NameGameScreen(
         title: 'Name All Countries',
-        instructions: 'Type every country you can think of — no rush, no clock.',
+        instructions:
+            'Type every country you can think of — no rush, no clock.',
         engineBuilder: () => NameEngine(pool: countries),
         onSessionComplete: (GameResult result) {
           ref.read(playerProfileProvider.notifier).recordSession(result);

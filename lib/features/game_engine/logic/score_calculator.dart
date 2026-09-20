@@ -24,7 +24,10 @@ abstract class ScoreCalculator {
 
     final timeFraction = timeAllotted.inMilliseconds == 0
         ? 0.0
-        : (timeRemaining.inMilliseconds / timeAllotted.inMilliseconds).clamp(0.0, 1.0);
+        : (timeRemaining.inMilliseconds / timeAllotted.inMilliseconds).clamp(
+            0.0,
+            1.0,
+          );
     final timeBonus = (base * 0.5 * timeFraction);
 
     return ((base + timeBonus) * multiplier).round();

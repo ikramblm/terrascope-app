@@ -25,7 +25,9 @@ class SpeedCapitalScreen extends ConsumerWidget {
       loading: () => const LoadingView(message: 'Loading countries…'),
       error: (err, st) => ErrorView(message: '$err'),
       data: (countries) {
-        final eligible = countries.where((c) => c.capital != null && c.capital!.isNotEmpty).toList();
+        final eligible = countries
+            .where((c) => c.capital != null && c.capital!.isNotEmpty)
+            .toList();
         return MultipleChoiceGameScreen(
           title: 'Capital Speed Run',
           engineBuilder: () => _buildEngine(eligible, countries),
@@ -43,7 +45,10 @@ class SpeedCapitalScreen extends ConsumerWidget {
     );
   }
 
-  MultipleChoiceEngine _buildEngine(List<Country> eligible, List<Country> fullPool) {
+  MultipleChoiceEngine _buildEngine(
+    List<Country> eligible,
+    List<Country> fullPool,
+  ) {
     final questions = MultipleChoiceGenerator().generate(
       pool: eligible,
       distractorPool: fullPool,
@@ -51,6 +56,10 @@ class SpeedCapitalScreen extends ConsumerWidget {
       difficulty: GameDifficulty.hard,
       promptFor: (c) => c.capital!,
     );
-    return MultipleChoiceEngine(questions: questions, difficulty: GameDifficulty.hard, suddenDeath: true);
+    return MultipleChoiceEngine(
+      questions: questions,
+      difficulty: GameDifficulty.hard,
+      suddenDeath: true,
+    );
   }
 }

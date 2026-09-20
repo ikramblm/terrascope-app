@@ -29,7 +29,8 @@ class SpeedFlagScreen extends ConsumerWidget {
       data: (countries) => MultipleChoiceGameScreen(
         title: 'Flag Speed Run',
         engineBuilder: () => _buildEngine(countries),
-        promptBuilder: (context, promptText) => Text(promptText, style: const TextStyle(fontSize: 96)),
+        promptBuilder: (context, promptText) =>
+            Text(promptText, style: const TextStyle(fontSize: 96)),
         centerLabelBuilder: (engine) => 'Streak: ${engine.combo}',
         onSessionComplete: (GameResult result) {
           ref.read(playerProfileProvider.notifier).recordSession(result);
@@ -46,6 +47,10 @@ class SpeedFlagScreen extends ConsumerWidget {
       difficulty: GameDifficulty.hard,
       promptFor: (c) => c.flagEmoji,
     );
-    return MultipleChoiceEngine(questions: questions, difficulty: GameDifficulty.hard, suddenDeath: true);
+    return MultipleChoiceEngine(
+      questions: questions,
+      difficulty: GameDifficulty.hard,
+      suddenDeath: true,
+    );
   }
 }

@@ -18,9 +18,21 @@ class ExploreHeroShape extends StatelessWidget {
         alignment: Alignment.center,
         clipBehavior: Clip.none,
         children: [
-          const Positioned(top: 8, left: 60, child: _Dot(color: AppColors.yellow, size: 14)),
-          const Positioned(bottom: 12, right: 56, child: _Dot(color: AppColors.coral, size: 10)),
-          const Positioned(top: 20, right: 70, child: _Dot(color: AppColors.purple, size: 8)),
+          const Positioned(
+            top: 8,
+            left: 60,
+            child: _Dot(color: AppColors.yellow, size: 14),
+          ),
+          const Positioned(
+            bottom: 12,
+            right: 56,
+            child: _Dot(color: AppColors.coral, size: 10),
+          ),
+          const Positioned(
+            top: 20,
+            right: 70,
+            child: _Dot(color: AppColors.purple, size: 8),
+          ),
           Container(
             width: 240,
             height: 130,
@@ -28,11 +40,18 @@ class ExploreHeroShape extends StatelessWidget {
               color: AppColors.green,
               borderRadius: BorderRadius.circular(65),
               boxShadow: [
-                BoxShadow(color: AppColors.green.withValues(alpha: 0.35), blurRadius: 20, offset: const Offset(0, 10)),
+                BoxShadow(
+                  color: AppColors.green.withValues(alpha: 0.35),
+                  blurRadius: 20,
+                  offset: const Offset(0, 10),
+                ),
               ],
             ),
             alignment: Alignment.center,
-            child: GlobeGrid(size: 78, color: Colors.white.withValues(alpha: 0.85)),
+            child: GlobeGrid(
+              size: 78,
+              color: Colors.white.withValues(alpha: 0.85),
+            ),
           ),
         ],
       ),

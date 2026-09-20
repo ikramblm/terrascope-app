@@ -12,7 +12,8 @@ import '../domain/game_result.dart';
 /// mechanic (type a name, match it, track what's found) is identical,
 /// so it lives here once.
 class NameEngine extends ChangeNotifier {
-  NameEngine({required List<Country> pool, this.timeLimit}) : pool = List.unmodifiable(pool);
+  NameEngine({required List<Country> pool, this.timeLimit})
+    : pool = List.unmodifiable(pool);
 
   final List<Country> pool;
 
@@ -34,7 +35,8 @@ class NameEngine extends ChangeNotifier {
   int get foundCount => _foundCca3.length;
   int get totalCount => pool.length;
   Duration get elapsed => _elapsed;
-  Duration? get timeRemaining => timeLimit == null ? null : timeLimit! - _elapsed;
+  Duration? get timeRemaining =>
+      timeLimit == null ? null : timeLimit! - _elapsed;
   bool get isComplete => _isComplete;
   double get progress => totalCount == 0 ? 0 : foundCount / totalCount;
 
@@ -50,7 +52,10 @@ class NameEngine extends ChangeNotifier {
     // to display, there's nothing for a 200ms tick to usefully redraw;
     // `elapsed` is just computed once, lazily, when the session ends.
     if (timeLimit != null) {
-      _ticker = Timer.periodic(const Duration(milliseconds: 200), (_) => _tick());
+      _ticker = Timer.periodic(
+        const Duration(milliseconds: 200),
+        (_) => _tick(),
+      );
     }
   }
 
@@ -74,7 +79,8 @@ class NameEngine extends ChangeNotifier {
 
     lastSubmitWasDuplicate = false;
     for (final country in pool) {
-      final matches = _normalize(country.nameCommon) == normalized ||
+      final matches =
+          _normalize(country.nameCommon) == normalized ||
           country.altSpellings.any((alt) => _normalize(alt) == normalized);
       if (!matches) continue;
 
@@ -127,14 +133,19 @@ class NameEngine extends ChangeNotifier {
   }
 
   String _normalize(String s) {
-    const diacritics = 'àáâãäåāăąèéêëēĕėęěìíîïĩīĭįòóôõöøōŏőùúûüũūŭůűųçćĉċčñńņňÿýş';
+    const diacritics =
+        'àáâãäåāăąèéêëēĕėęěìíîïĩīĭįòóôõöøōŏőùúûüũūŭůűųçćĉċčñńņňÿýş';
     const plain = 'aaaaaaaaaeeeeeeeeeiiiiiiiiiooooooooouuuuuuuuuuccccc nnnyys';
     final buffer = StringBuffer();
     for (final ch in s.toLowerCase().trim().split('')) {
       final idx = diacritics.indexOf(ch);
       buffer.write(idx >= 0 ? plain[idx] : ch);
     }
-    return buffer.toString().replaceAll(RegExp(r"[^a-z0-9 ]"), '').replaceAll(RegExp(r'\s+'), ' ').trim();
+    return buffer
+        .toString()
+        .replaceAll(RegExp(r"[^a-z0-9 ]"), '')
+        .replaceAll(RegExp(r'\s+'), ' ')
+        .trim();
   }
 
   @override

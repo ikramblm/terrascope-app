@@ -23,15 +23,15 @@ class PlayerProfile {
   });
 
   factory PlayerProfile.newPlayer() => const PlayerProfile(
-        totalXp: 0,
-        currentStreakDays: 0,
-        longestStreakDays: 0,
-        discoveredCountryCodes: {},
-        bestScore: 0,
-        gamesPlayed: 0,
-        totalCorrectAnswers: 0,
-        totalQuestionsAnswered: 0,
-      );
+    totalXp: 0,
+    currentStreakDays: 0,
+    longestStreakDays: 0,
+    discoveredCountryCodes: {},
+    bestScore: 0,
+    gamesPlayed: 0,
+    totalCorrectAnswers: 0,
+    totalQuestionsAnswered: 0,
+  );
 
   final int totalXp;
   final int currentStreakDays;
@@ -61,8 +61,9 @@ class PlayerProfile {
   /// Career accuracy across every question ever answered, in [0, 1].
   /// `0` (not null) before the first game — displayed as "—" by the UI
   /// rather than a misleading 0%.
-  double get overallAccuracy =>
-      totalQuestionsAnswered == 0 ? 0 : totalCorrectAnswers / totalQuestionsAnswered;
+  double get overallAccuracy => totalQuestionsAnswered == 0
+      ? 0
+      : totalCorrectAnswers / totalQuestionsAnswered;
 
   /// Progress toward the next level, in [0, 1]. 1.0 (maxed) at the top tier.
   double get levelProgress {
@@ -88,11 +89,13 @@ class PlayerProfile {
       totalXp: totalXp ?? this.totalXp,
       currentStreakDays: currentStreakDays ?? this.currentStreakDays,
       longestStreakDays: longestStreakDays ?? this.longestStreakDays,
-      discoveredCountryCodes: discoveredCountryCodes ?? this.discoveredCountryCodes,
+      discoveredCountryCodes:
+          discoveredCountryCodes ?? this.discoveredCountryCodes,
       bestScore: bestScore ?? this.bestScore,
       gamesPlayed: gamesPlayed ?? this.gamesPlayed,
       totalCorrectAnswers: totalCorrectAnswers ?? this.totalCorrectAnswers,
-      totalQuestionsAnswered: totalQuestionsAnswered ?? this.totalQuestionsAnswered,
+      totalQuestionsAnswered:
+          totalQuestionsAnswered ?? this.totalQuestionsAnswered,
       lastPlayedAt: lastPlayedAt ?? this.lastPlayedAt,
     );
   }

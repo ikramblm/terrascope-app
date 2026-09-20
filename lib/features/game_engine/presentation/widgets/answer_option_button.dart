@@ -63,8 +63,10 @@ class _AnswerOptionButtonState extends State<AnswerOptionButton>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final slotColor = AppColors.answerSlotColors[widget.slotIndex % AppColors.answerSlotColors.length];
-    final slotIcon = AppColors.answerSlotIcons[widget.slotIndex % AppColors.answerSlotIcons.length];
+    final slotColor = AppColors
+        .answerSlotColors[widget.slotIndex % AppColors.answerSlotColors.length];
+    final slotIcon = AppColors
+        .answerSlotIcons[widget.slotIndex % AppColors.answerSlotIcons.length];
 
     Color background;
     Color foreground;
@@ -101,8 +103,12 @@ class _AnswerOptionButtonState extends State<AnswerOptionButton>
       animation: _controller,
       builder: (context, child) {
         final t = _controller.value;
-        final offsetX = widget.state == AnswerOptionState.incorrectSelected ? _shake(t) : 0.0;
-        final scale = widget.state == AnswerOptionState.correct ? _pulse(t) : 1.0;
+        final offsetX = widget.state == AnswerOptionState.incorrectSelected
+            ? _shake(t)
+            : 0.0;
+        final scale = widget.state == AnswerOptionState.correct
+            ? _pulse(t)
+            : 1.0;
 
         return Transform.translate(
           offset: Offset(offsetX, 0),
@@ -119,7 +125,13 @@ class _AnswerOptionButtonState extends State<AnswerOptionButton>
             borderRadius: BorderRadius.circular(20),
             boxShadow: glowColor == null
                 ? null
-                : [BoxShadow(color: glowColor.withValues(alpha: 0.4), blurRadius: 18, spreadRadius: 1)],
+                : [
+                    BoxShadow(
+                      color: glowColor.withValues(alpha: 0.4),
+                      blurRadius: 18,
+                      spreadRadius: 1,
+                    ),
+                  ],
           ),
           child: Material(
             type: MaterialType.transparency,
@@ -127,20 +139,28 @@ class _AnswerOptionButtonState extends State<AnswerOptionButton>
               borderRadius: BorderRadius.circular(20),
               onTap: widget.onTap,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 14,
+                ),
                 child: Row(
                   children: [
                     Container(
                       width: 34,
                       height: 34,
-                      decoration: BoxDecoration(color: shapeBg, shape: BoxShape.circle),
+                      decoration: BoxDecoration(
+                        color: shapeBg,
+                        shape: BoxShape.circle,
+                      ),
                       child: Icon(trailingIcon, color: shapeColor, size: 18),
                     ),
                     const SizedBox(width: 14),
                     Expanded(
                       child: Text(
                         widget.country.nameCommon,
-                        style: theme.textTheme.titleSmall?.copyWith(color: foreground),
+                        style: theme.textTheme.titleSmall?.copyWith(
+                          color: foreground,
+                        ),
                       ),
                     ),
                   ],

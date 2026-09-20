@@ -47,7 +47,11 @@ class _PlayFab extends StatelessWidget {
         shape: BoxShape.circle,
         color: AppColors.oceanBlue,
         boxShadow: [
-          BoxShadow(color: AppColors.oceanBlue.withValues(alpha: 0.45), blurRadius: 20, offset: const Offset(0, 8)),
+          BoxShadow(
+            color: AppColors.oceanBlue.withValues(alpha: 0.45),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
         ],
       ),
       child: Material(
@@ -56,7 +60,11 @@ class _PlayFab extends StatelessWidget {
         child: InkWell(
           customBorder: const CircleBorder(),
           onTap: onTap,
-          child: const Icon(Icons.play_arrow_rounded, color: Colors.white, size: 34),
+          child: const Icon(
+            Icons.play_arrow_rounded,
+            color: Colors.white,
+            size: 34,
+          ),
         ),
       ),
     );
@@ -105,7 +113,9 @@ class _BottomBar extends StatelessWidget {
     // One consistent accent color for the whole nav area — selection is
     // shown by the rounded-square container filling in, not by a
     // different color per item.
-    final color = selected ? AppColors.oceanBlue : theme.colorScheme.onSurfaceVariant;
+    final color = selected
+        ? AppColors.oceanBlue
+        : theme.colorScheme.onSurfaceVariant;
 
     return Expanded(
       child: InkWell(
@@ -117,7 +127,9 @@ class _BottomBar extends StatelessWidget {
               duration: const Duration(milliseconds: 200),
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: selected ? AppColors.oceanBlue.withValues(alpha: 0.12) : Colors.transparent,
+                color: selected
+                    ? AppColors.oceanBlue.withValues(alpha: 0.12)
+                    : Colors.transparent,
                 borderRadius: BorderRadius.circular(14),
               ),
               child: Icon(item.icon, color: color, size: 22),

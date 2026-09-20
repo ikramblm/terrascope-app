@@ -30,7 +30,9 @@ class NameContinentScreen extends ConsumerWidget {
       error: (err, st) => ErrorView(message: '$err'),
       data: (countries) {
         final options = _continentColors.entries.map((entry) {
-          final pool = countries.where((c) => c.continent == entry.key).toList();
+          final pool = countries
+              .where((c) => c.continent == entry.key)
+              .toList();
           return NamePoolOption(
             label: entry.key,
             subtitle: '${pool.length} countries',
@@ -46,7 +48,8 @@ class NameContinentScreen extends ConsumerWidget {
           icon: Icons.terrain_outlined,
           options: options,
           gameTitleFor: (o) => 'Name ${o.label}',
-          instructionsFor: (o) => 'Type every country in ${o.label} you can think of.',
+          instructionsFor: (o) =>
+              'Type every country in ${o.label} you can think of.',
           onSessionComplete: (GameResult result) {
             ref.read(playerProfileProvider.notifier).recordSession(result);
           },

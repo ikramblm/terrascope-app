@@ -33,24 +33,31 @@ class NameLetterScreen extends ConsumerWidget {
         final options = <NamePoolOption>[];
         for (var i = 0; i < 26; i++) {
           final letter = String.fromCharCode('A'.codeUnitAt(0) + i);
-          final pool = countries.where((c) => c.nameCommon.toUpperCase().startsWith(letter)).toList();
+          final pool = countries
+              .where((c) => c.nameCommon.toUpperCase().startsWith(letter))
+              .toList();
           if (pool.isEmpty) continue;
-          options.add(NamePoolOption(
-            label: letter,
-            subtitle: '${pool.length} ${pool.length == 1 ? 'country' : 'countries'}',
-            icon: Icons.abc,
-            color: _letterColors[options.length % _letterColors.length],
-            pool: pool,
-          ));
+          options.add(
+            NamePoolOption(
+              label: letter,
+              subtitle:
+                  '${pool.length} ${pool.length == 1 ? 'country' : 'countries'}',
+              icon: Icons.abc,
+              color: _letterColors[options.length % _letterColors.length],
+              pool: pool,
+            ),
+          );
         }
 
         return NamePoolSelectScreen(
           title: 'Name by Letter',
-          subtitle: 'Pick a letter, then name every country that starts with it.',
+          subtitle:
+              'Pick a letter, then name every country that starts with it.',
           icon: Icons.abc,
           options: options,
           gameTitleFor: (o) => 'Countries Starting with ${o.label}',
-          instructionsFor: (o) => 'Type every country starting with "${o.label}".',
+          instructionsFor: (o) =>
+              'Type every country starting with "${o.label}".',
           onSessionComplete: (GameResult result) {
             ref.read(playerProfileProvider.notifier).recordSession(result);
           },

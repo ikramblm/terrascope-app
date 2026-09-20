@@ -10,26 +10,26 @@ abstract class AppTheme {
   AppTheme._();
 
   static ThemeData get light => _build(
-        brightness: Brightness.light,
-        background: AppColors.lightBackground,
-        surface: AppColors.lightSurface,
-        surfaceRaised: AppColors.lightSurfaceRaised,
-        border: AppColors.lightBorder,
-        textPrimary: AppColors.lightTextPrimary,
-        textSecondary: AppColors.lightTextSecondary,
-        shadowColor: AppColors.lightShadow,
-      );
+    brightness: Brightness.light,
+    background: AppColors.lightBackground,
+    surface: AppColors.lightSurface,
+    surfaceRaised: AppColors.lightSurfaceRaised,
+    border: AppColors.lightBorder,
+    textPrimary: AppColors.lightTextPrimary,
+    textSecondary: AppColors.lightTextSecondary,
+    shadowColor: AppColors.lightShadow,
+  );
 
   static ThemeData get dark => _build(
-        brightness: Brightness.dark,
-        background: AppColors.darkBackground,
-        surface: AppColors.darkSurface,
-        surfaceRaised: AppColors.darkSurfaceRaised,
-        border: AppColors.darkBorder,
-        textPrimary: AppColors.darkTextPrimary,
-        textSecondary: AppColors.darkTextSecondary,
-        shadowColor: Colors.black,
-      );
+    brightness: Brightness.dark,
+    background: AppColors.darkBackground,
+    surface: AppColors.darkSurface,
+    surfaceRaised: AppColors.darkSurfaceRaised,
+    border: AppColors.darkBorder,
+    textPrimary: AppColors.darkTextPrimary,
+    textSecondary: AppColors.darkTextSecondary,
+    shadowColor: Colors.black,
+  );
 
   static ThemeData _build({
     required Brightness brightness,
@@ -97,7 +97,9 @@ abstract class AppTheme {
       dividerTheme: DividerThemeData(color: border, space: 1, thickness: 1),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: surface,
-        indicatorColor: AppColors.oceanBlue.withValues(alpha: isDark ? 0.35 : 0.12),
+        indicatorColor: AppColors.oceanBlue.withValues(
+          alpha: isDark ? 0.35 : 0.12,
+        ),
         elevation: 0,
         height: 64,
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
@@ -109,7 +111,9 @@ abstract class AppTheme {
         }),
         iconTheme: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
-          return IconThemeData(color: selected ? AppColors.oceanBlue : textSecondary);
+          return IconThemeData(
+            color: selected ? AppColors.oceanBlue : textSecondary,
+          );
         }),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -120,7 +124,9 @@ abstract class AppTheme {
           disabledForegroundColor: textSecondary,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
           elevation: 0,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
           textStyle: textTheme.titleSmall,
         ),
       ),
@@ -129,7 +135,9 @@ abstract class AppTheme {
           foregroundColor: textPrimary,
           side: BorderSide(color: border, width: 1.5),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
           textStyle: textTheme.titleSmall,
         ),
       ),

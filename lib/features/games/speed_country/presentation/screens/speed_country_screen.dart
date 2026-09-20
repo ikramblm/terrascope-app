@@ -37,7 +37,10 @@ class SpeedCountryScreen extends ConsumerWidget {
     final countries = countriesAsync.requireValue;
     final clues = cluesAsync.requireValue;
     final byCca3 = {for (final c in countries) c.cca3: c};
-    final eligible = clues.keys.map((cca3) => byCca3[cca3]).whereType<Country>().toList();
+    final eligible = clues.keys
+        .map((cca3) => byCca3[cca3])
+        .whereType<Country>()
+        .toList();
 
     return MultipleChoiceGameScreen(
       title: 'Country Speed Run',
@@ -67,10 +70,18 @@ class SpeedCountryScreen extends ConsumerWidget {
       difficulty: GameDifficulty.hard,
       promptFor: (c) => _pickClue(clues, c.cca3, random),
     );
-    return MultipleChoiceEngine(questions: questions, difficulty: GameDifficulty.hard, suddenDeath: true);
+    return MultipleChoiceEngine(
+      questions: questions,
+      difficulty: GameDifficulty.hard,
+      suddenDeath: true,
+    );
   }
 
-  String _pickClue(Map<String, List<String>> clues, String cca3, Random random) {
+  String _pickClue(
+    Map<String, List<String>> clues,
+    String cca3,
+    Random random,
+  ) {
     final options = clues[cca3]!;
     return options[random.nextInt(options.length)];
   }

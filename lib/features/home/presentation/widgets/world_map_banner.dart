@@ -23,11 +23,41 @@ class WorldMapBanner extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             Container(color: AppColors.oceanBlue),
-            _blob(top: -60, left: -50, size: 200, color: AppColors.orange, radius: 90),
-            _blob(top: -40, right: -60, size: 190, color: AppColors.coral, radius: 100),
-            _blob(bottom: -70, right: -50, size: 210, color: AppColors.green, radius: 95),
-            _blob(bottom: -90, left: -70, size: 220, color: AppColors.skyBlue, radius: 100),
-            _blob(bottom: -60, left: 90, size: 130, color: AppColors.purple, radius: 60),
+            _blob(
+              top: -60,
+              left: -50,
+              size: 200,
+              color: AppColors.orange,
+              radius: 90,
+            ),
+            _blob(
+              top: -40,
+              right: -60,
+              size: 190,
+              color: AppColors.coral,
+              radius: 100,
+            ),
+            _blob(
+              bottom: -70,
+              right: -50,
+              size: 210,
+              color: AppColors.green,
+              radius: 95,
+            ),
+            _blob(
+              bottom: -90,
+              left: -70,
+              size: 220,
+              color: AppColors.skyBlue,
+              radius: 100,
+            ),
+            _blob(
+              bottom: -60,
+              left: 90,
+              size: 130,
+              color: AppColors.purple,
+              radius: 60,
+            ),
             Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -38,14 +68,23 @@ class WorldMapBanner extends StatelessWidget {
                       color: Colors.white.withValues(alpha: 0.22),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.public_rounded, color: Colors.white, size: 34),
+                    child: const Icon(
+                      Icons.public_rounded,
+                      color: Colors.white,
+                      size: 34,
+                    ),
                   ),
                   const SizedBox(height: 12),
                   Text(
                     title,
                     style: theme.textTheme.displayMedium?.copyWith(
                       color: Colors.white,
-                      shadows: [Shadow(color: Colors.black.withValues(alpha: 0.15), blurRadius: 12)],
+                      shadows: [
+                        Shadow(
+                          color: Colors.black.withValues(alpha: 0.15),
+                          blurRadius: 12,
+                        ),
+                      ],
                     ),
                   ),
                 ],

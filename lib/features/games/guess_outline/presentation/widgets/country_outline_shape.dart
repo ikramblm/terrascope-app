@@ -26,14 +26,22 @@ class CountryOutlineShape extends StatelessWidget {
       width: size,
       height: size,
       child: CustomPaint(
-        painter: _CountryOutlinePainter(outline: outline, color: color, glowColor: glowColor),
+        painter: _CountryOutlinePainter(
+          outline: outline,
+          color: color,
+          glowColor: glowColor,
+        ),
       ),
     );
   }
 }
 
 class _CountryOutlinePainter extends CustomPainter {
-  _CountryOutlinePainter({required this.outline, required this.color, this.glowColor});
+  _CountryOutlinePainter({
+    required this.outline,
+    required this.color,
+    this.glowColor,
+  });
 
   final CountryOutline outline;
   final Color color;
@@ -61,7 +69,9 @@ class _CountryOutlinePainter extends CustomPainter {
     const padding = 12.0;
     final availableW = size.width - padding * 2;
     final availableH = size.height - padding * 2;
-    final scale = (availableW / lonSpan < availableH / latSpan) ? availableW / lonSpan : availableH / latSpan;
+    final scale = (availableW / lonSpan < availableH / latSpan)
+        ? availableW / lonSpan
+        : availableH / latSpan;
 
     final drawnW = lonSpan * scale;
     final drawnH = latSpan * scale;
@@ -101,5 +111,7 @@ class _CountryOutlinePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _CountryOutlinePainter oldDelegate) =>
-      oldDelegate.outline != outline || oldDelegate.color != color || oldDelegate.glowColor != glowColor;
+      oldDelegate.outline != outline ||
+      oldDelegate.color != color ||
+      oldDelegate.glowColor != glowColor;
 }

@@ -30,7 +30,8 @@ class Speed60sScreen extends ConsumerWidget {
       data: (countries) => MultipleChoiceGameScreen(
         title: '60-Second Challenge',
         engineBuilder: () => _buildEngine(countries),
-        promptBuilder: (context, promptText) => Text(promptText, style: const TextStyle(fontSize: 96)),
+        promptBuilder: (context, promptText) =>
+            Text(promptText, style: const TextStyle(fontSize: 96)),
         centerLabelBuilder: (engine) {
           final remaining = _globalTimeLimit - engine.elapsed;
           final seconds = remaining.isNegative ? 0 : remaining.inSeconds + 1;

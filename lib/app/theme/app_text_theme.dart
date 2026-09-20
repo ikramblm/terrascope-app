@@ -84,8 +84,8 @@ TextTheme buildAppTextTheme(Color primaryTextColor, Color secondaryTextColor) {
 /// displays that want tabular figures) — used by widgets like score
 /// counters and the country-found tally.
 TextStyle scoreDisplayStyle(Color color) => GoogleFonts.sora(
-      fontSize: 36,
-      fontWeight: FontWeight.w800,
-      color: color,
-      fontFeatures: const [FontFeature.tabularFigures()],
-    );
+  fontSize: 36,
+  fontWeight: FontWeight.w800,
+  color: color,
+  fontFeatures: const [FontFeature.tabularFigures()],
+);

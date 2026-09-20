@@ -24,5 +24,6 @@ class GameResult {
   /// cca3 codes answered correctly — feeds "countries discovered".
   final Set<String> correctCca3s;
 
-  double get accuracy => totalQuestions == 0 ? 0 : correctCount / totalQuestions;
+  double get accuracy =>
+      totalQuestions == 0 ? 0 : correctCount / totalQuestions;
 }
