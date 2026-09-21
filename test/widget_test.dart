@@ -10,6 +10,8 @@ import 'package:terrascope_app/features/games/guess_emoji/data/emoji_clue_reposi
 import 'package:terrascope_app/features/games/guess_emoji/providers/emoji_clue_providers.dart';
 import 'package:terrascope_app/features/games/guess_outline/data/country_outline_repository.dart';
 import 'package:terrascope_app/features/games/guess_outline/providers/country_outline_providers.dart';
+import 'package:terrascope_app/features/player/data/player_profile_repository.dart';
+import 'package:terrascope_app/features/player/providers/player_providers.dart';
 
 import 'support/sync_test_asset_bundle.dart';
 
@@ -29,6 +31,12 @@ Widget buildTestApp() {
       ),
       countryOutlineRepositoryProvider.overrideWithValue(
         CountryOutlineRepository(bundle: bundle),
+      ),
+      // `null` prefs: every test gets a fresh PlayerProfile with no
+      // platform channel involved — see PlayerProfileRepository's doc
+      // comment for why this constructor accepts null at all.
+      playerProfileRepositoryProvider.overrideWithValue(
+        const PlayerProfileRepository(null),
       ),
     ],
     child: const TerraScopeApp(),

@@ -99,4 +99,46 @@ class PlayerProfile {
       lastPlayedAt: lastPlayedAt ?? this.lastPlayedAt,
     );
   }
+
+  /// Schema version this shape serializes as — bump alongside a
+  /// breaking field change so [PlayerProfileRepository] can tell an old
+  /// save apart from a corrupt one instead of guessing.
+  static const int schemaVersion = 1;
+
+  Map<String, dynamic> toJson() => {
+    'schemaVersion': schemaVersion,
+    'totalXp': totalXp,
+    'currentStreakDays': currentStreakDays,
+    'longestStreakDays': longestStreakDays,
+    'discoveredCountryCodes': discoveredCountryCodes.toList(),
+    'bestScore': bestScore,
+    'gamesPlayed': gamesPlayed,
+    'totalCorrectAnswers': totalCorrectAnswers,
+    'totalQuestionsAnswered': totalQuestionsAnswered,
+    'lastPlayedAt': lastPlayedAt?.toIso8601String(),
+  };
+
+  /// Throws on anything unreadable — [PlayerProfileRepository] treats a
+  /// failure here the same as no saved profile at all, rather than
+  /// crashing app startup over a corrupt or unrecognized save.
+  factory PlayerProfile.fromJson(Map<String, dynamic> json) {
+    if (json['schemaVersion'] != schemaVersion) {
+      throw const FormatException('Unrecognized PlayerProfile schema version');
+    }
+    return PlayerProfile(
+      totalXp: json['totalXp'] as int,
+      currentStreakDays: json['currentStreakDays'] as int,
+      longestStreakDays: json['longestStreakDays'] as int,
+      discoveredCountryCodes: (json['discoveredCountryCodes'] as List<dynamic>)
+          .map((e) => e as String)
+          .toSet(),
+      bestScore: json['bestScore'] as int,
+      gamesPlayed: json['gamesPlayed'] as int,
+      totalCorrectAnswers: json['totalCorrectAnswers'] as int,
+      totalQuestionsAnswered: json['totalQuestionsAnswered'] as int,
+      lastPlayedAt: json['lastPlayedAt'] == null
+          ? null
+          : DateTime.parse(json['lastPlayedAt'] as String),
+    );
+  }
 }
