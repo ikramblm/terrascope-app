@@ -19,6 +19,7 @@ class GameMode {
     required this.icon,
     this.routePath,
     this.logoBuilder,
+    this.requiredLevel,
   });
 
   final String id;
@@ -35,6 +36,14 @@ class GameMode {
   /// the plain [icon] wherever this mode is shown. Null falls back to
   /// [icon], which is why every mode still declares one.
   final Widget Function(BuildContext context)? logoBuilder;
+
+  /// Non-null only for a mode the team has chosen to ship *behind* a
+  /// numeric player level rather than open immediately — see
+  /// [PlayerProfile.numericLevel]. Distinct from [routePath] being
+  /// null: a level-gated mode is fully built and honestly unlocks the
+  /// moment the player reaches this level, never a claim on a mode
+  /// that isn't built yet.
+  final int? requiredLevel;
 
   bool get isAvailable => routePath != null;
 }

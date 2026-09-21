@@ -9,8 +9,9 @@ import '../../../../core/widgets/stat_card.dart';
 import '../../../player/domain/achievement.dart';
 import '../../../player/domain/player_level.dart';
 import '../../../player/domain/player_profile.dart';
+import '../../../player/domain/prestige_title.dart';
 import '../../../player/presentation/widgets/achievement_badge.dart';
-import '../../../player/presentation/widgets/country_map_mosaic.dart';
+import '../../../player/presentation/widgets/passport_map.dart';
 import '../../../player/presentation/widgets/streak_freeze_card.dart';
 import '../../../player/providers/player_providers.dart';
 
@@ -137,7 +138,7 @@ class ProfileScreen extends ConsumerWidget {
                     const SizedBox(height: 12),
                     FadeSlideIn(
                       index: 4,
-                      child: CountryMapMosaic(
+                      child: PassportMap(
                         discoveredCca3s: profile.discoveredCountryCodes,
                       ),
                     ),
@@ -241,7 +242,8 @@ class _IdentityCard extends StatelessWidget {
                       Text('Guest Explorer', style: theme.textTheme.titleLarge),
                       const SizedBox(height: 2),
                       Text(
-                        profile.level.label,
+                        'Level ${profile.numericLevel} · '
+                        '${PrestigeTitle.forLevel(profile.numericLevel)}',
                         style: theme.textTheme.bodyMedium,
                       ),
                     ],

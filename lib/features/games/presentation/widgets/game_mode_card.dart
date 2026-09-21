@@ -7,26 +7,36 @@ import '../../domain/game_mode.dart';
 /// stats, no decoration competing with the color and the icon for
 /// attention.
 ///
-/// Unavailable modes render visibly muted with a padlock icon and a
-/// "Soon" badge — never a tile that looks tappable but silently does
-/// nothing, and never a fabricated unlock condition either (these modes
-/// simply aren't built yet, not gated behind a player level).
+/// A locked tile is always one of two honest states, never a single
+/// catch-all: not built yet ("Soon", no number — there's no real gate
+/// to name) or built but level-gated ("Lvl N", [lockedUntilLevel] —
+/// a real, working unlock condition). Never a tile that looks tappable
+/// but silently does nothing, and never a fabricated unlock claim.
 class GameModeCard extends StatelessWidget {
   const GameModeCard({
     super.key,
     required this.mode,
     required this.color,
     this.onTap,
+    this.lockedUntilLevel,
   });
 
   final GameMode mode;
   final Color color;
   final VoidCallback? onTap;
 
+  /// Non-null only when [mode] is fully built (`routePath != null`) but
+  /// the player hasn't yet reached its `requiredLevel` — see
+  /// [GameMode.requiredLevel]. Left null for a mode with no level gate,
+  /// or one the player has already unlocked.
+  final int? lockedUntilLevel;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final available = mode.isAvailable;
+    final notBuilt = !mode.isAvailable;
+    final levelLocked = lockedUntilLevel != null;
+    final available = !notBuilt && !levelLocked;
     final background = available
         ? color
         : theme.colorScheme.surfaceContainerHighest;
@@ -79,7 +89,10 @@ class GameModeCard extends StatelessWidget {
                           color: theme.colorScheme.onSurfaceVariant,
                         ),
                         const SizedBox(width: 3),
-                        Text('Soon', style: theme.textTheme.labelSmall),
+                        Text(
+                          notBuilt ? 'Soon' : 'Lvl $lockedUntilLevel',
+                          style: theme.textTheme.labelSmall,
+                        ),
                       ],
                     ),
                   ),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/max_width_box.dart';
+import '../../../player/providers/player_providers.dart';
 import '../../domain/game_mode.dart';
 import '../widgets/game_mode_card.dart';
 
@@ -21,7 +23,7 @@ const _cardColors = [
   AppColors.purple,
 ];
 
-class GameCategoryScreen extends StatelessWidget {
+class GameCategoryScreen extends ConsumerWidget {
   const GameCategoryScreen({
     super.key,
     required this.title,
@@ -34,8 +36,11 @@ class GameCategoryScreen extends StatelessWidget {
   final List<GameMode> modes;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final playerLevel = ref.watch(
+      playerProfileProvider.select((p) => p.numericLevel),
+    );
     return Scaffold(
       appBar: AppBar(title: Text(title)),
       body: AppBackground(
@@ -56,12 +61,11 @@ class GameCategoryScreen extends StatelessWidget {
                 ),
                 children: [
                   for (final (i, mode) in modes.indexed)
-                    GameModeCard(
-                      mode: mode,
-                      color: _cardColors[i % _cardColors.length],
-                      onTap: mode.isAvailable
-                          ? () => context.push(mode.routePath!)
-                          : null,
+                    _modeCard(
+                      context,
+                      mode,
+                      _cardColors[i % _cardColors.length],
+                      playerLevel,
                     ),
                 ],
               ),
@@ -71,4 +75,23 @@ class GameCategoryScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+GameModeCard _modeCard(
+  BuildContext context,
+  GameMode mode,
+  Color color,
+  int playerLevel,
+) {
+  final required = mode.requiredLevel;
+  final lockedUntilLevel = required != null && playerLevel < required
+      ? required
+      : null;
+  final unlocked = mode.isAvailable && lockedUntilLevel == null;
+  return GameModeCard(
+    mode: mode,
+    color: color,
+    lockedUntilLevel: lockedUntilLevel,
+    onTap: unlocked ? () => context.push(mode.routePath!) : null,
+  );
 }

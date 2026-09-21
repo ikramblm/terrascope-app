@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 
 import 'player_level.dart';
@@ -89,6 +91,12 @@ class PlayerProfile {
   int get countriesDiscovered => discoveredCountryCodes.length;
 
   PlayerLevel get level => PlayerLevel.forXp(totalXp);
+
+  /// A finer-grained 1-50 number layered on top of the 7 coarse [level]
+  /// tiers, for a "Level 12 · Cartographer"-style readout that moves
+  /// most sessions — the 7-tier system stays what drives the avatar
+  /// ring color, since that shouldn't visually change every level.
+  int get numericLevel => math.sqrt(totalXp / 50).floor().clamp(1, 50);
 
   /// Career accuracy across every question ever answered, in [0, 1].
   /// `0` (not null) before the first game — displayed as "—" by the UI
