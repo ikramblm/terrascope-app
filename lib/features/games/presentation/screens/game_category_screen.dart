@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/theme/app_colors.dart';
+import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../domain/game_mode.dart';
 import '../widgets/game_mode_card.dart';
@@ -37,33 +38,35 @@ class GameCategoryScreen extends StatelessWidget {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: MaxWidthBox(
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
-          children: [
-            Text(subtitle, style: theme.textTheme.bodyMedium),
-            const SizedBox(height: 16),
-            GridView(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 14,
-                crossAxisSpacing: 14,
-                mainAxisExtent: 156,
+      body: AppBackground(
+        child: MaxWidthBox(
+          child: ListView(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
+            children: [
+              Text(subtitle, style: theme.textTheme.bodyMedium),
+              const SizedBox(height: 16),
+              GridView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 14,
+                  crossAxisSpacing: 14,
+                  mainAxisExtent: 156,
+                ),
+                children: [
+                  for (final (i, mode) in modes.indexed)
+                    GameModeCard(
+                      mode: mode,
+                      color: _cardColors[i % _cardColors.length],
+                      onTap: mode.isAvailable
+                          ? () => context.push(mode.routePath!)
+                          : null,
+                    ),
+                ],
               ),
-              children: [
-                for (final (i, mode) in modes.indexed)
-                  GameModeCard(
-                    mode: mode,
-                    color: _cardColors[i % _cardColors.length],
-                    onTap: mode.isAvailable
-                        ? () => context.push(mode.routePath!)
-                        : null,
-                  ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

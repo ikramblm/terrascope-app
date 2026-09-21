@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../app/theme/app_colors.dart';
+import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../../games/presentation/widgets/game_category_style.dart';
 import '../../../games/domain/game_category.dart';
@@ -103,18 +104,20 @@ class _NameGameScreenState extends State<NameGameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      body: SafeArea(
-        child: MaxWidthBox(
-          child: _engine.isComplete
-              ? NameResultsView(engine: _engine, onPlayAgain: _playAgain)
-              : _PlayingView(
-                  engine: _engine,
-                  instructions: widget.instructions,
-                  controller: _controller,
-                  focusNode: _focusNode,
-                  feedback: _feedback,
-                  onSubmitted: _handleSubmit,
-                ),
+      body: AppBackground(
+        child: SafeArea(
+          child: MaxWidthBox(
+            child: _engine.isComplete
+                ? NameResultsView(engine: _engine, onPlayAgain: _playAgain)
+                : _PlayingView(
+                    engine: _engine,
+                    instructions: widget.instructions,
+                    controller: _controller,
+                    focusNode: _focusNode,
+                    feedback: _feedback,
+                    onSubmitted: _handleSubmit,
+                  ),
+          ),
         ),
       ),
     );

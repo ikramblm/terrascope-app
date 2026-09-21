@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../app/theme/app_colors.dart';
+import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/fade_slide_in.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../data/game_catalog.dart';
@@ -62,51 +63,54 @@ class GamesScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      body: SafeArea(
-        bottom: false,
-        child: MaxWidthBox(
-          child: ListView(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
-            children: [
-              Text('Explore', style: theme.textTheme.headlineLarge),
-              const SizedBox(height: 4),
-              Text(
-                'Pick a category to find your next game.',
-                style: theme.textTheme.bodyMedium,
-              ),
-              const ExploreHeroShape(),
-              const SizedBox(height: 8),
-              FadeSlideIn(
-                index: 0,
-                child: GridView(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 14,
-                    crossAxisSpacing: 14,
-                    mainAxisExtent: 140,
-                  ),
-                  children: [
-                    for (final category in categories)
-                      _CategoryCard(
-                        category: category,
-                        onTap: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => GameCategoryScreen(
-                              title: category.title,
-                              subtitle: category.title == 'Soon'
-                                  ? 'Every mode still in the works, all in one place.'
-                                  : 'All ${category.title.toLowerCase()} modes in one place.',
-                              modes: category.modes,
+      body: AppBackground(
+        child: SafeArea(
+          bottom: false,
+          child: MaxWidthBox(
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
+              children: [
+                Text('Explore', style: theme.textTheme.headlineLarge),
+                const SizedBox(height: 4),
+                Text(
+                  'Pick a category to find your next game.',
+                  style: theme.textTheme.bodyMedium,
+                ),
+                const ExploreHeroShape(),
+                const SizedBox(height: 8),
+                FadeSlideIn(
+                  index: 0,
+                  child: GridView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 14,
+                          crossAxisSpacing: 14,
+                          mainAxisExtent: 140,
+                        ),
+                    children: [
+                      for (final category in categories)
+                        _CategoryCard(
+                          category: category,
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => GameCategoryScreen(
+                                title: category.title,
+                                subtitle: category.title == 'Soon'
+                                    ? 'Every mode still in the works, all in one place.'
+                                    : 'All ${category.title.toLowerCase()} modes in one place.',
+                                modes: category.modes,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

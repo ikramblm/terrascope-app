@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 import 'app_text_theme.dart';
 
-/// TerraScope's Material 3 theme definitions — light is the primary,
-/// fully-designed experience (a premium mobile game, not a dashboard);
-/// dark mirrors the same language for system-dark users.
+/// TerraScope's Material 3 theme definitions — dark is now the primary,
+/// fully-designed experience (a premium mobile game played at night, not
+/// a dashboard in daylight); light is kept defined for a possible future
+/// toggle but isn't reachable today — see [TerraScopeApp], which forces
+/// `ThemeMode.dark`.
 abstract class AppTheme {
   AppTheme._();
 
@@ -45,20 +47,20 @@ abstract class AppTheme {
 
     final colorScheme = ColorScheme(
       brightness: brightness,
-      primary: AppColors.oceanBlue,
-      onPrimary: Colors.white,
+      primary: isDark ? AppColors.ctaCyan : AppColors.oceanBlue,
+      onPrimary: isDark ? AppColors.darkBackground : Colors.white,
       secondary: AppColors.green,
       onSecondary: Colors.white,
       tertiary: AppColors.orange,
       onTertiary: Colors.white,
-      error: AppColors.coral,
+      error: isDark ? AppColors.comboFlame : AppColors.coral,
       onError: Colors.white,
       surface: surface,
       onSurface: textPrimary,
       surfaceContainerHighest: surfaceRaised,
       onSurfaceVariant: textSecondary,
       outline: border,
-      outlineVariant: border.withValues(alpha: 0.6),
+      outlineVariant: border.withValues(alpha: border.a * 0.6),
       shadow: shadowColor,
       scrim: Colors.black,
       inverseSurface: textPrimary,
@@ -84,8 +86,12 @@ abstract class AppTheme {
         centerTitle: false,
         titleTextStyle: textTheme.headlineMedium,
       ),
+      // The "glass card" look: a translucent fill over the textured
+      // background (see AppBackground) plus a lit neon hairline instead
+      // of a shadow — a drop shadow barely reads against near-black, a
+      // glowing border does.
       cardTheme: CardThemeData(
-        color: surfaceRaised,
+        color: isDark ? surfaceRaised.withValues(alpha: 0.65) : surfaceRaised,
         elevation: isDark ? 0 : 4,
         shadowColor: shadowColor.withValues(alpha: isDark ? 0 : 0.10),
         margin: EdgeInsets.zero,
@@ -118,8 +124,8 @@ abstract class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.oceanBlue,
-          foregroundColor: Colors.white,
+          backgroundColor: isDark ? AppColors.ctaCyan : AppColors.oceanBlue,
+          foregroundColor: isDark ? AppColors.darkBackground : Colors.white,
           disabledBackgroundColor: border,
           disabledForegroundColor: textSecondary,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),

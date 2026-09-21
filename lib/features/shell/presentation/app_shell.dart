@@ -19,6 +19,11 @@ class AppShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Not wrapped in AppBackground here: each tab owns its own Scaffold
+      // (Home, Explore, Lists, Profile), and a nested Scaffold paints an
+      // opaque `scaffoldBackgroundColor` that would hide anything behind
+      // it — the globe-grid texture is applied inside each of those
+      // instead, where it's actually visible.
       body: navigationShell,
       floatingActionButton: _PlayFab(onTap: () => launchQuickPlay(context)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -45,10 +50,14 @@ class _PlayFab extends StatelessWidget {
       height: 64,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: AppColors.oceanBlue,
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [AppColors.ctaCyan, AppColors.ctaViolet],
+        ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.oceanBlue.withValues(alpha: 0.45),
+            color: AppColors.ctaCyan.withValues(alpha: 0.45),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),

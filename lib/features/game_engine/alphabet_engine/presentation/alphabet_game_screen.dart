@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../app/theme/app_colors.dart';
+import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../domain/game_result.dart';
 import '../../sound/sound_service.dart';
@@ -96,18 +97,20 @@ class _AlphabetGameScreenState extends State<AlphabetGameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Name the Alphabet')),
-      body: SafeArea(
-        child: MaxWidthBox(
-          child: _engine.isComplete
-              ? AlphabetResultsView(engine: _engine, onPlayAgain: _playAgain)
-              : _PlayingView(
-                  engine: _engine,
-                  controller: _controller,
-                  focusNode: _focusNode,
-                  showWrongFlash: _showWrongFlash,
-                  onSubmitted: _handleSubmit,
-                  onSkip: _handleSkip,
-                ),
+      body: AppBackground(
+        child: SafeArea(
+          child: MaxWidthBox(
+            child: _engine.isComplete
+                ? AlphabetResultsView(engine: _engine, onPlayAgain: _playAgain)
+                : _PlayingView(
+                    engine: _engine,
+                    controller: _controller,
+                    focusNode: _focusNode,
+                    showWrongFlash: _showWrongFlash,
+                    onSubmitted: _handleSubmit,
+                    onSkip: _handleSkip,
+                  ),
+          ),
         ),
       ),
     );

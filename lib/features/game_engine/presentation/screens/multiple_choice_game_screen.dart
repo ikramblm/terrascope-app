@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../../../data/countries/models/country.dart';
 import '../../domain/game_result.dart';
@@ -101,39 +102,41 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      body: SafeArea(
-        child: MaxWidthBox(
-          child: Stack(
-            children: [
-              _engine.isComplete
-                  ? GameResultsView(
-                      result: _engine.buildResult(),
-                      onPlayAgain: _playAgain,
-                    )
-                  : _QuestionView(
-                      engine: _engine,
-                      promptBuilder: widget.promptBuilder,
-                      centerLabelBuilder: widget.centerLabelBuilder,
-                    ),
-              Align(
-                alignment: Alignment.topCenter,
-                child: ConfettiWidget(
-                  confettiController: _confettiController,
-                  blastDirection: pi / 2,
-                  blastDirectionality: BlastDirectionality.explosive,
-                  numberOfParticles: 18,
-                  gravity: 0.4,
-                  emissionFrequency: 0.9,
-                  maxBlastForce: 16,
-                  minBlastForce: 6,
-                  colors: [
-                    theme.colorScheme.secondary,
-                    theme.colorScheme.primary,
-                    theme.colorScheme.tertiary,
-                  ],
+      body: AppBackground(
+        child: SafeArea(
+          child: MaxWidthBox(
+            child: Stack(
+              children: [
+                _engine.isComplete
+                    ? GameResultsView(
+                        result: _engine.buildResult(),
+                        onPlayAgain: _playAgain,
+                      )
+                    : _QuestionView(
+                        engine: _engine,
+                        promptBuilder: widget.promptBuilder,
+                        centerLabelBuilder: widget.centerLabelBuilder,
+                      ),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: ConfettiWidget(
+                    confettiController: _confettiController,
+                    blastDirection: pi / 2,
+                    blastDirectionality: BlastDirectionality.explosive,
+                    numberOfParticles: 18,
+                    gravity: 0.4,
+                    emissionFrequency: 0.9,
+                    maxBlastForce: 16,
+                    minBlastForce: 6,
+                    colors: [
+                      theme.colorScheme.secondary,
+                      theme.colorScheme.primary,
+                      theme.colorScheme.tertiary,
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

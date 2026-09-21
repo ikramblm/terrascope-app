@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/async_state_views.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../../../data/countries/providers/country_providers.dart';
@@ -32,48 +33,50 @@ class _ListsScreenState extends State<ListsScreen>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      body: SafeArea(
-        bottom: false,
-        child: MaxWidthBox(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Lists', style: theme.textTheme.headlineLarge),
-                    const SizedBox(height: 4),
-                    Text(
-                      'Every country, at a glance.',
-                      style: theme.textTheme.bodyMedium,
-                    ),
-                  ],
+      body: AppBackground(
+        child: SafeArea(
+          bottom: false,
+          child: MaxWidthBox(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Lists', style: theme.textTheme.headlineLarge),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Every country, at a glance.',
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              TabBar(
-                controller: _tabController,
-                isScrollable: true,
-                labelColor: theme.colorScheme.primary,
-                unselectedLabelColor: theme.colorScheme.onSurfaceVariant,
-                indicatorColor: theme.colorScheme.primary,
-                tabs: const [
-                  Tab(text: 'Countries'),
-                  Tab(text: 'Capitals'),
-                  Tab(text: 'Flags'),
-                ],
-              ),
-              Expanded(
-                child: TabBarView(
+                TabBar(
                   controller: _tabController,
-                  children: const [
-                    _CountriesTab(),
-                    _CapitalsTab(),
-                    _FlagsTab(),
+                  isScrollable: true,
+                  labelColor: theme.colorScheme.primary,
+                  unselectedLabelColor: theme.colorScheme.onSurfaceVariant,
+                  indicatorColor: theme.colorScheme.primary,
+                  tabs: const [
+                    Tab(text: 'Countries'),
+                    Tab(text: 'Capitals'),
+                    Tab(text: 'Flags'),
                   ],
                 ),
-              ),
-            ],
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: const [
+                      _CountriesTab(),
+                      _CapitalsTab(),
+                      _FlagsTab(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

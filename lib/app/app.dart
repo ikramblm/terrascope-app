@@ -12,9 +12,10 @@ class TerraScopeApp extends ConsumerWidget {
     return MaterialApp.router(
       title: 'TerraScope',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
+      // Dark is the one, primary theme now — see AppTheme's doc comment.
+      theme: AppTheme.dark,
       darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.dark,
       routerConfig: ref.watch(appRouterProvider),
     );
   }

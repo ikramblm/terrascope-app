@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../app/router/route_paths.dart';
 import '../../../../app/theme/app_colors.dart';
+import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/fade_slide_in.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../../games/data/game_catalog.dart';
@@ -33,40 +34,42 @@ class HomeScreen extends StatelessWidget {
     ].where((m) => m.isAvailable).toList();
 
     return Scaffold(
-      body: SafeArea(
-        bottom: false,
-        child: MaxWidthBox(
-          child: ListView(
-            padding: const EdgeInsets.fromLTRB(20, 12, 20, 110),
-            children: [
-              FadeSlideIn(
-                index: 0,
-                child: const WorldMapBanner(title: 'TerraScope'),
-              ),
-              const SizedBox(height: 24),
-              for (final (i, mode) in featuredModes.indexed) ...[
+      body: AppBackground(
+        child: SafeArea(
+          bottom: false,
+          child: MaxWidthBox(
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 110),
+              children: [
                 FadeSlideIn(
-                  index: i + 1,
+                  index: 0,
+                  child: const WorldMapBanner(title: 'TerraScope'),
+                ),
+                const SizedBox(height: 24),
+                for (final (i, mode) in featuredModes.indexed) ...[
+                  FadeSlideIn(
+                    index: i + 1,
+                    child: GameModeButton(
+                      label: mode.title,
+                      icon: mode.icon,
+                      color: _buttonColors[i % _buttonColors.length],
+                      logoBuilder: mode.logoBuilder,
+                      onTap: () => context.push(mode.routePath!),
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                ],
+                FadeSlideIn(
+                  index: featuredModes.length + 1,
                   child: GameModeButton(
-                    label: mode.title,
-                    icon: mode.icon,
-                    color: _buttonColors[i % _buttonColors.length],
-                    logoBuilder: mode.logoBuilder,
-                    onTap: () => context.push(mode.routePath!),
+                    label: 'Explore All Games',
+                    icon: Icons.explore_rounded,
+                    color: AppColors.purple,
+                    onTap: () => context.go(RoutePaths.games),
                   ),
                 ),
-                const SizedBox(height: 14),
               ],
-              FadeSlideIn(
-                index: featuredModes.length + 1,
-                child: GameModeButton(
-                  label: 'Explore All Games',
-                  icon: Icons.explore_rounded,
-                  color: AppColors.purple,
-                  onTap: () => context.go(RoutePaths.games),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

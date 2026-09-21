@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../app/theme/app_colors.dart';
+import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../../../core/widgets/option_tile.dart';
 import '../../domain/game_difficulty.dart';
@@ -38,33 +39,35 @@ class DifficultySelectScreen extends StatelessWidget {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: MaxWidthBox(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Icon(icon, size: 48, color: theme.colorScheme.primary),
-              const SizedBox(height: 12),
-              Text(subtitle, style: theme.textTheme.bodyMedium),
-              const SizedBox(height: 28),
-              Text(
-                'Choose a difficulty',
-                style: theme.textTheme.headlineMedium,
-              ),
-              const SizedBox(height: 16),
-              for (final difficulty in GameDifficulty.values) ...[
-                OptionTile(
-                  title: difficulty.label,
-                  subtitle:
-                      '${difficulty.secondsPerQuestion}s per question · ${difficulty.basePoints} base pts',
-                  icon: _iconFor(difficulty),
-                  color: _accentFor(difficulty),
-                  onTap: () => onSelect(difficulty),
-                ),
+      body: AppBackground(
+        child: MaxWidthBox(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Icon(icon, size: 48, color: theme.colorScheme.primary),
                 const SizedBox(height: 12),
+                Text(subtitle, style: theme.textTheme.bodyMedium),
+                const SizedBox(height: 28),
+                Text(
+                  'Choose a difficulty',
+                  style: theme.textTheme.headlineMedium,
+                ),
+                const SizedBox(height: 16),
+                for (final difficulty in GameDifficulty.values) ...[
+                  OptionTile(
+                    title: difficulty.label,
+                    subtitle:
+                        '${difficulty.secondsPerQuestion}s per question · ${difficulty.basePoints} base pts',
+                    icon: _iconFor(difficulty),
+                    color: _accentFor(difficulty),
+                    onTap: () => onSelect(difficulty),
+                  ),
+                  const SizedBox(height: 12),
+                ],
               ],
-            ],
+            ),
           ),
         ),
       ),

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
-/// TerraScope brand palette — v2 (premium mobile game, not a dashboard).
+/// TerraScope brand palette — v3 (dark-first neon, a premium mobile game
+/// at night, not a dashboard in daylight).
 ///
-/// Light-first: a soft off-white base with a handful of confident,
-/// saturated colors doing the work, each with one job — never all seven
-/// competing on screen at once. Ocean blue is the brand/navigation
-/// color; green means correct/success; orange/yellow mean reward and
-/// urgency; coral means wrong/warning; purple marks special modes and
-/// achievements; sky blue is ocean blue's lighter sibling for secondary
-/// accents and geography motifs.
+/// Dark is now the primary, fully-designed theme: a deep slate-navy
+/// background with a handful of confident, high-saturation colors doing
+/// the work, each with one job — never all seven competing on screen at
+/// once. Ocean blue is the brand/navigation color; green means
+/// correct/success; orange/yellow mean reward and urgency; coral means
+/// wrong/warning; purple marks special modes and achievements; sky blue
+/// is ocean blue's lighter sibling for secondary accents and geography
+/// motifs. `ctaCyan`/`ctaViolet` are the primary-CTA gradient pair;
+/// `comboFlame` is the hot end of the combo/timer ramp.
 abstract class AppColors {
   AppColors._();
 
@@ -22,7 +25,24 @@ abstract class AppColors {
   static const Color coral = Color(0xFFFF6B6B);
   static const Color purple = Color(0xFF8B5CF6);
 
-  // Light theme surfaces (the primary, fully-designed look).
+  /// Primary-CTA gradient pair (electric cyan → violet) — the
+  /// "juiciest" color in the app, reserved for the single most important
+  /// action on a screen (Play Again, Start, the quick-play FAB).
+  static const Color ctaCyan = Color(0xFF22D3EE);
+  static const Color ctaViolet = Color(0xFFA855F7);
+
+  /// Hot end of the combo badge / segmented timer ramp — `coral` is the
+  /// general wrong/warning color; `comboFlame` is specifically for
+  /// "streak/time running out" urgency, a shade more red.
+  static const Color comboFlame = Color(0xFFEF4444);
+
+  /// Success/laser-emerald — a cooler, more saturated green than
+  /// `green`, reserved for victory-moment surfaces (the results banner)
+  /// rather than everyday correct-answer feedback, which stays `green`.
+  static const Color successEmerald = Color(0xFF10E19A);
+
+  // Light theme surfaces (kept for a possible future toggle; unreachable
+  // today — see AppTheme, which forces dark).
   static const Color lightBackground = Color(0xFFF7F8FC);
   static const Color lightSurface = Color(0xFFFFFFFF);
   static const Color lightSurfaceRaised = Color(0xFFFFFFFF);
@@ -31,13 +51,25 @@ abstract class AppColors {
   static const Color lightTextSecondary = Color(0xFF6B7280);
   static const Color lightShadow = Color(0xFF1B2559);
 
-  // Dark theme surfaces (same language, inverted — secondary look).
-  static const Color darkBackground = Color(0xFF0F1220);
-  static const Color darkSurface = Color(0xFF171B2C);
-  static const Color darkSurfaceRaised = Color(0xFF1F2438);
-  static const Color darkBorder = Color(0xFF2C3350);
-  static const Color darkTextPrimary = Color(0xFFF4F6FB);
-  static const Color darkTextSecondary = Color(0xFFA1A8C3);
+  // Dark theme surfaces — the primary look. A deep slate-navy base,
+  // glass-like raised surfaces with a translucent neon-cyan hairline
+  // border instead of a shadow (a shadow barely reads against a
+  // near-black background; a lit border does).
+  static const Color darkBackground = Color(0xFF0F172A);
+  static const Color darkSurface = Color(0xFF1A2338);
+  static const Color darkSurfaceRaised = Color(0xFF212C47);
+
+  /// Neon-cyan hairline, alpha already baked in (24%) — every border in
+  /// the dark theme is this one token, so "glowing border" stays one
+  /// consistent hue app-wide rather than a different tint per widget.
+  static const Color darkBorder = Color(0x3D38BDF8);
+  static const Color darkTextPrimary = Color(0xFFF8FAFC);
+  static const Color darkTextSecondary = Color(0xFF94A3B8);
+
+  /// Locked/unavailable-content fill — near-black, distinct from
+  /// `darkSurface` so a locked card reads as "off" even next to a
+  /// regular glass card.
+  static const Color lockedObsidian = Color(0xFF111827);
 
   /// Continent accent colors, used consistently across map and
   /// continent-challenge cards so a continent is always recognizable.
