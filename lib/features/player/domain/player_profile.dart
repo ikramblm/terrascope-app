@@ -26,6 +26,7 @@ class PlayerProfile {
     required this.timeFreezeCount,
     required this.radarCount,
     required this.streakFreezesAvailable,
+    required this.unlockedCosmeticTitles,
     this.lastPlayedAt,
     this.lastDailyChallengeDate,
   });
@@ -46,6 +47,7 @@ class PlayerProfile {
     timeFreezeCount: 2,
     radarCount: 2,
     streakFreezesAvailable: 1,
+    unlockedCosmeticTitles: {},
   );
 
   final int totalXp;
@@ -76,6 +78,11 @@ class PlayerProfile {
   /// consumed automatically the moment a day is about to lapse, never
   /// silently: see [PlayerProfileNotifier.recordSession].
   final int streakFreezesAvailable;
+
+  /// Flavor titles won from a Rare mystery-chest roll — see
+  /// [ChestReward], purely cosmetic and separate from [numericLevel]'s
+  /// title ladder, which needs no unlocking.
+  final Set<String> unlockedCosmeticTitles;
 
   /// cca3 codes of every country this player has answered correctly at
   /// least once, across all game modes.
@@ -147,6 +154,7 @@ class PlayerProfile {
     int? timeFreezeCount,
     int? radarCount,
     int? streakFreezesAvailable,
+    Set<String>? unlockedCosmeticTitles,
     DateTime? lastPlayedAt,
     DateTime? lastDailyChallengeDate,
   }) {
@@ -167,6 +175,8 @@ class PlayerProfile {
       radarCount: radarCount ?? this.radarCount,
       streakFreezesAvailable:
           streakFreezesAvailable ?? this.streakFreezesAvailable,
+      unlockedCosmeticTitles:
+          unlockedCosmeticTitles ?? this.unlockedCosmeticTitles,
       lastPlayedAt: lastPlayedAt ?? this.lastPlayedAt,
       lastDailyChallengeDate:
           lastDailyChallengeDate ?? this.lastDailyChallengeDate,
@@ -176,7 +186,7 @@ class PlayerProfile {
   /// Schema version this shape serializes as — bump alongside a
   /// breaking field change so [PlayerProfileRepository] can tell an old
   /// save apart from a corrupt one instead of guessing.
-  static const int schemaVersion = 3;
+  static const int schemaVersion = 4;
 
   Map<String, dynamic> toJson() => {
     'schemaVersion': schemaVersion,
@@ -193,6 +203,7 @@ class PlayerProfile {
     'timeFreezeCount': timeFreezeCount,
     'radarCount': radarCount,
     'streakFreezesAvailable': streakFreezesAvailable,
+    'unlockedCosmeticTitles': unlockedCosmeticTitles.toList(),
     'lastPlayedAt': lastPlayedAt?.toIso8601String(),
     'lastDailyChallengeDate': lastDailyChallengeDate?.toIso8601String(),
   };
@@ -220,6 +231,9 @@ class PlayerProfile {
       timeFreezeCount: json['timeFreezeCount'] as int,
       radarCount: json['radarCount'] as int,
       streakFreezesAvailable: json['streakFreezesAvailable'] as int,
+      unlockedCosmeticTitles: (json['unlockedCosmeticTitles'] as List<dynamic>)
+          .map((e) => e as String)
+          .toSet(),
       lastPlayedAt: json['lastPlayedAt'] == null
           ? null
           : DateTime.parse(json['lastPlayedAt'] as String),

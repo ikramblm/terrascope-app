@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/duels/presentation/screens/duel_screen.dart';
 import '../../features/games/daily_challenge/presentation/screens/daily_challenge_screen.dart';
 import '../../features/games/guess_borders/presentation/screens/guess_borders_screen.dart';
 import '../../features/games/guess_capital/presentation/screens/guess_capital_screen.dart';
@@ -85,6 +86,11 @@ GoRouter buildAppRouter() {
         parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.dailyChallenge,
         builder: (context, state) => const DailyChallengeScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.duel,
+        builder: (context, state) => const DuelScreen(),
       ),
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,

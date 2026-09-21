@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game_engine/domain/game_result.dart';
 import '../../notifications/services/notification_service.dart';
 import '../data/player_profile_repository.dart';
+import '../domain/chest_reward.dart';
 import '../domain/player_profile.dart';
 import '../domain/power_up.dart';
 
@@ -71,10 +72,15 @@ class PlayerProfileNotifier extends Notifier<PlayerProfile> {
   /// Streak Freeze to bridge a missed day rather than resetting.
   bool lastSessionUsedStreakFreeze = false;
 
-  /// Applies a completed game session's outcome: XP, coins, streak, and
-  /// newly-discovered countries. Called once per session by every game
-  /// mode via the shared game engine — the single place player
-  /// progression is updated from gameplay.
+  /// Set by [recordSession] for the results screen to read right after
+  /// — this session's mystery-chest roll, already fully applied to
+  /// [state] below (coins/title/freeze), never just a cosmetic claim.
+  ChestReward? lastChestReward;
+
+  /// Applies a completed game session's outcome: XP, coins, streak, a
+  /// mystery-chest roll, and newly-discovered countries. Called once
+  /// per session by every game mode via the shared game engine — the
+  /// single place player progression is updated from gameplay.
   void recordSession(GameResult result) {
     final now = DateTime.now();
     final streak = _nextStreak(now);
@@ -83,9 +89,16 @@ class PlayerProfileNotifier extends Notifier<PlayerProfile> {
     // Coins track XP at a flat 1-for-5 rate — no separate balancing
     // pass, just enough that a solid round buys roughly one power-up.
     final coinsEarned = (result.xpEarned / 5).round();
+
+    final chest = ChestReward.roll(
+      xpEarned: result.xpEarned,
+      ownedTitles: state.unlockedCosmeticTitles,
+    );
+    lastChestReward = chest;
+
     state = state.copyWith(
       totalXp: state.totalXp + result.xpEarned,
-      coins: state.coins + coinsEarned,
+      coins: state.coins + coinsEarned + chest.bonusCoins,
       discoveredCountryCodes: {
         ...state.discoveredCountryCodes,
         ...result.correctCca3s,
@@ -99,7 +112,11 @@ class PlayerProfileNotifier extends Notifier<PlayerProfile> {
           state.totalQuestionsAnswered + result.totalQuestions,
       currentStreakDays: streak.currentStreakDays,
       longestStreakDays: streak.longestStreakDays,
-      streakFreezesAvailable: streak.streakFreezesAvailable,
+      streakFreezesAvailable:
+          streak.streakFreezesAvailable + (chest.grantedStreakFreeze ? 1 : 0),
+      unlockedCosmeticTitles: chest.unlockedTitle == null
+          ? state.unlockedCosmeticTitles
+          : {...state.unlockedCosmeticTitles, chest.unlockedTitle!},
       lastPlayedAt: now,
     );
     _persist();
