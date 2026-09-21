@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game_engine/domain/game_result.dart';
+import '../../notifications/services/notification_service.dart';
 import '../data/player_profile_repository.dart';
 import '../domain/player_profile.dart';
 import '../domain/power_up.dart';
@@ -31,7 +32,25 @@ class PlayerProfileNotifier extends Notifier<PlayerProfile> {
   @override
   PlayerProfile build() {
     _repository = ref.watch(playerProfileRepositoryProvider);
-    return _repository.load() ?? PlayerProfile.newPlayer();
+    final profile = _repository.load() ?? PlayerProfile.newPlayer();
+    _syncStreakReminder(profile);
+    return profile;
+  }
+
+  /// Schedules (or clears) today's streak-expiry reminder to match
+  /// [profile] — called on every app start and after every completed
+  /// session, so the reminder never drifts from what's actually true.
+  void _syncStreakReminder(PlayerProfile profile) {
+    final today = DateTime.now();
+    if (profile.currentStreakDays <= 0 || profile.hasPlayedOn(today)) {
+      unawaited(NotificationService.instance.cancelStreakReminder());
+    } else {
+      unawaited(
+        NotificationService.instance.scheduleStreakReminder(
+          streakDays: profile.currentStreakDays,
+        ),
+      );
+    }
   }
 
   void _persist() {
@@ -84,6 +103,7 @@ class PlayerProfileNotifier extends Notifier<PlayerProfile> {
       lastPlayedAt: now,
     );
     _persist();
+    _syncStreakReminder(state);
   }
 
   /// Marks today's Daily Challenge as played — separate from

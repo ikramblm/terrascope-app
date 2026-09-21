@@ -115,6 +115,16 @@ class PlayerProfile {
         last.day == date.day;
   }
 
+  /// True once the player has completed any game session on [date] — the
+  /// condition that keeps [currentStreakDays] from lapsing the next day.
+  bool hasPlayedOn(DateTime date) {
+    final last = lastPlayedAt;
+    if (last == null) return false;
+    return last.year == date.year &&
+        last.month == date.month &&
+        last.day == date.day;
+  }
+
   PlayerProfile copyWith({
     int? totalXp,
     int? currentStreakDays,
