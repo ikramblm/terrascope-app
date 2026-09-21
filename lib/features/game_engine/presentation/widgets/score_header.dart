@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../app/theme/app_colors.dart';
-
-/// Score / question-progress / combo readout shown above every
-/// multiple-choice question.
+/// Score / question-progress readout shown above every multiple-choice
+/// question. The combo indicator used to live here as a small corner
+/// pill — it's now [ComboBanner], shown full-width just above the
+/// question itself, since a streak bonus is worth more than a corner
+/// badge's worth of attention.
 ///
 /// The score rolls up to its new value instead of jumping — small detail,
 /// but it's the difference between a number changing and a number
@@ -12,14 +13,12 @@ class ScoreHeader extends StatelessWidget {
   const ScoreHeader({
     super.key,
     required this.score,
-    required this.combo,
     required this.questionNumber,
     required this.totalQuestions,
     this.centerLabel,
   });
 
   final int score;
-  final int combo;
   final int questionNumber;
   final int totalQuestions;
 
@@ -51,93 +50,7 @@ class ScoreHeader extends StatelessWidget {
           centerLabel ?? 'Question $questionNumber / $totalQuestions',
           style: theme.textTheme.bodyMedium,
         ),
-        _ComboBadge(combo: combo),
       ],
-    );
-  }
-}
-
-class _ComboBadge extends StatefulWidget {
-  const _ComboBadge({required this.combo});
-
-  final int combo;
-
-  @override
-  State<_ComboBadge> createState() => _ComboBadgeState();
-}
-
-class _ComboBadgeState extends State<_ComboBadge>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 350),
-  );
-
-  @override
-  void didUpdateWidget(covariant _ComboBadge oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.combo > oldWidget.combo) {
-      _controller.forward(from: 0);
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final visible = widget.combo >= 2;
-    const comboColor = AppColors.yellow;
-
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        final bounce =
-            1 +
-            Curves.elasticOut.transform(_controller.value) *
-                0.25 *
-                (1 - _controller.value);
-        return Transform.scale(
-          scale: visible ? bounce.clamp(1.0, 1.3) : 1,
-          child: child,
-        );
-      },
-      child: AnimatedOpacity(
-        opacity: visible ? 1 : 0,
-        duration: const Duration(milliseconds: 200),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          decoration: BoxDecoration(
-            color: comboColor,
-            borderRadius: BorderRadius.circular(100),
-            boxShadow: [
-              BoxShadow(
-                color: comboColor.withValues(alpha: 0.4),
-                blurRadius: 10,
-                offset: const Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(Icons.bolt, size: 16, color: Colors.white),
-              const SizedBox(width: 2),
-              Text(
-                'Combo ${widget.combo}x',
-                style: theme.textTheme.labelLarge?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

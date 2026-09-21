@@ -117,6 +117,16 @@ class MultipleChoiceEngine extends ChangeNotifier {
     _applyAnswer(selected: null, isCorrect: false);
   }
 
+  /// Time Freeze power-up: adds [extra] to the current question's clock,
+  /// capped at the question's full allotted time so it can't be stacked
+  /// into an effectively unlimited clock.
+  void addTime(Duration extra) {
+    if (answered || isComplete) return;
+    final next = timeRemaining + extra;
+    timeRemaining = next > timeAllotted ? timeAllotted : next;
+    notifyListeners();
+  }
+
   void submitAnswer(Country selected) {
     if (answered || isComplete) return;
     _ticker?.cancel();

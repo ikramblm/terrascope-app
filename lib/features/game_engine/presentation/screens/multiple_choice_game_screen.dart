@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/max_width_box.dart';
@@ -11,6 +12,9 @@ import '../../engine/multiple_choice_engine.dart';
 import '../../sound/sound_service.dart';
 import '../widgets/answer_option_button.dart';
 import '../widgets/answer_reveal_inset.dart';
+import '../widgets/combo_banner.dart';
+import '../widgets/power_up_tray.dart';
+import '../widgets/radar_reveal.dart';
 import '../widgets/score_header.dart';
 import '../widgets/timer_bar.dart';
 import 'game_results_view.dart';
@@ -18,7 +22,7 @@ import 'game_results_view.dart';
 /// Generic screen for any "clue → pick the country" mode. Guess by Flag
 /// and Guess by Emoji are both just an [engineBuilder] (which questions)
 /// and a [promptBuilder] (how the clue renders) — everything else (timer,
-/// scoring, feedback, confetti, sound, results) lives here once.
+/// scoring, feedback, confetti, sound, results, power-ups) lives here once.
 class MultipleChoiceGameScreen extends StatefulWidget {
   const MultipleChoiceGameScreen({
     super.key,
@@ -49,6 +53,12 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
   bool _resultRecorded = false;
   int _lastCelebratedIndex = -1;
 
+  // Power-up state, scoped to the current question — reset the moment
+  // the engine moves to a new one (see _onEngineTick).
+  int _powerUpQuestionIndex = -1;
+  Set<String> _eliminatedCca3s = {};
+  bool _radarRevealed = false;
+
   late final ConfettiController _confettiController = ConfettiController(
     duration: const Duration(milliseconds: 700),
   );
@@ -61,22 +71,45 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
   }
 
   void _onEngineTick() {
+    if (!_engine.isComplete && _engine.currentIndex != _powerUpQuestionIndex) {
+      _powerUpQuestionIndex = _engine.currentIndex;
+      _eliminatedCca3s = {};
+      _radarRevealed = false;
+    }
     if (_engine.answered && _engine.currentIndex != _lastCelebratedIndex) {
       _lastCelebratedIndex = _engine.currentIndex;
       if (_engine.lastAnswerCorrect == true) {
         _confettiController.play();
-        SoundService.instance.playCorrect();
+        HapticFeedback.lightImpact();
+        // combo was already incremented for this answer, so it's the
+        // right "how many in a row so far" figure for the pitch ramp.
+        SoundService.instance.playCorrect(comboLevel: _engine.combo);
       } else {
+        HapticFeedback.mediumImpact();
         SoundService.instance.playWrong();
       }
     }
     if (_engine.isComplete && !_resultRecorded) {
       _resultRecorded = true;
+      HapticFeedback.heavyImpact();
       SoundService.instance.playComplete();
       widget.onSessionComplete(_engine.buildResult());
     }
     setState(() {});
   }
+
+  void _useFiftyFifty() {
+    final correct = _engine.currentQuestion.correctAnswer.cca3;
+    final wrongCca3s = _engine.currentQuestion.options
+        .map((c) => c.cca3)
+        .where((cca3) => cca3 != correct)
+        .toList();
+    setState(() => _eliminatedCca3s = wrongCca3s.take(2).toSet());
+  }
+
+  void _useTimeFreeze() => _engine.addTime(const Duration(seconds: 5));
+
+  void _useRadar() => setState(() => _radarRevealed = true);
 
   void _playAgain() {
     _engine.removeListener(_onEngineTick);
@@ -84,6 +117,9 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
     setState(() {
       _resultRecorded = false;
       _lastCelebratedIndex = -1;
+      _powerUpQuestionIndex = -1;
+      _eliminatedCca3s = {};
+      _radarRevealed = false;
       _engine = widget.engineBuilder()..addListener(_onEngineTick);
       _engine.start();
     });
@@ -116,6 +152,11 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
                         engine: _engine,
                         promptBuilder: widget.promptBuilder,
                         centerLabelBuilder: widget.centerLabelBuilder,
+                        eliminatedCca3s: _eliminatedCca3s,
+                        radarRevealed: _radarRevealed,
+                        onFiftyFifty: _useFiftyFifty,
+                        onTimeFreeze: _useTimeFreeze,
+                        onRadar: _useRadar,
                       ),
                 Align(
                   alignment: Alignment.topCenter,
@@ -148,12 +189,22 @@ class _QuestionView extends StatelessWidget {
   const _QuestionView({
     required this.engine,
     required this.promptBuilder,
+    required this.eliminatedCca3s,
+    required this.radarRevealed,
+    required this.onFiftyFifty,
+    required this.onTimeFreeze,
+    required this.onRadar,
     this.centerLabelBuilder,
   });
 
   final MultipleChoiceEngine engine;
   final Widget Function(BuildContext context, String promptText) promptBuilder;
   final String Function(MultipleChoiceEngine engine)? centerLabelBuilder;
+  final Set<String> eliminatedCca3s;
+  final bool radarRevealed;
+  final VoidCallback onFiftyFifty;
+  final VoidCallback onTimeFreeze;
+  final VoidCallback onRadar;
 
   @override
   Widget build(BuildContext context) {
@@ -166,17 +217,33 @@ class _QuestionView extends StatelessWidget {
         children: [
           ScoreHeader(
             score: engine.score,
-            combo: engine.combo,
             questionNumber: engine.currentIndex + 1,
             totalQuestions: engine.totalQuestions,
             centerLabel: centerLabelBuilder?.call(engine),
           ),
           const SizedBox(height: 12),
           TimerBar(remaining: engine.timeRemaining, total: engine.timeAllotted),
-          const SizedBox(height: 32),
+          const SizedBox(height: 12),
+          ComboBanner(combo: engine.combo),
+          const SizedBox(height: 8),
+          if (!engine.answered)
+            PowerUpTray(
+              onFiftyFifty: onFiftyFifty,
+              onTimeFreeze: onTimeFreeze,
+              onRadar: onRadar,
+              fiftyFiftyAvailable: eliminatedCca3s.isEmpty,
+              radarAvailable: !radarRevealed,
+            ),
+          const SizedBox(height: 12),
           Expanded(
             child: Center(child: promptBuilder(context, question.promptText)),
           ),
+          if (!engine.answered && radarRevealed) ...[
+            const SizedBox(height: 8),
+            Center(
+              child: RadarReveal(continent: question.correctAnswer.continent),
+            ),
+          ],
           if (engine.answered) ...[
             const SizedBox(height: 8),
             Center(child: AnswerRevealInset(cca3: question.correctAnswer.cca3)),
@@ -187,7 +254,9 @@ class _QuestionView extends StatelessWidget {
               country: option,
               state: _stateFor(option),
               slotIndex: i,
-              onTap: engine.answered ? null : () => engine.submitAnswer(option),
+              onTap: engine.answered || eliminatedCca3s.contains(option.cca3)
+                  ? null
+                  : () => engine.submitAnswer(option),
             ),
             const SizedBox(height: 10),
           ],
@@ -197,7 +266,11 @@ class _QuestionView extends StatelessWidget {
   }
 
   AnswerOptionState _stateFor(Country option) {
-    if (!engine.answered) return AnswerOptionState.idle;
+    if (!engine.answered) {
+      return eliminatedCca3s.contains(option.cca3)
+          ? AnswerOptionState.incorrectOther
+          : AnswerOptionState.idle;
+    }
     final isCorrectOption =
         option.cca3 == engine.currentQuestion.correctAnswer.cca3;
     if (isCorrectOption) return AnswerOptionState.correct;

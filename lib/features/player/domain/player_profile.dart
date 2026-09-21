@@ -19,6 +19,10 @@ class PlayerProfile {
     required this.gamesPlayed,
     required this.totalCorrectAnswers,
     required this.totalQuestionsAnswered,
+    required this.coins,
+    required this.fiftyFiftyCount,
+    required this.timeFreezeCount,
+    required this.radarCount,
     this.lastPlayedAt,
   });
 
@@ -31,6 +35,12 @@ class PlayerProfile {
     gamesPlayed: 0,
     totalCorrectAnswers: 0,
     totalQuestionsAnswered: 0,
+    coins: 0,
+    // A small welcome stock so a brand-new player can feel what a
+    // power-up does before they've earned enough coins to buy one.
+    fiftyFiftyCount: 2,
+    timeFreezeCount: 2,
+    radarCount: 2,
   );
 
   final int totalXp;
@@ -47,6 +57,15 @@ class PlayerProfile {
   /// session, every mode.
   final int totalCorrectAnswers;
   final int totalQuestionsAnswered;
+
+  /// Spendable in-game currency — earned per completed session, spent on
+  /// power-ups and Streak Freezes. Separate from [totalXp], which drives
+  /// level/title progress and is never spent.
+  final int coins;
+
+  final int fiftyFiftyCount;
+  final int timeFreezeCount;
+  final int radarCount;
 
   /// cca3 codes of every country this player has answered correctly at
   /// least once, across all game modes.
@@ -83,6 +102,10 @@ class PlayerProfile {
     int? gamesPlayed,
     int? totalCorrectAnswers,
     int? totalQuestionsAnswered,
+    int? coins,
+    int? fiftyFiftyCount,
+    int? timeFreezeCount,
+    int? radarCount,
     DateTime? lastPlayedAt,
   }) {
     return PlayerProfile(
@@ -96,6 +119,10 @@ class PlayerProfile {
       totalCorrectAnswers: totalCorrectAnswers ?? this.totalCorrectAnswers,
       totalQuestionsAnswered:
           totalQuestionsAnswered ?? this.totalQuestionsAnswered,
+      coins: coins ?? this.coins,
+      fiftyFiftyCount: fiftyFiftyCount ?? this.fiftyFiftyCount,
+      timeFreezeCount: timeFreezeCount ?? this.timeFreezeCount,
+      radarCount: radarCount ?? this.radarCount,
       lastPlayedAt: lastPlayedAt ?? this.lastPlayedAt,
     );
   }
@@ -103,7 +130,7 @@ class PlayerProfile {
   /// Schema version this shape serializes as — bump alongside a
   /// breaking field change so [PlayerProfileRepository] can tell an old
   /// save apart from a corrupt one instead of guessing.
-  static const int schemaVersion = 1;
+  static const int schemaVersion = 2;
 
   Map<String, dynamic> toJson() => {
     'schemaVersion': schemaVersion,
@@ -115,6 +142,10 @@ class PlayerProfile {
     'gamesPlayed': gamesPlayed,
     'totalCorrectAnswers': totalCorrectAnswers,
     'totalQuestionsAnswered': totalQuestionsAnswered,
+    'coins': coins,
+    'fiftyFiftyCount': fiftyFiftyCount,
+    'timeFreezeCount': timeFreezeCount,
+    'radarCount': radarCount,
     'lastPlayedAt': lastPlayedAt?.toIso8601String(),
   };
 
@@ -136,6 +167,10 @@ class PlayerProfile {
       gamesPlayed: json['gamesPlayed'] as int,
       totalCorrectAnswers: json['totalCorrectAnswers'] as int,
       totalQuestionsAnswered: json['totalQuestionsAnswered'] as int,
+      coins: json['coins'] as int,
+      fiftyFiftyCount: json['fiftyFiftyCount'] as int,
+      timeFreezeCount: json['timeFreezeCount'] as int,
+      radarCount: json['radarCount'] as int,
       lastPlayedAt: json['lastPlayedAt'] == null
           ? null
           : DateTime.parse(json['lastPlayedAt'] as String),

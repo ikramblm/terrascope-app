@@ -74,6 +74,12 @@ class ProfileScreen extends ConsumerWidget {
                             ),
                         children: [
                           StatCard(
+                            icon: Icons.monetization_on_rounded,
+                            label: 'Coins',
+                            value: '${profile.coins}',
+                            color: AppColors.ctaCyan,
+                          ),
+                          StatCard(
                             icon: Icons.local_fire_department_rounded,
                             label: 'Best Streak',
                             value: '${profile.longestStreakDays}',
