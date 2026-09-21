@@ -6,9 +6,24 @@ import '../../../../core/widgets/fade_slide_in.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../../../core/widgets/stat_card.dart';
 import '../../../player/domain/achievement.dart';
+import '../../../player/domain/player_level.dart';
 import '../../../player/domain/player_profile.dart';
 import '../../../player/presentation/widgets/achievement_badge.dart';
+import '../../../player/presentation/widgets/country_map_mosaic.dart';
 import '../../../player/providers/player_providers.dart';
+
+/// One color per [PlayerLevel] tier, escalating toward gold at the top
+/// rank — the frame around the avatar in [_IdentityCard] uses this so a
+/// player's status reads at a glance, not just from the text label.
+Color colorForLevel(PlayerLevel level) => switch (level) {
+  PlayerLevel.beginner => const Color(0xFF9CA3AF),
+  PlayerLevel.explorer => AppColors.skyBlue,
+  PlayerLevel.traveler => AppColors.oceanBlue,
+  PlayerLevel.geographer => AppColors.green,
+  PlayerLevel.cartographer => AppColors.orange,
+  PlayerLevel.worldExpert => AppColors.coral,
+  PlayerLevel.worldMaster => AppColors.yellow,
+};
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -95,6 +110,30 @@ class ProfileScreen extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
+                          'World Coverage',
+                          style: theme.textTheme.headlineMedium,
+                        ),
+                        Text(
+                          '${profile.countriesDiscovered} / 195',
+                          style: theme.textTheme.bodyMedium,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  FadeSlideIn(
+                    index: 3,
+                    child: CountryMapMosaic(
+                      discoveredCca3s: profile.discoveredCountryCodes,
+                    ),
+                  ),
+                  const SizedBox(height: 28),
+                  FadeSlideIn(
+                    index: 4,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
                           'Achievements',
                           style: theme.textTheme.headlineMedium,
                         ),
@@ -107,7 +146,7 @@ class ProfileScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 12),
                   FadeSlideIn(
-                    index: 3,
+                    index: 5,
                     child: GridView(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -156,17 +195,27 @@ class _IdentityCard extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  width: 56,
-                  height: 56,
-                  decoration: const BoxDecoration(
+                  width: 64,
+                  height: 64,
+                  padding: const EdgeInsets.all(3),
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.oceanBlue,
+                    border: Border.all(
+                      color: colorForLevel(profile.level),
+                      width: 3,
+                    ),
                   ),
-                  alignment: Alignment.center,
-                  child: const Icon(
-                    Icons.person_rounded,
-                    color: Colors.white,
-                    size: 30,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.oceanBlue,
+                    ),
+                    alignment: Alignment.center,
+                    child: const Icon(
+                      Icons.person_rounded,
+                      color: Colors.white,
+                      size: 28,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 16),

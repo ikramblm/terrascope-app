@@ -166,7 +166,7 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 
-    expect(find.text('Game Complete'), findsOneWidget);
+    expect(find.text('VICTORY'), findsOneWidget);
     expect(find.text('Play Again'), findsOneWidget);
     expect(find.text('Try Another'), findsOneWidget);
   });
@@ -293,7 +293,7 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 300));
 
-      expect(find.text('Nice Run!'), findsOneWidget);
+      expect(find.text('NICE RUN'), findsOneWidget);
       expect(find.text('Play Again'), findsOneWidget);
     },
   );

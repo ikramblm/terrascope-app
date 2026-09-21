@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../app/theme/app_colors.dart';
+
 /// Score / question-progress / combo readout shown above every
 /// multiple-choice question.
 ///
@@ -89,6 +91,7 @@ class _ComboBadgeState extends State<_ComboBadge>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final visible = widget.combo >= 2;
+    const comboColor = AppColors.yellow;
 
     return AnimatedBuilder(
       animation: _controller,
@@ -107,20 +110,28 @@ class _ComboBadgeState extends State<_ComboBadge>
         opacity: visible ? 1 : 0,
         duration: const Duration(milliseconds: 200),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: theme.colorScheme.tertiary.withValues(alpha: 0.16),
+            color: comboColor,
             borderRadius: BorderRadius.circular(100),
+            boxShadow: [
+              BoxShadow(
+                color: comboColor.withValues(alpha: 0.4),
+                blurRadius: 10,
+                offset: const Offset(0, 3),
+              ),
+            ],
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.bolt, size: 16, color: theme.colorScheme.tertiary),
+              const Icon(Icons.bolt, size: 16, color: Colors.white),
               const SizedBox(width: 2),
               Text(
-                '${widget.combo}x',
+                'Combo ${widget.combo}x',
                 style: theme.textTheme.labelLarge?.copyWith(
-                  color: theme.colorScheme.tertiary,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
             ],

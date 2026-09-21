@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/router/route_paths.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/stat_card.dart';
 import '../../../games/data/quick_play.dart';
+import '../../../player/providers/player_providers.dart';
 import '../../domain/game_result.dart';
+import '../widgets/personal_best_badge.dart';
+import '../widgets/victory_banner.dart';
+import '../widgets/xp_progress_bar.dart';
 
 /// Shared end-of-game summary — every multiple-choice mode ends here.
-class GameResultsView extends StatelessWidget {
+class GameResultsView extends ConsumerWidget {
   const GameResultsView({
     super.key,
     required this.result,
@@ -19,66 +24,69 @@ class GameResultsView extends StatelessWidget {
   final VoidCallback onPlayAgain;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final profile = ref.watch(playerProfileProvider);
     final accuracyPct = (result.accuracy * 100).round();
+    // recordSession already ran (onSessionComplete fires before this view
+    // builds), so bestScore already reflects this result if it set one.
+    final isNewBest =
+        result.totalScore > 0 && result.totalScore == profile.bestScore;
 
-    return Padding(
+    return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
       child: Column(
         children: [
-          Icon(
-            result.accuracy >= 0.7
-                ? Icons.emoji_events
-                : Icons.flag_circle_outlined,
-            size: 56,
-            color: theme.colorScheme.tertiary,
-          ),
+          VictoryBanner(title: 'VICTORY', accuracy: result.accuracy),
           const SizedBox(height: 12),
-          Text('Game Complete', style: theme.textTheme.headlineLarge),
-          const SizedBox(height: 4),
           Text(
             '${result.correctCount} / ${result.totalQuestions} correct · $accuracyPct% accuracy',
             style: theme.textTheme.bodyMedium,
           ),
-          const SizedBox(height: 28),
-          Expanded(
-            child: GridView(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                mainAxisExtent: 128,
-              ),
-              children: [
-                StatCard(
-                  label: 'Score',
-                  value: '${result.totalScore}',
-                  icon: Icons.stars_rounded,
-                  color: AppColors.skyBlue,
-                ),
-                StatCard(
-                  label: 'XP Earned',
-                  value: '+${result.xpEarned}',
-                  icon: Icons.bolt,
-                  color: AppColors.green,
-                ),
-                StatCard(
-                  label: 'Best Combo',
-                  value: '${result.bestCombo}x',
-                  icon: Icons.local_fire_department,
-                  color: AppColors.orange,
-                ),
-                StatCard(
-                  label: 'Time',
-                  value: _formatDuration(result.elapsed),
-                  icon: Icons.timer_outlined,
-                  color: AppColors.purple,
-                ),
-              ],
+          if (isNewBest) ...[
+            const SizedBox(height: 12),
+            const PersonalBestBadge(),
+          ],
+          const SizedBox(height: 20),
+          GridView(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              mainAxisExtent: 128,
             ),
+            children: [
+              StatCard(
+                label: 'Score',
+                value: '${result.totalScore}',
+                icon: Icons.stars_rounded,
+                color: AppColors.skyBlue,
+              ),
+              StatCard(
+                label: 'XP Earned',
+                value: '+${result.xpEarned}',
+                icon: Icons.bolt,
+                color: AppColors.green,
+              ),
+              StatCard(
+                label: 'Best Combo',
+                value: '${result.bestCombo}x',
+                icon: Icons.local_fire_department,
+                color: AppColors.orange,
+              ),
+              StatCard(
+                label: 'Time',
+                value: _formatDuration(result.elapsed),
+                icon: Icons.timer_outlined,
+                color: AppColors.purple,
+              ),
+            ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 16),
+          XpProgressBar(profile: profile),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: onPlayAgain,
             style: ElevatedButton.styleFrom(

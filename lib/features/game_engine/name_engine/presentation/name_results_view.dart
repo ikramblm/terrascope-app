@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/router/route_paths.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/stat_card.dart';
 import '../../../games/data/quick_play.dart';
+import '../../../player/providers/player_providers.dart';
+import '../../presentation/widgets/personal_best_badge.dart';
+import '../../presentation/widgets/victory_banner.dart';
+import '../../presentation/widgets/xp_progress_bar.dart';
 import '../name_engine.dart';
 
 /// Shared end-of-session summary for every "name as many as you can"
 /// mode — same visual language as [GameResultsView] (the multiple-choice
 /// results screen), just with stats that make sense for this mechanic
-/// (no accuracy/combo — there's no wrong answer to be inaccurate about,
-/// just countries found or not).
-class NameResultsView extends StatelessWidget {
+/// (no wrong answers, just countries found or not — "accuracy" here is
+/// really completeness: how much of the pool got found).
+class NameResultsView extends ConsumerWidget {
   const NameResultsView({
     super.key,
     required this.engine,
@@ -23,67 +28,71 @@ class NameResultsView extends StatelessWidget {
   final VoidCallback onPlayAgain;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final profile = ref.watch(playerProfileProvider);
+    final result = engine.buildResult();
     final completedAll = engine.foundCount == engine.totalCount;
+    final isNewBest =
+        result.totalScore > 0 && result.totalScore == profile.bestScore;
 
-    return Padding(
+    return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
       child: Column(
         children: [
-          Icon(
-            completedAll ? Icons.emoji_events : Icons.flag_circle_outlined,
-            size: 56,
-            color: theme.colorScheme.tertiary,
+          VictoryBanner(
+            title: completedAll ? 'ALL FOUND' : 'NICE RUN',
+            accuracy: result.accuracy,
           ),
           const SizedBox(height: 12),
-          Text(
-            completedAll ? 'All Found!' : 'Nice Run!',
-            style: theme.textTheme.headlineLarge,
-          ),
-          const SizedBox(height: 4),
           Text(
             '${engine.foundCount} / ${engine.totalCount} countries found',
             style: theme.textTheme.bodyMedium,
           ),
-          const SizedBox(height: 28),
-          Expanded(
-            child: GridView(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                mainAxisExtent: 128,
-              ),
-              children: [
-                StatCard(
-                  label: 'Found',
-                  value: '${engine.foundCount}',
-                  icon: Icons.public_rounded,
-                  color: AppColors.oceanBlue,
-                ),
-                StatCard(
-                  label: 'XP Earned',
-                  value: '+${engine.buildResult().xpEarned}',
-                  icon: Icons.bolt,
-                  color: AppColors.green,
-                ),
-                StatCard(
-                  label: 'Score',
-                  value: '${engine.buildResult().totalScore}',
-                  icon: Icons.stars_rounded,
-                  color: AppColors.yellow,
-                ),
-                StatCard(
-                  label: 'Time',
-                  value: _formatDuration(engine.elapsed),
-                  icon: Icons.timer_outlined,
-                  color: AppColors.purple,
-                ),
-              ],
+          if (isNewBest) ...[
+            const SizedBox(height: 12),
+            const PersonalBestBadge(),
+          ],
+          const SizedBox(height: 20),
+          GridView(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              mainAxisExtent: 128,
             ),
+            children: [
+              StatCard(
+                label: 'Found',
+                value: '${engine.foundCount}',
+                icon: Icons.public_rounded,
+                color: AppColors.oceanBlue,
+              ),
+              StatCard(
+                label: 'XP Earned',
+                value: '+${result.xpEarned}',
+                icon: Icons.bolt,
+                color: AppColors.green,
+              ),
+              StatCard(
+                label: 'Score',
+                value: '${result.totalScore}',
+                icon: Icons.stars_rounded,
+                color: AppColors.yellow,
+              ),
+              StatCard(
+                label: 'Time',
+                value: _formatDuration(engine.elapsed),
+                icon: Icons.timer_outlined,
+                color: AppColors.purple,
+              ),
+            ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 16),
+          XpProgressBar(profile: profile),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: onPlayAgain,
             style: ElevatedButton.styleFrom(

@@ -7,8 +7,10 @@ import '../../domain/game_mode.dart';
 /// stats, no decoration competing with the color and the icon for
 /// attention.
 ///
-/// Unavailable modes render visibly muted with a "Soon" badge — never a
-/// tile that looks tappable but silently does nothing.
+/// Unavailable modes render visibly muted with a padlock icon and a
+/// "Soon" badge — never a tile that looks tappable but silently does
+/// nothing, and never a fabricated unlock condition either (these modes
+/// simply aren't built yet, not gated behind a player level).
 class GameModeCard extends StatelessWidget {
   const GameModeCard({
     super.key,
@@ -68,7 +70,18 @@ class GameModeCard extends StatelessWidget {
                       color: theme.colorScheme.surface,
                       borderRadius: BorderRadius.circular(100),
                     ),
-                    child: Text('Soon', style: theme.textTheme.labelSmall),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.lock_rounded,
+                          size: 12,
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                        const SizedBox(width: 3),
+                        Text('Soon', style: theme.textTheme.labelSmall),
+                      ],
+                    ),
                   ),
                 ),
               Column(
@@ -85,7 +98,9 @@ class GameModeCard extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     alignment: Alignment.center,
-                    child: available && mode.logoBuilder != null
+                    child: !available
+                        ? Icon(Icons.lock_rounded, color: foreground, size: 20)
+                        : mode.logoBuilder != null
                         ? mode.logoBuilder!(context)
                         : Icon(mode.icon, color: foreground, size: 22),
                   ),

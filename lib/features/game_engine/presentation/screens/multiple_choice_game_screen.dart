@@ -9,6 +9,7 @@ import '../../domain/game_result.dart';
 import '../../engine/multiple_choice_engine.dart';
 import '../../sound/sound_service.dart';
 import '../widgets/answer_option_button.dart';
+import '../widgets/answer_reveal_inset.dart';
 import '../widgets/score_header.dart';
 import '../widgets/timer_bar.dart';
 import 'game_results_view.dart';
@@ -173,6 +174,10 @@ class _QuestionView extends StatelessWidget {
           Expanded(
             child: Center(child: promptBuilder(context, question.promptText)),
           ),
+          if (engine.answered) ...[
+            const SizedBox(height: 8),
+            Center(child: AnswerRevealInset(cca3: question.correctAnswer.cca3)),
+          ],
           const SizedBox(height: 12),
           for (final (i, option) in question.options.indexed) ...[
             AnswerOptionButton(
