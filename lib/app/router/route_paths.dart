@@ -6,6 +6,7 @@ abstract class RoutePaths {
   static const String games = '/games';
   static const String lists = '/lists';
   static const String profile = '/profile';
+  static const String dailyChallenge = '/daily-challenge';
 
   static const String guessFlag = '/games/guess-flag';
   static const String guessEmoji = '/games/guess-emoji';

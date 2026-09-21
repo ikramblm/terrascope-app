@@ -70,6 +70,13 @@ void main() {
       // in Explore now.
       expect(find.text('Guess by Flag'), findsOneWidget);
       expect(find.text('Guess by Emoji'), findsOneWidget);
+      // Outline is off the fold in the test viewport now that the Daily
+      // Challenge card sits above the featured buttons — scroll to it.
+      await tester.dragUntilVisible(
+        find.text('Guess by Outline'),
+        find.byType(ListView),
+        const Offset(0, -400),
+      );
       expect(find.text('Guess by Outline'), findsOneWidget);
       expect(find.text('Guess by Capital'), findsNothing);
       // Scroll to the last button — off the fold in the test viewport.

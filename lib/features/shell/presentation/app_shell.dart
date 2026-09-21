@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../games/data/quick_play.dart';
+import '../../player/presentation/widgets/streak_badge.dart';
 
 /// Bottom-navigation shell shared by the four tab destinations, plus a
 /// floating "Play" button docked in a notch between them — the single
@@ -19,12 +20,26 @@ class AppShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Not wrapped in AppBackground here: each tab owns its own Scaffold
-      // (Home, Explore, Lists, Profile), and a nested Scaffold paints an
-      // opaque `scaffoldBackgroundColor` that would hide anything behind
-      // it — the globe-grid texture is applied inside each of those
-      // instead, where it's actually visible.
-      body: navigationShell,
+      // The streak badge sits in a Stack layer *above* navigationShell,
+      // not behind it — unlike AppBackground (a background texture,
+      // which a nested Scaffold's opaque fill would hide), an overlay
+      // drawn on top is unaffected by whatever each tab paints beneath
+      // it, so this one placement covers all four tabs with no
+      // per-screen edits.
+      body: Stack(
+        children: [
+          navigationShell,
+          const SafeArea(
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(0, 12, 16, 0),
+                child: StreakBadge(),
+              ),
+            ),
+          ),
+        ],
+      ),
       floatingActionButton: _PlayFab(onTap: () => launchQuickPlay(context)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: _BottomBar(

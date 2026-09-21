@@ -7,6 +7,7 @@ import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/fade_slide_in.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../../games/data/game_catalog.dart';
+import '../widgets/daily_challenge_card.dart';
 import '../widgets/game_mode_button.dart';
 import '../widgets/world_map_banner.dart';
 
@@ -45,10 +46,12 @@ class HomeScreen extends StatelessWidget {
                   index: 0,
                   child: const WorldMapBanner(title: 'TerraScope'),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
+                const FadeSlideIn(index: 1, child: DailyChallengeCard()),
+                const SizedBox(height: 16),
                 for (final (i, mode) in featuredModes.indexed) ...[
                   FadeSlideIn(
-                    index: i + 1,
+                    index: i + 2,
                     child: GameModeButton(
                       label: mode.title,
                       icon: mode.icon,
@@ -60,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 14),
                 ],
                 FadeSlideIn(
-                  index: featuredModes.length + 1,
+                  index: featuredModes.length + 2,
                   child: GameModeButton(
                     label: 'Explore All Games',
                     icon: Icons.explore_rounded,

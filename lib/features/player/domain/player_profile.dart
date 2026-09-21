@@ -23,7 +23,9 @@ class PlayerProfile {
     required this.fiftyFiftyCount,
     required this.timeFreezeCount,
     required this.radarCount,
+    required this.streakFreezesAvailable,
     this.lastPlayedAt,
+    this.lastDailyChallengeDate,
   });
 
   factory PlayerProfile.newPlayer() => const PlayerProfile(
@@ -41,6 +43,7 @@ class PlayerProfile {
     fiftyFiftyCount: 2,
     timeFreezeCount: 2,
     radarCount: 2,
+    streakFreezesAvailable: 1,
   );
 
   final int totalXp;
@@ -67,11 +70,21 @@ class PlayerProfile {
   final int timeFreezeCount;
   final int radarCount;
 
+  /// How many missed days the player is currently protected against —
+  /// consumed automatically the moment a day is about to lapse, never
+  /// silently: see [PlayerProfileNotifier.recordSession].
+  final int streakFreezesAvailable;
+
   /// cca3 codes of every country this player has answered correctly at
   /// least once, across all game modes.
   final Set<String> discoveredCountryCodes;
 
   final DateTime? lastPlayedAt;
+
+  /// Calendar date (time-of-day ignored) of the last completed Daily
+  /// Challenge — null means never. Gates the challenge to one honest
+  /// attempt per day rather than a replayable session.
+  final DateTime? lastDailyChallengeDate;
 
   int get countriesDiscovered => discoveredCountryCodes.length;
 
@@ -93,6 +106,15 @@ class PlayerProfile {
     return ((totalXp - level.minXp) / span).clamp(0.0, 1.0);
   }
 
+  /// True once today's Daily Challenge has already been played.
+  bool hasCompletedDailyChallengeOn(DateTime date) {
+    final last = lastDailyChallengeDate;
+    if (last == null) return false;
+    return last.year == date.year &&
+        last.month == date.month &&
+        last.day == date.day;
+  }
+
   PlayerProfile copyWith({
     int? totalXp,
     int? currentStreakDays,
@@ -106,7 +128,9 @@ class PlayerProfile {
     int? fiftyFiftyCount,
     int? timeFreezeCount,
     int? radarCount,
+    int? streakFreezesAvailable,
     DateTime? lastPlayedAt,
+    DateTime? lastDailyChallengeDate,
   }) {
     return PlayerProfile(
       totalXp: totalXp ?? this.totalXp,
@@ -123,14 +147,18 @@ class PlayerProfile {
       fiftyFiftyCount: fiftyFiftyCount ?? this.fiftyFiftyCount,
       timeFreezeCount: timeFreezeCount ?? this.timeFreezeCount,
       radarCount: radarCount ?? this.radarCount,
+      streakFreezesAvailable:
+          streakFreezesAvailable ?? this.streakFreezesAvailable,
       lastPlayedAt: lastPlayedAt ?? this.lastPlayedAt,
+      lastDailyChallengeDate:
+          lastDailyChallengeDate ?? this.lastDailyChallengeDate,
     );
   }
 
   /// Schema version this shape serializes as — bump alongside a
   /// breaking field change so [PlayerProfileRepository] can tell an old
   /// save apart from a corrupt one instead of guessing.
-  static const int schemaVersion = 2;
+  static const int schemaVersion = 3;
 
   Map<String, dynamic> toJson() => {
     'schemaVersion': schemaVersion,
@@ -146,7 +174,9 @@ class PlayerProfile {
     'fiftyFiftyCount': fiftyFiftyCount,
     'timeFreezeCount': timeFreezeCount,
     'radarCount': radarCount,
+    'streakFreezesAvailable': streakFreezesAvailable,
     'lastPlayedAt': lastPlayedAt?.toIso8601String(),
+    'lastDailyChallengeDate': lastDailyChallengeDate?.toIso8601String(),
   };
 
   /// Throws on anything unreadable — [PlayerProfileRepository] treats a
@@ -171,9 +201,13 @@ class PlayerProfile {
       fiftyFiftyCount: json['fiftyFiftyCount'] as int,
       timeFreezeCount: json['timeFreezeCount'] as int,
       radarCount: json['radarCount'] as int,
+      streakFreezesAvailable: json['streakFreezesAvailable'] as int,
       lastPlayedAt: json['lastPlayedAt'] == null
           ? null
           : DateTime.parse(json['lastPlayedAt'] as String),
+      lastDailyChallengeDate: json['lastDailyChallengeDate'] == null
+          ? null
+          : DateTime.parse(json['lastDailyChallengeDate'] as String),
     );
   }
 }

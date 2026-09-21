@@ -19,6 +19,9 @@ final playerProfileRepositoryProvider = Provider<PlayerProfileRepository>((
   );
 });
 
+/// Coins to buy one more Streak Freeze once the free stock is at zero.
+const streakFreezeCoinCost = 30;
+
 /// Holds the current player's progression state, backed by on-device
 /// storage via [PlayerProfileRepository] — every mutation here is
 /// persisted immediately after, so progress survives an app restart.
@@ -44,11 +47,20 @@ class PlayerProfileNotifier extends Notifier<PlayerProfile> {
     _persist();
   }
 
-  /// Applies a completed game session's outcome: XP, coins, and
+  /// Set by [recordSession] for the caller to read right after —
+  /// true if this session's day-boundary streak update consumed a
+  /// Streak Freeze to bridge a missed day rather than resetting.
+  bool lastSessionUsedStreakFreeze = false;
+
+  /// Applies a completed game session's outcome: XP, coins, streak, and
   /// newly-discovered countries. Called once per session by every game
   /// mode via the shared game engine — the single place player
   /// progression is updated from gameplay.
   void recordSession(GameResult result) {
+    final now = DateTime.now();
+    final streak = _nextStreak(now);
+    lastSessionUsedStreakFreeze = streak.freezeUsed;
+
     // Coins track XP at a flat 1-for-5 rate — no separate balancing
     // pass, just enough that a solid round buys roughly one power-up.
     final coinsEarned = (result.xpEarned / 5).round();
@@ -66,9 +78,108 @@ class PlayerProfileNotifier extends Notifier<PlayerProfile> {
       totalCorrectAnswers: state.totalCorrectAnswers + result.correctCount,
       totalQuestionsAnswered:
           state.totalQuestionsAnswered + result.totalQuestions,
-      lastPlayedAt: DateTime.now(),
+      currentStreakDays: streak.currentStreakDays,
+      longestStreakDays: streak.longestStreakDays,
+      streakFreezesAvailable: streak.streakFreezesAvailable,
+      lastPlayedAt: now,
     );
     _persist();
+  }
+
+  /// Marks today's Daily Challenge as played — separate from
+  /// [recordSession] (which still runs first, for XP/coins/stats) so
+  /// the one-attempt-per-day gate lives in exactly one place.
+  void recordDailyChallengeCompletion(DateTime date) {
+    state = state.copyWith(lastDailyChallengeDate: date);
+    _persist();
+  }
+
+  /// Buys one more Streak Freeze for [streakFreezeCoinCost] coins.
+  /// Returns false (no change) if the player can't afford it.
+  bool buyStreakFreeze() {
+    if (state.coins < streakFreezeCoinCost) return false;
+    state = state.copyWith(
+      coins: state.coins - streakFreezeCoinCost,
+      streakFreezesAvailable: state.streakFreezesAvailable + 1,
+    );
+    _persist();
+    return true;
+  }
+
+  /// The day-boundary streak rule: same calendar day as last played ->
+  /// unchanged; exactly one day later -> streak continues; more than
+  /// one day later -> broken, UNLESS a Streak Freeze is available and
+  /// exactly one day was missed, in which case one freeze is spent to
+  /// bridge the gap instead. Never silently applies more than one
+  /// freeze for a longer gap — that's a real broken streak, not a
+  /// one-day slip.
+  ({
+    int currentStreakDays,
+    int longestStreakDays,
+    int streakFreezesAvailable,
+    bool freezeUsed,
+  })
+  _nextStreak(DateTime now) {
+    final last = state.lastPlayedAt;
+    if (last == null) {
+      return (
+        currentStreakDays: 1,
+        longestStreakDays: state.longestStreakDays < 1
+            ? 1
+            : state.longestStreakDays,
+        streakFreezesAvailable: state.streakFreezesAvailable,
+        freezeUsed: false,
+      );
+    }
+
+    final lastDate = DateTime(last.year, last.month, last.day);
+    final today = DateTime(now.year, now.month, now.day);
+    final dayGap = today.difference(lastDate).inDays;
+
+    if (dayGap <= 0) {
+      // Same day (or a clock oddity putting "now" before the last
+      // recorded date) — no change to the streak either way.
+      final current = state.currentStreakDays < 1 ? 1 : state.currentStreakDays;
+      return (
+        currentStreakDays: current,
+        longestStreakDays: current > state.longestStreakDays
+            ? current
+            : state.longestStreakDays,
+        streakFreezesAvailable: state.streakFreezesAvailable,
+        freezeUsed: false,
+      );
+    }
+
+    if (dayGap == 1) {
+      final next = state.currentStreakDays + 1;
+      return (
+        currentStreakDays: next,
+        longestStreakDays: next > state.longestStreakDays
+            ? next
+            : state.longestStreakDays,
+        streakFreezesAvailable: state.streakFreezesAvailable,
+        freezeUsed: false,
+      );
+    }
+
+    if (dayGap == 2 && state.streakFreezesAvailable > 0) {
+      final next = state.currentStreakDays + 1;
+      return (
+        currentStreakDays: next,
+        longestStreakDays: next > state.longestStreakDays
+            ? next
+            : state.longestStreakDays,
+        streakFreezesAvailable: state.streakFreezesAvailable - 1,
+        freezeUsed: true,
+      );
+    }
+
+    return (
+      currentStreakDays: 1,
+      longestStreakDays: state.longestStreakDays,
+      streakFreezesAvailable: state.streakFreezesAvailable,
+      freezeUsed: false,
+    );
   }
 
   int _countFor(PowerUpType type) => switch (type) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/games/daily_challenge/presentation/screens/daily_challenge_screen.dart';
 import '../../features/games/guess_borders/presentation/screens/guess_borders_screen.dart';
 import '../../features/games/guess_capital/presentation/screens/guess_capital_screen.dart';
 import '../../features/games/guess_emoji/presentation/screens/guess_emoji_screen.dart';
@@ -80,6 +81,11 @@ GoRouter buildAppRouter() {
       ),
       // Full-screen gameplay routes: pushed over the bottom-nav shell (not a
       // shell branch) since a game session isn't a tab destination.
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.dailyChallenge,
+        builder: (context, state) => const DailyChallengeScreen(),
+      ),
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.guessFlag,
