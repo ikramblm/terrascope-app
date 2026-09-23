@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../core/widgets/app_background.dart';
+import '../../../../core/widgets/color_back_button.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../../../data/countries/models/country.dart';
 import '../../domain/game_result.dart';
@@ -137,7 +138,10 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: Text(widget.title),
+        leading: const ColorBackButton(),
+      ),
       body: AppBackground(
         child: SafeArea(
           child: MaxWidthBox(

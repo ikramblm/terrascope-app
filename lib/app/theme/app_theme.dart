@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 import 'app_text_theme.dart';
 
-/// TerraScope's Material 3 theme definitions — dark is now the primary,
-/// fully-designed experience (a premium mobile game played at night, not
-/// a dashboard in daylight); light is kept defined for a possible future
-/// toggle but isn't reachable today — see [TerraScopeApp], which forces
-/// `ThemeMode.dark`.
+/// TerraScope's Material 3 theme definitions — light is the primary,
+/// fully-designed experience (a bright, colorful mobile game, not a
+/// dashboard, and not stark white either — see [AppColors.lightBackground]);
+/// dark is kept defined for a possible future toggle but isn't reachable
+/// today — see [TerraScopeApp], which forces `ThemeMode.light`.
 abstract class AppTheme {
   AppTheme._();
 
@@ -86,14 +86,14 @@ abstract class AppTheme {
         centerTitle: false,
         titleTextStyle: textTheme.headlineMedium,
       ),
-      // The "glass card" look: a translucent fill over the textured
-      // background (see AppBackground) plus a lit neon hairline instead
-      // of a shadow — a drop shadow barely reads against near-black, a
-      // glowing border does.
+      // The "glass card" look in dark mode: a translucent fill plus a lit
+      // neon hairline instead of a shadow. In light mode, a real chunky
+      // drop shadow instead — the "3D" look: every card sits visibly
+      // raised off the background rather than flat against it.
       cardTheme: CardThemeData(
         color: isDark ? surfaceRaised.withValues(alpha: 0.65) : surfaceRaised,
-        elevation: isDark ? 0 : 4,
-        shadowColor: shadowColor.withValues(alpha: isDark ? 0 : 0.10),
+        elevation: isDark ? 0 : 10,
+        shadowColor: shadowColor.withValues(alpha: isDark ? 0 : 0.22),
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
@@ -106,7 +106,8 @@ abstract class AppTheme {
         indicatorColor: AppColors.oceanBlue.withValues(
           alpha: isDark ? 0.35 : 0.12,
         ),
-        elevation: 0,
+        elevation: isDark ? 0 : 12,
+        shadowColor: shadowColor.withValues(alpha: isDark ? 0 : 0.18),
         height: 64,
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
@@ -129,7 +130,13 @@ abstract class AppTheme {
           disabledBackgroundColor: border,
           disabledForegroundColor: textSecondary,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-          elevation: 0,
+          // A chunky, visibly-raised button in light mode — part of the
+          // app-wide 3D pass; dark mode keeps the flat glass look since a
+          // drop shadow doesn't read against near-black.
+          elevation: isDark ? 0 : 8,
+          shadowColor: isDark
+              ? Colors.transparent
+              : AppColors.oceanBlueDeep.withValues(alpha: 0.45),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),

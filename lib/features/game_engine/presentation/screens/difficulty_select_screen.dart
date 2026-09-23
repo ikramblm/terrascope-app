@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/app_background.dart';
+import '../../../../core/widgets/color_back_button.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../../../core/widgets/option_tile.dart';
 import '../../domain/game_difficulty.dart';
@@ -38,7 +39,7 @@ class DifficultySelectScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: Text(title), leading: const ColorBackButton()),
       body: AppBackground(
         child: MaxWidthBox(
           child: Padding(

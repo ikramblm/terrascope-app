@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/app_background.dart';
+import '../../../../core/widgets/color_back_button.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../domain/game_result.dart';
 import '../../sound/sound_service.dart';
@@ -96,7 +97,10 @@ class _AlphabetGameScreenState extends State<AlphabetGameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Name the Alphabet')),
+      appBar: AppBar(
+        title: const Text('Name the Alphabet'),
+        leading: const ColorBackButton(),
+      ),
       body: AppBackground(
         child: SafeArea(
           child: MaxWidthBox(

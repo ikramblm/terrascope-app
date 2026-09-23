@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game_engine/domain/game_result.dart';
+import '../../game_engine/sound/sound_service.dart';
 import '../../notifications/services/notification_service.dart';
 import '../data/player_profile_repository.dart';
 import '../domain/chest_reward.dart';
@@ -35,7 +36,17 @@ class PlayerProfileNotifier extends Notifier<PlayerProfile> {
     _repository = ref.watch(playerProfileRepositoryProvider);
     final profile = _repository.load() ?? PlayerProfile.newPlayer();
     _syncStreakReminder(profile);
+    SoundService.instance.enabled = profile.soundEnabled;
     return profile;
+  }
+
+  /// The only place [PlayerProfile.soundEnabled] ever changes — flips
+  /// the persisted preference and [SoundService]'s live mute flag
+  /// together, so they can never drift out of sync.
+  void setSoundEnabled(bool value) {
+    state = state.copyWith(soundEnabled: value);
+    SoundService.instance.enabled = value;
+    _persist();
   }
 
   /// Schedules (or clears) today's streak-expiry reminder to match

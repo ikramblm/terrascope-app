@@ -13,6 +13,7 @@ import '../../../player/domain/prestige_title.dart';
 import '../../../player/presentation/widgets/achievement_badge.dart';
 import '../../../player/presentation/widgets/duel_entry_card.dart';
 import '../../../player/presentation/widgets/passport_map.dart';
+import '../../../player/presentation/widgets/sound_toggle_card.dart';
 import '../../../player/presentation/widgets/streak_freeze_card.dart';
 import '../../../player/providers/player_providers.dart';
 
@@ -66,9 +67,11 @@ class ProfileScreen extends ConsumerWidget {
                     const FadeSlideIn(index: 1, child: StreakFreezeCard()),
                     const SizedBox(height: 12),
                     const FadeSlideIn(index: 2, child: DuelEntryCard()),
+                    const SizedBox(height: 12),
+                    const FadeSlideIn(index: 3, child: SoundToggleCard()),
                     const SizedBox(height: 20),
                     FadeSlideIn(
-                      index: 3,
+                      index: 4,
                       child: GridView(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -129,7 +132,7 @@ class ProfileScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: 28),
                     FadeSlideIn(
-                      index: 4,
+                      index: 5,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -146,14 +149,14 @@ class ProfileScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: 12),
                     FadeSlideIn(
-                      index: 5,
+                      index: 6,
                       child: PassportMap(
                         discoveredCca3s: profile.discoveredCountryCodes,
                       ),
                     ),
                     const SizedBox(height: 28),
                     FadeSlideIn(
-                      index: 6,
+                      index: 7,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -170,7 +173,7 @@ class ProfileScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: 12),
                     FadeSlideIn(
-                      index: 7,
+                      index: 8,
                       child: GridView(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),

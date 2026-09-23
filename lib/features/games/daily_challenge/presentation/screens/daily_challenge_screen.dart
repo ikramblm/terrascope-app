@@ -8,6 +8,7 @@ import '../../../../../app/router/route_paths.dart';
 import '../../../../../app/theme/app_colors.dart';
 import '../../../../../core/widgets/app_background.dart';
 import '../../../../../core/widgets/async_state_views.dart';
+import '../../../../../core/widgets/color_back_button.dart';
 import '../../../../../core/widgets/max_width_box.dart';
 import '../../../../../data/countries/providers/country_providers.dart';
 import '../../../../game_engine/domain/game_difficulty.dart';
@@ -35,7 +36,10 @@ class DailyChallengeScreen extends ConsumerWidget {
     final alreadyDone = profile.hasCompletedDailyChallengeOn(today);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Daily Challenge')),
+      appBar: AppBar(
+        title: const Text('Daily Challenge'),
+        leading: const ColorBackButton(),
+      ),
       body: AppBackground(
         child: MaxWidthBox(
           child: countriesAsync.when(

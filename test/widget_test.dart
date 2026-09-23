@@ -12,6 +12,7 @@ import 'package:terrascope_app/features/games/guess_outline/data/country_outline
 import 'package:terrascope_app/features/games/guess_outline/providers/country_outline_providers.dart';
 import 'package:terrascope_app/features/player/data/player_profile_repository.dart';
 import 'package:terrascope_app/features/player/providers/player_providers.dart';
+import 'package:terrascope_app/features/splash/presentation/screens/splash_screen.dart';
 
 import 'support/sync_test_asset_bundle.dart';
 
@@ -38,6 +39,10 @@ Widget buildTestApp() {
       playerProfileRepositoryProvider.overrideWithValue(
         const PlayerProfileRepository(null),
       ),
+      // The real 2-second splash would make every test slow and leaves
+      // pumpAndSettle waiting on a bare, non-animating Future.delayed —
+      // zero here, a real duration only in the actual app.
+      splashDurationProvider.overrideWithValue(Duration.zero),
     ],
     child: const TerraScopeApp(),
   );

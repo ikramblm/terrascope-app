@@ -3,74 +3,76 @@ import 'package:google_fonts/google_fonts.dart';
 
 /// Builds TerraScope's Material 3 [TextTheme].
 ///
-/// Headings use Sora (geometric, confident — reads as a game, not a
-/// classroom app); body copy uses Inter for readability at small sizes.
+/// Fredoka everywhere — a rounded, chunky, unmistakably "game" font,
+/// used for headings and body copy alike rather than pairing it with a
+/// neutral sans, so the whole app reads as one consistent playful
+/// identity rather than a game title over a spreadsheet's body text.
 TextTheme buildAppTextTheme(Color primaryTextColor, Color secondaryTextColor) {
   final base = TextTheme(
-    displayLarge: GoogleFonts.sora(
+    displayLarge: GoogleFonts.fredoka(
       fontSize: 40,
-      fontWeight: FontWeight.w800,
+      fontWeight: FontWeight.w700,
       letterSpacing: -0.5,
       color: primaryTextColor,
     ),
-    displayMedium: GoogleFonts.sora(
+    displayMedium: GoogleFonts.fredoka(
       fontSize: 32,
-      fontWeight: FontWeight.w800,
+      fontWeight: FontWeight.w700,
       letterSpacing: -0.5,
       color: primaryTextColor,
     ),
-    headlineLarge: GoogleFonts.sora(
+    headlineLarge: GoogleFonts.fredoka(
       fontSize: 28,
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w600,
       color: primaryTextColor,
     ),
-    headlineMedium: GoogleFonts.sora(
+    headlineMedium: GoogleFonts.fredoka(
       fontSize: 24,
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w600,
       color: primaryTextColor,
     ),
-    titleLarge: GoogleFonts.sora(
+    titleLarge: GoogleFonts.fredoka(
       fontSize: 20,
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w600,
       color: primaryTextColor,
     ),
-    titleMedium: GoogleFonts.sora(
+    titleMedium: GoogleFonts.fredoka(
       fontSize: 16,
       fontWeight: FontWeight.w600,
       color: primaryTextColor,
     ),
-    titleSmall: GoogleFonts.sora(
+    titleSmall: GoogleFonts.fredoka(
       fontSize: 14,
       fontWeight: FontWeight.w600,
       color: primaryTextColor,
     ),
-    bodyLarge: GoogleFonts.inter(
+    bodyLarge: GoogleFonts.fredoka(
       fontSize: 16,
       fontWeight: FontWeight.w400,
       color: primaryTextColor,
     ),
-    bodyMedium: GoogleFonts.inter(
+    bodyMedium: GoogleFonts.fredoka(
       fontSize: 14,
       fontWeight: FontWeight.w400,
       color: secondaryTextColor,
     ),
-    bodySmall: GoogleFonts.inter(
+    bodySmall: GoogleFonts.fredoka(
       fontSize: 12,
       fontWeight: FontWeight.w400,
       color: secondaryTextColor,
     ),
-    labelLarge: GoogleFonts.inter(
+    labelLarge: GoogleFonts.fredoka(
       fontSize: 14,
       fontWeight: FontWeight.w600,
       color: primaryTextColor,
     ),
-    labelMedium: GoogleFonts.inter(
+    labelMedium: GoogleFonts.fredoka(
       fontSize: 12,
       fontWeight: FontWeight.w600,
       color: secondaryTextColor,
       letterSpacing: 0.4,
     ),
-    labelSmall: GoogleFonts.inter(
+    labelSmall: GoogleFonts.fredoka(
       fontSize: 11,
       fontWeight: FontWeight.w600,
       color: secondaryTextColor,
@@ -83,9 +85,9 @@ TextTheme buildAppTextTheme(Color primaryTextColor, Color secondaryTextColor) {
 /// Convenience accessors kept off [TextTheme] itself (e.g. numeric/score
 /// displays that want tabular figures) — used by widgets like score
 /// counters and the country-found tally.
-TextStyle scoreDisplayStyle(Color color) => GoogleFonts.sora(
+TextStyle scoreDisplayStyle(Color color) => GoogleFonts.fredoka(
   fontSize: 36,
-  fontWeight: FontWeight.w800,
+  fontWeight: FontWeight.w700,
   color: color,
   fontFeatures: const [FontFeature.tabularFigures()],
 );

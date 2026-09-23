@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/async_state_views.dart';
+import '../../../../core/widgets/color_back_button.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../../../data/countries/models/country.dart';
 import '../../../../data/countries/providers/country_providers.dart';
@@ -160,7 +161,10 @@ class _DuelScreenState extends ConsumerState<DuelScreen> {
     final countriesAsync = ref.watch(allCountriesProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Duel a Friend')),
+      appBar: AppBar(
+        title: const Text('Duel a Friend'),
+        leading: const ColorBackButton(),
+      ),
       body: AppBackground(
         child: MaxWidthBox(
           child: countriesAsync.when(

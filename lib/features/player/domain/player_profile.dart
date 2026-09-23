@@ -27,6 +27,7 @@ class PlayerProfile {
     required this.radarCount,
     required this.streakFreezesAvailable,
     required this.unlockedCosmeticTitles,
+    required this.soundEnabled,
     this.lastPlayedAt,
     this.lastDailyChallengeDate,
   });
@@ -48,6 +49,7 @@ class PlayerProfile {
     radarCount: 2,
     streakFreezesAvailable: 1,
     unlockedCosmeticTitles: {},
+    soundEnabled: true,
   );
 
   final int totalXp;
@@ -83,6 +85,13 @@ class PlayerProfile {
   /// [ChestReward], purely cosmetic and separate from [numericLevel]'s
   /// title ladder, which needs no unlocking.
   final Set<String> unlockedCosmeticTitles;
+
+  /// Master mute for every sound effect — the global tap click and every
+  /// gameplay sound alike. Kept on the profile (rather than in-memory
+  /// only) so muting survives an app restart; see
+  /// [PlayerProfileNotifier.setSoundEnabled], the only place this ever
+  /// changes.
+  final bool soundEnabled;
 
   /// cca3 codes of every country this player has answered correctly at
   /// least once, across all game modes.
@@ -155,6 +164,7 @@ class PlayerProfile {
     int? radarCount,
     int? streakFreezesAvailable,
     Set<String>? unlockedCosmeticTitles,
+    bool? soundEnabled,
     DateTime? lastPlayedAt,
     DateTime? lastDailyChallengeDate,
   }) {
@@ -177,6 +187,7 @@ class PlayerProfile {
           streakFreezesAvailable ?? this.streakFreezesAvailable,
       unlockedCosmeticTitles:
           unlockedCosmeticTitles ?? this.unlockedCosmeticTitles,
+      soundEnabled: soundEnabled ?? this.soundEnabled,
       lastPlayedAt: lastPlayedAt ?? this.lastPlayedAt,
       lastDailyChallengeDate:
           lastDailyChallengeDate ?? this.lastDailyChallengeDate,
@@ -186,7 +197,7 @@ class PlayerProfile {
   /// Schema version this shape serializes as — bump alongside a
   /// breaking field change so [PlayerProfileRepository] can tell an old
   /// save apart from a corrupt one instead of guessing.
-  static const int schemaVersion = 4;
+  static const int schemaVersion = 5;
 
   Map<String, dynamic> toJson() => {
     'schemaVersion': schemaVersion,
@@ -204,6 +215,7 @@ class PlayerProfile {
     'radarCount': radarCount,
     'streakFreezesAvailable': streakFreezesAvailable,
     'unlockedCosmeticTitles': unlockedCosmeticTitles.toList(),
+    'soundEnabled': soundEnabled,
     'lastPlayedAt': lastPlayedAt?.toIso8601String(),
     'lastDailyChallengeDate': lastDailyChallengeDate?.toIso8601String(),
   };
@@ -234,6 +246,7 @@ class PlayerProfile {
       unlockedCosmeticTitles: (json['unlockedCosmeticTitles'] as List<dynamic>)
           .map((e) => e as String)
           .toSet(),
+      soundEnabled: json['soundEnabled'] as bool,
       lastPlayedAt: json['lastPlayedAt'] == null
           ? null
           : DateTime.parse(json['lastPlayedAt'] as String),

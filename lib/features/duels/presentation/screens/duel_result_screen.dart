@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../app/router/route_paths.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/app_background.dart';
+import '../../../../core/widgets/color_back_button.dart';
 import '../../../../core/widgets/max_width_box.dart';
 
 /// Shown right after playing a duel — either "you just created one" (no
@@ -49,7 +50,10 @@ class DuelResultScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Duel Result')),
+      appBar: AppBar(
+        title: const Text('Duel Result'),
+        leading: const ColorBackButton(),
+      ),
       body: AppBackground(
         child: MaxWidthBox(
           child: SingleChildScrollView(

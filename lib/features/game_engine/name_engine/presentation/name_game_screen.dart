@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/app_background.dart';
+import '../../../../core/widgets/color_back_button.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../../games/presentation/widgets/game_category_style.dart';
 import '../../../games/domain/game_category.dart';
@@ -103,7 +104,10 @@ class _NameGameScreenState extends State<NameGameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: Text(widget.title),
+        leading: const ColorBackButton(),
+      ),
       body: AppBackground(
         child: SafeArea(
           child: MaxWidthBox(

@@ -17,6 +17,13 @@ class SoundService {
   final AudioPlayer _sfxPlayer = AudioPlayer()
     ..setReleaseMode(ReleaseMode.stop);
 
+  /// Separate from [_sfxPlayer] on purpose — the global UI tap blip (see
+  /// [playTap]) can fire in the same instant as a gameplay sound (e.g.
+  /// tapping an answer that's also the moment `playCorrect` fires), and
+  /// sharing one player would have each cut the other off mid-sample.
+  final AudioPlayer _tapPlayer = AudioPlayer()
+    ..setReleaseMode(ReleaseMode.stop);
+
   /// [comboLevel] steps the pitch up for consecutive correct answers —
   /// the same one `correct.wav` sample, just played back faster (which
   /// raises its pitch along with it), rather than five separate
@@ -28,10 +35,23 @@ class SoundService {
   }
 
   Future<void> playWrong() => _play('audio/wrong.wav');
-  Future<void> playTap() => _play('audio/tap.wav');
   Future<void> playComplete() => _play('audio/complete.wav');
   Future<void> playLevelUp() => _play('audio/level_up.wav');
   Future<void> playAchievement() => _play('audio/achievement.wav');
+
+  /// The global UI click — fired once per tap, anywhere in the app (see
+  /// the root [Listener] in `TerraScopeApp`), so it uses [_tapPlayer]
+  /// rather than [_sfxPlayer].
+  Future<void> playTap() async {
+    if (!enabled) return;
+    try {
+      await _tapPlayer.play(AssetSource('audio/tap.wav'));
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('SoundService: could not play tap.wav ($e)');
+      }
+    }
+  }
 
   Future<void> _play(String assetPath, {double rate = 1.0}) async {
     if (!enabled) return;

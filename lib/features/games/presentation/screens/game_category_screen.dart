@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/app_background.dart';
+import '../../../../core/widgets/color_back_button.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../../player/providers/player_providers.dart';
 import '../../domain/game_mode.dart';
@@ -42,7 +43,7 @@ class GameCategoryScreen extends ConsumerWidget {
       playerProfileProvider.select((p) => p.numericLevel),
     );
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: Text(title), leading: const ColorBackButton()),
       body: AppBackground(
         child: MaxWidthBox(
           child: ListView(

@@ -24,6 +24,7 @@ import '../../features/home/presentation/screens/home_screen.dart';
 import '../../features/lists/presentation/screens/lists_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
 import '../../features/shell/presentation/app_shell.dart';
+import '../../features/splash/presentation/screens/splash_screen.dart';
 import 'route_paths.dart';
 
 /// Builds one [GoRouter] instance, owned by [appRouterProvider].
@@ -40,8 +41,13 @@ GoRouter buildAppRouter() {
 
   return GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: RoutePaths.home,
+    initialLocation: RoutePaths.splash,
     routes: [
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.splash,
+        builder: (context, state) => const SplashScreen(),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) =>
             AppShell(navigationShell: navigationShell),
