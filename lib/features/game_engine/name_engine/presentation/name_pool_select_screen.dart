@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/color_back_button.dart';
 import '../../../../core/widgets/max_width_box.dart';
@@ -62,7 +63,23 @@ class NamePoolSelectScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Icon(icon, size: 48, color: theme.colorScheme.primary),
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: AppColors.green,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.greenDeep.withValues(alpha: 0.4),
+                        blurRadius: 18,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                  ),
+                  alignment: Alignment.center,
+                  child: Icon(icon, size: 36, color: Colors.white),
+                ),
                 const SizedBox(height: 12),
                 Text(subtitle, style: theme.textTheme.bodyMedium),
                 const SizedBox(height: 20),

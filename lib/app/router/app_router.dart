@@ -6,12 +6,14 @@ import '../../features/duels/presentation/screens/duel_screen.dart';
 import '../../features/games/daily_challenge/presentation/screens/daily_challenge_screen.dart';
 import '../../features/games/guess_borders/presentation/screens/guess_borders_screen.dart';
 import '../../features/games/guess_capital/presentation/screens/guess_capital_screen.dart';
+import '../../features/games/guess_clues/presentation/screens/guess_clues_screen.dart';
 import '../../features/games/guess_emoji/presentation/screens/guess_emoji_screen.dart';
 import '../../features/games/guess_flag/presentation/screens/guess_flag_screen.dart';
 import '../../features/games/guess_outline/presentation/screens/guess_outline_screen.dart';
 import '../../features/games/name_all/presentation/screens/name_all_screen.dart';
 import '../../features/games/name_alphabet/presentation/screens/name_alphabet_screen.dart';
 import '../../features/games/name_as_many/presentation/screens/name_as_many_screen.dart';
+import '../../features/games/name_borders_of/presentation/screens/name_borders_of_screen.dart';
 import '../../features/games/name_category/presentation/screens/name_category_screen.dart';
 import '../../features/games/name_continent/presentation/screens/name_continent_screen.dart';
 import '../../features/games/name_letter/presentation/screens/name_letter_screen.dart';
@@ -125,6 +127,11 @@ GoRouter buildAppRouter() {
       ),
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.guessClues,
+        builder: (context, state) => const GuessCluesScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.nameAll,
         builder: (context, state) => const NameAllScreen(),
       ),
@@ -132,6 +139,11 @@ GoRouter buildAppRouter() {
         parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.nameAsMany,
         builder: (context, state) => const NameAsManyScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.nameBordersOf,
+        builder: (context, state) => const NameBordersOfScreen(),
       ),
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,

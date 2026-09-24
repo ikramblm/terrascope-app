@@ -5,15 +5,20 @@ import 'app_text_theme.dart';
 
 /// TerraScope's Material 3 theme definitions — light is the primary,
 /// fully-designed experience (a bright, colorful mobile game, not a
-/// dashboard, and not stark white either — see [AppColors.lightBackground]);
-/// dark is kept defined for a possible future toggle but isn't reachable
-/// today — see [TerraScopeApp], which forces `ThemeMode.light`.
+/// dashboard, and not stark white either — see `AppBackground`'s
+/// blue-to-green gradient backdrop); dark is kept defined for a
+/// possible future toggle but isn't reachable today — see
+/// [TerraScopeApp], which forces `ThemeMode.light`.
 abstract class AppTheme {
   AppTheme._();
 
   static ThemeData get light => _build(
     brightness: Brightness.light,
-    background: AppColors.lightBackground,
+    // Matches the top of AppBackground's gradient, so the sliver of
+    // scaffold/app-bar it doesn't cover (the app bar strip) blends into
+    // the gradient below it rather than seaming against a mismatched
+    // solid color.
+    background: AppColors.bgGradientTop,
     surface: AppColors.lightSurface,
     surfaceRaised: AppColors.lightSurfaceRaised,
     border: AppColors.lightBorder,

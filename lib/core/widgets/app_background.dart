@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../app/theme/app_colors.dart';
 import 'globe_grid.dart';
 
-/// The dark theme's screen backdrop: the deep slate background plus one
-/// large, faint, static globe-grid watermark behind the content — never
-/// competing with it, just texture. Wraps a screen's body; the globe is
-/// sized and positioned off the top-right edge so it reads as a subtle
-/// presence in the corner of the eye, not a centered logo.
+/// The app-wide screen backdrop: a soft light-blue-to-light-green
+/// gradient fill, plus one large, faint, static globe-grid watermark
+/// behind the content — never competing with it, just texture. Wraps a
+/// screen's body; the globe is sized and positioned off the top-right
+/// edge so it reads as a subtle presence in the corner of the eye, not
+/// a centered logo.
 class AppBackground extends StatelessWidget {
   const AppBackground({super.key, required this.child});
 
@@ -21,6 +23,15 @@ class AppBackground extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
+        const DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [AppColors.bgGradientTop, AppColors.bgGradientBottom],
+            ),
+          ),
+        ),
         Positioned(
           top: -globeSize * 0.32,
           right: -globeSize * 0.38,

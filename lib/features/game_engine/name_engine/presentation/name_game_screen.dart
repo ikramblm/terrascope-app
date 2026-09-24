@@ -169,26 +169,40 @@ class _PlayingView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(instructions, style: theme.textTheme.bodyMedium),
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              Text(
-                '${engine.foundCount} / ${engine.totalCount}',
-                style: theme.textTheme.titleLarge,
-              ),
-              const SizedBox(width: 8),
-              Text('found', style: theme.textTheme.bodyMedium),
-            ],
-          ),
-          const SizedBox(height: 8),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(100),
-            child: LinearProgressIndicator(
-              value: engine.progress,
-              minHeight: 8,
-              backgroundColor: theme.colorScheme.surfaceContainerHighest,
-              color: accent,
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: accent.withValues(alpha: 0.14),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(instructions, style: theme.textTheme.bodyMedium),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Text(
+                      '${engine.foundCount} / ${engine.totalCount}',
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        color: accent,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text('found', style: theme.textTheme.bodyMedium),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: LinearProgressIndicator(
+                    value: engine.progress,
+                    minHeight: 8,
+                    backgroundColor: theme.colorScheme.surface,
+                    color: accent,
+                  ),
+                ),
+              ],
             ),
           ),
           if (engine.timeLimit != null) ...[
@@ -223,13 +237,13 @@ class _PlayingView extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: 'Type a country…',
                 filled: true,
-                fillColor: theme.colorScheme.surfaceContainerHighest,
+                fillColor: accent.withValues(alpha: 0.08),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                   borderSide: BorderSide.none,
                 ),
                 suffixIcon: IconButton(
-                  icon: const Icon(Icons.arrow_forward_rounded),
+                  icon: Icon(Icons.arrow_forward_rounded, color: accent),
                   onPressed: () => onSubmitted(controller.text),
                 ),
               ),

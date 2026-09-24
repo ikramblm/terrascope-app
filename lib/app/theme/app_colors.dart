@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-/// TerraScope brand palette — v3 (dark-first neon, a premium mobile game
-/// at night, not a dashboard in daylight).
+/// TerraScope brand palette — v4 (light and colorful, a bright mobile
+/// game, not a dashboard).
 ///
-/// Dark is now the primary, fully-designed theme: a deep slate-navy
-/// background with a handful of confident, high-saturation colors doing
-/// the work, each with one job — never all seven competing on screen at
-/// once. Ocean blue is the brand/navigation color; green means
+/// Light is now the primary, fully-designed theme: a soft blue-to-green
+/// gradient backdrop (see [bgGradientTop]/[bgGradientBottom] and
+/// `AppBackground`) with a handful of confident, high-saturation colors
+/// doing the work, each with one job — never all seven competing on
+/// screen at once. Ocean blue is the brand/navigation color; green means
 /// correct/success; orange/yellow mean reward and urgency; coral means
 /// wrong/warning; purple marks special modes and achievements; sky blue
 /// is ocean blue's lighter sibling for secondary accents and geography
@@ -41,8 +42,7 @@ abstract class AppColors {
   /// rather than everyday correct-answer feedback, which stays `green`.
   static const Color successEmerald = Color(0xFF10E19A);
 
-  // Light theme surfaces (kept for a possible future toggle; unreachable
-  // today — see AppTheme, which forces dark).
+  // Light theme surfaces — the primary look now, see AppTheme.
   static const Color lightBackground = Color(0xFFF7F8FC);
   static const Color lightSurface = Color(0xFFFFFFFF);
   static const Color lightSurfaceRaised = Color(0xFFFFFFFF);
@@ -50,6 +50,12 @@ abstract class AppColors {
   static const Color lightTextPrimary = Color(0xFF1A1D29);
   static const Color lightTextSecondary = Color(0xFF6B7280);
   static const Color lightShadow = Color(0xFF1B2559);
+
+  /// The app-wide backdrop gradient — light blue at the top merging into
+  /// light green at the bottom, painted once by `AppBackground` behind
+  /// every screen's content rather than a flat single background color.
+  static const Color bgGradientTop = Color(0xFFDCEEFF);
+  static const Color bgGradientBottom = Color(0xFFE1F7E7);
 
   // Dark theme surfaces — the primary look. A deep slate-navy base,
   // glass-like raised surfaces with a translucent neon-cyan hairline

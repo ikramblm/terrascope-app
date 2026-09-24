@@ -15,17 +15,23 @@ import '../widgets/world_map_banner.dart';
 /// clean list of large mode buttons. Deliberately nothing else — no
 /// stats, no cards, no secondary sections competing for attention.
 ///
-/// Only the three headline modes appear here — every other mode lives
-/// one tap away in Explore, organized by category.
+/// Only the headline modes appear here — every other mode lives one tap
+/// away in Explore, organized by category.
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  static const _featuredIds = ['guess_emoji', 'guess_flag', 'guess_outline'];
+  static const _featuredIds = [
+    'guess_emoji',
+    'guess_flag',
+    'guess_outline',
+    'name_alphabet',
+  ];
 
   static const _buttonColors = [
     AppColors.oceanBlue,
     AppColors.green,
     AppColors.orange,
+    AppColors.skyBlue,
   ];
 
   @override

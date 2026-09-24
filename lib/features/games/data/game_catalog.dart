@@ -63,6 +63,7 @@ final List<GameMode> kGameCatalog = [
     title: 'Guess by Clues',
     tagline: 'Fewer clues, more points',
     icon: Icons.lightbulb_outline,
+    routePath: RoutePaths.guessClues,
   ),
   GameMode(
     id: 'guess_landmark',
@@ -80,6 +81,14 @@ final List<GameMode> kGameCatalog = [
   ),
 
   // NAME
+  GameMode(
+    id: 'name_alphabet',
+    category: GameCategory.name,
+    title: 'Name the Alphabet',
+    tagline: 'One country per letter, A to Z',
+    icon: Icons.sort_by_alpha_rounded,
+    routePath: RoutePaths.nameAlphabet,
+  ),
   GameMode(
     id: 'name_all',
     category: GameCategory.name,
@@ -118,6 +127,7 @@ final List<GameMode> kGameCatalog = [
     title: 'Name the Neighbors',
     tagline: 'Every country bordering one nation',
     icon: Icons.route_outlined,
+    routePath: RoutePaths.nameBordersOf,
   ),
   GameMode(
     id: 'name_as_many',
@@ -126,14 +136,6 @@ final List<GameMode> kGameCatalog = [
     tagline: 'No timer, no limit',
     icon: Icons.all_inclusive,
     routePath: RoutePaths.nameAsMany,
-  ),
-  GameMode(
-    id: 'name_alphabet',
-    category: GameCategory.name,
-    title: 'Name the Alphabet',
-    tagline: 'One country per letter, A to Z',
-    icon: Icons.sort_by_alpha_rounded,
-    routePath: RoutePaths.nameAlphabet,
   ),
 
   // SPEED

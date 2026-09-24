@@ -148,18 +148,27 @@ class _PlayingView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: [
-              Text(
-                'Letter ${engine.letterIndex + 1} / ${engine.totalLetters}',
-                style: theme.textTheme.titleMedium,
-              ),
-              const Spacer(),
-              Text(
-                'Score ${engine.correctCount * 100}',
-                style: theme.textTheme.bodyMedium,
-              ),
-            ],
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+            decoration: BoxDecoration(
+              color: AppColors.green.withValues(alpha: 0.14),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Row(
+              children: [
+                Text(
+                  'Letter ${engine.letterIndex + 1} / ${engine.totalLetters}',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: AppColors.greenDeep,
+                  ),
+                ),
+                const Spacer(),
+                Text(
+                  'Score ${engine.correctCount * 100}',
+                  style: theme.textTheme.bodyMedium,
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 8),
           ClipRRect(
@@ -179,10 +188,10 @@ class _PlayingView extends StatelessWidget {
               height: 96,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.oceanBlue,
+                color: AppColors.green,
                 boxShadow: [
                   BoxShadow(
-                    color: (feedbackColor ?? AppColors.oceanBlue).withValues(
+                    color: (feedbackColor ?? AppColors.green).withValues(
                       alpha: 0.4,
                     ),
                     blurRadius: 20,
@@ -233,13 +242,16 @@ class _PlayingView extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: 'Type a country…',
                 filled: true,
-                fillColor: theme.colorScheme.surfaceContainerHighest,
+                fillColor: AppColors.green.withValues(alpha: 0.08),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                   borderSide: BorderSide.none,
                 ),
                 suffixIcon: IconButton(
-                  icon: const Icon(Icons.arrow_forward_rounded),
+                  icon: const Icon(
+                    Icons.arrow_forward_rounded,
+                    color: AppColors.green,
+                  ),
                   onPressed: () => onSubmitted(controller.text),
                 ),
               ),

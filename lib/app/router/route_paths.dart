@@ -15,6 +15,7 @@ abstract class RoutePaths {
   static const String guessOutline = '/games/guess-outline';
   static const String guessCapital = '/games/guess-capital';
   static const String guessBorders = '/games/guess-borders';
+  static const String guessClues = '/games/guess-clues';
 
   static const String nameAll = '/games/name-all';
   static const String nameAsMany = '/games/name-as-many';
@@ -22,6 +23,7 @@ abstract class RoutePaths {
   static const String nameCategory = '/games/name-category';
   static const String nameLetter = '/games/name-letter';
   static const String nameAlphabet = '/games/name-alphabet';
+  static const String nameBordersOf = '/games/name-borders-of';
 
   static const String speedFlag = '/games/speed-flag';
   static const String speedCapital = '/games/speed-capital';

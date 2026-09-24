@@ -71,8 +71,8 @@ void main() {
       expect(find.text('Explore'), findsOneWidget);
       expect(find.text('Lists'), findsOneWidget);
       expect(find.text('Profile'), findsOneWidget);
-      // Only the three headline modes get a button — everything else lives
-      // in Explore now.
+      // Only the headline modes get a button — everything else lives in
+      // Explore now.
       expect(find.text('Guess by Flag'), findsOneWidget);
       expect(find.text('Guess by Emoji'), findsOneWidget);
       // Outline is off the fold in the test viewport now that the Daily
@@ -144,10 +144,8 @@ void main() {
 
     await _openCategory(tester, 'Soon');
 
-    expect(find.text('Guess by Clues'), findsOneWidget);
     expect(find.text('Guess by Landmark'), findsOneWidget);
     expect(find.text('Guess by Location'), findsOneWidget);
-    expect(find.text('Name the Neighbors'), findsOneWidget);
   });
 
   testWidgets('Guess by Flag: pick a difficulty, answer, reach results', (
@@ -278,6 +276,54 @@ void main() {
     expect(find.text('SCORE'), findsOneWidget);
     expect(find.byType(AnswerOptionButton), findsNWidgets(4));
   });
+
+  testWidgets('Guess by Clues: pick a difficulty and see a question', (
+    tester,
+  ) async {
+    await tester.pumpWidget(buildTestApp());
+    await tester.pumpAndSettle();
+
+    await _openCategory(tester, 'Guessing');
+    await tester.ensureVisible(find.text('Guess by Clues'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Guess by Clues'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Choose a difficulty'), findsOneWidget);
+    await tester.tap(find.text('Medium'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.text('SCORE'), findsOneWidget);
+    expect(find.byType(AnswerOptionButton), findsNWidgets(4));
+  });
+
+  testWidgets(
+    'Name the Neighbors: names a random target country and takes typed answers',
+    (tester) async {
+      await tester.pumpWidget(buildTestApp());
+      await tester.pumpAndSettle();
+
+      await _openCategory(tester, 'Naming');
+      await tester.ensureVisible(find.text('Name the Neighbors'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Name the Neighbors'));
+      // Not pumpAndSettle: NameEngine's untimed session still keeps no
+      // ticker, but the screen itself has no settle-blocking animation
+      // either — bounded pump for consistency with the other Name modes.
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+
+      // The target country is picked at random each run, so only the
+      // shape of the screen is asserted, not a specific country name.
+      expect(
+        find.textContaining('Name every country bordering'),
+        findsOneWidget,
+      );
+      expect(find.byType(TextField), findsOneWidget);
+      expect(find.text("I'm Done"), findsOneWidget);
+    },
+  );
 
   testWidgets(
     'Name All Countries: type a country, see it found, finish the session',
