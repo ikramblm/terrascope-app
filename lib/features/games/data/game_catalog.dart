@@ -78,6 +78,7 @@ final List<GameMode> kGameCatalog = [
     title: 'Guess by Location',
     tagline: 'Tap the map, as close as you can',
     icon: Icons.my_location_outlined,
+    routePath: RoutePaths.guessLocation,
   ),
 
   // NAME

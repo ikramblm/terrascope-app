@@ -145,7 +145,6 @@ void main() {
     await _openCategory(tester, 'Soon');
 
     expect(find.text('Guess by Landmark'), findsOneWidget);
-    expect(find.text('Guess by Location'), findsOneWidget);
   });
 
   testWidgets('Guess by Flag: pick a difficulty, answer, reach results', (
@@ -297,6 +296,41 @@ void main() {
     expect(find.text('SCORE'), findsOneWidget);
     expect(find.byType(AnswerOptionButton), findsNWidgets(4));
   });
+
+  testWidgets(
+    'Guess by Location: pick a difficulty, tap the map, see a distance readout',
+    (tester) async {
+      await tester.pumpWidget(buildTestApp());
+      await tester.pumpAndSettle();
+
+      await _openCategory(tester, 'Guessing');
+      await tester.ensureVisible(find.text('Guess by Location'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Guess by Location'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Choose a difficulty'), findsOneWidget);
+      await tester.tap(find.text('Medium'));
+      // Not pumpAndSettle: the per-question countdown timer keeps
+      // scheduling frames, same reason every other timed mode's test
+      // uses bounded pumps instead.
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+
+      expect(find.text('SCORE'), findsOneWidget);
+      expect(find.textContaining('Where is'), findsOneWidget);
+      expect(find.byKey(const Key('world_tap_map')), findsOneWidget);
+
+      await tester.tap(find.byKey(const Key('world_tap_map')));
+      await tester.pump();
+
+      // A guess was taken — some distance-and-points readout appears
+      // regardless of exactly where the tap landed. "km away" (not the
+      // more generic "pts", which the still-mounted difficulty picker's
+      // own "N base pts" option labels also contain) is unique to it.
+      expect(find.textContaining('km away'), findsOneWidget);
+    },
+  );
 
   testWidgets(
     'Name the Neighbors: names a random target country and takes typed answers',

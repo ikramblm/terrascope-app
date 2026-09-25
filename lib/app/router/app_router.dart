@@ -9,6 +9,7 @@ import '../../features/games/guess_capital/presentation/screens/guess_capital_sc
 import '../../features/games/guess_clues/presentation/screens/guess_clues_screen.dart';
 import '../../features/games/guess_emoji/presentation/screens/guess_emoji_screen.dart';
 import '../../features/games/guess_flag/presentation/screens/guess_flag_screen.dart';
+import '../../features/games/guess_location/presentation/screens/guess_location_screen.dart';
 import '../../features/games/guess_outline/presentation/screens/guess_outline_screen.dart';
 import '../../features/games/name_all/presentation/screens/name_all_screen.dart';
 import '../../features/games/name_alphabet/presentation/screens/name_alphabet_screen.dart';
@@ -129,6 +130,11 @@ GoRouter buildAppRouter() {
         parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.guessClues,
         builder: (context, state) => const GuessCluesScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.guessLocation,
+        builder: (context, state) => const GuessLocationScreen(),
       ),
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
