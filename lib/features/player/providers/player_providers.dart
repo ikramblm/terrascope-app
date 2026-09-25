@@ -49,6 +49,16 @@ class PlayerProfileNotifier extends Notifier<PlayerProfile> {
     _persist();
   }
 
+  /// The only place [PlayerProfile.displayName] ever changes. Trims
+  /// whitespace and ignores an empty result — the name shown throughout
+  /// the app (Profile, duels) should never silently go blank.
+  void setDisplayName(String value) {
+    final trimmed = value.trim();
+    if (trimmed.isEmpty) return;
+    state = state.copyWith(displayName: trimmed);
+    _persist();
+  }
+
   /// Schedules (or clears) today's streak-expiry reminder to match
   /// [profile] — called on every app start and after every completed
   /// session, so the reminder never drifts from what's actually true.

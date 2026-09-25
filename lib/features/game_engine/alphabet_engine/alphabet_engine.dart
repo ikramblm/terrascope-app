@@ -29,11 +29,6 @@ class AlphabetEngine {
   /// advancing; cleared on the next submit/skip.
   bool lastSubmitWasWrong = false;
 
-  /// The country just matched by [submit] — the UI shows its flag as
-  /// positive feedback. Stays set (not cleared on skip) so it always
-  /// reflects the most recent correct answer, if any.
-  Country? lastMatchedCountry;
-
   static List<String> _eligibleLetters(List<Country> pool) {
     final letters = <String>[];
     for (var i = 0; i < 26; i++) {
@@ -76,7 +71,6 @@ class AlphabetEngine {
       if (!matches) continue;
 
       lastSubmitWasWrong = false;
-      lastMatchedCountry = country;
       correctCount++;
       _currentStreak++;
       if (_currentStreak > _bestStreak) _bestStreak = _currentStreak;
@@ -125,6 +119,9 @@ class AlphabetEngine {
       correctCca3s: Set.of(_correctCca3s),
     );
   }
+
+  /// Ends the session immediately, wherever the player currently is.
+  void surrender() => _finish();
 
   String _normalize(String s) {
     const diacritics =

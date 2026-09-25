@@ -13,6 +13,35 @@ const double _worldMaxLat = 85;
 const double _lonSpan = _worldMaxLon - _worldMinLon;
 const double _latSpan = _worldMaxLat - _worldMinLat;
 
+/// Traces one outline ring into [path], breaking it into a fresh
+/// subpath wherever consecutive points jump more than 180° in raw
+/// longitude — a handful of countries (Russia, Fiji) have rings that
+/// cross the antimeridian (±180°), and without this, connecting those
+/// two points straight across the map draws a long spurious line
+/// clear across the whole width instead of two separate landmasses.
+void _addRing(
+  Path path,
+  List<Offset> ring,
+  Offset Function(double lon, double lat) project,
+) {
+  if (ring.isEmpty) return;
+  var prevLon = ring.first.dx;
+  final first = project(ring.first.dx, ring.first.dy);
+  path.moveTo(first.dx, first.dy);
+  for (final point in ring.skip(1)) {
+    if ((point.dx - prevLon).abs() > 180) {
+      path.close();
+      final p = project(point.dx, point.dy);
+      path.moveTo(p.dx, p.dy);
+    } else {
+      final p = project(point.dx, point.dy);
+      path.lineTo(p.dx, p.dy);
+    }
+    prevLon = point.dx;
+  }
+  path.close();
+}
+
 /// A tappable world map: every outlined country renders as one neutral
 /// "land" silhouette — no borders, no per-country color, nothing that
 /// would give a guess away — so there's a real geographic reference
@@ -45,40 +74,52 @@ class WorldTapMap extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: ColoredBox(
         color: _WorldTapMapPainter._ocean,
-        child: InteractiveViewer(
-          minScale: 1,
-          maxScale: 8,
+        // AspectRatio has to sit OUTSIDE InteractiveViewer, not inside
+        // it: InteractiveViewer's child fills whatever box it's given,
+        // so an AspectRatio nested inside it receives a fully tight box
+        // and can't actually enforce a ratio — the map just stretches
+        // to match the container instead. Computing the
+        // correctly-proportioned box first and handing InteractiveViewer
+        // exactly that box is what keeps the map's real shape whether
+        // it's zoomed in or not.
+        child: Center(
           child: AspectRatio(
             aspectRatio: _lonSpan / _latSpan,
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final size = constraints.biggest;
-                return GestureDetector(
-                  key: const Key('world_tap_map'),
-                  onTapUp: enabled
-                      ? (details) {
-                          final local = details.localPosition;
-                          final lon =
-                              (_worldMinLon + local.dx / size.width * _lonSpan)
-                                  .clamp(_worldMinLon, _worldMaxLon);
-                          final lat =
-                              (_worldMaxLat - local.dy / size.height * _latSpan)
-                                  .clamp(_worldMinLat, _worldMaxLat);
-                          onGuess(lon, lat);
-                        }
-                      : null,
-                  child: CustomPaint(
-                    size: size,
-                    painter: _WorldTapMapPainter(
-                      outlines: outlines,
-                      guessLon: guessLon,
-                      guessLat: guessLat,
-                      actualLon: actualLon,
-                      actualLat: actualLat,
+            child: InteractiveViewer(
+              minScale: 1,
+              maxScale: 8,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final size = constraints.biggest;
+                  return GestureDetector(
+                    key: const Key('world_tap_map'),
+                    onTapUp: enabled
+                        ? (details) {
+                            final local = details.localPosition;
+                            final lon =
+                                (_worldMinLon +
+                                        local.dx / size.width * _lonSpan)
+                                    .clamp(_worldMinLon, _worldMaxLon);
+                            final lat =
+                                (_worldMaxLat -
+                                        local.dy / size.height * _latSpan)
+                                    .clamp(_worldMinLat, _worldMaxLat);
+                            onGuess(lon, lat);
+                          }
+                        : null,
+                    child: CustomPaint(
+                      size: size,
+                      painter: _WorldTapMapPainter(
+                        outlines: outlines,
+                        guessLon: guessLon,
+                        guessLat: guessLat,
+                        actualLon: actualLon,
+                        actualLat: actualLat,
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
         ),
@@ -134,14 +175,7 @@ class _WorldTapMapPainter extends CustomPainter {
       final path = Path()..fillType = PathFillType.evenOdd;
       for (final polygon in outline) {
         for (final ring in polygon) {
-          if (ring.isEmpty) continue;
-          final first = project(ring.first.dx, ring.first.dy);
-          path.moveTo(first.dx, first.dy);
-          for (final point in ring.skip(1)) {
-            final p = project(point.dx, point.dy);
-            path.lineTo(p.dx, p.dy);
-          }
-          path.close();
+          _addRing(path, ring, project);
         }
       }
       canvas.drawPath(path, landPaint);

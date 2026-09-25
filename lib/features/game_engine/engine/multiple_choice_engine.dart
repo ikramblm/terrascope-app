@@ -220,6 +220,11 @@ class MultipleChoiceEngine extends ChangeNotifier {
     );
   }
 
+  /// Ends the session immediately, wherever the player currently is —
+  /// results are built from whatever was reached, the same as running
+  /// out the clock on the last question would.
+  void surrender() => _complete();
+
   @override
   void dispose() {
     _ticker?.cancel();

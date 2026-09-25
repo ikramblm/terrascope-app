@@ -28,6 +28,7 @@ class PlayerProfile {
     required this.streakFreezesAvailable,
     required this.unlockedCosmeticTitles,
     required this.soundEnabled,
+    required this.displayName,
     this.lastPlayedAt,
     this.lastDailyChallengeDate,
   });
@@ -50,6 +51,7 @@ class PlayerProfile {
     streakFreezesAvailable: 1,
     unlockedCosmeticTitles: {},
     soundEnabled: true,
+    displayName: 'Guest Explorer',
   );
 
   final int totalXp;
@@ -92,6 +94,12 @@ class PlayerProfile {
   /// [PlayerProfileNotifier.setSoundEnabled], the only place this ever
   /// changes.
   final bool soundEnabled;
+
+  /// Shown throughout the app (Profile, duels) in place of a login — this
+  /// is a local, offline-first profile with no account system, so the
+  /// player names themselves rather than signing in. "Guest Explorer"
+  /// until they change it; see [PlayerProfileNotifier.setDisplayName].
+  final String displayName;
 
   /// cca3 codes of every country this player has answered correctly at
   /// least once, across all game modes.
@@ -165,6 +173,7 @@ class PlayerProfile {
     int? streakFreezesAvailable,
     Set<String>? unlockedCosmeticTitles,
     bool? soundEnabled,
+    String? displayName,
     DateTime? lastPlayedAt,
     DateTime? lastDailyChallengeDate,
   }) {
@@ -188,6 +197,7 @@ class PlayerProfile {
       unlockedCosmeticTitles:
           unlockedCosmeticTitles ?? this.unlockedCosmeticTitles,
       soundEnabled: soundEnabled ?? this.soundEnabled,
+      displayName: displayName ?? this.displayName,
       lastPlayedAt: lastPlayedAt ?? this.lastPlayedAt,
       lastDailyChallengeDate:
           lastDailyChallengeDate ?? this.lastDailyChallengeDate,
@@ -197,10 +207,11 @@ class PlayerProfile {
   /// Schema version this shape serializes as — bump alongside a
   /// breaking field change so [PlayerProfileRepository] can tell an old
   /// save apart from a corrupt one instead of guessing.
-  static const int schemaVersion = 5;
+  static const int schemaVersion = 6;
 
   Map<String, dynamic> toJson() => {
     'schemaVersion': schemaVersion,
+    'displayName': displayName,
     'totalXp': totalXp,
     'currentStreakDays': currentStreakDays,
     'longestStreakDays': longestStreakDays,
@@ -228,6 +239,7 @@ class PlayerProfile {
       throw const FormatException('Unrecognized PlayerProfile schema version');
     }
     return PlayerProfile(
+      displayName: json['displayName'] as String,
       totalXp: json['totalXp'] as int,
       currentStreakDays: json['currentStreakDays'] as int,
       longestStreakDays: json['longestStreakDays'] as int,

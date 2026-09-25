@@ -204,13 +204,45 @@ class ProfileScreen extends ConsumerWidget {
   }
 }
 
-class _IdentityCard extends StatelessWidget {
+class _IdentityCard extends ConsumerWidget {
   const _IdentityCard({required this.profile});
 
   final PlayerProfile profile;
 
+  Future<void> _editName(BuildContext context, WidgetRef ref) async {
+    final controller = TextEditingController(text: profile.displayName);
+    final newName = await showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Your name'),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          maxLength: 24,
+          textCapitalization: TextCapitalization.words,
+          onSubmitted: (value) => Navigator.of(context).pop(value),
+          decoration: const InputDecoration(hintText: 'Guest Explorer'),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(controller.text),
+            child: const Text('Save'),
+          ),
+        ],
+      ),
+    );
+    controller.dispose();
+    if (newName != null) {
+      ref.read(playerProfileProvider.notifier).setDisplayName(newName);
+    }
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final next = profile.level.next;
 
@@ -248,17 +280,40 @@ class _IdentityCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 16),
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Guest Explorer', style: theme.textTheme.titleLarge),
-                      const SizedBox(height: 2),
-                      Text(
-                        'Level ${profile.numericLevel} · '
-                        '${PrestigeTitle.forLevel(profile.numericLevel)}',
-                        style: theme.textTheme.bodyMedium,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(12),
+                    onTap: () => _editName(context, ref),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  profile.displayName,
+                                  style: theme.textTheme.titleLarge,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              Icon(
+                                Icons.edit_rounded,
+                                size: 16,
+                                color: theme.colorScheme.onSurfaceVariant,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            'Level ${profile.numericLevel} · '
+                            '${PrestigeTitle.forLevel(profile.numericLevel)}',
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ],

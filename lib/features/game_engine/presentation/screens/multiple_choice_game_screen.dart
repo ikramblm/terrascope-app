@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/color_back_button.dart';
 import '../../../../core/widgets/max_width_box.dart';
+import '../../../../core/widgets/surrender_button.dart';
 import '../../../../data/countries/models/country.dart';
 import '../../domain/game_result.dart';
 import '../../engine/multiple_choice_engine.dart';
@@ -137,6 +138,10 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
       appBar: AppBar(
         title: Text(widget.title),
         leading: const ColorBackButton(),
+        actions: [
+          if (!_engine.isComplete)
+            SurrenderButton(onSurrender: _engine.surrender),
+        ],
       ),
       body: AppBackground(
         child: SafeArea(

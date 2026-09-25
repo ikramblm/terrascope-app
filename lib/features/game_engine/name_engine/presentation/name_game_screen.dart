@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -5,6 +7,7 @@ import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/color_back_button.dart';
 import '../../../../core/widgets/max_width_box.dart';
+import '../../../../core/widgets/surrender_button.dart';
 import '../../../games/presentation/widgets/game_category_style.dart';
 import '../../../games/domain/game_category.dart';
 import '../../domain/game_result.dart';
@@ -47,6 +50,7 @@ class _NameGameScreenState extends State<NameGameScreen> {
   final FocusNode _focusNode = FocusNode();
   bool _resultRecorded = false;
   _FeedbackKind _feedback = _FeedbackKind.none;
+  Timer? _feedbackTimer;
 
   @override
   void initState() {
@@ -82,7 +86,8 @@ class _NameGameScreenState extends State<NameGameScreen> {
       HapticFeedback.mediumImpact();
       SoundService.instance.playWrong();
     }
-    Future.delayed(const Duration(milliseconds: 500), () {
+    _feedbackTimer?.cancel();
+    _feedbackTimer = Timer(const Duration(milliseconds: 500), () {
       if (mounted) setState(() => _feedback = _FeedbackKind.none);
     });
     _focusNode.requestFocus();
@@ -100,6 +105,7 @@ class _NameGameScreenState extends State<NameGameScreen> {
 
   @override
   void dispose() {
+    _feedbackTimer?.cancel();
     _engine.removeListener(_onEngineTick);
     _engine.dispose();
     _controller.dispose();
@@ -113,6 +119,9 @@ class _NameGameScreenState extends State<NameGameScreen> {
       appBar: AppBar(
         title: Text(widget.title),
         leading: const ColorBackButton(),
+        actions: [
+          if (!_engine.isComplete) SurrenderButton(onSurrender: _engine.finish),
+        ],
       ),
       body: AppBackground(
         child: SafeArea(
@@ -292,9 +301,7 @@ class _PlayingView extends StatelessWidget {
                       children: [
                         for (final country in engine.foundCountriesSorted)
                           Chip(
-                            label: Text(
-                              '${country.flagEmoji} ${country.nameCommon}',
-                            ),
+                            label: Text(country.nameCommon),
                             backgroundColor: AppColors.green.withValues(
                               alpha: 0.12,
                             ),

@@ -2,6 +2,30 @@ import 'package:flutter/material.dart';
 
 import '../../data/country_outline_repository.dart';
 
+/// Traces one outline ring into [path], breaking it into a fresh
+/// subpath wherever consecutive points jump more than 180° in raw
+/// longitude — Russia's ring crosses the antimeridian (±180°), and
+/// without this, connecting those two points draws a long spurious
+/// line straight across the shape instead of leaving it as two parts.
+void _addRing(Path path, List<Offset> ring, Offset Function(Offset) project) {
+  if (ring.isEmpty) return;
+  var prevLon = ring.first.dx;
+  final first = project(ring.first);
+  path.moveTo(first.dx, first.dy);
+  for (final point in ring.skip(1)) {
+    if ((point.dx - prevLon).abs() > 180) {
+      path.close();
+      final p = project(point);
+      path.moveTo(p.dx, p.dy);
+    } else {
+      final p = project(point);
+      path.lineTo(p.dx, p.dy);
+    }
+    prevLon = point.dx;
+  }
+  path.close();
+}
+
 /// Renders a country's silhouette — fit to the available box, aspect
 /// ratio preserved, latitude flipped so north is up. Deliberately a flat
 /// single-color fill: no borders, no neighboring countries, nothing that
@@ -91,13 +115,7 @@ class _CountryOutlinePainter extends CustomPainter {
     final path = Path()..fillType = PathFillType.evenOdd;
     for (final polygon in outline) {
       for (final ring in polygon) {
-        if (ring.isEmpty) continue;
-        path.moveTo(project(ring.first).dx, project(ring.first).dy);
-        for (final point in ring.skip(1)) {
-          final p = project(point);
-          path.lineTo(p.dx, p.dy);
-        }
-        path.close();
+        _addRing(path, ring, project);
       }
     }
 

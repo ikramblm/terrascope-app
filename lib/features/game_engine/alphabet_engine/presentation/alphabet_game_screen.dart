@@ -7,6 +7,7 @@ import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/color_back_button.dart';
 import '../../../../core/widgets/max_width_box.dart';
+import '../../../../core/widgets/surrender_button.dart';
 import '../../domain/game_result.dart';
 import '../../sound/sound_service.dart';
 import '../alphabet_engine.dart';
@@ -35,8 +36,6 @@ class _AlphabetGameScreenState extends State<AlphabetGameScreen> {
   final FocusNode _focusNode = FocusNode();
   bool _resultRecorded = false;
   bool _showWrongFlash = false;
-  bool _showCorrectPop = false;
-  Timer? _correctPopTimer;
   Timer? _wrongFlashTimer;
 
   @override
@@ -61,14 +60,7 @@ class _AlphabetGameScreenState extends State<AlphabetGameScreen> {
     if (matched) {
       HapticFeedback.lightImpact();
       SoundService.instance.playCorrect();
-      setState(() {
-        _showWrongFlash = false;
-        _showCorrectPop = true;
-      });
-      _correctPopTimer?.cancel();
-      _correctPopTimer = Timer(const Duration(milliseconds: 550), () {
-        if (mounted) setState(() => _showCorrectPop = false);
-      });
+      setState(() => _showWrongFlash = false);
       _maybeRecordCompletion();
     } else {
       HapticFeedback.mediumImpact();
@@ -92,6 +84,12 @@ class _AlphabetGameScreenState extends State<AlphabetGameScreen> {
     _focusNode.requestFocus();
   }
 
+  void _handleSurrender() {
+    if (_engine.isComplete) return;
+    setState(() => _engine.surrender());
+    _maybeRecordCompletion();
+  }
+
   void _playAgain() {
     setState(() {
       _resultRecorded = false;
@@ -102,7 +100,6 @@ class _AlphabetGameScreenState extends State<AlphabetGameScreen> {
 
   @override
   void dispose() {
-    _correctPopTimer?.cancel();
     _wrongFlashTimer?.cancel();
     _controller.dispose();
     _focusNode.dispose();
@@ -115,47 +112,24 @@ class _AlphabetGameScreenState extends State<AlphabetGameScreen> {
       appBar: AppBar(
         title: const Text('Name the Alphabet'),
         leading: const ColorBackButton(),
+        actions: [
+          if (!_engine.isComplete)
+            SurrenderButton(onSurrender: _handleSurrender),
+        ],
       ),
       body: AppBackground(
         child: SafeArea(
           child: MaxWidthBox(
-            child: Stack(
-              children: [
-                _engine.isComplete
-                    ? AlphabetResultsView(
-                        engine: _engine,
-                        onPlayAgain: _playAgain,
-                      )
-                    : _PlayingView(
-                        engine: _engine,
-                        controller: _controller,
-                        focusNode: _focusNode,
-                        showWrongFlash: _showWrongFlash,
-                        onSubmitted: _handleSubmit,
-                        onSkip: _handleSkip,
-                      ),
-                if (_engine.lastMatchedCountry != null)
-                  IgnorePointer(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: AnimatedOpacity(
-                        opacity: _showCorrectPop ? 1 : 0,
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.easeOut,
-                        child: AnimatedScale(
-                          scale: _showCorrectPop ? 1.0 : 0.4,
-                          duration: const Duration(milliseconds: 350),
-                          curve: Curves.elasticOut,
-                          child: Text(
-                            _engine.lastMatchedCountry!.flagEmoji,
-                            style: const TextStyle(fontSize: 96),
-                          ),
-                        ),
-                      ),
-                    ),
+            child: _engine.isComplete
+                ? AlphabetResultsView(engine: _engine, onPlayAgain: _playAgain)
+                : _PlayingView(
+                    engine: _engine,
+                    controller: _controller,
+                    focusNode: _focusNode,
+                    showWrongFlash: _showWrongFlash,
+                    onSubmitted: _handleSubmit,
+                    onSkip: _handleSkip,
                   ),
-              ],
-            ),
           ),
         ),
       ),

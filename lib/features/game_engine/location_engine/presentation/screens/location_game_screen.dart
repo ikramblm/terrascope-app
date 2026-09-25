@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/widgets/app_background.dart';
 import '../../../../../core/widgets/color_back_button.dart';
 import '../../../../../core/widgets/max_width_box.dart';
+import '../../../../../core/widgets/surrender_button.dart';
 import '../../../../games/guess_outline/data/country_outline_repository.dart';
 import '../../../domain/game_result.dart';
 import '../../../presentation/screens/game_results_view.dart';
@@ -93,6 +94,10 @@ class _LocationGameScreenState extends State<LocationGameScreen> {
       appBar: AppBar(
         title: const Text('Guess by Location'),
         leading: const ColorBackButton(),
+        actions: [
+          if (!_engine.isComplete)
+            SurrenderButton(onSurrender: _engine.surrender),
+        ],
       ),
       body: AppBackground(
         child: SafeArea(
@@ -130,15 +135,36 @@ class _PlayingView extends StatelessWidget {
     final theme = Theme.of(context);
     final distance = engine.lastDistanceKm;
 
-    return SizedBox.expand(
-      child: Stack(
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // The map fills the whole screen — everything else floats on
-          // top of it, instead of squeezing it into a small box in a
-          // scrolling column, so there's real room to tap precisely and
-          // to zoom in on a crowded region.
-          Positioned.fill(
+          ScoreHeader(
+            score: engine.score,
+            questionNumber: engine.currentIndex + 1,
+            totalQuestions: engine.totalQuestions,
+          ),
+          const SizedBox(height: 12),
+          TimerBar(remaining: engine.timeRemaining, total: engine.timeAllotted),
+          const SizedBox(height: 16),
+          Text(
+            'Where is ${engine.currentTarget.nameCommon}?',
+            style: theme.textTheme.headlineSmall,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 12),
+          // The map gets whatever room is left below the header — sized
+          // by Expanded, but never stretched off its own aspect ratio
+          // (WorldTapMap enforces that itself). Pinch/scroll zoom still
+          // works inside that space; the map's shape just never changes
+          // to fill it. Keyed by round so a zoom/pan from a previous
+          // question doesn't carry over — each new question starts
+          // fully fit-to-box again instead of picking up wherever the
+          // last one was left zoomed in.
+          Expanded(
             child: WorldTapMap(
+              key: ValueKey(engine.currentIndex),
               outlines: outlines,
               enabled: !engine.answered,
               onGuess: onGuess,
@@ -150,73 +176,16 @@ class _PlayingView extends StatelessWidget {
               actualLat: engine.answered ? engine.currentTarget.latitude : null,
             ),
           ),
-          Positioned(
-            left: 12,
-            right: 12,
-            top: 12,
-            child: _FloatingPanel(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  ScoreHeader(
-                    score: engine.score,
-                    questionNumber: engine.currentIndex + 1,
-                    totalQuestions: engine.totalQuestions,
-                  ),
-                  const SizedBox(height: 10),
-                  TimerBar(
-                    remaining: engine.timeRemaining,
-                    total: engine.timeAllotted,
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Where is ${engine.currentTarget.nameCommon}?',
-                    style: theme.textTheme.titleLarge,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-          ),
+          const SizedBox(height: 12),
           if (engine.answered)
-            Positioned(
-              left: 12,
-              right: 12,
-              bottom: 12,
-              child: _FloatingPanel(
-                child: Text(
-                  distance == null
-                      ? "Time's up — no guess that round."
-                      : '${distance.round()} km away · +${engine.lastRoundScore} pts',
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.titleMedium,
-                ),
-              ),
+            Text(
+              distance == null
+                  ? "Time's up — no guess that round."
+                  : '${distance.round()} km away · +${engine.lastRoundScore} pts',
+              textAlign: TextAlign.center,
+              style: theme.textTheme.titleMedium,
             ),
         ],
-      ),
-    );
-  }
-}
-
-/// A translucent card floating over the full-screen map — used for both
-/// the top status bar and the post-guess readout, so the map stays the
-/// dominant thing on screen instead of competing with opaque chrome.
-class _FloatingPanel extends StatelessWidget {
-  const _FloatingPanel({required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Material(
-      color: theme.colorScheme.surface.withValues(alpha: 0.92),
-      elevation: 6,
-      borderRadius: BorderRadius.circular(20),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: child,
       ),
     );
   }

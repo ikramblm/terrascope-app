@@ -97,6 +97,13 @@ class LocationEngine extends ChangeNotifier {
   Duration get timeAllotted => Duration(seconds: difficulty.secondsPerQuestion);
   Duration get elapsed => _clockElapsed;
 
+  /// Rounds actually resolved — equal to [totalQuestions] after a normal
+  /// completion (every target was reached and answered/timed out), but
+  /// smaller after [surrender] cuts the session short partway through,
+  /// so the end-of-game accuracy stat reflects what was actually played
+  /// rather than being diluted by rounds never reached.
+  int get _questionsAttempted => answered ? currentIndex + 1 : currentIndex;
+
   void start() {
     _startedAt = clock.now();
     _running = true;
@@ -207,12 +214,17 @@ class LocationEngine extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Ends the session immediately, wherever the player currently is —
+  /// results are built from whatever was reached, the same as running
+  /// out the clock on the last round would.
+  void surrender() => _complete();
+
   GameResult buildResult() {
     return GameResult(
       totalScore: score,
       xpEarned: xpEarned,
       correctCount: correctCount,
-      totalQuestions: totalQuestions,
+      totalQuestions: _questionsAttempted,
       bestCombo: bestCombo,
       elapsed: _clockElapsed,
       correctCca3s: correctCca3s,

@@ -5,6 +5,31 @@ import '../../../../app/theme/app_colors.dart';
 import '../../../games/guess_outline/data/country_outline_repository.dart';
 import '../../../games/guess_outline/providers/country_outline_providers.dart';
 
+/// Traces one outline ring into [path], breaking it into a fresh
+/// subpath wherever consecutive points jump more than 180° in raw
+/// longitude — a handful of countries (Russia, Fiji) have rings that
+/// cross the antimeridian (±180°), and without this, connecting those
+/// two points straight across the map draws a long spurious line clear
+/// across the whole width instead of two separate landmasses.
+void _addRing(Path path, List<Offset> ring, Offset Function(Offset) project) {
+  if (ring.isEmpty) return;
+  var prevLon = ring.first.dx;
+  final first = project(ring.first);
+  path.moveTo(first.dx, first.dy);
+  for (final point in ring.skip(1)) {
+    if ((point.dx - prevLon).abs() > 180) {
+      path.close();
+      final p = project(point);
+      path.moveTo(p.dx, p.dy);
+    } else {
+      final p = project(point);
+      path.lineTo(p.dx, p.dy);
+    }
+    prevLon = point.dx;
+  }
+  path.close();
+}
+
 /// A real, positioned world map — every outlined country drawn at its
 /// true relative location via a shared equirectangular projection
 /// (`x = longitude, y = -latitude`, one scale for all of them), gold
@@ -127,14 +152,7 @@ class _PassportMapPainter extends CustomPainter {
       final path = Path()..fillType = PathFillType.evenOdd;
       for (final polygon in entry.value) {
         for (final ring in polygon) {
-          if (ring.isEmpty) continue;
-          final first = project(ring.first);
-          path.moveTo(first.dx, first.dy);
-          for (final point in ring.skip(1)) {
-            final p = project(point);
-            path.lineTo(p.dx, p.dy);
-          }
-          path.close();
+          _addRing(path, ring, project);
         }
       }
       final discovered = discoveredCca3s.contains(entry.key);
