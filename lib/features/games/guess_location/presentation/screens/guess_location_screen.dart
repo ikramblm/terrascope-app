@@ -47,10 +47,13 @@ class GuessLocationScreen extends ConsumerWidget {
                       eligible,
                     )..shuffle()).take(_questionsPerGame).toList(),
                     difficulty: difficulty,
+                    outlines: outlines,
                   ),
                   outlines: outlines,
                   onSessionComplete: (GameResult result) {
-                    ref.read(playerProfileProvider.notifier).recordSession(result);
+                    ref
+                        .read(playerProfileProvider.notifier)
+                        .recordSession(result);
                   },
                 ),
               );

@@ -5,6 +5,7 @@ import 'package:clock/clock.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../data/countries/models/country.dart';
+import '../../games/guess_outline/data/country_outline_repository.dart';
 import '../domain/game_difficulty.dart';
 import '../domain/game_result.dart';
 
@@ -20,11 +21,23 @@ import '../domain/game_result.dart';
 /// `GuessLocationScreen`), same convention as `AlphabetEngine`'s
 /// eligible-letters filter.
 class LocationEngine extends ChangeNotifier {
-  LocationEngine({required this.targets, required this.difficulty})
-    : timeRemaining = Duration(seconds: difficulty.secondsPerQuestion);
+  LocationEngine({
+    required this.targets,
+    required this.difficulty,
+    this.outlines = const {},
+  }) : timeRemaining = Duration(seconds: difficulty.secondsPerQuestion);
 
   final List<Country> targets;
   final GameDifficulty difficulty;
+
+  /// Country silhouettes, keyed by cca3 — when the target's outline is
+  /// known, a tap anywhere inside it counts as fully correct even if
+  /// it's far from the stored reference point. Countries are big; a tap
+  /// on the far side of Russia or Brazil from its capital shouldn't
+  /// score worse than one a few hundred km off in the ocean next to a
+  /// small country. Falls back to pure distance scoring when no outline
+  /// is available for that target.
+  final Map<String, CountryOutline> outlines;
 
   static const _tickInterval = Duration(milliseconds: 100);
 
@@ -123,11 +136,19 @@ class LocationEngine extends ChangeNotifier {
         : _haversineKm(lon, lat, target.longitude!, target.latitude!);
     lastDistanceKm = distanceKm;
 
-    final roundScore = distanceKm == null ? 0 : _scoreForDistance(distanceKm);
+    final outline = outlines[target.cca3];
+    final insideCountry = lon != null && lat != null && outline != null
+        ? _pointInOutline(lon, lat, outline)
+        : false;
+
+    final roundScore = insideCountry
+        ? difficulty.basePoints
+        : (distanceKm == null ? 0 : _scoreForDistance(distanceKm));
     lastRoundScore = roundScore;
     score += roundScore;
 
-    final isClose = distanceKm != null && distanceKm <= closeEnoughKm;
+    final isClose =
+        insideCountry || (distanceKm != null && distanceKm <= closeEnoughKm);
     if (isClose) {
       xpEarned += difficulty.baseXp;
       combo += 1;
@@ -218,4 +239,28 @@ class LocationEngine extends ChangeNotifier {
   }
 
   static double _degToRad(double deg) => deg * pi / 180;
+
+  /// Even-odd ray-casting point-in-polygon test, run across every ring
+  /// of every polygon part together — matches the even-odd fill rule
+  /// [WorldTapMap] renders the outline with, so "inside" here means
+  /// exactly what the player sees filled in as land, holes (enclaves)
+  /// included.
+  static bool _pointInOutline(double lon, double lat, CountryOutline outline) {
+    var inside = false;
+    for (final polygon in outline) {
+      for (final ring in polygon) {
+        final n = ring.length;
+        if (n < 3) continue;
+        for (var i = 0, j = n - 1; i < n; j = i++) {
+          final xi = ring[i].dx, yi = ring[i].dy;
+          final xj = ring[j].dx, yj = ring[j].dy;
+          final crosses =
+              (yi > lat) != (yj > lat) &&
+              (lon < (xj - xi) * (lat - yi) / (yj - yi) + xi);
+          if (crosses) inside = !inside;
+        }
+      }
+    }
+    return inside;
+  }
 }

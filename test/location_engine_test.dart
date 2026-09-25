@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:terrascope_app/data/countries/models/country.dart';
 import 'package:terrascope_app/features/game_engine/domain/game_difficulty.dart';
 import 'package:terrascope_app/features/game_engine/location_engine/location_engine.dart';
+import 'package:terrascope_app/features/games/guess_outline/data/country_outline_repository.dart';
 
 Country _country(String cca3, String name, {double? lat, double? lon}) =>
     Country(
@@ -62,6 +63,82 @@ void main() {
       async.elapse(LocationEngine.feedbackDelay);
       expect(engine.currentIndex, 1);
       expect(engine.answered, isFalse);
+
+      engine.dispose();
+    });
+  });
+
+  test('a tap anywhere inside the target\'s outline scores full marks, even '
+      'far from the stored reference point', () {
+    fakeAsync((async) {
+      // A big, roughly square country whose stored lat/lon (used only
+      // as the Haversine reference point) sits in one corner — a tap
+      // in the far corner is genuinely far from that point (would
+      // score 0 by distance alone) but is still inside the country.
+      final big = _country('BIG', 'Big Country', lat: 0, lon: 0);
+      final outlines = <String, CountryOutline>{
+        'BIG': [
+          [
+            [
+              const Offset(0, 0),
+              const Offset(30, 0),
+              const Offset(30, 30),
+              const Offset(0, 30),
+              const Offset(0, 0),
+            ],
+          ],
+        ],
+      };
+      final engine = LocationEngine(
+        targets: [big, big],
+        difficulty: GameDifficulty.medium,
+        outlines: outlines,
+      );
+      engine.start();
+
+      // Far corner of the country, thousands of km from (0, 0).
+      engine.submitGuess(29, 29);
+
+      expect(engine.lastDistanceKm, greaterThan(4000));
+      expect(engine.lastRoundScore, GameDifficulty.medium.basePoints);
+      expect(engine.score, GameDifficulty.medium.basePoints);
+      expect(engine.combo, 1);
+      expect(engine.correctCount, 1);
+      expect(engine.correctCca3s, contains('BIG'));
+
+      engine.dispose();
+    });
+  });
+
+  test('a guess outside the target\'s outline still falls back to distance '
+      'scoring', () {
+    fakeAsync((async) {
+      final big = _country('BIG', 'Big Country', lat: 0, lon: 0);
+      final outlines = <String, CountryOutline>{
+        'BIG': [
+          [
+            [
+              const Offset(0, 0),
+              const Offset(30, 0),
+              const Offset(30, 30),
+              const Offset(0, 30),
+              const Offset(0, 0),
+            ],
+          ],
+        ],
+      };
+      final engine = LocationEngine(
+        targets: [big, big],
+        difficulty: GameDifficulty.medium,
+        outlines: outlines,
+      );
+      engine.start();
+
+      // Outside the square, and far enough from (0, 0) to score zero.
+      engine.submitGuess(180, 0);
+
+      expect(engine.lastRoundScore, 0);
+      expect(engine.correctCount, 0);
 
       engine.dispose();
     });
