@@ -156,12 +156,10 @@ class _PlayingView extends StatelessWidget {
           const SizedBox(height: 12),
           // The map gets whatever room is left below the header — sized
           // by Expanded, but never stretched off its own aspect ratio
-          // (WorldTapMap enforces that itself). Pinch/scroll zoom still
-          // works inside that space; the map's shape just never changes
-          // to fill it. Keyed by round so a zoom/pan from a previous
-          // question doesn't carry over — each new question starts
-          // fully fit-to-box again instead of picking up wherever the
-          // last one was left zoomed in.
+          // (WorldTapMap enforces that itself). Pinch/scroll zoom stays
+          // inside this same box, never a separate popup. Keyed by
+          // round so a zoom/pan from a previous question doesn't carry
+          // over — each new question starts fully fit-to-box again.
           Expanded(
             child: WorldTapMap(
               key: ValueKey(engine.currentIndex),
@@ -174,6 +172,7 @@ class _PlayingView extends StatelessWidget {
                   ? engine.currentTarget.longitude
                   : null,
               actualLat: engine.answered ? engine.currentTarget.latitude : null,
+              isCorrect: engine.answered ? engine.lastGuessWasCorrect : null,
             ),
           ),
           const SizedBox(height: 12),

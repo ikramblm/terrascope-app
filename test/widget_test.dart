@@ -74,15 +74,29 @@ void main() {
       // Only the headline modes get a button — everything else lives in
       // Explore now.
       expect(find.text('Guess by Flag'), findsOneWidget);
-      expect(find.text('Guess by Emoji'), findsOneWidget);
-      // Outline is off the fold in the test viewport now that the Daily
-      // Challenge card sits above the featured buttons — scroll to it.
+      expect(find.text('Guess by Emoji'), findsNothing);
+      expect(find.text('Guess by Outline'), findsNothing);
+      // The rest are off the fold in the test viewport now that the
+      // Daily Challenge card sits above the featured buttons — scroll
+      // to each in turn.
       await tester.dragUntilVisible(
-        find.text('Guess by Outline'),
+        find.text('Guess by Location'),
         find.byType(ListView),
         const Offset(0, -400),
       );
-      expect(find.text('Guess by Outline'), findsOneWidget);
+      expect(find.text('Guess by Location'), findsOneWidget);
+      await tester.dragUntilVisible(
+        find.text('Name the Alphabet'),
+        find.byType(ListView),
+        const Offset(0, -400),
+      );
+      expect(find.text('Name the Alphabet'), findsOneWidget);
+      await tester.dragUntilVisible(
+        find.text('Capital Speed Run'),
+        find.byType(ListView),
+        const Offset(0, -400),
+      );
+      expect(find.text('Capital Speed Run'), findsOneWidget);
       expect(find.text('Guess by Capital'), findsNothing);
       // Scroll to the last button — off the fold in the test viewport.
       await tester.dragUntilVisible(

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../app/router/route_paths.dart';
 import '../../../../app/theme/app_colors.dart';
+import '../../../../core/widgets/app_logo.dart';
 
 /// How long [SplashScreen] holds before moving on to Home. A provider
 /// (not a bare constant) so `buildTestApp()` can override it to
@@ -41,12 +42,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: 96,
-              height: 96,
+            DecoratedBox(
               decoration: BoxDecoration(
-                color: AppColors.oceanBlue,
-                shape: BoxShape.circle,
+                borderRadius: BorderRadius.circular(22),
                 boxShadow: [
                   BoxShadow(
                     color: AppColors.oceanBlueDeep.withValues(alpha: 0.45),
@@ -55,12 +53,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                   ),
                 ],
               ),
-              alignment: Alignment.center,
-              child: const Icon(
-                Icons.public_rounded,
-                color: Colors.white,
-                size: 52,
-              ),
+              child: const AppLogo(size: 96),
             ),
             const SizedBox(height: 20),
             Text('TerraScope', style: theme.textTheme.displayMedium),

@@ -58,6 +58,7 @@ class WorldTapMap extends StatelessWidget {
     this.guessLat,
     this.actualLon,
     this.actualLat,
+    this.isCorrect,
   });
 
   final Map<String, CountryOutline> outlines;
@@ -67,6 +68,12 @@ class WorldTapMap extends StatelessWidget {
   final double? guessLat;
   final double? actualLon;
   final double? actualLat;
+
+  /// Whether the most recent guess counted as correct — null before any
+  /// guess this round. Drives the pin colors: both pins render green
+  /// together on a correct guess instead of the usual red-guess /
+  /// green-actual pairing.
+  final bool? isCorrect;
 
   @override
   Widget build(BuildContext context) {
@@ -80,14 +87,15 @@ class WorldTapMap extends StatelessWidget {
         // and can't actually enforce a ratio — the map just stretches
         // to match the container instead. Computing the
         // correctly-proportioned box first and handing InteractiveViewer
-        // exactly that box is what keeps the map's real shape whether
-        // it's zoomed in or not.
+        // exactly that box is what keeps the map's real shape — filling
+        // this same box, never a separate popup — whether it's zoomed
+        // in or not.
         child: Center(
           child: AspectRatio(
             aspectRatio: _lonSpan / _latSpan,
             child: InteractiveViewer(
               minScale: 1,
-              maxScale: 8,
+              maxScale: 6,
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   final size = constraints.biggest;
@@ -115,6 +123,7 @@ class WorldTapMap extends StatelessWidget {
                         guessLat: guessLat,
                         actualLon: actualLon,
                         actualLat: actualLat,
+                        isCorrect: isCorrect,
                       ),
                     ),
                   );
@@ -135,6 +144,7 @@ class _WorldTapMapPainter extends CustomPainter {
     this.guessLat,
     this.actualLon,
     this.actualLat,
+    this.isCorrect,
   });
 
   final Map<String, CountryOutline> outlines;
@@ -142,12 +152,13 @@ class _WorldTapMapPainter extends CustomPainter {
   final double? guessLat;
   final double? actualLon;
   final double? actualLat;
+  final bool? isCorrect;
 
   static const _ocean = Color(0xFFBFE3F5);
   static const _land = Color(0xFFE8DCB8);
   static const _border = Color(0xFF9C7A45);
-  static const _guessColor = Color(0xFFFF6B6B);
-  static const _actualColor = Color(0xFF22C55E);
+  static const _correctColor = Color(0xFF22C55E);
+  static const _wrongColor = Color(0xFFFF6B6B);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -190,16 +201,20 @@ class _WorldTapMapPainter extends CustomPainter {
       final gLat = guessLat;
       if (gLon != null && gLat != null) {
         final guess = project(gLon, gLat);
+        // Both pins turn green together on a correct guess instead of
+        // the usual red-guess / green-actual pairing — a right answer
+        // should read as unambiguously right.
+        final guessColor = isCorrect == true ? _correctColor : _wrongColor;
         canvas.drawLine(
           guess,
           actual,
           Paint()
-            ..color = _guessColor
+            ..color = guessColor
             ..strokeWidth = 2,
         );
-        _drawPin(canvas, guess, _guessColor);
+        _drawPin(canvas, guess, guessColor);
       }
-      _drawPin(canvas, actual, _actualColor);
+      _drawPin(canvas, actual, _correctColor);
     }
   }
 
@@ -214,5 +229,6 @@ class _WorldTapMapPainter extends CustomPainter {
       oldDelegate.guessLat != guessLat ||
       oldDelegate.actualLon != actualLon ||
       oldDelegate.actualLat != actualLat ||
+      oldDelegate.isCorrect != isCorrect ||
       oldDelegate.outlines != outlines;
 }

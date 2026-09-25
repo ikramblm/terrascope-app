@@ -21,10 +21,10 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   static const _featuredIds = [
-    'guess_emoji',
     'guess_flag',
-    'guess_outline',
+    'guess_location',
     'name_alphabet',
+    'speed_capital',
   ];
 
   static const _buttonColors = [

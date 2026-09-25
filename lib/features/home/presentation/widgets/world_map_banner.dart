@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../app/theme/app_colors.dart';
+import '../../../../core/widgets/app_logo.dart';
 
 /// Home screen's top visual: an abstract "world map" made of a handful
 /// of large, overlapping colorful blob shapes (never a literal map, and
@@ -62,17 +63,17 @@ class WorldMapBanner extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(14),
+                  DecoratedBox(
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.22),
-                      shape: BoxShape.circle,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.2),
+                          blurRadius: 12,
+                        ),
+                      ],
                     ),
-                    child: const Icon(
-                      Icons.public_rounded,
-                      color: Colors.white,
-                      size: 34,
-                    ),
+                    child: const AppLogo(size: 62),
                   ),
                   const SizedBox(height: 12),
                   Text(
