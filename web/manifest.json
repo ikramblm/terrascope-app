@@ -1,6 +1,6 @@
 {
-    "name": "terrascope_app",
-    "short_name": "terrascope_app",
+    "name": "TerraScope",
+    "short_name": "TerraScope",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
