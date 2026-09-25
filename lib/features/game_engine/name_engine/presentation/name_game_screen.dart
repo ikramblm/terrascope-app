@@ -22,12 +22,18 @@ class NameGameScreen extends StatefulWidget {
     required this.instructions,
     required this.engineBuilder,
     required this.onSessionComplete,
+    this.highlightCountry,
   });
 
   final String title;
   final String instructions;
   final NameEngine Function() engineBuilder;
   final void Function(GameResult result) onSessionComplete;
+
+  /// When set, shown big and colored above [instructions] — used by
+  /// modes like Name the Neighbors where one specific country is the
+  /// whole point of the round, not just a detail in a sentence.
+  final String? highlightCountry;
 
   @override
   State<NameGameScreen> createState() => _NameGameScreenState();
@@ -116,6 +122,7 @@ class _NameGameScreenState extends State<NameGameScreen> {
                 : _PlayingView(
                     engine: _engine,
                     instructions: widget.instructions,
+                    highlightCountry: widget.highlightCountry,
                     controller: _controller,
                     focusNode: _focusNode,
                     feedback: _feedback,
@@ -136,10 +143,12 @@ class _PlayingView extends StatelessWidget {
     required this.focusNode,
     required this.feedback,
     required this.onSubmitted,
+    this.highlightCountry,
   });
 
   final NameEngine engine;
   final String instructions;
+  final String? highlightCountry;
   final TextEditingController controller;
   final FocusNode focusNode;
   final _FeedbackKind feedback;
@@ -179,6 +188,16 @@ class _PlayingView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(instructions, style: theme.textTheme.bodyMedium),
+                if (highlightCountry != null) ...[
+                  const SizedBox(height: 6),
+                  Text(
+                    highlightCountry!,
+                    style: theme.textTheme.headlineMedium?.copyWith(
+                      color: accent,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 12),
                 Row(
                   children: [
@@ -273,7 +292,9 @@ class _PlayingView extends StatelessWidget {
                       children: [
                         for (final country in engine.foundCountriesSorted)
                           Chip(
-                            label: Text(country.nameCommon),
+                            label: Text(
+                              '${country.flagEmoji} ${country.nameCommon}',
+                            ),
                             backgroundColor: AppColors.green.withValues(
                               alpha: 0.12,
                             ),

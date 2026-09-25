@@ -117,44 +117,93 @@ class _PlayingView extends StatelessWidget {
     final theme = Theme.of(context);
     final distance = engine.lastDistanceKm;
 
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+    return SizedBox.expand(
+      child: Stack(
         children: [
-          ScoreHeader(
-            score: engine.score,
-            questionNumber: engine.currentIndex + 1,
-            totalQuestions: engine.totalQuestions,
+          // The map fills the whole screen — everything else floats on
+          // top of it, instead of squeezing it into a small box in a
+          // scrolling column, so there's real room to tap precisely and
+          // to zoom in on a crowded region.
+          Positioned.fill(
+            child: WorldTapMap(
+              outlines: outlines,
+              enabled: !engine.answered,
+              onGuess: onGuess,
+              guessLon: engine.lastGuessLon,
+              guessLat: engine.lastGuessLat,
+              actualLon: engine.answered
+                  ? engine.currentTarget.longitude
+                  : null,
+              actualLat: engine.answered ? engine.currentTarget.latitude : null,
+            ),
           ),
-          const SizedBox(height: 12),
-          TimerBar(remaining: engine.timeRemaining, total: engine.timeAllotted),
-          const SizedBox(height: 16),
-          Text(
-            'Where is ${engine.currentTarget.nameCommon}?',
-            style: theme.textTheme.headlineSmall,
-            textAlign: TextAlign.center,
+          Positioned(
+            left: 12,
+            right: 12,
+            top: 12,
+            child: _FloatingPanel(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  ScoreHeader(
+                    score: engine.score,
+                    questionNumber: engine.currentIndex + 1,
+                    totalQuestions: engine.totalQuestions,
+                  ),
+                  const SizedBox(height: 10),
+                  TimerBar(
+                    remaining: engine.timeRemaining,
+                    total: engine.timeAllotted,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Where is ${engine.currentTarget.nameCommon}?',
+                    style: theme.textTheme.titleLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
           ),
-          const SizedBox(height: 12),
-          WorldTapMap(
-            outlines: outlines,
-            enabled: !engine.answered,
-            onGuess: onGuess,
-            guessLon: engine.lastGuessLon,
-            guessLat: engine.lastGuessLat,
-            actualLon: engine.answered ? engine.currentTarget.longitude : null,
-            actualLat: engine.answered ? engine.currentTarget.latitude : null,
-          ),
-          const SizedBox(height: 12),
           if (engine.answered)
-            Text(
-              distance == null
-                  ? "Time's up — no guess that round."
-                  : '${distance.round()} km away · +${engine.lastRoundScore} pts',
-              textAlign: TextAlign.center,
-              style: theme.textTheme.titleMedium,
+            Positioned(
+              left: 12,
+              right: 12,
+              bottom: 12,
+              child: _FloatingPanel(
+                child: Text(
+                  distance == null
+                      ? "Time's up — no guess that round."
+                      : '${distance.round()} km away · +${engine.lastRoundScore} pts',
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.titleMedium,
+                ),
+              ),
             ),
         ],
+      ),
+    );
+  }
+}
+
+/// A translucent card floating over the full-screen map — used for both
+/// the top status bar and the post-guess readout, so the map stays the
+/// dominant thing on screen instead of competing with opaque chrome.
+class _FloatingPanel extends StatelessWidget {
+  const _FloatingPanel({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Material(
+      color: theme.colorScheme.surface.withValues(alpha: 0.92),
+      elevation: 6,
+      borderRadius: BorderRadius.circular(20),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: child,
       ),
     );
   }

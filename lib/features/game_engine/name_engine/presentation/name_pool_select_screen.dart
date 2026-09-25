@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../app/router/push_screen.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/color_back_button.dart';
@@ -96,15 +97,13 @@ class NamePoolSelectScreen extends StatelessWidget {
                         color: option.color,
                         onTap: option.pool.isEmpty
                             ? null
-                            : () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (_) => NameGameScreen(
-                                    title: gameTitleFor(option),
-                                    instructions: instructionsFor(option),
-                                    engineBuilder: () =>
-                                        NameEngine(pool: option.pool),
-                                    onSessionComplete: onSessionComplete,
-                                  ),
+                            : () => context.pushScreen(
+                                NameGameScreen(
+                                  title: gameTitleFor(option),
+                                  instructions: instructionsFor(option),
+                                  engineBuilder: () =>
+                                      NameEngine(pool: option.pool),
+                                  onSessionComplete: onSessionComplete,
                                 ),
                               ),
                       );

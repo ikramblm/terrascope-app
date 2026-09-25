@@ -46,7 +46,12 @@ class AppShell extends StatelessWidget {
         currentIndex: navigationShell.currentIndex,
         onSelect: (index) => navigationShell.goBranch(
           index,
-          initialLocation: index == navigationShell.currentIndex,
+          // Explore (branch 1) always resets to its category grid —
+          // unlike the other tabs, landing mid-category from a previous
+          // visit reads as broken, not as a remembered place, since the
+          // grid is the tab's whole identity.
+          initialLocation:
+              index == 1 || index == navigationShell.currentIndex,
         ),
       ),
     );

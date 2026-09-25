@@ -384,7 +384,7 @@ void main() {
       await tester.pump();
 
       expect(find.text('1 / 195'), findsOneWidget);
-      expect(find.text('France'), findsOneWidget);
+      expect(find.textContaining('France'), findsOneWidget);
       // Drain the 500ms feedback-flash timer _handleSubmit scheduled
       // before moving on, or it's still pending at teardown.
       await tester.pump(const Duration(milliseconds: 600));

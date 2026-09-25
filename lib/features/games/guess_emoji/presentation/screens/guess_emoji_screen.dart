@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../app/router/push_screen.dart';
 import '../../../../../core/widgets/async_state_views.dart';
 import '../../../../../data/countries/models/country.dart';
 import '../../../../../data/countries/providers/country_providers.dart';
@@ -49,21 +50,19 @@ class GuessEmojiScreen extends ConsumerWidget {
       subtitle: 'A country, told in emoji — name it from 4 options.',
       icon: Icons.emoji_emotions_outlined,
       onSelect: (difficulty) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) => MultipleChoiceGameScreen(
-              title: 'Guess by Emoji',
-              engineBuilder: () =>
-                  _buildEngine(eligible, countries, clues, difficulty),
-              promptBuilder: (context, promptText) => Text(
-                promptText,
-                style: const TextStyle(fontSize: 72),
-                textAlign: TextAlign.center,
-              ),
-              onSessionComplete: (GameResult result) {
-                ref.read(playerProfileProvider.notifier).recordSession(result);
-              },
+        context.pushScreen(
+          MultipleChoiceGameScreen(
+            title: 'Guess by Emoji',
+            engineBuilder: () =>
+                _buildEngine(eligible, countries, clues, difficulty),
+            promptBuilder: (context, promptText) => Text(
+              promptText,
+              style: const TextStyle(fontSize: 72),
+              textAlign: TextAlign.center,
             ),
+            onSessionComplete: (GameResult result) {
+              ref.read(playerProfileProvider.notifier).recordSession(result);
+            },
           ),
         );
       },

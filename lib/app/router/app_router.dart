@@ -18,6 +18,7 @@ import '../../features/games/name_borders_of/presentation/screens/name_borders_o
 import '../../features/games/name_category/presentation/screens/name_category_screen.dart';
 import '../../features/games/name_continent/presentation/screens/name_continent_screen.dart';
 import '../../features/games/name_letter/presentation/screens/name_letter_screen.dart';
+import '../../features/games/presentation/screens/game_category_screen.dart';
 import '../../features/games/presentation/screens/games_screen.dart';
 import '../../features/games/speed_60s/presentation/screens/speed_60s_screen.dart';
 import '../../features/games/speed_capital/presentation/screens/speed_capital_screen.dart';
@@ -68,6 +69,23 @@ GoRouter buildAppRouter() {
               GoRoute(
                 path: RoutePaths.games,
                 builder: (context, state) => const GamesScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'category/:key',
+                    builder: (context, state) {
+                      final key = state.pathParameters['key'];
+                      final category = buildExploreCategories().firstWhere(
+                        (c) => c.key == key,
+                        orElse: () => buildExploreCategories().first,
+                      );
+                      return GameCategoryScreen(
+                        title: category.title,
+                        subtitle: category.screenSubtitle,
+                        modes: category.modes,
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),
@@ -88,6 +106,16 @@ GoRouter buildAppRouter() {
             ],
           ),
         ],
+      ),
+      // Generic destination for any screen a difficulty/mode pick leads
+      // to — the widget itself travels via `extra` (see PushScreenX),
+      // so every one of these pushes gets its own real history entry.
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.play,
+        redirect: (context, state) =>
+            state.extra is Widget ? null : RoutePaths.home,
+        builder: (context, state) => state.extra as Widget,
       ),
       // Full-screen gameplay routes: pushed over the bottom-nav shell (not a
       // shell branch) since a game session isn't a tab destination.

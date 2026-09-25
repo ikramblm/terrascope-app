@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../app/router/push_screen.dart';
 import '../../../../../app/theme/app_colors.dart';
 import '../../../../../core/widgets/async_state_views.dart';
 import '../../../../../data/countries/models/country.dart';
@@ -54,21 +55,18 @@ class GuessOutlineScreen extends ConsumerWidget {
       subtitle: 'A country\'s shape appears — name it from 4 options.',
       icon: Icons.crop_free,
       onSelect: (difficulty) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) => MultipleChoiceGameScreen(
-              title: 'Guess by Outline',
-              engineBuilder: () =>
-                  _buildEngine(eligible, countries, difficulty),
-              promptBuilder: (context, promptText) => CountryOutlineShape(
-                outline: outlines[promptText]!,
-                color: AppColors.green,
-                glowColor: AppColors.orange,
-              ),
-              onSessionComplete: (GameResult result) {
-                ref.read(playerProfileProvider.notifier).recordSession(result);
-              },
+        context.pushScreen(
+          MultipleChoiceGameScreen(
+            title: 'Guess by Outline',
+            engineBuilder: () => _buildEngine(eligible, countries, difficulty),
+            promptBuilder: (context, promptText) => CountryOutlineShape(
+              outline: outlines[promptText]!,
+              color: AppColors.green,
+              glowColor: AppColors.orange,
             ),
+            onSessionComplete: (GameResult result) {
+              ref.read(playerProfileProvider.notifier).recordSession(result);
+            },
           ),
         );
       },

@@ -10,6 +10,17 @@ abstract class RoutePaths {
   static const String dailyChallenge = '/daily-challenge';
   static const String duel = '/duel';
 
+  /// One generic destination for "the screen a difficulty/mode pick
+  /// leads to" — the actual widget travels via `extra` on the push, so
+  /// every game-launch flow gets its own real browser-history entry
+  /// instead of an invisible-to-go_router `Navigator.push`.
+  static const String play = '/play';
+
+  /// Nested under [games] (inside its shell branch) so browsing a
+  /// category keeps the bottom nav reachable, while still being a real
+  /// go_router location that resets when the tab is re-selected.
+  static const String gamesCategory = '/games/category';
+
   static const String guessFlag = '/games/guess-flag';
   static const String guessEmoji = '/games/guess-emoji';
   static const String guessOutline = '/games/guess-outline';

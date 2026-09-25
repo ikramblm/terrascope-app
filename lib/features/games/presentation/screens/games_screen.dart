@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../app/router/route_paths.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/fade_slide_in.dart';
@@ -8,7 +10,56 @@ import '../../data/game_catalog.dart';
 import '../../domain/game_category.dart';
 import '../../domain/game_mode.dart';
 import '../widgets/explore_hero_shape.dart';
-import 'game_category_screen.dart';
+
+/// The four Explore category tiles, keyed so a route (`/games/category/
+/// :key`) can rebuild the same list [GameCategoryScreen] needs without
+/// go_router having to serialize a `List<GameMode>` through the URL.
+List<ExploreCategoryData> buildExploreCategories() {
+  final soon = kGameCatalog.where((m) => !m.isAvailable).toList();
+  return [
+    ExploreCategoryData(
+      key: 'guessing',
+      title: 'Guessing',
+      subtitle:
+          '${kGameCatalog.where((m) => m.category == GameCategory.guess).length} games',
+      icon: Icons.travel_explore_rounded,
+      color: AppColors.oceanBlue,
+      modes: kGameCatalog
+          .where((m) => m.category == GameCategory.guess)
+          .toList(),
+    ),
+    ExploreCategoryData(
+      key: 'naming',
+      title: 'Naming',
+      subtitle:
+          '${kGameCatalog.where((m) => m.category == GameCategory.name).length} games',
+      icon: Icons.abc_rounded,
+      color: AppColors.green,
+      modes: kGameCatalog
+          .where((m) => m.category == GameCategory.name)
+          .toList(),
+    ),
+    ExploreCategoryData(
+      key: 'speed',
+      title: 'Speed',
+      subtitle:
+          '${kGameCatalog.where((m) => m.category == GameCategory.speed).length} games',
+      icon: Icons.bolt_rounded,
+      color: AppColors.orange,
+      modes: kGameCatalog
+          .where((m) => m.category == GameCategory.speed)
+          .toList(),
+    ),
+    ExploreCategoryData(
+      key: 'soon',
+      title: 'Soon',
+      subtitle: '${soon.length} upcoming',
+      icon: Icons.hourglass_top_rounded,
+      color: AppColors.purple,
+      modes: soon,
+    ),
+  ];
+}
 
 /// Explore, reorganized into categories instead of one long flat grid —
 /// Guessing, Naming, Speed, and a cross-cutting Soon bucket that pulls
@@ -20,47 +71,7 @@ class GamesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final soon = kGameCatalog.where((m) => !m.isAvailable).toList();
-
-    final categories = [
-      _ExploreCategory(
-        title: 'Guessing',
-        subtitle:
-            '${kGameCatalog.where((m) => m.category == GameCategory.guess).length} games',
-        icon: Icons.travel_explore_rounded,
-        color: AppColors.oceanBlue,
-        modes: kGameCatalog
-            .where((m) => m.category == GameCategory.guess)
-            .toList(),
-      ),
-      _ExploreCategory(
-        title: 'Naming',
-        subtitle:
-            '${kGameCatalog.where((m) => m.category == GameCategory.name).length} games',
-        icon: Icons.abc_rounded,
-        color: AppColors.green,
-        modes: kGameCatalog
-            .where((m) => m.category == GameCategory.name)
-            .toList(),
-      ),
-      _ExploreCategory(
-        title: 'Speed',
-        subtitle:
-            '${kGameCatalog.where((m) => m.category == GameCategory.speed).length} games',
-        icon: Icons.bolt_rounded,
-        color: AppColors.orange,
-        modes: kGameCatalog
-            .where((m) => m.category == GameCategory.speed)
-            .toList(),
-      ),
-      _ExploreCategory(
-        title: 'Soon',
-        subtitle: '${soon.length} upcoming',
-        icon: Icons.hourglass_top_rounded,
-        color: AppColors.purple,
-        modes: soon,
-      ),
-    ];
+    final categories = buildExploreCategories();
 
     return Scaffold(
       body: AppBackground(
@@ -94,16 +105,8 @@ class GamesScreen extends StatelessWidget {
                       for (final category in categories)
                         _CategoryCard(
                           category: category,
-                          onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (_) => GameCategoryScreen(
-                                title: category.title,
-                                subtitle: category.title == 'Soon'
-                                    ? 'Every mode still in the works, all in one place.'
-                                    : 'All ${category.title.toLowerCase()} modes in one place.',
-                                modes: category.modes,
-                              ),
-                            ),
+                          onTap: () => context.push(
+                            '${RoutePaths.gamesCategory}/${category.key}',
                           ),
                         ),
                     ],
@@ -118,8 +121,9 @@ class GamesScreen extends StatelessWidget {
   }
 }
 
-class _ExploreCategory {
-  const _ExploreCategory({
+class ExploreCategoryData {
+  const ExploreCategoryData({
+    required this.key,
     required this.title,
     required this.subtitle,
     required this.icon,
@@ -127,17 +131,24 @@ class _ExploreCategory {
     required this.modes,
   });
 
+  /// URL-safe identifier used by the `/games/category/:key` route to
+  /// look this category back up after a tab switch or reload.
+  final String key;
   final String title;
   final String subtitle;
   final IconData icon;
   final Color color;
   final List<GameMode> modes;
+
+  String get screenSubtitle => key == 'soon'
+      ? 'Every mode still in the works, all in one place.'
+      : 'All ${title.toLowerCase()} modes in one place.';
 }
 
 class _CategoryCard extends StatelessWidget {
   const _CategoryCard({required this.category, required this.onTap});
 
-  final _ExploreCategory category;
+  final ExploreCategoryData category;
   final VoidCallback onTap;
 
   @override

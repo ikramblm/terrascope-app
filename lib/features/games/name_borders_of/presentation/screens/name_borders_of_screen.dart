@@ -41,7 +41,8 @@ class NameBordersOfScreen extends ConsumerWidget {
 
         return NameGameScreen(
           title: 'Name the Neighbors',
-          instructions: 'Name every country bordering ${target.nameCommon}.',
+          instructions: 'Name every country bordering',
+          highlightCountry: target.nameCommon,
           engineBuilder: () => NameEngine(pool: neighbors),
           onSessionComplete: (GameResult result) {
             ref.read(playerProfileProvider.notifier).recordSession(result);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../app/router/push_screen.dart';
 import '../../../../../core/widgets/async_state_views.dart';
 import '../../../../../data/countries/providers/country_providers.dart';
 import '../../../../game_engine/domain/game_result.dart';
@@ -39,22 +40,18 @@ class GuessLocationScreen extends ConsumerWidget {
             subtitle: 'Tap the map as close as you can to each country.',
             icon: Icons.my_location_outlined,
             onSelect: (difficulty) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => LocationGameScreen(
-                    engineBuilder: () => LocationEngine(
-                      targets: (List.of(
-                        eligible,
-                      )..shuffle()).take(_questionsPerGame).toList(),
-                      difficulty: difficulty,
-                    ),
-                    outlines: outlines,
-                    onSessionComplete: (GameResult result) {
-                      ref
-                          .read(playerProfileProvider.notifier)
-                          .recordSession(result);
-                    },
+              context.pushScreen(
+                LocationGameScreen(
+                  engineBuilder: () => LocationEngine(
+                    targets: (List.of(
+                      eligible,
+                    )..shuffle()).take(_questionsPerGame).toList(),
+                    difficulty: difficulty,
                   ),
+                  outlines: outlines,
+                  onSessionComplete: (GameResult result) {
+                    ref.read(playerProfileProvider.notifier).recordSession(result);
+                  },
                 ),
               );
             },

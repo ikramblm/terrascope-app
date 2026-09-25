@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../app/router/push_screen.dart';
 import '../../../../../app/router/route_paths.dart';
 import '../../../../../app/theme/app_colors.dart';
 import '../../../../../core/widgets/app_background.dart';
@@ -51,38 +52,36 @@ class DailyChallengeScreen extends ConsumerWidget {
                     onStart: () {
                       final seed =
                           today.year * 10000 + today.month * 100 + today.day;
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => MultipleChoiceGameScreen(
-                            title: 'Daily Challenge',
-                            engineBuilder: () {
-                              final questions =
-                                  MultipleChoiceGenerator(
-                                    random: Random(seed),
-                                  ).generate(
-                                    pool: countries,
-                                    distractorPool: countries,
-                                    count: _questionsPerChallenge,
-                                    difficulty: GameDifficulty.medium,
-                                    promptFor: (c) => c.flagEmoji,
-                                  );
-                              return MultipleChoiceEngine(
-                                questions: questions,
-                                difficulty: GameDifficulty.medium,
-                              );
-                            },
-                            promptBuilder: (context, promptText) => Text(
-                              promptText,
-                              style: const TextStyle(fontSize: 96),
-                            ),
-                            onSessionComplete: (GameResult result) {
-                              final notifier = ref.read(
-                                playerProfileProvider.notifier,
-                              );
-                              notifier.recordSession(result);
-                              notifier.recordDailyChallengeCompletion(today);
-                            },
+                      context.pushScreen(
+                        MultipleChoiceGameScreen(
+                          title: 'Daily Challenge',
+                          engineBuilder: () {
+                            final questions =
+                                MultipleChoiceGenerator(
+                                  random: Random(seed),
+                                ).generate(
+                                  pool: countries,
+                                  distractorPool: countries,
+                                  count: _questionsPerChallenge,
+                                  difficulty: GameDifficulty.medium,
+                                  promptFor: (c) => c.flagEmoji,
+                                );
+                            return MultipleChoiceEngine(
+                              questions: questions,
+                              difficulty: GameDifficulty.medium,
+                            );
+                          },
+                          promptBuilder: (context, promptText) => Text(
+                            promptText,
+                            style: const TextStyle(fontSize: 96),
                           ),
+                          onSessionComplete: (GameResult result) {
+                            final notifier = ref.read(
+                              playerProfileProvider.notifier,
+                            );
+                            notifier.recordSession(result);
+                            notifier.recordDailyChallengeCompletion(today);
+                          },
                         ),
                       );
                     },

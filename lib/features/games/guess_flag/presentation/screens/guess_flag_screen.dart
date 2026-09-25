@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../app/router/push_screen.dart';
 import '../../../../../core/widgets/async_state_views.dart';
 import '../../../../../data/countries/models/country.dart';
 import '../../../../../data/countries/providers/country_providers.dart';
@@ -32,19 +33,15 @@ class GuessFlagScreen extends ConsumerWidget {
         subtitle: 'A flag appears — name the country behind it.',
         icon: Icons.flag_outlined,
         onSelect: (difficulty) {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (_) => MultipleChoiceGameScreen(
-                title: 'Guess by Flag',
-                engineBuilder: () => _buildEngine(countries, difficulty),
-                promptBuilder: (context, promptText) =>
-                    Text(promptText, style: const TextStyle(fontSize: 96)),
-                onSessionComplete: (GameResult result) {
-                  ref
-                      .read(playerProfileProvider.notifier)
-                      .recordSession(result);
-                },
-              ),
+          context.pushScreen(
+            MultipleChoiceGameScreen(
+              title: 'Guess by Flag',
+              engineBuilder: () => _buildEngine(countries, difficulty),
+              promptBuilder: (context, promptText) =>
+                  Text(promptText, style: const TextStyle(fontSize: 96)),
+              onSessionComplete: (GameResult result) {
+                ref.read(playerProfileProvider.notifier).recordSession(result);
+              },
             ),
           );
         },

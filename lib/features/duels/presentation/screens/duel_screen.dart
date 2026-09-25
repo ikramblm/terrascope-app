@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../app/router/push_screen.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/async_state_views.dart';
@@ -53,44 +54,40 @@ class _DuelScreenState extends ConsumerState<DuelScreen> {
         ? 'Guest Explorer'
         : _nameController.text.trim();
     final seed = Random().nextInt(1 << 31);
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => MultipleChoiceGameScreen(
-          title: 'Duel Challenge',
-          engineBuilder: () {
-            final questions = MultipleChoiceGenerator(random: Random(seed))
-                .generate(
-                  pool: countries,
-                  distractorPool: countries,
-                  count: _duelQuestionCount,
-                  difficulty: GameDifficulty.medium,
-                  promptFor: (c) => c.flagEmoji,
-                );
-            return MultipleChoiceEngine(
-              questions: questions,
-              difficulty: GameDifficulty.medium,
-            );
-          },
-          promptBuilder: (context, promptText) =>
-              Text(promptText, style: const TextStyle(fontSize: 96)),
-          onSessionComplete: (GameResult result) {
-            ref.read(playerProfileProvider.notifier).recordSession(result);
-            Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => DuelResultScreen(
-                  myScore: result.totalScore,
-                  myName: name,
-                  shareCode: DuelPayload(
-                    seed: seed,
-                    questionCount: _duelQuestionCount,
-                    challengerScore: result.totalScore,
-                    challengerName: name,
-                  ).encode(),
-                ),
-              ),
-            );
-          },
-        ),
+    context.pushScreen(
+      MultipleChoiceGameScreen(
+        title: 'Duel Challenge',
+        engineBuilder: () {
+          final questions = MultipleChoiceGenerator(random: Random(seed))
+              .generate(
+                pool: countries,
+                distractorPool: countries,
+                count: _duelQuestionCount,
+                difficulty: GameDifficulty.medium,
+                promptFor: (c) => c.flagEmoji,
+              );
+          return MultipleChoiceEngine(
+            questions: questions,
+            difficulty: GameDifficulty.medium,
+          );
+        },
+        promptBuilder: (context, promptText) =>
+            Text(promptText, style: const TextStyle(fontSize: 96)),
+        onSessionComplete: (GameResult result) {
+          ref.read(playerProfileProvider.notifier).recordSession(result);
+          context.pushScreen(
+            DuelResultScreen(
+              myScore: result.totalScore,
+              myName: name,
+              shareCode: DuelPayload(
+                seed: seed,
+                questionCount: _duelQuestionCount,
+                challengerScore: result.totalScore,
+                challengerName: name,
+              ).encode(),
+            ),
+          );
+        },
       ),
     );
   }
@@ -111,46 +108,42 @@ class _DuelScreenState extends ConsumerState<DuelScreen> {
     final name = _nameController.text.trim().isEmpty
         ? 'Guest Explorer'
         : _nameController.text.trim();
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => MultipleChoiceGameScreen(
-          title: 'vs ${payload.challengerName}',
-          engineBuilder: () {
-            final questions =
-                MultipleChoiceGenerator(random: Random(payload.seed)).generate(
-                  pool: countries,
-                  distractorPool: countries,
-                  count: payload.questionCount,
-                  difficulty: GameDifficulty.medium,
-                  promptFor: (c) => c.flagEmoji,
-                );
-            return MultipleChoiceEngine(
-              questions: questions,
-              difficulty: GameDifficulty.medium,
-            );
-          },
-          promptBuilder: (context, promptText) =>
-              Text(promptText, style: const TextStyle(fontSize: 96)),
-          onSessionComplete: (GameResult result) {
-            ref.read(playerProfileProvider.notifier).recordSession(result);
-            Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => DuelResultScreen(
-                  myScore: result.totalScore,
-                  myName: name,
-                  opponentScore: payload.challengerScore,
-                  opponentName: payload.challengerName,
-                  shareCode: DuelPayload(
-                    seed: payload.seed,
-                    questionCount: payload.questionCount,
-                    challengerScore: result.totalScore,
-                    challengerName: name,
-                  ).encode(),
-                ),
-              ),
-            );
-          },
-        ),
+    context.pushScreen(
+      MultipleChoiceGameScreen(
+        title: 'vs ${payload.challengerName}',
+        engineBuilder: () {
+          final questions =
+              MultipleChoiceGenerator(random: Random(payload.seed)).generate(
+                pool: countries,
+                distractorPool: countries,
+                count: payload.questionCount,
+                difficulty: GameDifficulty.medium,
+                promptFor: (c) => c.flagEmoji,
+              );
+          return MultipleChoiceEngine(
+            questions: questions,
+            difficulty: GameDifficulty.medium,
+          );
+        },
+        promptBuilder: (context, promptText) =>
+            Text(promptText, style: const TextStyle(fontSize: 96)),
+        onSessionComplete: (GameResult result) {
+          ref.read(playerProfileProvider.notifier).recordSession(result);
+          context.pushScreen(
+            DuelResultScreen(
+              myScore: result.totalScore,
+              myName: name,
+              opponentScore: payload.challengerScore,
+              opponentName: payload.challengerName,
+              shareCode: DuelPayload(
+                seed: payload.seed,
+                questionCount: payload.questionCount,
+                challengerScore: result.totalScore,
+                challengerName: name,
+              ).encode(),
+            ),
+          );
+        },
       ),
     );
   }

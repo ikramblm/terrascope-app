@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../app/router/push_screen.dart';
 import '../../../../../core/widgets/async_state_views.dart';
 import '../../../../../data/countries/models/country.dart';
 import '../../../../../data/countries/providers/country_providers.dart';
@@ -64,34 +65,30 @@ class GuessCluesScreen extends ConsumerWidget {
           subtitle: 'A few facts appear — name the country they describe.',
           icon: Icons.lightbulb_outline,
           onSelect: (difficulty) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => MultipleChoiceGameScreen(
-                  title: 'Guess by Clues',
-                  engineBuilder: () => _buildEngine(countries, difficulty),
-                  promptBuilder: (context, promptText) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    // FittedBox as a hard guarantee, on top of keeping
-                    // clues short: the prompt area's real height varies
-                    // by device and by how many power-ups are still in
-                    // stock, so no fixed font size can promise a fit —
-                    // this scales the text down instead of ever
-                    // overflowing into the rows above or below it.
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        promptText,
-                        style: Theme.of(context).textTheme.titleLarge,
-                        textAlign: TextAlign.center,
-                      ),
+            context.pushScreen(
+              MultipleChoiceGameScreen(
+                title: 'Guess by Clues',
+                engineBuilder: () => _buildEngine(countries, difficulty),
+                promptBuilder: (context, promptText) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  // FittedBox as a hard guarantee, on top of keeping
+                  // clues short: the prompt area's real height varies
+                  // by device and by how many power-ups are still in
+                  // stock, so no fixed font size can promise a fit —
+                  // this scales the text down instead of ever
+                  // overflowing into the rows above or below it.
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      promptText,
+                      style: Theme.of(context).textTheme.titleLarge,
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  onSessionComplete: (GameResult result) {
-                    ref
-                        .read(playerProfileProvider.notifier)
-                        .recordSession(result);
-                  },
                 ),
+                onSessionComplete: (GameResult result) {
+                  ref.read(playerProfileProvider.notifier).recordSession(result);
+                },
               ),
             );
           },

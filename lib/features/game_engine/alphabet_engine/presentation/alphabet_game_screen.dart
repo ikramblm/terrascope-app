@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -33,6 +35,9 @@ class _AlphabetGameScreenState extends State<AlphabetGameScreen> {
   final FocusNode _focusNode = FocusNode();
   bool _resultRecorded = false;
   bool _showWrongFlash = false;
+  bool _showCorrectPop = false;
+  Timer? _correctPopTimer;
+  Timer? _wrongFlashTimer;
 
   @override
   void initState() {
@@ -56,13 +61,21 @@ class _AlphabetGameScreenState extends State<AlphabetGameScreen> {
     if (matched) {
       HapticFeedback.lightImpact();
       SoundService.instance.playCorrect();
-      setState(() => _showWrongFlash = false);
+      setState(() {
+        _showWrongFlash = false;
+        _showCorrectPop = true;
+      });
+      _correctPopTimer?.cancel();
+      _correctPopTimer = Timer(const Duration(milliseconds: 550), () {
+        if (mounted) setState(() => _showCorrectPop = false);
+      });
       _maybeRecordCompletion();
     } else {
       HapticFeedback.mediumImpact();
       SoundService.instance.playWrong();
       setState(() => _showWrongFlash = true);
-      Future.delayed(const Duration(milliseconds: 500), () {
+      _wrongFlashTimer?.cancel();
+      _wrongFlashTimer = Timer(const Duration(milliseconds: 500), () {
         if (mounted) setState(() => _showWrongFlash = false);
       });
     }
@@ -89,6 +102,8 @@ class _AlphabetGameScreenState extends State<AlphabetGameScreen> {
 
   @override
   void dispose() {
+    _correctPopTimer?.cancel();
+    _wrongFlashTimer?.cancel();
     _controller.dispose();
     _focusNode.dispose();
     super.dispose();
@@ -104,16 +119,43 @@ class _AlphabetGameScreenState extends State<AlphabetGameScreen> {
       body: AppBackground(
         child: SafeArea(
           child: MaxWidthBox(
-            child: _engine.isComplete
-                ? AlphabetResultsView(engine: _engine, onPlayAgain: _playAgain)
-                : _PlayingView(
-                    engine: _engine,
-                    controller: _controller,
-                    focusNode: _focusNode,
-                    showWrongFlash: _showWrongFlash,
-                    onSubmitted: _handleSubmit,
-                    onSkip: _handleSkip,
+            child: Stack(
+              children: [
+                _engine.isComplete
+                    ? AlphabetResultsView(
+                        engine: _engine,
+                        onPlayAgain: _playAgain,
+                      )
+                    : _PlayingView(
+                        engine: _engine,
+                        controller: _controller,
+                        focusNode: _focusNode,
+                        showWrongFlash: _showWrongFlash,
+                        onSubmitted: _handleSubmit,
+                        onSkip: _handleSkip,
+                      ),
+                if (_engine.lastMatchedCountry != null)
+                  IgnorePointer(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: AnimatedOpacity(
+                        opacity: _showCorrectPop ? 1 : 0,
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.easeOut,
+                        child: AnimatedScale(
+                          scale: _showCorrectPop ? 1.0 : 0.4,
+                          duration: const Duration(milliseconds: 350),
+                          curve: Curves.elasticOut,
+                          child: Text(
+                            _engine.lastMatchedCountry!.flagEmoji,
+                            style: const TextStyle(fontSize: 96),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
+              ],
+            ),
           ),
         ),
       ),
@@ -260,6 +302,10 @@ class _PlayingView extends StatelessWidget {
           const SizedBox(height: 12),
           OutlinedButton.icon(
             onPressed: onSkip,
+            style: OutlinedButton.styleFrom(
+              foregroundColor: AppColors.orange,
+              side: const BorderSide(color: AppColors.orange, width: 1.5),
+            ),
             icon: const Icon(Icons.skip_next_rounded),
             label: const Text('Skip this letter'),
           ),

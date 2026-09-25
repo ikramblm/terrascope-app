@@ -166,7 +166,7 @@ class _FlagsTab extends ConsumerWidget {
             crossAxisCount: 3,
             mainAxisSpacing: 12,
             crossAxisSpacing: 12,
-            mainAxisExtent: 96,
+            mainAxisExtent: 108,
           ),
           itemCount: sorted.length,
           itemBuilder: (context, index) {
@@ -238,12 +238,16 @@ class _FlagTile extends StatelessWidget {
           children: [
             Text(flagEmoji, style: const TextStyle(fontSize: 30)),
             const SizedBox(height: 6),
-            Text(
-              name,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: theme.textTheme.labelSmall,
+            Expanded(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  name,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  style: theme.textTheme.labelSmall,
+                ),
+              ),
             ),
           ],
         ),

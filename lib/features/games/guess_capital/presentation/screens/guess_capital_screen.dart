@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../app/router/push_screen.dart';
 import '../../../../../core/widgets/async_state_views.dart';
 import '../../../../../data/countries/models/country.dart';
 import '../../../../../data/countries/providers/country_providers.dart';
@@ -38,23 +39,19 @@ class GuessCapitalScreen extends ConsumerWidget {
           subtitle: 'A capital city appears — name its country.',
           icon: Icons.location_city_outlined,
           onSelect: (difficulty) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => MultipleChoiceGameScreen(
-                  title: 'Guess by Capital',
-                  engineBuilder: () =>
-                      _buildEngine(eligible, countries, difficulty),
-                  promptBuilder: (context, promptText) => Text(
-                    promptText,
-                    style: Theme.of(context).textTheme.displayMedium,
-                    textAlign: TextAlign.center,
-                  ),
-                  onSessionComplete: (GameResult result) {
-                    ref
-                        .read(playerProfileProvider.notifier)
-                        .recordSession(result);
-                  },
+            context.pushScreen(
+              MultipleChoiceGameScreen(
+                title: 'Guess by Capital',
+                engineBuilder: () =>
+                    _buildEngine(eligible, countries, difficulty),
+                promptBuilder: (context, promptText) => Text(
+                  promptText,
+                  style: Theme.of(context).textTheme.displayMedium,
+                  textAlign: TextAlign.center,
                 ),
+                onSessionComplete: (GameResult result) {
+                  ref.read(playerProfileProvider.notifier).recordSession(result);
+                },
               ),
             );
           },

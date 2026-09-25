@@ -41,39 +41,46 @@ class WorldTapMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: _lonSpan / _latSpan,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final size = constraints.biggest;
-            return GestureDetector(
-              key: const Key('world_tap_map'),
-              onTapUp: enabled
-                  ? (details) {
-                      final local = details.localPosition;
-                      final lon =
-                          (_worldMinLon + local.dx / size.width * _lonSpan)
-                              .clamp(_worldMinLon, _worldMaxLon);
-                      final lat =
-                          (_worldMaxLat - local.dy / size.height * _latSpan)
-                              .clamp(_worldMinLat, _worldMaxLat);
-                      onGuess(lon, lat);
-                    }
-                  : null,
-              child: CustomPaint(
-                size: size,
-                painter: _WorldTapMapPainter(
-                  outlines: outlines,
-                  guessLon: guessLon,
-                  guessLat: guessLat,
-                  actualLon: actualLon,
-                  actualLat: actualLat,
-                ),
-              ),
-            );
-          },
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: ColoredBox(
+        color: _WorldTapMapPainter._ocean,
+        child: InteractiveViewer(
+          minScale: 1,
+          maxScale: 8,
+          child: AspectRatio(
+            aspectRatio: _lonSpan / _latSpan,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final size = constraints.biggest;
+                return GestureDetector(
+                  key: const Key('world_tap_map'),
+                  onTapUp: enabled
+                      ? (details) {
+                          final local = details.localPosition;
+                          final lon =
+                              (_worldMinLon + local.dx / size.width * _lonSpan)
+                                  .clamp(_worldMinLon, _worldMaxLon);
+                          final lat =
+                              (_worldMaxLat - local.dy / size.height * _latSpan)
+                                  .clamp(_worldMinLat, _worldMaxLat);
+                          onGuess(lon, lat);
+                        }
+                      : null,
+                  child: CustomPaint(
+                    size: size,
+                    painter: _WorldTapMapPainter(
+                      outlines: outlines,
+                      guessLon: guessLon,
+                      guessLat: guessLat,
+                      actualLon: actualLon,
+                      actualLat: actualLat,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
         ),
       ),
     );
@@ -97,6 +104,7 @@ class _WorldTapMapPainter extends CustomPainter {
 
   static const _ocean = Color(0xFFBFE3F5);
   static const _land = Color(0xFFE8DCB8);
+  static const _border = Color(0xFF9C7A45);
   static const _guessColor = Color(0xFFFF6B6B);
   static const _actualColor = Color(0xFF22C55E);
 
@@ -114,6 +122,14 @@ class _WorldTapMapPainter extends CustomPainter {
     }
 
     final landPaint = Paint()..color = _land;
+    // A visible stroke per country, on top of the shared land fill, is
+    // what makes this read as "a map with borders" instead of one flat
+    // continent-shaped blob — scaled with the canvas so it stays a
+    // sensible width whether the player is zoomed out or in close.
+    final borderPaint = Paint()
+      ..color = _border
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.1;
     for (final outline in outlines.values) {
       final path = Path()..fillType = PathFillType.evenOdd;
       for (final polygon in outline) {
@@ -129,6 +145,7 @@ class _WorldTapMapPainter extends CustomPainter {
         }
       }
       canvas.drawPath(path, landPaint);
+      canvas.drawPath(path, borderPaint);
     }
 
     final aLon = actualLon;
