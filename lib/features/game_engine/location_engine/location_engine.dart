@@ -71,6 +71,11 @@ class LocationEngine extends ChangeNotifier {
   double? lastDistanceKm;
   int? lastRoundScore;
 
+  /// Whether the round just resolved (tap or timeout) counted as
+  /// correct — inside the target's outline, or within [closeEnoughKm].
+  /// The screen uses this to pick the right/wrong sound.
+  bool lastGuessWasCorrect = false;
+
   Duration timeRemaining;
   bool isComplete = false;
 
@@ -149,6 +154,7 @@ class LocationEngine extends ChangeNotifier {
 
     final isClose =
         insideCountry || (distanceKm != null && distanceKm <= closeEnoughKm);
+    lastGuessWasCorrect = isClose;
     if (isClose) {
       xpEarned += difficulty.baseXp;
       combo += 1;
@@ -187,6 +193,7 @@ class LocationEngine extends ChangeNotifier {
     lastGuessLat = null;
     lastDistanceKm = null;
     lastRoundScore = null;
+    lastGuessWasCorrect = false;
     _startQuestionTimer();
   }
 

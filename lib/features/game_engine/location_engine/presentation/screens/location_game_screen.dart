@@ -35,6 +35,7 @@ class LocationGameScreen extends StatefulWidget {
 class _LocationGameScreenState extends State<LocationGameScreen> {
   late LocationEngine _engine;
   bool _resultRecorded = false;
+  int _lastCelebratedIndex = -1;
 
   @override
   void initState() {
@@ -44,6 +45,18 @@ class _LocationGameScreenState extends State<LocationGameScreen> {
   }
 
   void _onEngineTick() {
+    // Fires for both a tapped guess and a timeout — either way,
+    // [LocationEngine.answered] just flipped true for this round, so
+    // this is the one moment to play the right/wrong sound, keyed off
+    // currentIndex so it never repeats on the timer's own ticks.
+    if (_engine.answered && _engine.currentIndex != _lastCelebratedIndex) {
+      _lastCelebratedIndex = _engine.currentIndex;
+      if (_engine.lastGuessWasCorrect) {
+        SoundService.instance.playCorrect(comboLevel: _engine.combo);
+      } else {
+        SoundService.instance.playWrong();
+      }
+    }
     if (_engine.isComplete && !_resultRecorded) {
       _resultRecorded = true;
       SoundService.instance.playComplete();
@@ -54,7 +67,6 @@ class _LocationGameScreenState extends State<LocationGameScreen> {
 
   void _handleGuess(double lon, double lat) {
     _engine.submitGuess(lon, lat);
-    SoundService.instance.playTap();
   }
 
   void _playAgain() {
@@ -62,6 +74,7 @@ class _LocationGameScreenState extends State<LocationGameScreen> {
     _engine.dispose();
     setState(() {
       _resultRecorded = false;
+      _lastCelebratedIndex = -1;
       _engine = widget.engineBuilder()..addListener(_onEngineTick);
       _engine.start();
     });
