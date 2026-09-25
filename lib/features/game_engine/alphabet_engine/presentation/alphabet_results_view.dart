@@ -100,16 +100,23 @@ class AlphabetResultsView extends ConsumerWidget {
             child: const Text('Play Again'),
           ),
           const SizedBox(height: 10),
-          OutlinedButton(
+          ElevatedButton(
             onPressed: () => launchQuickPlay(context),
-            style: OutlinedButton.styleFrom(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.purple,
+              foregroundColor: Colors.white,
               minimumSize: const Size.fromHeight(56),
             ),
             child: const Text('Try Another'),
           ),
-          const SizedBox(height: 4),
-          TextButton(
+          const SizedBox(height: 10),
+          OutlinedButton(
             onPressed: () => context.go(RoutePaths.home),
+            style: OutlinedButton.styleFrom(
+              foregroundColor: AppColors.oceanBlue,
+              side: const BorderSide(color: AppColors.oceanBlue, width: 1.5),
+              minimumSize: const Size.fromHeight(56),
+            ),
             child: const Text('Home'),
           ),
         ],

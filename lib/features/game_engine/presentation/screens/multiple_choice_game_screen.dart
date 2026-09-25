@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,7 +20,7 @@ import 'game_results_view.dart';
 /// Generic screen for any "clue → pick the country" mode. Guess by Flag
 /// and Guess by Emoji are both just an [engineBuilder] (which questions)
 /// and a [promptBuilder] (how the clue renders) — everything else (timer,
-/// scoring, feedback, confetti, sound, results, power-ups) lives here once.
+/// scoring, feedback, sound, results, power-ups) lives here once.
 class MultipleChoiceGameScreen extends StatefulWidget {
   const MultipleChoiceGameScreen({
     super.key,
@@ -59,10 +56,7 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
   int _powerUpQuestionIndex = -1;
   Set<String> _eliminatedCca3s = {};
   bool _radarRevealed = false;
-
-  late final ConfettiController _confettiController = ConfettiController(
-    duration: const Duration(milliseconds: 700),
-  );
+  bool _showCorrectPop = false;
 
   @override
   void initState() {
@@ -80,7 +74,10 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
     if (_engine.answered && _engine.currentIndex != _lastCelebratedIndex) {
       _lastCelebratedIndex = _engine.currentIndex;
       if (_engine.lastAnswerCorrect == true) {
-        _confettiController.play();
+        _showCorrectPop = true;
+        Future.delayed(const Duration(milliseconds: 550), () {
+          if (mounted) setState(() => _showCorrectPop = false);
+        });
         HapticFeedback.lightImpact();
         // combo was already incremented for this answer, so it's the
         // right "how many in a row so far" figure for the pitch ramp.
@@ -130,7 +127,6 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
   void dispose() {
     _engine.removeListener(_onEngineTick);
     _engine.dispose();
-    _confettiController.dispose();
     super.dispose();
   }
 
@@ -162,22 +158,24 @@ class _MultipleChoiceGameScreenState extends State<MultipleChoiceGameScreen> {
                         onTimeFreeze: _useTimeFreeze,
                         onRadar: _useRadar,
                       ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: ConfettiWidget(
-                    confettiController: _confettiController,
-                    blastDirection: pi / 2,
-                    blastDirectionality: BlastDirectionality.explosive,
-                    numberOfParticles: 18,
-                    gravity: 0.4,
-                    emissionFrequency: 0.9,
-                    maxBlastForce: 16,
-                    minBlastForce: 6,
-                    colors: [
-                      theme.colorScheme.secondary,
-                      theme.colorScheme.primary,
-                      theme.colorScheme.tertiary,
-                    ],
+                IgnorePointer(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: AnimatedOpacity(
+                      opacity: _showCorrectPop ? 1 : 0,
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeOut,
+                      child: AnimatedScale(
+                        scale: _showCorrectPop ? 1.0 : 0.4,
+                        duration: const Duration(milliseconds: 350),
+                        curve: Curves.elasticOut,
+                        child: Icon(
+                          Icons.check_circle_rounded,
+                          size: 96,
+                          color: theme.colorScheme.secondary,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],

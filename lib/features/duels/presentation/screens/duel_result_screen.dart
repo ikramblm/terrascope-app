@@ -135,8 +135,16 @@ class DuelResultScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                TextButton(
+                OutlinedButton(
                   onPressed: () => context.go(RoutePaths.home),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: AppColors.oceanBlue,
+                    side: const BorderSide(
+                      color: AppColors.oceanBlue,
+                      width: 1.5,
+                    ),
+                    minimumSize: const Size.fromHeight(56),
+                  ),
                   child: const Text('Home'),
                 ),
               ],
