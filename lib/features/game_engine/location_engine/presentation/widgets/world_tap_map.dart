@@ -75,59 +75,63 @@ class WorldTapMap extends StatelessWidget {
   /// green-actual pairing.
   final bool? isCorrect;
 
+  /// The map's own drawing surface, at a fixed size matching the real
+  /// lon/lat aspect ratio — never resized to match whatever box this
+  /// widget is given. [FittedBox] is what scales this down (or up) to
+  /// fit that box, so a mismatched container ratio always shows as
+  /// letterboxing (the ocean color around it), never as stretching or
+  /// cropping.
+  static const double _mapWidth = 1400;
+  static const double _mapHeight = _mapWidth * _latSpan / _lonSpan;
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: ColoredBox(
         color: _WorldTapMapPainter._ocean,
-        // AspectRatio has to sit OUTSIDE InteractiveViewer, not inside
-        // it: InteractiveViewer's child fills whatever box it's given,
-        // so an AspectRatio nested inside it receives a fully tight box
-        // and can't actually enforce a ratio — the map just stretches
-        // to match the container instead. Computing the
-        // correctly-proportioned box first and handing InteractiveViewer
-        // exactly that box is what keeps the map's real shape — filling
-        // this same box, never a separate popup — whether it's zoomed
-        // in or not.
-        child: Center(
-          child: AspectRatio(
-            aspectRatio: _lonSpan / _latSpan,
-            child: InteractiveViewer(
-              minScale: 1,
-              maxScale: 6,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final size = constraints.biggest;
-                  return GestureDetector(
-                    key: const Key('world_tap_map'),
-                    onTapUp: enabled
-                        ? (details) {
-                            final local = details.localPosition;
-                            final lon =
-                                (_worldMinLon +
-                                        local.dx / size.width * _lonSpan)
-                                    .clamp(_worldMinLon, _worldMaxLon);
-                            final lat =
-                                (_worldMaxLat -
-                                        local.dy / size.height * _latSpan)
-                                    .clamp(_worldMinLat, _worldMaxLat);
-                            onGuess(lon, lat);
-                          }
-                        : null,
-                    child: CustomPaint(
-                      size: size,
-                      painter: _WorldTapMapPainter(
-                        outlines: outlines,
-                        guessLon: guessLon,
-                        guessLat: guessLat,
-                        actualLon: actualLon,
-                        actualLat: actualLat,
-                        isCorrect: isCorrect,
-                      ),
-                    ),
-                  );
-                },
+        // InteractiveViewer's own scale starts at 1.0, which — because
+        // its child is a BoxFit.contain FittedBox, not the raw map —
+        // already means "the whole map, fitted to the box, centered."
+        // There's no way to zoom out past that (minScale: 1), so the
+        // map can never start or end up cropped: zooming only ever
+        // scales up from a guaranteed-fully-visible baseline. This is
+        // what makes it responsive too — nothing here is a hardcoded
+        // pixel size for a specific screen; FittedBox recomputes the
+        // fit from whatever box it's actually given, every time.
+        child: InteractiveViewer(
+          minScale: 1,
+          maxScale: 6,
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: SizedBox(
+              width: _mapWidth,
+              height: _mapHeight,
+              child: GestureDetector(
+                key: const Key('world_tap_map'),
+                onTapUp: enabled
+                    ? (details) {
+                        final local = details.localPosition;
+                        final lon =
+                            (_worldMinLon + local.dx / _mapWidth * _lonSpan)
+                                .clamp(_worldMinLon, _worldMaxLon);
+                        final lat =
+                            (_worldMaxLat - local.dy / _mapHeight * _latSpan)
+                                .clamp(_worldMinLat, _worldMaxLat);
+                        onGuess(lon, lat);
+                      }
+                    : null,
+                child: CustomPaint(
+                  size: const Size(_mapWidth, _mapHeight),
+                  painter: _WorldTapMapPainter(
+                    outlines: outlines,
+                    guessLon: guessLon,
+                    guessLat: guessLat,
+                    actualLon: actualLon,
+                    actualLat: actualLat,
+                    isCorrect: isCorrect,
+                  ),
+                ),
               ),
             ),
           ),
