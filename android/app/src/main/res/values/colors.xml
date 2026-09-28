@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand blue from the app's badge gradient — flat color background
+         for the adaptive-icon layer (Android composites a solid color
+         far more reliably across launcher mask shapes than a bitmap). -->
+    <color name="ic_launcher_background">#2F6FED</color>
+</resources>

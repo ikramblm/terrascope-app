@@ -43,3 +43,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Release signing — the upload keystore and its passwords must never be
+# committed; losing them means the app can never be updated on Play again,
+# but leaking them is just as bad, so they stay local-only.
+/android/key.properties
+/android/app/upload-keystore.jks
+*.jks
+*.keystore
