@@ -12,7 +12,7 @@ const Map<String, Color> _continentColors = {
 };
 
 /// The Radar power-up's reveal: which continent the answer is on —
-/// shown before answering, a coarser hint than [AnswerRevealInset]'s
+/// shown before answering, a coarse hint
 /// full silhouette (which only ever appears after), so it narrows the
 /// question down without handing away the answer outright.
 class RadarReveal extends StatelessWidget {
