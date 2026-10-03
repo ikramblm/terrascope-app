@@ -312,7 +312,7 @@ void main() {
   });
 
   testWidgets(
-    'Guess by Location: pick a difficulty, tap the map, see a distance readout',
+    'Guess by Location: pick a difficulty, tap the map, see a result readout',
     (tester) async {
       await tester.pumpWidget(buildTestApp());
       await tester.pumpAndSettle();
@@ -338,11 +338,10 @@ void main() {
       await tester.tap(find.byKey(const Key('world_tap_map')));
       await tester.pump();
 
-      // A guess was taken — some distance-and-points readout appears
-      // regardless of exactly where the tap landed. "km away" (not the
-      // more generic "pts", which the still-mounted difficulty picker's
-      // own "N base pts" option labels also contain) is unique to it.
-      expect(find.textContaining('km away'), findsOneWidget);
+      // A guess was taken — a result readout appears regardless of
+      // exactly where the tap landed: "Correct!" if it hit the target
+      // country, otherwise "N km off".
+      expect(find.textContaining(RegExp(r'Correct!|km off')), findsOneWidget);
     },
   );
 

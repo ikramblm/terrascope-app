@@ -9,6 +9,7 @@ import '../../../../core/widgets/max_width_box.dart';
 import '../../../player/providers/player_providers.dart';
 import '../../domain/game_mode.dart';
 import '../widgets/game_mode_card.dart';
+import '../../../../core/widgets/scaled_extent.dart';
 
 /// One flat grid of game modes, scoped to a single Explore category
 /// (Guessing, Naming, Speed, or Soon). Pushed from [GamesScreen]'s
@@ -54,11 +55,11 @@ class GameCategoryScreen extends ConsumerWidget {
               GridView(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 14,
                   crossAxisSpacing: 14,
-                  mainAxisExtent: 156,
+                  mainAxisExtent: scaledExtent(context, 156),
                 ),
                 children: [
                   for (final (i, mode) in modes.indexed)

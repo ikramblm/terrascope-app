@@ -31,160 +31,136 @@ Country _country(String cca3, String name, {double? lat, double? lon}) =>
       emojiClues: const [],
     );
 
+// A 10° x 10° square country at the origin, and a tiny neighbour just
+// east of it — close enough that the old 800 km "close enough" rule
+// would have scored a tap on one as correct for the other.
+CountryOutline _square(double x, double y, double size) => [
+  [
+    [
+      Offset(x, y),
+      Offset(x + size, y),
+      Offset(x + size, y + size),
+      Offset(x, y + size),
+      Offset(x, y),
+    ],
+  ],
+];
+
 void main() {
-  // Sits at the equator/prime meridian so distances from a handful of
-  // simple (lon, lat) test guesses are easy to reason about by hand.
-  final origin = _country('AAA', 'Origin', lat: 0, lon: 0);
-  final another = _country('BBB', 'Another', lat: 0, lon: 0);
+  final big = _country('BIG', 'Big', lat: 5, lon: 5);
+  final small = _country('SML', 'Small', lat: 5, lon: 12.5);
+  final tiny = _country('TNY', 'Tiny', lat: 0, lon: 0); // no outline
+  final outlines = <String, CountryOutline>{
+    'BIG': _square(0, 0, 10),
+    'SML': _square(12, 4, 1),
+  };
 
-  test('a near-exact guess scores full points and counts as close', () {
+  LocationEngine build(List<Country> targets) => LocationEngine(
+    targets: targets,
+    difficulty: GameDifficulty.medium,
+    outlines: outlines,
+  );
+
+  test('a tap inside the target\'s outline is correct and scores full marks',
+      () {
     fakeAsync((async) {
-      final engine = LocationEngine(
-        targets: [origin, another],
-        difficulty: GameDifficulty.medium,
-      );
-      engine.start();
+      final engine = build([big, big])..start();
 
-      // ~111 km east of the target — comfortably inside the 300 km
-      // full-marks radius and the 800 km "close enough" threshold.
-      engine.submitGuess(1, 0);
+      // Far corner of the country, far from its reference point.
+      engine.submitGuess(9, 9);
 
-      expect(engine.answered, isTrue);
-      expect(engine.lastDistanceKm, isNotNull);
-      expect(engine.lastDistanceKm!, lessThan(150));
+      expect(engine.lastGuessWasCorrect, isTrue);
+      expect(engine.lastDistanceKm, 0);
       expect(engine.lastRoundScore, GameDifficulty.medium.basePoints);
-      expect(engine.score, GameDifficulty.medium.basePoints);
       expect(engine.combo, 1);
-      expect(engine.bestCombo, 1);
       expect(engine.correctCount, 1);
-      expect(engine.correctCca3s, contains('AAA'));
+      expect(engine.correctCca3s, contains('BIG'));
       expect(engine.xpEarned, GameDifficulty.medium.baseXp);
 
       async.elapse(LocationEngine.feedbackDelay);
       expect(engine.currentIndex, 1);
       expect(engine.answered, isFalse);
-
       engine.dispose();
     });
   });
 
-  test('a tap anywhere inside the target\'s outline scores full marks, even '
-      'far from the stored reference point', () {
+  test('a tap on a small neighbouring country is wrong', () {
     fakeAsync((async) {
-      // A big, roughly square country whose stored lat/lon (used only
-      // as the Haversine reference point) sits in one corner — a tap
-      // in the far corner is genuinely far from that point (would
-      // score 0 by distance alone) but is still inside the country.
-      final big = _country('BIG', 'Big Country', lat: 0, lon: 0);
-      final outlines = <String, CountryOutline>{
-        'BIG': [
-          [
-            [
-              const Offset(0, 0),
-              const Offset(30, 0),
-              const Offset(30, 30),
-              const Offset(0, 30),
-              const Offset(0, 0),
-            ],
-          ],
-        ],
-      };
-      final engine = LocationEngine(
-        targets: [big, big],
-        difficulty: GameDifficulty.medium,
-        outlines: outlines,
-      );
-      engine.start();
+      final engine = build([small, big])..start();
 
-      // Far corner of the country, thousands of km from (0, 0).
-      engine.submitGuess(29, 29);
+      // Inside BIG, ~1.5° (~165 km) from SML's edge — close, but not it.
+      engine.submitGuess(9.5, 4.5);
 
-      expect(engine.lastDistanceKm, greaterThan(4000));
-      expect(engine.lastRoundScore, GameDifficulty.medium.basePoints);
-      expect(engine.score, GameDifficulty.medium.basePoints);
-      expect(engine.combo, 1);
-      expect(engine.correctCount, 1);
-      expect(engine.correctCca3s, contains('BIG'));
-
-      engine.dispose();
-    });
-  });
-
-  test('a guess outside the target\'s outline still falls back to distance '
-      'scoring', () {
-    fakeAsync((async) {
-      final big = _country('BIG', 'Big Country', lat: 0, lon: 0);
-      final outlines = <String, CountryOutline>{
-        'BIG': [
-          [
-            [
-              const Offset(0, 0),
-              const Offset(30, 0),
-              const Offset(30, 30),
-              const Offset(0, 30),
-              const Offset(0, 0),
-            ],
-          ],
-        ],
-      };
-      final engine = LocationEngine(
-        targets: [big, big],
-        difficulty: GameDifficulty.medium,
-        outlines: outlines,
-      );
-      engine.start();
-
-      // Outside the square, and far enough from (0, 0) to score zero.
-      engine.submitGuess(180, 0);
-
-      expect(engine.lastRoundScore, 0);
+      expect(engine.lastGuessWasCorrect, isFalse);
+      expect(engine.lastDistanceKm, greaterThan(100));
       expect(engine.correctCount, 0);
-
+      expect(engine.combo, 0);
+      expect(engine.xpEarned, 0);
+      // Wrong, but near: partial credit, less than full marks.
+      expect(engine.lastRoundScore, greaterThan(0));
+      expect(engine.lastRoundScore, lessThan(GameDifficulty.medium.basePoints));
       engine.dispose();
     });
   });
 
-  test(
-    'a guess on the opposite side of the world scores zero and resets combo',
-    () {
-      fakeAsync((async) {
-        final engine = LocationEngine(
-          targets: [origin, another],
-          difficulty: GameDifficulty.medium,
-        );
-        engine.start();
+  test('a tap just past the border (within tolerance) still counts', () {
+    fakeAsync((async) {
+      final engine = build([big, big])..start();
 
-        // Antipodal-ish guess — roughly half the Earth's circumference
-        // away, well past the zero-marks distance.
-        engine.submitGuess(180, 0);
+      // ~0.05° (~5 km) outside BIG's east edge.
+      engine.submitGuess(10.05, 5);
 
-        expect(engine.lastDistanceKm, greaterThan(15000));
-        expect(engine.lastRoundScore, 0);
-        expect(engine.score, 0);
-        expect(engine.combo, 0);
-        expect(engine.correctCount, 0);
-        expect(engine.xpEarned, 0);
+      expect(engine.lastGuessWasCorrect, isTrue);
+      expect(engine.lastDistanceKm, lessThan(LocationEngine.edgeToleranceKm));
+      engine.dispose();
+    });
+  });
 
-        engine.dispose();
-      });
-    },
-  );
+  test('a far-away tap is wrong and scores zero', () {
+    fakeAsync((async) {
+      final engine = build([big, big])..start();
+
+      engine.submitGuess(-120, 40);
+
+      expect(engine.lastGuessWasCorrect, isFalse);
+      expect(engine.lastRoundScore, 0);
+      expect(engine.score, 0);
+      expect(engine.combo, 0);
+      engine.dispose();
+    });
+  });
+
+  test('a target without an outline uses a short radius around its point', () {
+    fakeAsync((async) {
+      final engine = build([tiny, tiny, tiny])..start();
+
+      // ~55 km away — inside the 150 km radius.
+      engine.submitGuess(0.5, 0);
+      expect(engine.lastGuessWasCorrect, isTrue);
+
+      async.elapse(LocationEngine.feedbackDelay);
+      // ~550 km away — outside it.
+      engine.submitGuess(5, 0);
+      expect(engine.lastGuessWasCorrect, isFalse);
+      engine.dispose();
+    });
+  });
 
   test('a round that times out with no tap scores zero, not a crash', () {
     fakeAsync((async) {
       final engine = LocationEngine(
-        targets: [origin, another],
+        targets: [big, small],
         difficulty: GameDifficulty.hard,
-      );
-      engine.start();
+        outlines: outlines,
+      )..start();
 
       async.elapse(engine.timeAllotted);
 
       expect(engine.answered, isTrue);
       expect(engine.lastDistanceKm, isNull);
       expect(engine.lastRoundScore, 0);
+      expect(engine.lastGuessWasCorrect, isFalse);
       expect(engine.combo, 0);
-
       engine.dispose();
     });
   });
@@ -192,16 +168,16 @@ void main() {
   test('completes after the last round and builds a matching GameResult', () {
     fakeAsync((async) {
       final engine = LocationEngine(
-        targets: [origin, another],
+        targets: [big, small],
         difficulty: GameDifficulty.easy,
-      );
-      engine.start();
+        outlines: outlines,
+      )..start();
 
-      engine.submitGuess(0, 0);
+      engine.submitGuess(5, 5);
       async.elapse(LocationEngine.feedbackDelay);
       expect(engine.isComplete, isFalse);
 
-      engine.submitGuess(0, 0);
+      engine.submitGuess(12.5, 4.5);
       async.elapse(LocationEngine.feedbackDelay);
       expect(engine.isComplete, isTrue);
 
@@ -210,8 +186,7 @@ void main() {
       expect(result.correctCount, 2);
       expect(result.bestCombo, 2);
       expect(result.totalScore, GameDifficulty.easy.basePoints * 2);
-      expect(result.correctCca3s, {'AAA', 'BBB'});
-
+      expect(result.correctCca3s, {'BIG', 'SML'});
       engine.dispose();
     });
   });

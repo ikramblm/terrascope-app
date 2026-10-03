@@ -37,7 +37,7 @@ class GuessLocationScreen extends ConsumerWidget {
               .toList();
           return DifficultySelectScreen(
             title: 'Guess by Location',
-            subtitle: 'Tap the map as close as you can to each country.',
+            subtitle: 'Tap the country on the map — pinch to zoom for small ones.',
             icon: Icons.my_location_outlined,
             onSelect: (difficulty) {
               context.pushScreen(

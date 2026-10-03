@@ -23,10 +23,16 @@ class TerraScopeApp extends ConsumerWidget {
       // from the button/card underneath — it just overhears every
       // pointer-down anywhere in the app and fires the click blip.
       // SoundService.playTap() itself no-ops when muted.
-      builder: (context, child) => Listener(
-        behavior: HitTestBehavior.translucent,
-        onPointerDown: (_) => SoundService.instance.playTap(),
-        child: child ?? const SizedBox.shrink(),
+      builder: (context, child) => MediaQuery.withClampedTextScaling(
+        // Keeps layouts from breaking on phones with a very large (or
+        // tiny) system font size.
+        minScaleFactor: 0.9,
+        maxScaleFactor: 1.2,
+        child: Listener(
+          behavior: HitTestBehavior.translucent,
+          onPointerDown: (_) => SoundService.instance.playTap(),
+          child: child ?? const SizedBox.shrink(),
+        ),
       ),
     );
   }

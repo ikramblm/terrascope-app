@@ -12,6 +12,7 @@ import '../../presentation/widgets/personal_best_badge.dart';
 import '../../presentation/widgets/victory_banner.dart';
 import '../../presentation/widgets/xp_progress_bar.dart';
 import '../alphabet_engine.dart';
+import '../../../../core/widgets/scaled_extent.dart';
 
 /// End-of-session summary for Name the Alphabet — same visual language
 /// as every other results screen ([GameResultsView], [NameResultsView]).
@@ -58,11 +59,11 @@ class AlphabetResultsView extends ConsumerWidget {
           GridView(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
-              mainAxisExtent: 128,
+              mainAxisExtent: scaledExtent(context, 128),
             ),
             children: [
               StatCard(

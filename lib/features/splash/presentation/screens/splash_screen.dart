@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/router/route_paths.dart';
-import '../../../../app/theme/app_colors.dart';
-import '../../../../core/widgets/app_logo.dart';
 
 /// How long [SplashScreen] holds before moving on to Home. A provider
 /// (not a bare constant) so `buildTestApp()` can override it to
@@ -15,7 +13,7 @@ final splashDurationProvider = Provider<Duration>(
   (ref) => const Duration(seconds: 2),
 );
 
-/// The very first thing the app shows: the logo and the app name, alone,
+/// The very first thing the app shows: the app name, alone,
 /// for a fixed beat, then a real navigation into Home — no interaction,
 /// nothing to wait on beyond the timer itself.
 class SplashScreen extends ConsumerStatefulWidget {
@@ -39,26 +37,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(22),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.oceanBlueDeep.withValues(alpha: 0.45),
-                    blurRadius: 24,
-                    offset: const Offset(0, 10),
-                  ),
-                ],
-              ),
-              child: const AppLogo(size: 96),
-            ),
-            const SizedBox(height: 20),
-            Text('TerraScope', style: theme.textTheme.displayMedium),
-          ],
-        ),
+        child: Text('TerraScope', style: theme.textTheme.displayMedium),
       ),
     );
   }

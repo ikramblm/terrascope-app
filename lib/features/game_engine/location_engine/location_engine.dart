@@ -10,11 +10,14 @@ import '../domain/game_difficulty.dart';
 import '../domain/game_result.dart';
 
 /// Drives one play-through of Guess by Location: a country's name
-/// appears, one map tap is taken as the guess, scored by real-world
-/// distance (Haversine) to its actual coordinates — same shape as the
-/// multiple-choice engine (per-question countdown, auto-advance after a
-/// reveal pause, combo/streak, final [GameResult]), just guess-by-tap
-/// instead of guess-by-choice.
+/// appears and one map tap is taken as the guess. The tap is correct
+/// only when it lands on the country itself (inside its outline, with a
+/// few km of slack for the simplified borders). Countries too small to
+/// have an outline fall back to a short-radius distance check around
+/// their reference point. Same shape as the multiple-choice engine
+/// (per-question countdown, auto-advance after a reveal pause,
+/// combo/streak, final [GameResult]), just guess-by-tap instead of
+/// guess-by-choice.
 ///
 /// Every entry in [targets] must have non-null `latitude`/`longitude` —
 /// the caller filters the pool before construction (see
@@ -30,13 +33,10 @@ class LocationEngine extends ChangeNotifier {
   final List<Country> targets;
   final GameDifficulty difficulty;
 
-  /// Country silhouettes, keyed by cca3 — when the target's outline is
-  /// known, a tap anywhere inside it counts as fully correct even if
-  /// it's far from the stored reference point. Countries are big; a tap
-  /// on the far side of Russia or Brazil from its capital shouldn't
-  /// score worse than one a few hundred km off in the ocean next to a
-  /// small country. Falls back to pure distance scoring when no outline
-  /// is available for that target.
+  /// Country silhouettes, keyed by cca3. A tap counts as correct only
+  /// when it falls inside the target's outline (or within
+  /// [edgeToleranceKm] of its edge). Targets with no outline use
+  /// [pointToleranceKm] around their reference point instead.
   final Map<String, CountryOutline> outlines;
 
   static const _tickInterval = Duration(milliseconds: 100);
@@ -45,15 +45,19 @@ class LocationEngine extends ChangeNotifier {
   /// auto-advancing to the next round.
   static const feedbackDelay = Duration(milliseconds: 1800);
 
-  /// A guess within this many km counts as "close enough" — feeds
-  /// correctCount/correctCca3s/combo/XP, the same way a right
-  /// multiple-choice answer would.
-  static const closeEnoughKm = 800.0;
+  /// Slack outside an outline's edge that still counts as correct — the
+  /// bundled outlines are simplified, so a tap on the visible border of
+  /// a small country shouldn't be punished.
+  static const edgeToleranceKm = 20.0;
 
-  /// Distance scoring curve: full base points inside [_fullMarksKm],
-  /// zero at or beyond [_zeroMarksKm], linear falloff between.
-  static const _fullMarksKm = 300.0;
-  static const _zeroMarksKm = 10000.0;
+  /// Radius around the reference point for targets that have no outline
+  /// (micro-states and small island nations).
+  static const pointToleranceKm = 150.0;
+
+  /// A wrong guess still earns partial credit for being near the
+  /// country: up to half the base points, fading to zero at this
+  /// distance from the country.
+  static const _partialZeroKm = 2500.0;
 
   int currentIndex = 0;
   int score = 0;
@@ -67,13 +71,16 @@ class LocationEngine extends ChangeNotifier {
   double? lastGuessLon;
   double? lastGuessLat;
 
-  /// Null only when the round timed out with no tap at all.
+  /// Distance from the tap to the target country: 0 when the tap was
+  /// inside it, otherwise the distance to its nearest edge (or to its
+  /// reference point when it has no outline). Null only when the round
+  /// timed out with no tap at all.
   double? lastDistanceKm;
   int? lastRoundScore;
 
   /// Whether the round just resolved (tap or timeout) counted as
-  /// correct — inside the target's outline, or within [closeEnoughKm].
-  /// The screen uses this to pick the right/wrong sound.
+  /// correct — on the target country itself. The screen uses this to
+  /// pick the right/wrong sound and the green/red highlight.
   bool lastGuessWasCorrect = false;
 
   Duration timeRemaining;
@@ -143,26 +150,30 @@ class LocationEngine extends ChangeNotifier {
     lastGuessLat = lat;
 
     final target = currentTarget;
-    final distanceKm = (lon == null || lat == null)
-        ? null
-        : _haversineKm(lon, lat, target.longitude!, target.latitude!);
+    final outline = outlines[target.cca3];
+
+    double? distanceKm;
+    var correct = false;
+    if (lon != null && lat != null) {
+      if (outline != null) {
+        final inside = _pointInOutline(lon, lat, outline);
+        distanceKm = inside ? 0.0 : _distanceToOutlineKm(lon, lat, outline);
+        correct = inside || distanceKm <= edgeToleranceKm;
+      } else {
+        distanceKm = _haversineKm(lon, lat, target.longitude!, target.latitude!);
+        correct = distanceKm <= pointToleranceKm;
+      }
+    }
     lastDistanceKm = distanceKm;
 
-    final outline = outlines[target.cca3];
-    final insideCountry = lon != null && lat != null && outline != null
-        ? _pointInOutline(lon, lat, outline)
-        : false;
-
-    final roundScore = insideCountry
+    final roundScore = correct
         ? difficulty.basePoints
-        : (distanceKm == null ? 0 : _scoreForDistance(distanceKm));
+        : (distanceKm == null ? 0 : _partialScore(distanceKm));
     lastRoundScore = roundScore;
     score += roundScore;
 
-    final isClose =
-        insideCountry || (distanceKm != null && distanceKm <= closeEnoughKm);
-    lastGuessWasCorrect = isClose;
-    if (isClose) {
+    lastGuessWasCorrect = correct;
+    if (correct) {
       xpEarned += difficulty.baseXp;
       combo += 1;
       bestCombo = combo > bestCombo ? combo : bestCombo;
@@ -178,11 +189,10 @@ class LocationEngine extends ChangeNotifier {
     _advanceTimer = Timer(feedbackDelay, nextQuestion);
   }
 
-  int _scoreForDistance(double distanceKm) {
-    if (distanceKm <= _fullMarksKm) return difficulty.basePoints;
-    if (distanceKm >= _zeroMarksKm) return 0;
-    final t = 1 - (distanceKm - _fullMarksKm) / (_zeroMarksKm - _fullMarksKm);
-    return (difficulty.basePoints * t).round();
+  int _partialScore(double distanceKm) {
+    if (distanceKm >= _partialZeroKm) return 0;
+    final t = 1 - distanceKm / _partialZeroKm;
+    return (difficulty.basePoints * 0.5 * t).round();
   }
 
   /// Advances to the next round, or completes the session. Safe to call
@@ -281,5 +291,61 @@ class LocationEngine extends ChangeNotifier {
       }
     }
     return inside;
+  }
+
+  static double _wrapLon(double d) {
+    while (d > 180) {
+      d -= 360;
+    }
+    while (d < -180) {
+      d += 360;
+    }
+    return d;
+  }
+
+  /// Great-circle distance from a tap to the nearest point on any edge
+  /// of [outline]. The nearest edge point is found in a flat local
+  /// projection around the tap (cheap, and accurate at the short ranges
+  /// that matter), then measured with Haversine.
+  static double _distanceToOutlineKm(
+    double lon,
+    double lat,
+    CountryOutline outline,
+  ) {
+    final cosLat = max(cos(_degToRad(lat)), 0.01);
+    var bestSq = double.infinity;
+    var bestLon = lon;
+    var bestLat = lat;
+    for (final polygon in outline) {
+      for (final ring in polygon) {
+        final n = ring.length;
+        if (n < 2) continue;
+        for (var i = 0; i < n; i++) {
+          final a = ring[i];
+          final b = ring[(i + 1) % n];
+          final adx = _wrapLon(a.dx - lon);
+          final bdx = _wrapLon(b.dx - lon);
+          // A jump of more than 180° is an antimeridian break in the
+          // ring, not a real edge.
+          if ((adx - bdx).abs() > 180) continue;
+          final ax = adx * cosLat, ay = a.dy - lat;
+          final bx = bdx * cosLat, by = b.dy - lat;
+          final dx = bx - ax, dy = by - ay;
+          final lenSq = dx * dx + dy * dy;
+          final t = lenSq == 0
+              ? 0.0
+              : (-(ax * dx + ay * dy) / lenSq).clamp(0.0, 1.0);
+          final cx = ax + t * dx, cy = ay + t * dy;
+          final sq = cx * cx + cy * cy;
+          if (sq < bestSq) {
+            bestSq = sq;
+            bestLon = lon + cx / cosLat;
+            bestLat = lat + cy;
+          }
+        }
+      }
+    }
+    if (bestSq == double.infinity) return double.infinity;
+    return _haversineKm(lon, lat, bestLon, bestLat);
   }
 }

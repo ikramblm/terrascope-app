@@ -14,7 +14,7 @@ import '../../location_engine.dart';
 import '../widgets/world_tap_map.dart';
 
 /// Guess by Location: a country's name appears, one tap on the world
-/// map is the guess, scored by real-world distance — the same
+/// map is the guess — right only if it lands on that country — the same
 /// engine-drives-the-state / screen-swaps-playing-for-results shape as
 /// every other mode's shared game screen.
 class LocationGameScreen extends StatefulWidget {
@@ -172,18 +172,24 @@ class _PlayingView extends StatelessWidget {
                   ? engine.currentTarget.longitude
                   : null,
               actualLat: engine.answered ? engine.currentTarget.latitude : null,
+              highlightCca3: engine.currentTarget.cca3,
               isCorrect: engine.answered ? engine.lastGuessWasCorrect : null,
             ),
           ),
           const SizedBox(height: 12),
-          if (engine.answered)
-            Text(
-              distance == null
-                  ? "Time's up — no guess that round."
-                  : '${distance.round()} km away · +${engine.lastRoundScore} pts',
-              textAlign: TextAlign.center,
-              style: theme.textTheme.titleMedium,
-            ),
+          Text(
+            !engine.answered
+                ? 'Tap inside the country · pinch to zoom for small ones'
+                : distance == null
+                ? "Time's up — it's highlighted in red."
+                : engine.lastGuessWasCorrect
+                ? 'Correct! · +${engine.lastRoundScore} pts'
+                : '${distance.round()} km off · +${engine.lastRoundScore} pts',
+            textAlign: TextAlign.center,
+            style: engine.answered
+                ? theme.textTheme.titleMedium
+                : theme.textTheme.bodySmall,
+          ),
         ],
       ),
     );

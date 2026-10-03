@@ -16,6 +16,7 @@ import '../../../player/presentation/widgets/passport_map.dart';
 import '../../../player/presentation/widgets/sound_toggle_card.dart';
 import '../../../player/presentation/widgets/streak_freeze_card.dart';
 import '../../../player/providers/player_providers.dart';
+import '../../../../core/widgets/scaled_extent.dart';
 
 /// One color per [PlayerLevel] tier, escalating toward gold at the top
 /// rank — the frame around the avatar in [_IdentityCard] uses this so a
@@ -76,11 +77,11 @@ class ProfileScreen extends ConsumerWidget {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
+                            SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
                               mainAxisSpacing: 12,
                               crossAxisSpacing: 12,
-                              mainAxisExtent: 128,
+                              mainAxisExtent: scaledExtent(context, 128),
                             ),
                         children: [
                           StatCard(
@@ -178,11 +179,11 @@ class ProfileScreen extends ConsumerWidget {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
+                            SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3,
                               mainAxisSpacing: 10,
                               crossAxisSpacing: 10,
-                              mainAxisExtent: 164,
+                              mainAxisExtent: scaledExtent(context, 164),
                             ),
                         children: [
                           for (final achievement in kAchievements)
@@ -210,32 +211,14 @@ class _IdentityCard extends ConsumerWidget {
   final PlayerProfile profile;
 
   Future<void> _editName(BuildContext context, WidgetRef ref) async {
-    final controller = TextEditingController(text: profile.displayName);
+    // The dialog owns (and disposes) its own controller — disposing it
+    // here right after showDialog returns freed it while the dialog's
+    // exit animation was still using it, which crashed with
+    // "'_dependents.isEmpty' is not true" (the red screen).
     final newName = await showDialog<String>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Your name'),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          maxLength: 24,
-          textCapitalization: TextCapitalization.words,
-          onSubmitted: (value) => Navigator.of(context).pop(value),
-          decoration: const InputDecoration(hintText: 'Guest Explorer'),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(controller.text),
-            child: const Text('Save'),
-          ),
-        ],
-      ),
+      builder: (_) => _NameDialog(initialName: profile.displayName),
     );
-    controller.dispose();
     if (newName != null) {
       ref.read(playerProfileProvider.notifier).setDisplayName(newName);
     }
@@ -338,6 +321,52 @@ class _IdentityCard extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _NameDialog extends StatefulWidget {
+  const _NameDialog({required this.initialName});
+
+  final String initialName;
+
+  @override
+  State<_NameDialog> createState() => _NameDialogState();
+}
+
+class _NameDialogState extends State<_NameDialog> {
+  late final TextEditingController _controller = TextEditingController(
+    text: widget.initialName,
+  );
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Your name'),
+      content: TextField(
+        controller: _controller,
+        autofocus: true,
+        maxLength: 24,
+        textCapitalization: TextCapitalization.words,
+        onSubmitted: (value) => Navigator.of(context).pop(value),
+        decoration: const InputDecoration(hintText: 'Guest Explorer'),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Cancel'),
+        ),
+        FilledButton(
+          onPressed: () => Navigator.of(context).pop(_controller.text),
+          child: const Text('Save'),
+        ),
+      ],
     );
   }
 }

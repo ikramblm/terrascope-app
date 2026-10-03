@@ -10,6 +10,7 @@ import '../../data/game_catalog.dart';
 import '../../domain/game_category.dart';
 import '../../domain/game_mode.dart';
 import '../widgets/explore_hero_shape.dart';
+import '../../../../core/widgets/scaled_extent.dart';
 
 /// The four Explore category tiles, keyed so a route (`/games/category/
 /// :key`) can rebuild the same list [GameCategoryScreen] needs without
@@ -95,11 +96,11 @@ class GamesScreen extends StatelessWidget {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                        SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           mainAxisSpacing: 14,
                           crossAxisSpacing: 14,
-                          mainAxisExtent: 140,
+                          mainAxisExtent: scaledExtent(context, 140),
                         ),
                     children: [
                       for (final category in categories)

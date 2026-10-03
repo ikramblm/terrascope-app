@@ -5,6 +5,7 @@ import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/async_state_views.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../../../data/countries/providers/country_providers.dart';
+import '../../../../core/widgets/scaled_extent.dart';
 
 /// Lists tab: every country, browsable three ways — by name, by
 /// capital, or just its flag. Real data throughout (the bundled
@@ -162,11 +163,11 @@ class _FlagsTab extends ConsumerWidget {
           ..sort((a, b) => a.nameCommon.compareTo(b.nameCommon));
         return GridView.builder(
           padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             mainAxisSpacing: 12,
             crossAxisSpacing: 12,
-            mainAxisExtent: 108,
+            mainAxisExtent: scaledExtent(context, 108),
           ),
           itemCount: sorted.length,
           itemBuilder: (context, index) {

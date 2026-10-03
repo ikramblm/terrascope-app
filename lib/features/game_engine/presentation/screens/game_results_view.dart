@@ -15,6 +15,7 @@ import '../../domain/game_result.dart';
 import '../widgets/personal_best_badge.dart';
 import '../widgets/victory_banner.dart';
 import '../widgets/xp_progress_bar.dart';
+import '../../../../core/widgets/scaled_extent.dart';
 
 /// Shared end-of-game summary — every multiple-choice mode ends here.
 /// This is the one moment that gets the confetti burst now — not every
@@ -79,11 +80,11 @@ class _GameResultsViewState extends ConsumerState<GameResultsView> {
               GridView(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
-                  mainAxisExtent: 128,
+                  mainAxisExtent: scaledExtent(context, 128),
                 ),
                 children: [
                   StatCard(

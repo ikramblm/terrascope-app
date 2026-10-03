@@ -12,6 +12,7 @@ import '../../presentation/widgets/personal_best_badge.dart';
 import '../../presentation/widgets/victory_banner.dart';
 import '../../presentation/widgets/xp_progress_bar.dart';
 import '../name_engine.dart';
+import '../../../../core/widgets/scaled_extent.dart';
 
 /// Shared end-of-session summary for every "name as many as you can"
 /// mode — same visual language as [GameResultsView] (the multiple-choice
@@ -61,11 +62,11 @@ class NameResultsView extends ConsumerWidget {
           GridView(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
-              mainAxisExtent: 128,
+              mainAxisExtent: scaledExtent(context, 128),
             ),
             children: [
               StatCard(
