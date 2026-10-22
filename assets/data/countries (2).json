@@ -1,0 +1,8122 @@
+[
+  {
+    "cca2": "AF",
+    "cca3": "AFG",
+    "nameCommon": "Afghanistan",
+    "nameOfficial": "Islamic Republic of Afghanistan",
+    "capital": "Kabul",
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "continent": "Asia",
+    "latitude": 33,
+    "longitude": 65,
+    "area": 652230,
+    "population": null,
+    "flagEmoji": "🇦🇫",
+    "currencies": [
+      {
+        "code": "AFN",
+        "name": "Afghan afghani",
+        "symbol": "؋"
+      }
+    ],
+    "languages": [
+      "Dari",
+      "Pashto",
+      "Turkmen"
+    ],
+    "borders": [
+      "IRN",
+      "PAK",
+      "TKM",
+      "UZB",
+      "TJK",
+      "CHN"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "AF",
+      "Afġānistān"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "AL",
+    "cca3": "ALB",
+    "nameCommon": "Albania",
+    "nameOfficial": "Republic of Albania",
+    "capital": "Tirana",
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "continent": "Europe",
+    "latitude": 41,
+    "longitude": 20,
+    "area": 28748,
+    "population": null,
+    "flagEmoji": "🇦🇱",
+    "currencies": [
+      {
+        "code": "ALL",
+        "name": "Albanian lek",
+        "symbol": "L"
+      }
+    ],
+    "languages": [
+      "Albanian"
+    ],
+    "borders": [
+      "MNE",
+      "GRC",
+      "MKD",
+      "UNK"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "AL",
+      "Shqipëri",
+      "Shqipëria",
+      "Shqipnia"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "DZ",
+    "cca3": "DZA",
+    "nameCommon": "Algeria",
+    "nameOfficial": "People's Democratic Republic of Algeria",
+    "capital": "Algiers",
+    "region": "Africa",
+    "subregion": "Northern Africa",
+    "continent": "Africa",
+    "latitude": 28,
+    "longitude": 3,
+    "area": 2381741,
+    "population": null,
+    "flagEmoji": "🇩🇿",
+    "currencies": [
+      {
+        "code": "DZD",
+        "name": "Algerian dinar",
+        "symbol": "د.ج"
+      }
+    ],
+    "languages": [
+      "Arabic"
+    ],
+    "borders": [
+      "TUN",
+      "LBY",
+      "NER",
+      "ESH",
+      "MRT",
+      "MLI",
+      "MAR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "DZ",
+      "Dzayer",
+      "Algérie"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "AD",
+    "cca3": "AND",
+    "nameCommon": "Andorra",
+    "nameOfficial": "Principality of Andorra",
+    "capital": "Andorra la Vella",
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "continent": "Europe",
+    "latitude": 42.5,
+    "longitude": 1.5,
+    "area": 468,
+    "population": null,
+    "flagEmoji": "🇦🇩",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Catalan"
+    ],
+    "borders": [
+      "FRA",
+      "ESP"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "AD",
+      "Principality of Andorra",
+      "Principat d'Andorra"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "AO",
+    "cca3": "AGO",
+    "nameCommon": "Angola",
+    "nameOfficial": "Republic of Angola",
+    "capital": "Luanda",
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "continent": "Africa",
+    "latitude": -12.5,
+    "longitude": 18.5,
+    "area": 1246700,
+    "population": null,
+    "flagEmoji": "🇦🇴",
+    "currencies": [
+      {
+        "code": "AOA",
+        "name": "Angolan kwanza",
+        "symbol": "Kz"
+      }
+    ],
+    "languages": [
+      "Portuguese"
+    ],
+    "borders": [
+      "COG",
+      "COD",
+      "ZMB",
+      "NAM"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "AO",
+      "República de Angola",
+      "ʁɛpublika de an'ɡɔla"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "AG",
+    "cca3": "ATG",
+    "nameCommon": "Antigua and Barbuda",
+    "nameOfficial": "Antigua and Barbuda",
+    "capital": "Saint John's",
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "continent": "North America",
+    "latitude": 17.05,
+    "longitude": -61.8,
+    "area": 442,
+    "population": null,
+    "flagEmoji": "🇦🇬",
+    "currencies": [
+      {
+        "code": "XCD",
+        "name": "Eastern Caribbean dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "AG"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "AR",
+    "cca3": "ARG",
+    "nameCommon": "Argentina",
+    "nameOfficial": "Argentine Republic",
+    "capital": "Buenos Aires",
+    "region": "Americas",
+    "subregion": "South America",
+    "continent": "South America",
+    "latitude": -34,
+    "longitude": -64,
+    "area": 2780400,
+    "population": null,
+    "flagEmoji": "🇦🇷",
+    "currencies": [
+      {
+        "code": "ARS",
+        "name": "Argentine peso",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Guaraní",
+      "Spanish"
+    ],
+    "borders": [
+      "BOL",
+      "BRA",
+      "CHL",
+      "PRY",
+      "URY"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "AR",
+      "Argentine Republic",
+      "República Argentina"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "AM",
+    "cca3": "ARM",
+    "nameCommon": "Armenia",
+    "nameOfficial": "Republic of Armenia",
+    "capital": "Yerevan",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 40,
+    "longitude": 45,
+    "area": 29743,
+    "population": null,
+    "flagEmoji": "🇦🇲",
+    "currencies": [
+      {
+        "code": "AMD",
+        "name": "Armenian dram",
+        "symbol": "֏"
+      }
+    ],
+    "languages": [
+      "Armenian"
+    ],
+    "borders": [
+      "AZE",
+      "GEO",
+      "IRN",
+      "TUR"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "AM",
+      "Hayastan",
+      "Republic of Armenia",
+      "Հայաստանի Հանրապետություն"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "AU",
+    "cca3": "AUS",
+    "nameCommon": "Australia",
+    "nameOfficial": "Commonwealth of Australia",
+    "capital": "Canberra",
+    "region": "Oceania",
+    "subregion": "Australia and New Zealand",
+    "continent": "Oceania",
+    "latitude": -27,
+    "longitude": 133,
+    "area": 7692024,
+    "population": null,
+    "flagEmoji": "🇦🇺",
+    "currencies": [
+      {
+        "code": "AUD",
+        "name": "Australian dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "AU"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "AT",
+    "cca3": "AUT",
+    "nameCommon": "Austria",
+    "nameOfficial": "Republic of Austria",
+    "capital": "Vienna",
+    "region": "Europe",
+    "subregion": "Central Europe",
+    "continent": "Europe",
+    "latitude": 47.33333333,
+    "longitude": 13.33333333,
+    "area": 83871,
+    "population": null,
+    "flagEmoji": "🇦🇹",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Austro-Bavarian German"
+    ],
+    "borders": [
+      "CZE",
+      "DEU",
+      "HUN",
+      "ITA",
+      "LIE",
+      "SVK",
+      "SVN",
+      "CHE"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "AT",
+      "Osterreich",
+      "Oesterreich"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "AZ",
+    "cca3": "AZE",
+    "nameCommon": "Azerbaijan",
+    "nameOfficial": "Republic of Azerbaijan",
+    "capital": "Baku",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 40.5,
+    "longitude": 47.5,
+    "area": 86600,
+    "population": null,
+    "flagEmoji": "🇦🇿",
+    "currencies": [
+      {
+        "code": "AZN",
+        "name": "Azerbaijani manat",
+        "symbol": "₼"
+      }
+    ],
+    "languages": [
+      "Azerbaijani",
+      "Russian"
+    ],
+    "borders": [
+      "ARM",
+      "GEO",
+      "IRN",
+      "RUS",
+      "TUR"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "AZ",
+      "Republic of Azerbaijan",
+      "Azərbaycan Respublikası"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BS",
+    "cca3": "BHS",
+    "nameCommon": "Bahamas",
+    "nameOfficial": "Commonwealth of the Bahamas",
+    "capital": "Nassau",
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "continent": "North America",
+    "latitude": 24.25,
+    "longitude": -76,
+    "area": 13943,
+    "population": null,
+    "flagEmoji": "🇧🇸",
+    "currencies": [
+      {
+        "code": "BSD",
+        "name": "Bahamian dollar",
+        "symbol": "$"
+      },
+      {
+        "code": "USD",
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BS",
+      "Commonwealth of the Bahamas"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BH",
+    "cca3": "BHR",
+    "nameCommon": "Bahrain",
+    "nameOfficial": "Kingdom of Bahrain",
+    "capital": "Manama",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 26,
+    "longitude": 50.55,
+    "area": 765,
+    "population": null,
+    "flagEmoji": "🇧🇭",
+    "currencies": [
+      {
+        "code": "BHD",
+        "name": "Bahraini dinar",
+        "symbol": ".د.ب"
+      }
+    ],
+    "languages": [
+      "Arabic"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BH",
+      "Kingdom of Bahrain",
+      "Mamlakat al-Baḥrayn"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BD",
+    "cca3": "BGD",
+    "nameCommon": "Bangladesh",
+    "nameOfficial": "People's Republic of Bangladesh",
+    "capital": "Dhaka",
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "continent": "Asia",
+    "latitude": 24,
+    "longitude": 90,
+    "area": 147570,
+    "population": null,
+    "flagEmoji": "🇧🇩",
+    "currencies": [
+      {
+        "code": "BDT",
+        "name": "Bangladeshi taka",
+        "symbol": "৳"
+      }
+    ],
+    "languages": [
+      "Bengali"
+    ],
+    "borders": [
+      "MMR",
+      "IND"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BD",
+      "People's Republic of Bangladesh",
+      "Gônôprôjatôntri Bangladesh"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BB",
+    "cca3": "BRB",
+    "nameCommon": "Barbados",
+    "nameOfficial": "Barbados",
+    "capital": "Bridgetown",
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "continent": "North America",
+    "latitude": 13.16666666,
+    "longitude": -59.53333333,
+    "area": 430,
+    "population": null,
+    "flagEmoji": "🇧🇧",
+    "currencies": [
+      {
+        "code": "BBD",
+        "name": "Barbadian dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BB"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BY",
+    "cca3": "BLR",
+    "nameCommon": "Belarus",
+    "nameOfficial": "Republic of Belarus",
+    "capital": "Minsk",
+    "region": "Europe",
+    "subregion": "Eastern Europe",
+    "continent": "Europe",
+    "latitude": 53,
+    "longitude": 28,
+    "area": 207600,
+    "population": null,
+    "flagEmoji": "🇧🇾",
+    "currencies": [
+      {
+        "code": "BYN",
+        "name": "Belarusian ruble",
+        "symbol": "Br"
+      }
+    ],
+    "languages": [
+      "Belarusian",
+      "Russian"
+    ],
+    "borders": [
+      "LVA",
+      "LTU",
+      "POL",
+      "RUS",
+      "UKR"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BY",
+      "Bielaruś",
+      "Republic of Belarus",
+      "Белоруссия",
+      "Республика Белоруссия"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BE",
+    "cca3": "BEL",
+    "nameCommon": "Belgium",
+    "nameOfficial": "Kingdom of Belgium",
+    "capital": "Brussels",
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "continent": "Europe",
+    "latitude": 50.83333333,
+    "longitude": 4,
+    "area": 30528,
+    "population": null,
+    "flagEmoji": "🇧🇪",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "German",
+      "French",
+      "Dutch"
+    ],
+    "borders": [
+      "FRA",
+      "DEU",
+      "LUX",
+      "NLD"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BE",
+      "België",
+      "Belgie",
+      "Belgien",
+      "Belgique",
+      "Kingdom of Belgium",
+      "Koninkrijk België",
+      "Royaume de Belgique",
+      "Königreich Belgien"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BZ",
+    "cca3": "BLZ",
+    "nameCommon": "Belize",
+    "nameOfficial": "Belize",
+    "capital": "Belmopan",
+    "region": "Americas",
+    "subregion": "Central America",
+    "continent": "North America",
+    "latitude": 17.25,
+    "longitude": -88.75,
+    "area": 22966,
+    "population": null,
+    "flagEmoji": "🇧🇿",
+    "currencies": [
+      {
+        "code": "BZD",
+        "name": "Belize dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Belizean Creole",
+      "English",
+      "Spanish"
+    ],
+    "borders": [
+      "GTM",
+      "MEX"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BZ"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BJ",
+    "cca3": "BEN",
+    "nameCommon": "Benin",
+    "nameOfficial": "Republic of Benin",
+    "capital": "Porto-Novo",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 9.5,
+    "longitude": 2.25,
+    "area": 112622,
+    "population": null,
+    "flagEmoji": "🇧🇯",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "French"
+    ],
+    "borders": [
+      "BFA",
+      "NER",
+      "NGA",
+      "TGO"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BJ",
+      "Republic of Benin",
+      "République du Bénin"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BT",
+    "cca3": "BTN",
+    "nameCommon": "Bhutan",
+    "nameOfficial": "Kingdom of Bhutan",
+    "capital": "Thimphu",
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "continent": "Asia",
+    "latitude": 27.5,
+    "longitude": 90.5,
+    "area": 38394,
+    "population": null,
+    "flagEmoji": "🇧🇹",
+    "currencies": [
+      {
+        "code": "BTN",
+        "name": "Bhutanese ngultrum",
+        "symbol": "Nu."
+      },
+      {
+        "code": "INR",
+        "name": "Indian rupee",
+        "symbol": "₹"
+      }
+    ],
+    "languages": [
+      "Dzongkha"
+    ],
+    "borders": [
+      "CHN",
+      "IND"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BT",
+      "Kingdom of Bhutan"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BO",
+    "cca3": "BOL",
+    "nameCommon": "Bolivia",
+    "nameOfficial": "Plurinational State of Bolivia",
+    "capital": "Sucre",
+    "region": "Americas",
+    "subregion": "South America",
+    "continent": "South America",
+    "latitude": -17,
+    "longitude": -65,
+    "area": 1098581,
+    "population": null,
+    "flagEmoji": "🇧🇴",
+    "currencies": [
+      {
+        "code": "BOB",
+        "name": "Bolivian boliviano",
+        "symbol": "Bs."
+      }
+    ],
+    "languages": [
+      "Aymara",
+      "Guaraní",
+      "Quechua",
+      "Spanish"
+    ],
+    "borders": [
+      "ARG",
+      "BRA",
+      "CHL",
+      "PRY",
+      "PER"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BO",
+      "Buliwya",
+      "Wuliwya",
+      "Bolivia, Plurinational State of",
+      "Plurinational State of Bolivia",
+      "Estado Plurinacional de Bolivia",
+      "Buliwya Mamallaqta",
+      "Wuliwya Suyu",
+      "Tetã Volívia"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BA",
+    "cca3": "BIH",
+    "nameCommon": "Bosnia and Herzegovina",
+    "nameOfficial": "Bosnia and Herzegovina",
+    "capital": "Sarajevo",
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "continent": "Europe",
+    "latitude": 44,
+    "longitude": 18,
+    "area": 51209,
+    "population": null,
+    "flagEmoji": "🇧🇦",
+    "currencies": [
+      {
+        "code": "BAM",
+        "name": "Bosnia and Herzegovina convertible mark",
+        "symbol": "KM"
+      }
+    ],
+    "languages": [
+      "Bosnian",
+      "Croatian",
+      "Serbian"
+    ],
+    "borders": [
+      "HRV",
+      "MNE",
+      "SRB"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BA",
+      "Bosnia-Herzegovina",
+      "Босна и Херцеговина"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BW",
+    "cca3": "BWA",
+    "nameCommon": "Botswana",
+    "nameOfficial": "Republic of Botswana",
+    "capital": "Gaborone",
+    "region": "Africa",
+    "subregion": "Southern Africa",
+    "continent": "Africa",
+    "latitude": -22,
+    "longitude": 24,
+    "area": 582000,
+    "population": null,
+    "flagEmoji": "🇧🇼",
+    "currencies": [
+      {
+        "code": "BWP",
+        "name": "Botswana pula",
+        "symbol": "P"
+      }
+    ],
+    "languages": [
+      "English",
+      "Tswana"
+    ],
+    "borders": [
+      "NAM",
+      "ZAF",
+      "ZMB",
+      "ZWE"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BW",
+      "Republic of Botswana",
+      "Lefatshe la Botswana"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BR",
+    "cca3": "BRA",
+    "nameCommon": "Brazil",
+    "nameOfficial": "Federative Republic of Brazil",
+    "capital": "Brasília",
+    "region": "Americas",
+    "subregion": "South America",
+    "continent": "South America",
+    "latitude": -10,
+    "longitude": -55,
+    "area": 8515767,
+    "population": null,
+    "flagEmoji": "🇧🇷",
+    "currencies": [
+      {
+        "code": "BRL",
+        "name": "Brazilian real",
+        "symbol": "R$"
+      }
+    ],
+    "languages": [
+      "Portuguese"
+    ],
+    "borders": [
+      "ARG",
+      "BOL",
+      "COL",
+      "GUF",
+      "GUY",
+      "PRY",
+      "PER",
+      "SUR",
+      "URY",
+      "VEN"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BR",
+      "Brasil",
+      "Federative Republic of Brazil",
+      "República Federativa do Brasil"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BN",
+    "cca3": "BRN",
+    "nameCommon": "Brunei",
+    "nameOfficial": "Nation of Brunei, Abode of Peace",
+    "capital": "Bandar Seri Begawan",
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "continent": "Asia",
+    "latitude": 4.5,
+    "longitude": 114.66666666,
+    "area": 5765,
+    "population": null,
+    "flagEmoji": "🇧🇳",
+    "currencies": [
+      {
+        "code": "BND",
+        "name": "Brunei dollar",
+        "symbol": "$"
+      },
+      {
+        "code": "SGD",
+        "name": "Singapore dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Malay"
+    ],
+    "borders": [
+      "MYS"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BN",
+      "Brunei Darussalam",
+      "Nation of Brunei",
+      "the Abode of Peace"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BG",
+    "cca3": "BGR",
+    "nameCommon": "Bulgaria",
+    "nameOfficial": "Republic of Bulgaria",
+    "capital": "Sofia",
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "continent": "Europe",
+    "latitude": 43,
+    "longitude": 25,
+    "area": 110879,
+    "population": null,
+    "flagEmoji": "🇧🇬",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Bulgarian"
+    ],
+    "borders": [
+      "GRC",
+      "MKD",
+      "ROU",
+      "SRB",
+      "TUR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BG",
+      "Republic of Bulgaria",
+      "Република България"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BF",
+    "cca3": "BFA",
+    "nameCommon": "Burkina Faso",
+    "nameOfficial": "Burkina Faso",
+    "capital": "Ouagadougou",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 13,
+    "longitude": -2,
+    "area": 272967,
+    "population": null,
+    "flagEmoji": "🇧🇫",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "French"
+    ],
+    "borders": [
+      "BEN",
+      "CIV",
+      "GHA",
+      "MLI",
+      "NER",
+      "TGO"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BF"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "BI",
+    "cca3": "BDI",
+    "nameCommon": "Burundi",
+    "nameOfficial": "Republic of Burundi",
+    "capital": "Gitega",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": -3.5,
+    "longitude": 30,
+    "area": 27834,
+    "population": null,
+    "flagEmoji": "🇧🇮",
+    "currencies": [
+      {
+        "code": "BIF",
+        "name": "Burundian franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "French",
+      "Kirundi"
+    ],
+    "borders": [
+      "COD",
+      "RWA",
+      "TZA"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "BI",
+      "Republic of Burundi",
+      "Republika y'Uburundi",
+      "République du Burundi"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "KH",
+    "cca3": "KHM",
+    "nameCommon": "Cambodia",
+    "nameOfficial": "Kingdom of Cambodia",
+    "capital": "Phnom Penh",
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "continent": "Asia",
+    "latitude": 13,
+    "longitude": 105,
+    "area": 181035,
+    "population": null,
+    "flagEmoji": "🇰🇭",
+    "currencies": [
+      {
+        "code": "KHR",
+        "name": "Cambodian riel",
+        "symbol": "៛"
+      },
+      {
+        "code": "USD",
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Khmer"
+    ],
+    "borders": [
+      "LAO",
+      "THA",
+      "VNM"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "KH",
+      "Kingdom of Cambodia"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "CM",
+    "cca3": "CMR",
+    "nameCommon": "Cameroon",
+    "nameOfficial": "Republic of Cameroon",
+    "capital": "Yaoundé",
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "continent": "Africa",
+    "latitude": 6,
+    "longitude": 12,
+    "area": 475442,
+    "population": null,
+    "flagEmoji": "🇨🇲",
+    "currencies": [
+      {
+        "code": "XAF",
+        "name": "Central African CFA franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "English",
+      "French"
+    ],
+    "borders": [
+      "CAF",
+      "TCD",
+      "COG",
+      "GNQ",
+      "GAB",
+      "NGA"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "CM",
+      "Republic of Cameroon",
+      "République du Cameroun"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "CA",
+    "cca3": "CAN",
+    "nameCommon": "Canada",
+    "nameOfficial": "Canada",
+    "capital": "Ottawa",
+    "region": "Americas",
+    "subregion": "North America",
+    "continent": "North America",
+    "latitude": 60,
+    "longitude": -95,
+    "area": 9984670,
+    "population": null,
+    "flagEmoji": "🇨🇦",
+    "currencies": [
+      {
+        "code": "CAD",
+        "name": "Canadian dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English",
+      "French"
+    ],
+    "borders": [
+      "USA"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "CA"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "CV",
+    "cca3": "CPV",
+    "nameCommon": "Cape Verde",
+    "nameOfficial": "Republic of Cabo Verde",
+    "capital": "Praia",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 16,
+    "longitude": -24,
+    "area": 4033,
+    "population": null,
+    "flagEmoji": "🇨🇻",
+    "currencies": [
+      {
+        "code": "CVE",
+        "name": "Cape Verdean escudo",
+        "symbol": "Esc"
+      }
+    ],
+    "languages": [
+      "Portuguese"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "CV",
+      "Republic of Cabo Verde",
+      "República de Cabo Verde"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "CF",
+    "cca3": "CAF",
+    "nameCommon": "Central African Republic",
+    "nameOfficial": "Central African Republic",
+    "capital": "Bangui",
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "continent": "Africa",
+    "latitude": 7,
+    "longitude": 21,
+    "area": 622984,
+    "population": null,
+    "flagEmoji": "🇨🇫",
+    "currencies": [
+      {
+        "code": "XAF",
+        "name": "Central African CFA franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "French",
+      "Sango"
+    ],
+    "borders": [
+      "CMR",
+      "TCD",
+      "COD",
+      "COG",
+      "SSD",
+      "SDN"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "CF",
+      "Central African Republic",
+      "République centrafricaine"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "TD",
+    "cca3": "TCD",
+    "nameCommon": "Chad",
+    "nameOfficial": "Republic of Chad",
+    "capital": "N'Djamena",
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "continent": "Africa",
+    "latitude": 15,
+    "longitude": 19,
+    "area": 1284000,
+    "population": null,
+    "flagEmoji": "🇹🇩",
+    "currencies": [
+      {
+        "code": "XAF",
+        "name": "Central African CFA franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "Arabic",
+      "French"
+    ],
+    "borders": [
+      "CMR",
+      "CAF",
+      "LBY",
+      "NER",
+      "NGA",
+      "SDN"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "TD",
+      "Tchad",
+      "Republic of Chad",
+      "République du Tchad"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "CL",
+    "cca3": "CHL",
+    "nameCommon": "Chile",
+    "nameOfficial": "Republic of Chile",
+    "capital": "Santiago",
+    "region": "Americas",
+    "subregion": "South America",
+    "continent": "South America",
+    "latitude": -30,
+    "longitude": -71,
+    "area": 756102,
+    "population": null,
+    "flagEmoji": "🇨🇱",
+    "currencies": [
+      {
+        "code": "CLP",
+        "name": "Chilean peso",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "borders": [
+      "ARG",
+      "BOL",
+      "PER"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "CL",
+      "Republic of Chile",
+      "República de Chile"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "CN",
+    "cca3": "CHN",
+    "nameCommon": "China",
+    "nameOfficial": "People's Republic of China",
+    "capital": "Beijing",
+    "region": "Asia",
+    "subregion": "Eastern Asia",
+    "continent": "Asia",
+    "latitude": 35,
+    "longitude": 105,
+    "area": 9706961,
+    "population": null,
+    "flagEmoji": "🇨🇳",
+    "currencies": [
+      {
+        "code": "CNY",
+        "name": "Chinese yuan",
+        "symbol": "¥"
+      }
+    ],
+    "languages": [
+      "Chinese"
+    ],
+    "borders": [
+      "AFG",
+      "BTN",
+      "MMR",
+      "HKG",
+      "IND",
+      "KAZ",
+      "NPL",
+      "PRK",
+      "KGZ",
+      "LAO",
+      "MAC",
+      "MNG",
+      "PAK",
+      "RUS",
+      "TJK",
+      "VNM"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "CN",
+      "Zhōngguó",
+      "Zhongguo",
+      "Zhonghua",
+      "People's Republic of China",
+      "中华人民共和国",
+      "Zhōnghuá Rénmín Gònghéguó"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "CO",
+    "cca3": "COL",
+    "nameCommon": "Colombia",
+    "nameOfficial": "Republic of Colombia",
+    "capital": "Bogotá",
+    "region": "Americas",
+    "subregion": "South America",
+    "continent": "South America",
+    "latitude": 4,
+    "longitude": -72,
+    "area": 1141748,
+    "population": null,
+    "flagEmoji": "🇨🇴",
+    "currencies": [
+      {
+        "code": "COP",
+        "name": "Colombian peso",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "borders": [
+      "BRA",
+      "ECU",
+      "PAN",
+      "PER",
+      "VEN"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "CO",
+      "Republic of Colombia",
+      "República de Colombia"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "KM",
+    "cca3": "COM",
+    "nameCommon": "Comoros",
+    "nameOfficial": "Union of the Comoros",
+    "capital": "Moroni",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": -12.16666666,
+    "longitude": 44.25,
+    "area": 1862,
+    "population": null,
+    "flagEmoji": "🇰🇲",
+    "currencies": [
+      {
+        "code": "KMF",
+        "name": "Comorian franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "Arabic",
+      "French",
+      "Comorian"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "KM",
+      "Union of the Comoros",
+      "Union des Comores",
+      "Udzima wa Komori",
+      "al-Ittiḥād al-Qumurī"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "CG",
+    "cca3": "COG",
+    "nameCommon": "Congo",
+    "nameOfficial": "Republic of the Congo",
+    "capital": "Brazzaville",
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "continent": "Africa",
+    "latitude": -1,
+    "longitude": 15,
+    "area": 342000,
+    "population": null,
+    "flagEmoji": "🇨🇬",
+    "currencies": [
+      {
+        "code": "XAF",
+        "name": "Central African CFA franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "French",
+      "Kikongo",
+      "Lingala"
+    ],
+    "borders": [
+      "AGO",
+      "CMR",
+      "CAF",
+      "COD",
+      "GAB"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "CG",
+      "Congo",
+      "Congo-Brazzaville"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "CR",
+    "cca3": "CRI",
+    "nameCommon": "Costa Rica",
+    "nameOfficial": "Republic of Costa Rica",
+    "capital": "San José",
+    "region": "Americas",
+    "subregion": "Central America",
+    "continent": "North America",
+    "latitude": 10,
+    "longitude": -84,
+    "area": 51100,
+    "population": null,
+    "flagEmoji": "🇨🇷",
+    "currencies": [
+      {
+        "code": "CRC",
+        "name": "Costa Rican colón",
+        "symbol": "₡"
+      }
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "borders": [
+      "NIC",
+      "PAN"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "CR",
+      "Republic of Costa Rica",
+      "República de Costa Rica"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "HR",
+    "cca3": "HRV",
+    "nameCommon": "Croatia",
+    "nameOfficial": "Republic of Croatia",
+    "capital": "Zagreb",
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "continent": "Europe",
+    "latitude": 45.16666666,
+    "longitude": 15.5,
+    "area": 56594,
+    "population": null,
+    "flagEmoji": "🇭🇷",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Croatian"
+    ],
+    "borders": [
+      "BIH",
+      "HUN",
+      "MNE",
+      "SRB",
+      "SVN"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "HR",
+      "Hrvatska",
+      "Republic of Croatia",
+      "Republika Hrvatska"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "CU",
+    "cca3": "CUB",
+    "nameCommon": "Cuba",
+    "nameOfficial": "Republic of Cuba",
+    "capital": "Havana",
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "continent": "North America",
+    "latitude": 21.5,
+    "longitude": -80,
+    "area": 109884,
+    "population": null,
+    "flagEmoji": "🇨🇺",
+    "currencies": [
+      {
+        "code": "CUC",
+        "name": "Cuban convertible peso",
+        "symbol": "$"
+      },
+      {
+        "code": "CUP",
+        "name": "Cuban peso",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "CU",
+      "Republic of Cuba",
+      "República de Cuba"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "CY",
+    "cca3": "CYP",
+    "nameCommon": "Cyprus",
+    "nameOfficial": "Republic of Cyprus",
+    "capital": "Nicosia",
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "continent": "Europe",
+    "latitude": 35,
+    "longitude": 33,
+    "area": 9251,
+    "population": null,
+    "flagEmoji": "🇨🇾",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Greek",
+      "Turkish"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "CY",
+      "Kýpros",
+      "Kıbrıs",
+      "Republic of Cyprus",
+      "Κυπριακή Δημοκρατία",
+      "Kıbrıs Cumhuriyeti"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "CZ",
+    "cca3": "CZE",
+    "nameCommon": "Czechia",
+    "nameOfficial": "Czech Republic",
+    "capital": "Prague",
+    "region": "Europe",
+    "subregion": "Central Europe",
+    "continent": "Europe",
+    "latitude": 49.75,
+    "longitude": 15.5,
+    "area": 78865,
+    "population": null,
+    "flagEmoji": "🇨🇿",
+    "currencies": [
+      {
+        "code": "CZK",
+        "name": "Czech koruna",
+        "symbol": "Kč"
+      }
+    ],
+    "languages": [
+      "Czech",
+      "Slovak"
+    ],
+    "borders": [
+      "AUT",
+      "DEU",
+      "POL",
+      "SVK"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "CZ",
+      "Česká republika",
+      "Česko"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "CD",
+    "cca3": "COD",
+    "nameCommon": "DR Congo",
+    "nameOfficial": "Democratic Republic of the Congo",
+    "capital": "Kinshasa",
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "continent": "Africa",
+    "latitude": 0,
+    "longitude": 25,
+    "area": 2344858,
+    "population": null,
+    "flagEmoji": "🇨🇩",
+    "currencies": [
+      {
+        "code": "CDF",
+        "name": "Congolese franc",
+        "symbol": "FC"
+      }
+    ],
+    "languages": [
+      "French",
+      "Kikongo",
+      "Lingala",
+      "Tshiluba",
+      "Swahili"
+    ],
+    "borders": [
+      "AGO",
+      "BDI",
+      "CAF",
+      "COG",
+      "RWA",
+      "SSD",
+      "TZA",
+      "UGA",
+      "ZMB"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "CD",
+      "DR Congo",
+      "Congo-Kinshasa",
+      "Congo, the Democratic Republic of the",
+      "Democratic Republic of Congo",
+      "DRC"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "DK",
+    "cca3": "DNK",
+    "nameCommon": "Denmark",
+    "nameOfficial": "Kingdom of Denmark",
+    "capital": "Copenhagen",
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "continent": "Europe",
+    "latitude": 56,
+    "longitude": 10,
+    "area": 43094,
+    "population": null,
+    "flagEmoji": "🇩🇰",
+    "currencies": [
+      {
+        "code": "DKK",
+        "name": "Danish krone",
+        "symbol": "kr"
+      }
+    ],
+    "languages": [
+      "Danish"
+    ],
+    "borders": [
+      "DEU"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "DK",
+      "Danmark",
+      "Kingdom of Denmark",
+      "Kongeriget Danmark"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "DJ",
+    "cca3": "DJI",
+    "nameCommon": "Djibouti",
+    "nameOfficial": "Republic of Djibouti",
+    "capital": "Djibouti",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": 11.5,
+    "longitude": 43,
+    "area": 23200,
+    "population": null,
+    "flagEmoji": "🇩🇯",
+    "currencies": [
+      {
+        "code": "DJF",
+        "name": "Djiboutian franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "Arabic",
+      "French"
+    ],
+    "borders": [
+      "ERI",
+      "ETH",
+      "SOM"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "DJ",
+      "Jabuuti",
+      "Gabuuti",
+      "Republic of Djibouti",
+      "République de Djibouti",
+      "Gabuutih Ummuuno",
+      "Jamhuuriyadda Jabuuti"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "DM",
+    "cca3": "DMA",
+    "nameCommon": "Dominica",
+    "nameOfficial": "Commonwealth of Dominica",
+    "capital": "Roseau",
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "continent": "North America",
+    "latitude": 15.41666666,
+    "longitude": -61.33333333,
+    "area": 751,
+    "population": null,
+    "flagEmoji": "🇩🇲",
+    "currencies": [
+      {
+        "code": "XCD",
+        "name": "Eastern Caribbean dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "DM",
+      "Dominique",
+      "Wai‘tu kubuli",
+      "Commonwealth of Dominica"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "DO",
+    "cca3": "DOM",
+    "nameCommon": "Dominican Republic",
+    "nameOfficial": "Dominican Republic",
+    "capital": "Santo Domingo",
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "continent": "North America",
+    "latitude": 19,
+    "longitude": -70.66666666,
+    "area": 48671,
+    "population": null,
+    "flagEmoji": "🇩🇴",
+    "currencies": [
+      {
+        "code": "DOP",
+        "name": "Dominican peso",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "borders": [
+      "HTI"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "DO"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "EC",
+    "cca3": "ECU",
+    "nameCommon": "Ecuador",
+    "nameOfficial": "Republic of Ecuador",
+    "capital": "Quito",
+    "region": "Americas",
+    "subregion": "South America",
+    "continent": "South America",
+    "latitude": -2,
+    "longitude": -77.5,
+    "area": 276841,
+    "population": null,
+    "flagEmoji": "🇪🇨",
+    "currencies": [
+      {
+        "code": "USD",
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "borders": [
+      "COL",
+      "PER"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "EC",
+      "Republic of Ecuador",
+      "República del Ecuador"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "EG",
+    "cca3": "EGY",
+    "nameCommon": "Egypt",
+    "nameOfficial": "Arab Republic of Egypt",
+    "capital": "Cairo",
+    "region": "Africa",
+    "subregion": "Northern Africa",
+    "continent": "Africa",
+    "latitude": 27,
+    "longitude": 30,
+    "area": 1002450,
+    "population": null,
+    "flagEmoji": "🇪🇬",
+    "currencies": [
+      {
+        "code": "EGP",
+        "name": "Egyptian pound",
+        "symbol": "£"
+      }
+    ],
+    "languages": [
+      "Arabic"
+    ],
+    "borders": [
+      "ISR",
+      "LBY",
+      "PSE",
+      "SDN"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "EG",
+      "Arab Republic of Egypt"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SV",
+    "cca3": "SLV",
+    "nameCommon": "El Salvador",
+    "nameOfficial": "Republic of El Salvador",
+    "capital": "San Salvador",
+    "region": "Americas",
+    "subregion": "Central America",
+    "continent": "North America",
+    "latitude": 13.83333333,
+    "longitude": -88.91666666,
+    "area": 21041,
+    "population": null,
+    "flagEmoji": "🇸🇻",
+    "currencies": [
+      {
+        "code": "USD",
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "borders": [
+      "GTM",
+      "HND"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SV",
+      "Republic of El Salvador",
+      "República de El Salvador"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "GQ",
+    "cca3": "GNQ",
+    "nameCommon": "Equatorial Guinea",
+    "nameOfficial": "Republic of Equatorial Guinea",
+    "capital": "Malabo",
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "continent": "Africa",
+    "latitude": 2,
+    "longitude": 10,
+    "area": 28051,
+    "population": null,
+    "flagEmoji": "🇬🇶",
+    "currencies": [
+      {
+        "code": "XAF",
+        "name": "Central African CFA franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "French",
+      "Portuguese",
+      "Spanish"
+    ],
+    "borders": [
+      "CMR",
+      "GAB"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "GQ",
+      "Republic of Equatorial Guinea",
+      "República de Guinea Ecuatorial",
+      "République de Guinée équatoriale",
+      "República da Guiné Equatorial"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "ER",
+    "cca3": "ERI",
+    "nameCommon": "Eritrea",
+    "nameOfficial": "State of Eritrea",
+    "capital": "Asmara",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": 15,
+    "longitude": 39,
+    "area": 117600,
+    "population": null,
+    "flagEmoji": "🇪🇷",
+    "currencies": [
+      {
+        "code": "ERN",
+        "name": "Eritrean nakfa",
+        "symbol": "Nfk"
+      }
+    ],
+    "languages": [
+      "Arabic",
+      "English",
+      "Tigrinya"
+    ],
+    "borders": [
+      "DJI",
+      "ETH",
+      "SDN"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "ER",
+      "State of Eritrea",
+      "ሃገረ ኤርትራ",
+      "Dawlat Iritriyá",
+      "ʾErtrā",
+      "Iritriyā"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "EE",
+    "cca3": "EST",
+    "nameCommon": "Estonia",
+    "nameOfficial": "Republic of Estonia",
+    "capital": "Tallinn",
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "continent": "Europe",
+    "latitude": 59,
+    "longitude": 26,
+    "area": 45227,
+    "population": null,
+    "flagEmoji": "🇪🇪",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Estonian"
+    ],
+    "borders": [
+      "LVA",
+      "RUS"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "EE",
+      "Eesti",
+      "Republic of Estonia",
+      "Eesti Vabariik"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SZ",
+    "cca3": "SWZ",
+    "nameCommon": "Eswatini",
+    "nameOfficial": "Kingdom of Eswatini",
+    "capital": "Lobamba",
+    "region": "Africa",
+    "subregion": "Southern Africa",
+    "continent": "Africa",
+    "latitude": -26.5,
+    "longitude": 31.5,
+    "area": 17364,
+    "population": null,
+    "flagEmoji": "🇸🇿",
+    "currencies": [
+      {
+        "code": "SZL",
+        "name": "Swazi lilangeni",
+        "symbol": "L"
+      },
+      {
+        "code": "ZAR",
+        "name": "South African rand",
+        "symbol": "R"
+      }
+    ],
+    "languages": [
+      "English",
+      "Swazi"
+    ],
+    "borders": [
+      "MOZ",
+      "ZAF"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SZ",
+      "Swaziland",
+      "weSwatini",
+      "Swatini",
+      "Ngwane",
+      "Kingdom of Eswatini",
+      "Umbuso weSwatini"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "ET",
+    "cca3": "ETH",
+    "nameCommon": "Ethiopia",
+    "nameOfficial": "Federal Democratic Republic of Ethiopia",
+    "capital": "Addis Ababa",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": 8,
+    "longitude": 38,
+    "area": 1104300,
+    "population": null,
+    "flagEmoji": "🇪🇹",
+    "currencies": [
+      {
+        "code": "ETB",
+        "name": "Ethiopian birr",
+        "symbol": "Br"
+      }
+    ],
+    "languages": [
+      "Amharic"
+    ],
+    "borders": [
+      "DJI",
+      "ERI",
+      "KEN",
+      "SOM",
+      "SSD",
+      "SDN"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "ET",
+      "ʾĪtyōṗṗyā",
+      "Federal Democratic Republic of Ethiopia",
+      "የኢትዮጵያ ፌዴራላዊ ዲሞክራሲያዊ ሪፐብሊክ"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "FJ",
+    "cca3": "FJI",
+    "nameCommon": "Fiji",
+    "nameOfficial": "Republic of Fiji",
+    "capital": "Suva",
+    "region": "Oceania",
+    "subregion": "Melanesia",
+    "continent": "Oceania",
+    "latitude": -18,
+    "longitude": 175,
+    "area": 18272,
+    "population": null,
+    "flagEmoji": "🇫🇯",
+    "currencies": [
+      {
+        "code": "FJD",
+        "name": "Fijian dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English",
+      "Fijian",
+      "Fiji Hindi"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "FJ",
+      "Viti",
+      "Republic of Fiji",
+      "Matanitu ko Viti",
+      "Fijī Gaṇarājya"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "FI",
+    "cca3": "FIN",
+    "nameCommon": "Finland",
+    "nameOfficial": "Republic of Finland",
+    "capital": "Helsinki",
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "continent": "Europe",
+    "latitude": 64,
+    "longitude": 26,
+    "area": 338424,
+    "population": null,
+    "flagEmoji": "🇫🇮",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Finnish",
+      "Swedish"
+    ],
+    "borders": [
+      "NOR",
+      "SWE",
+      "RUS"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "FI",
+      "Suomi",
+      "Republic of Finland",
+      "Suomen tasavalta",
+      "Republiken Finland"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "FR",
+    "cca3": "FRA",
+    "nameCommon": "France",
+    "nameOfficial": "French Republic",
+    "capital": "Paris",
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "continent": "Europe",
+    "latitude": 46,
+    "longitude": 2,
+    "area": 551695,
+    "population": null,
+    "flagEmoji": "🇫🇷",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "French"
+    ],
+    "borders": [
+      "AND",
+      "BEL",
+      "DEU",
+      "ITA",
+      "LUX",
+      "MCO",
+      "ESP",
+      "CHE"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "FR",
+      "French Republic",
+      "République française"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "GA",
+    "cca3": "GAB",
+    "nameCommon": "Gabon",
+    "nameOfficial": "Gabonese Republic",
+    "capital": "Libreville",
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "continent": "Africa",
+    "latitude": -1,
+    "longitude": 11.75,
+    "area": 267668,
+    "population": null,
+    "flagEmoji": "🇬🇦",
+    "currencies": [
+      {
+        "code": "XAF",
+        "name": "Central African CFA franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "French"
+    ],
+    "borders": [
+      "CMR",
+      "COG",
+      "GNQ"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "GA",
+      "Gabonese Republic",
+      "République Gabonaise"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "GM",
+    "cca3": "GMB",
+    "nameCommon": "Gambia",
+    "nameOfficial": "Republic of the Gambia",
+    "capital": "Banjul",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 13.46666666,
+    "longitude": -16.56666666,
+    "area": 10689,
+    "population": null,
+    "flagEmoji": "🇬🇲",
+    "currencies": [
+      {
+        "code": "GMD",
+        "name": "dalasi",
+        "symbol": "D"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [
+      "SEN"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "GM",
+      "Republic of the Gambia"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "GE",
+    "cca3": "GEO",
+    "nameCommon": "Georgia",
+    "nameOfficial": "Georgia",
+    "capital": "Tbilisi",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 42,
+    "longitude": 43.5,
+    "area": 69700,
+    "population": null,
+    "flagEmoji": "🇬🇪",
+    "currencies": [
+      {
+        "code": "GEL",
+        "name": "lari",
+        "symbol": "₾"
+      }
+    ],
+    "languages": [
+      "Georgian"
+    ],
+    "borders": [
+      "ARM",
+      "AZE",
+      "RUS",
+      "TUR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "GE",
+      "Sakartvelo"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "DE",
+    "cca3": "DEU",
+    "nameCommon": "Germany",
+    "nameOfficial": "Federal Republic of Germany",
+    "capital": "Berlin",
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "continent": "Europe",
+    "latitude": 51,
+    "longitude": 9,
+    "area": 357114,
+    "population": null,
+    "flagEmoji": "🇩🇪",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "German"
+    ],
+    "borders": [
+      "AUT",
+      "BEL",
+      "CZE",
+      "DNK",
+      "FRA",
+      "LUX",
+      "NLD",
+      "POL",
+      "CHE"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "DE",
+      "Federal Republic of Germany",
+      "Bundesrepublik Deutschland"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "GH",
+    "cca3": "GHA",
+    "nameCommon": "Ghana",
+    "nameOfficial": "Republic of Ghana",
+    "capital": "Accra",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 8,
+    "longitude": -2,
+    "area": 238533,
+    "population": null,
+    "flagEmoji": "🇬🇭",
+    "currencies": [
+      {
+        "code": "GHS",
+        "name": "Ghanaian cedi",
+        "symbol": "₵"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [
+      "BFA",
+      "CIV",
+      "TGO"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "GH"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "GR",
+    "cca3": "GRC",
+    "nameCommon": "Greece",
+    "nameOfficial": "Hellenic Republic",
+    "capital": "Athens",
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "continent": "Europe",
+    "latitude": 39,
+    "longitude": 22,
+    "area": 131990,
+    "population": null,
+    "flagEmoji": "🇬🇷",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Greek"
+    ],
+    "borders": [
+      "ALB",
+      "BGR",
+      "TUR",
+      "MKD"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "GR",
+      "Elláda",
+      "Hellenic Republic",
+      "Ελληνική Δημοκρατία"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "GD",
+    "cca3": "GRD",
+    "nameCommon": "Grenada",
+    "nameOfficial": "Grenada",
+    "capital": "St. George's",
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "continent": "North America",
+    "latitude": 12.11666666,
+    "longitude": -61.66666666,
+    "area": 344,
+    "population": null,
+    "flagEmoji": "🇬🇩",
+    "currencies": [
+      {
+        "code": "XCD",
+        "name": "Eastern Caribbean dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "GD"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "GT",
+    "cca3": "GTM",
+    "nameCommon": "Guatemala",
+    "nameOfficial": "Republic of Guatemala",
+    "capital": "Guatemala City",
+    "region": "Americas",
+    "subregion": "Central America",
+    "continent": "North America",
+    "latitude": 15.5,
+    "longitude": -90.25,
+    "area": 108889,
+    "population": null,
+    "flagEmoji": "🇬🇹",
+    "currencies": [
+      {
+        "code": "GTQ",
+        "name": "Guatemalan quetzal",
+        "symbol": "Q"
+      }
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "borders": [
+      "BLZ",
+      "SLV",
+      "HND",
+      "MEX"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "GT"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "GN",
+    "cca3": "GIN",
+    "nameCommon": "Guinea",
+    "nameOfficial": "Republic of Guinea",
+    "capital": "Conakry",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 11,
+    "longitude": -10,
+    "area": 245857,
+    "population": null,
+    "flagEmoji": "🇬🇳",
+    "currencies": [
+      {
+        "code": "GNF",
+        "name": "Guinean franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "French"
+    ],
+    "borders": [
+      "CIV",
+      "GNB",
+      "LBR",
+      "MLI",
+      "SEN",
+      "SLE"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "GN",
+      "Republic of Guinea",
+      "République de Guinée"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "GW",
+    "cca3": "GNB",
+    "nameCommon": "Guinea-Bissau",
+    "nameOfficial": "Republic of Guinea-Bissau",
+    "capital": "Bissau",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 12,
+    "longitude": -15,
+    "area": 36125,
+    "population": null,
+    "flagEmoji": "🇬🇼",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "Portuguese",
+      "Upper Guinea Creole"
+    ],
+    "borders": [
+      "GIN",
+      "SEN"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "GW",
+      "Republic of Guinea-Bissau",
+      "República da Guiné-Bissau"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "GY",
+    "cca3": "GUY",
+    "nameCommon": "Guyana",
+    "nameOfficial": "Co-operative Republic of Guyana",
+    "capital": "Georgetown",
+    "region": "Americas",
+    "subregion": "South America",
+    "continent": "South America",
+    "latitude": 5,
+    "longitude": -59,
+    "area": 214969,
+    "population": null,
+    "flagEmoji": "🇬🇾",
+    "currencies": [
+      {
+        "code": "GYD",
+        "name": "Guyanese dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [
+      "BRA",
+      "SUR",
+      "VEN"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "GY",
+      "Co-operative Republic of Guyana"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "HT",
+    "cca3": "HTI",
+    "nameCommon": "Haiti",
+    "nameOfficial": "Republic of Haiti",
+    "capital": "Port-au-Prince",
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "continent": "North America",
+    "latitude": 19,
+    "longitude": -72.41666666,
+    "area": 27750,
+    "population": null,
+    "flagEmoji": "🇭🇹",
+    "currencies": [
+      {
+        "code": "HTG",
+        "name": "Haitian gourde",
+        "symbol": "G"
+      }
+    ],
+    "languages": [
+      "French",
+      "Haitian Creole"
+    ],
+    "borders": [
+      "DOM"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "HT",
+      "Republic of Haiti",
+      "République d'Haïti",
+      "Repiblik Ayiti"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "HN",
+    "cca3": "HND",
+    "nameCommon": "Honduras",
+    "nameOfficial": "Republic of Honduras",
+    "capital": "Tegucigalpa",
+    "region": "Americas",
+    "subregion": "Central America",
+    "continent": "North America",
+    "latitude": 15,
+    "longitude": -86.5,
+    "area": 112492,
+    "population": null,
+    "flagEmoji": "🇭🇳",
+    "currencies": [
+      {
+        "code": "HNL",
+        "name": "Honduran lempira",
+        "symbol": "L"
+      }
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "borders": [
+      "GTM",
+      "SLV",
+      "NIC"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "HN",
+      "Republic of Honduras",
+      "República de Honduras"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "HU",
+    "cca3": "HUN",
+    "nameCommon": "Hungary",
+    "nameOfficial": "Hungary",
+    "capital": "Budapest",
+    "region": "Europe",
+    "subregion": "Central Europe",
+    "continent": "Europe",
+    "latitude": 47,
+    "longitude": 20,
+    "area": 93028,
+    "population": null,
+    "flagEmoji": "🇭🇺",
+    "currencies": [
+      {
+        "code": "HUF",
+        "name": "Hungarian forint",
+        "symbol": "Ft"
+      }
+    ],
+    "languages": [
+      "Hungarian"
+    ],
+    "borders": [
+      "AUT",
+      "HRV",
+      "ROU",
+      "SRB",
+      "SVK",
+      "SVN",
+      "UKR"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "HU"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "IS",
+    "cca3": "ISL",
+    "nameCommon": "Iceland",
+    "nameOfficial": "Iceland",
+    "capital": "Reykjavik",
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "continent": "Europe",
+    "latitude": 65,
+    "longitude": -18,
+    "area": 103000,
+    "population": null,
+    "flagEmoji": "🇮🇸",
+    "currencies": [
+      {
+        "code": "ISK",
+        "name": "Icelandic króna",
+        "symbol": "kr"
+      }
+    ],
+    "languages": [
+      "Icelandic"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "IS",
+      "Island",
+      "Republic of Iceland",
+      "Lýðveldið Ísland"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "IN",
+    "cca3": "IND",
+    "nameCommon": "India",
+    "nameOfficial": "Republic of India",
+    "capital": "New Delhi",
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "continent": "Asia",
+    "latitude": 20,
+    "longitude": 77,
+    "area": 3287590,
+    "population": null,
+    "flagEmoji": "🇮🇳",
+    "currencies": [
+      {
+        "code": "INR",
+        "name": "Indian rupee",
+        "symbol": "₹"
+      }
+    ],
+    "languages": [
+      "English",
+      "Hindi",
+      "Tamil"
+    ],
+    "borders": [
+      "BGD",
+      "BTN",
+      "MMR",
+      "CHN",
+      "NPL",
+      "PAK"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "IN",
+      "Bhārat",
+      "Republic of India",
+      "Bharat Ganrajya",
+      "இந்தியா"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "ID",
+    "cca3": "IDN",
+    "nameCommon": "Indonesia",
+    "nameOfficial": "Republic of Indonesia",
+    "capital": "Jakarta",
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "continent": "Asia",
+    "latitude": -5,
+    "longitude": 120,
+    "area": 1904569,
+    "population": null,
+    "flagEmoji": "🇮🇩",
+    "currencies": [
+      {
+        "code": "IDR",
+        "name": "Indonesian rupiah",
+        "symbol": "Rp"
+      }
+    ],
+    "languages": [
+      "Indonesian"
+    ],
+    "borders": [
+      "TLS",
+      "MYS",
+      "PNG"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "ID",
+      "Republic of Indonesia",
+      "Republik Indonesia"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "IR",
+    "cca3": "IRN",
+    "nameCommon": "Iran",
+    "nameOfficial": "Islamic Republic of Iran",
+    "capital": "Tehran",
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "continent": "Asia",
+    "latitude": 32,
+    "longitude": 53,
+    "area": 1648195,
+    "population": null,
+    "flagEmoji": "🇮🇷",
+    "currencies": [
+      {
+        "code": "IRR",
+        "name": "Iranian rial",
+        "symbol": "﷼"
+      }
+    ],
+    "languages": [
+      "Persian (Farsi)"
+    ],
+    "borders": [
+      "AFG",
+      "ARM",
+      "AZE",
+      "IRQ",
+      "PAK",
+      "TUR",
+      "TKM"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "IR",
+      "Islamic Republic of Iran",
+      "Iran, Islamic Republic of",
+      "Jomhuri-ye Eslāmi-ye Irān"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "IQ",
+    "cca3": "IRQ",
+    "nameCommon": "Iraq",
+    "nameOfficial": "Republic of Iraq",
+    "capital": "Baghdad",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 33,
+    "longitude": 44,
+    "area": 438317,
+    "population": null,
+    "flagEmoji": "🇮🇶",
+    "currencies": [
+      {
+        "code": "IQD",
+        "name": "Iraqi dinar",
+        "symbol": "ع.د"
+      }
+    ],
+    "languages": [
+      "Arabic",
+      "Aramaic",
+      "Sorani"
+    ],
+    "borders": [
+      "IRN",
+      "JOR",
+      "KWT",
+      "SAU",
+      "SYR",
+      "TUR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "IQ",
+      "Republic of Iraq",
+      "Jumhūriyyat al-‘Irāq"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "IE",
+    "cca3": "IRL",
+    "nameCommon": "Ireland",
+    "nameOfficial": "Republic of Ireland",
+    "capital": "Dublin",
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "continent": "Europe",
+    "latitude": 53,
+    "longitude": -8,
+    "area": 70273,
+    "population": null,
+    "flagEmoji": "🇮🇪",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "English",
+      "Irish"
+    ],
+    "borders": [
+      "GBR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "IE",
+      "Éire",
+      "Republic of Ireland",
+      "Poblacht na hÉireann"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "IL",
+    "cca3": "ISR",
+    "nameCommon": "Israel",
+    "nameOfficial": "State of Israel",
+    "capital": "Jerusalem",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 31.47,
+    "longitude": 35.13,
+    "area": 20770,
+    "population": null,
+    "flagEmoji": "🇮🇱",
+    "currencies": [
+      {
+        "code": "ILS",
+        "name": "Israeli new shekel",
+        "symbol": "₪"
+      }
+    ],
+    "languages": [
+      "Arabic",
+      "Hebrew"
+    ],
+    "borders": [
+      "EGY",
+      "JOR",
+      "LBN",
+      "PSE",
+      "SYR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "IL",
+      "State of Israel",
+      "Medīnat Yisrā'el"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "IT",
+    "cca3": "ITA",
+    "nameCommon": "Italy",
+    "nameOfficial": "Italian Republic",
+    "capital": "Rome",
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "continent": "Europe",
+    "latitude": 42.83333333,
+    "longitude": 12.83333333,
+    "area": 301336,
+    "population": null,
+    "flagEmoji": "🇮🇹",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Italian"
+    ],
+    "borders": [
+      "AUT",
+      "FRA",
+      "SMR",
+      "SVN",
+      "CHE",
+      "VAT"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "IT",
+      "Italian Republic",
+      "Repubblica italiana"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "CI",
+    "cca3": "CIV",
+    "nameCommon": "Ivory Coast",
+    "nameOfficial": "Republic of Côte d'Ivoire",
+    "capital": "Yamoussoukro",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 8,
+    "longitude": -5,
+    "area": 322463,
+    "population": null,
+    "flagEmoji": "🇨🇮",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "French"
+    ],
+    "borders": [
+      "BFA",
+      "GHA",
+      "GIN",
+      "LBR",
+      "MLI"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "CI",
+      "Côte d'Ivoire",
+      "Cote d'Ivoire",
+      "Ivory Coast",
+      "Republic of Côte d'Ivoire",
+      "République de Côte d'Ivoire"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "JM",
+    "cca3": "JAM",
+    "nameCommon": "Jamaica",
+    "nameOfficial": "Jamaica",
+    "capital": "Kingston",
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "continent": "North America",
+    "latitude": 18.25,
+    "longitude": -77.5,
+    "area": 10991,
+    "population": null,
+    "flagEmoji": "🇯🇲",
+    "currencies": [
+      {
+        "code": "JMD",
+        "name": "Jamaican dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English",
+      "Jamaican Patois"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "JM"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "JP",
+    "cca3": "JPN",
+    "nameCommon": "Japan",
+    "nameOfficial": "Japan",
+    "capital": "Tokyo",
+    "region": "Asia",
+    "subregion": "Eastern Asia",
+    "continent": "Asia",
+    "latitude": 36,
+    "longitude": 138,
+    "area": 377930,
+    "population": null,
+    "flagEmoji": "🇯🇵",
+    "currencies": [
+      {
+        "code": "JPY",
+        "name": "Japanese yen",
+        "symbol": "¥"
+      }
+    ],
+    "languages": [
+      "Japanese"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "JP",
+      "Nippon",
+      "Nihon"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "JO",
+    "cca3": "JOR",
+    "nameCommon": "Jordan",
+    "nameOfficial": "Hashemite Kingdom of Jordan",
+    "capital": "Amman",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 31,
+    "longitude": 36,
+    "area": 89342,
+    "population": null,
+    "flagEmoji": "🇯🇴",
+    "currencies": [
+      {
+        "code": "JOD",
+        "name": "Jordanian dinar",
+        "symbol": "د.ا"
+      }
+    ],
+    "languages": [
+      "Arabic"
+    ],
+    "borders": [
+      "IRQ",
+      "ISR",
+      "PSE",
+      "SAU",
+      "SYR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "JO",
+      "Hashemite Kingdom of Jordan",
+      "al-Mamlakah al-Urdunīyah al-Hāshimīyah"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "KZ",
+    "cca3": "KAZ",
+    "nameCommon": "Kazakhstan",
+    "nameOfficial": "Republic of Kazakhstan",
+    "capital": "Astana",
+    "region": "Asia",
+    "subregion": "Central Asia",
+    "continent": "Asia",
+    "latitude": 48,
+    "longitude": 68,
+    "area": 2724900,
+    "population": null,
+    "flagEmoji": "🇰🇿",
+    "currencies": [
+      {
+        "code": "KZT",
+        "name": "Kazakhstani tenge",
+        "symbol": "₸"
+      }
+    ],
+    "languages": [
+      "Kazakh",
+      "Russian"
+    ],
+    "borders": [
+      "CHN",
+      "KGZ",
+      "RUS",
+      "TKM",
+      "UZB"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "KZ",
+      "Qazaqstan",
+      "Казахстан",
+      "Republic of Kazakhstan",
+      "Қазақстан Республикасы",
+      "Qazaqstan Respublïkası",
+      "Республика Казахстан",
+      "Respublika Kazakhstan"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "KE",
+    "cca3": "KEN",
+    "nameCommon": "Kenya",
+    "nameOfficial": "Republic of Kenya",
+    "capital": "Nairobi",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": 1,
+    "longitude": 38,
+    "area": 580367,
+    "population": null,
+    "flagEmoji": "🇰🇪",
+    "currencies": [
+      {
+        "code": "KES",
+        "name": "Kenyan shilling",
+        "symbol": "Sh"
+      }
+    ],
+    "languages": [
+      "English",
+      "Swahili"
+    ],
+    "borders": [
+      "ETH",
+      "SOM",
+      "SSD",
+      "TZA",
+      "UGA"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "KE",
+      "Republic of Kenya",
+      "Jamhuri ya Kenya"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "KI",
+    "cca3": "KIR",
+    "nameCommon": "Kiribati",
+    "nameOfficial": "Independent and Sovereign Republic of Kiribati",
+    "capital": "South Tarawa",
+    "region": "Oceania",
+    "subregion": "Micronesia",
+    "continent": "Oceania",
+    "latitude": 1.41666666,
+    "longitude": 173,
+    "area": 811,
+    "population": null,
+    "flagEmoji": "🇰🇮",
+    "currencies": [
+      {
+        "code": "AUD",
+        "name": "Australian dollar",
+        "symbol": "$"
+      },
+      {
+        "code": "KID",
+        "name": "Kiribati dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English",
+      "Gilbertese"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "KI",
+      "Republic of Kiribati",
+      "Ribaberiki Kiribati"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "KW",
+    "cca3": "KWT",
+    "nameCommon": "Kuwait",
+    "nameOfficial": "State of Kuwait",
+    "capital": "Kuwait City",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 29.5,
+    "longitude": 45.75,
+    "area": 17818,
+    "population": null,
+    "flagEmoji": "🇰🇼",
+    "currencies": [
+      {
+        "code": "KWD",
+        "name": "Kuwaiti dinar",
+        "symbol": "د.ك"
+      }
+    ],
+    "languages": [
+      "Arabic"
+    ],
+    "borders": [
+      "IRQ",
+      "SAU"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "KW",
+      "State of Kuwait",
+      "Dawlat al-Kuwait"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "KG",
+    "cca3": "KGZ",
+    "nameCommon": "Kyrgyzstan",
+    "nameOfficial": "Kyrgyz Republic",
+    "capital": "Bishkek",
+    "region": "Asia",
+    "subregion": "Central Asia",
+    "continent": "Asia",
+    "latitude": 41,
+    "longitude": 75,
+    "area": 199951,
+    "population": null,
+    "flagEmoji": "🇰🇬",
+    "currencies": [
+      {
+        "code": "KGS",
+        "name": "Kyrgyzstani som",
+        "symbol": "с"
+      }
+    ],
+    "languages": [
+      "Kyrgyz",
+      "Russian"
+    ],
+    "borders": [
+      "CHN",
+      "KAZ",
+      "TJK",
+      "UZB"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "KG",
+      "Киргизия",
+      "Kyrgyz Republic",
+      "Кыргыз Республикасы",
+      "Kyrgyz Respublikasy"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "LA",
+    "cca3": "LAO",
+    "nameCommon": "Laos",
+    "nameOfficial": "Lao People's Democratic Republic",
+    "capital": "Vientiane",
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "continent": "Asia",
+    "latitude": 18,
+    "longitude": 105,
+    "area": 236800,
+    "population": null,
+    "flagEmoji": "🇱🇦",
+    "currencies": [
+      {
+        "code": "LAK",
+        "name": "Lao kip",
+        "symbol": "₭"
+      }
+    ],
+    "languages": [
+      "Lao"
+    ],
+    "borders": [
+      "MMR",
+      "KHM",
+      "CHN",
+      "THA",
+      "VNM"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "LA",
+      "Lao",
+      "Lao People's Democratic Republic",
+      "Sathalanalat Paxathipatai Paxaxon Lao"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "LV",
+    "cca3": "LVA",
+    "nameCommon": "Latvia",
+    "nameOfficial": "Republic of Latvia",
+    "capital": "Riga",
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "continent": "Europe",
+    "latitude": 57,
+    "longitude": 25,
+    "area": 64559,
+    "population": null,
+    "flagEmoji": "🇱🇻",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Latvian"
+    ],
+    "borders": [
+      "BLR",
+      "EST",
+      "LTU",
+      "RUS"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "LV",
+      "Republic of Latvia",
+      "Latvijas Republika"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "LB",
+    "cca3": "LBN",
+    "nameCommon": "Lebanon",
+    "nameOfficial": "Lebanese Republic",
+    "capital": "Beirut",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 33.83333333,
+    "longitude": 35.83333333,
+    "area": 10452,
+    "population": null,
+    "flagEmoji": "🇱🇧",
+    "currencies": [
+      {
+        "code": "LBP",
+        "name": "Lebanese pound",
+        "symbol": "ل.ل"
+      }
+    ],
+    "languages": [
+      "Arabic",
+      "French"
+    ],
+    "borders": [
+      "ISR",
+      "SYR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "LB",
+      "Lebanese Republic",
+      "Al-Jumhūrīyah Al-Libnānīyah"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "LS",
+    "cca3": "LSO",
+    "nameCommon": "Lesotho",
+    "nameOfficial": "Kingdom of Lesotho",
+    "capital": "Maseru",
+    "region": "Africa",
+    "subregion": "Southern Africa",
+    "continent": "Africa",
+    "latitude": -29.5,
+    "longitude": 28.5,
+    "area": 30355,
+    "population": null,
+    "flagEmoji": "🇱🇸",
+    "currencies": [
+      {
+        "code": "LSL",
+        "name": "Lesotho loti",
+        "symbol": "L"
+      },
+      {
+        "code": "ZAR",
+        "name": "South African rand",
+        "symbol": "R"
+      }
+    ],
+    "languages": [
+      "English",
+      "Sotho"
+    ],
+    "borders": [
+      "ZAF"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "LS",
+      "Kingdom of Lesotho",
+      "Muso oa Lesotho"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "LR",
+    "cca3": "LBR",
+    "nameCommon": "Liberia",
+    "nameOfficial": "Republic of Liberia",
+    "capital": "Monrovia",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 6.5,
+    "longitude": -9.5,
+    "area": 111369,
+    "population": null,
+    "flagEmoji": "🇱🇷",
+    "currencies": [
+      {
+        "code": "LRD",
+        "name": "Liberian dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [
+      "GIN",
+      "CIV",
+      "SLE"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "LR",
+      "Republic of Liberia"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "LY",
+    "cca3": "LBY",
+    "nameCommon": "Libya",
+    "nameOfficial": "State of Libya",
+    "capital": "Tripoli",
+    "region": "Africa",
+    "subregion": "Northern Africa",
+    "continent": "Africa",
+    "latitude": 25,
+    "longitude": 17,
+    "area": 1759540,
+    "population": null,
+    "flagEmoji": "🇱🇾",
+    "currencies": [
+      {
+        "code": "LYD",
+        "name": "Libyan dinar",
+        "symbol": "ل.د"
+      }
+    ],
+    "languages": [
+      "Arabic"
+    ],
+    "borders": [
+      "DZA",
+      "TCD",
+      "EGY",
+      "NER",
+      "SDN",
+      "TUN"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "LY",
+      "State of Libya",
+      "Dawlat Libya"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "LI",
+    "cca3": "LIE",
+    "nameCommon": "Liechtenstein",
+    "nameOfficial": "Principality of Liechtenstein",
+    "capital": "Vaduz",
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "continent": "Europe",
+    "latitude": 47.26666666,
+    "longitude": 9.53333333,
+    "area": 160,
+    "population": null,
+    "flagEmoji": "🇱🇮",
+    "currencies": [
+      {
+        "code": "CHF",
+        "name": "Swiss franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "German"
+    ],
+    "borders": [
+      "AUT",
+      "CHE"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "LI",
+      "Principality of Liechtenstein",
+      "Fürstentum Liechtenstein"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "LT",
+    "cca3": "LTU",
+    "nameCommon": "Lithuania",
+    "nameOfficial": "Republic of Lithuania",
+    "capital": "Vilnius",
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "continent": "Europe",
+    "latitude": 56,
+    "longitude": 24,
+    "area": 65300,
+    "population": null,
+    "flagEmoji": "🇱🇹",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Lithuanian"
+    ],
+    "borders": [
+      "BLR",
+      "LVA",
+      "POL",
+      "RUS"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "LT",
+      "Republic of Lithuania",
+      "Lietuvos Respublika"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "LU",
+    "cca3": "LUX",
+    "nameCommon": "Luxembourg",
+    "nameOfficial": "Grand Duchy of Luxembourg",
+    "capital": "Luxembourg",
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "continent": "Europe",
+    "latitude": 49.75,
+    "longitude": 6.16666666,
+    "area": 2586,
+    "population": null,
+    "flagEmoji": "🇱🇺",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "German",
+      "French",
+      "Luxembourgish"
+    ],
+    "borders": [
+      "BEL",
+      "FRA",
+      "DEU"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "LU",
+      "Grand Duchy of Luxembourg",
+      "Grand-Duché de Luxembourg",
+      "Großherzogtum Luxemburg",
+      "Groussherzogtum Lëtzebuerg"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MG",
+    "cca3": "MDG",
+    "nameCommon": "Madagascar",
+    "nameOfficial": "Republic of Madagascar",
+    "capital": "Antananarivo",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": -20,
+    "longitude": 47,
+    "area": 587041,
+    "population": null,
+    "flagEmoji": "🇲🇬",
+    "currencies": [
+      {
+        "code": "MGA",
+        "name": "Malagasy ariary",
+        "symbol": "Ar"
+      }
+    ],
+    "languages": [
+      "French",
+      "Malagasy"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MG",
+      "Republic of Madagascar",
+      "Repoblikan'i Madagasikara",
+      "République de Madagascar"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MW",
+    "cca3": "MWI",
+    "nameCommon": "Malawi",
+    "nameOfficial": "Republic of Malawi",
+    "capital": "Lilongwe",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": -13.5,
+    "longitude": 34,
+    "area": 118484,
+    "population": null,
+    "flagEmoji": "🇲🇼",
+    "currencies": [
+      {
+        "code": "MWK",
+        "name": "Malawian kwacha",
+        "symbol": "MK"
+      }
+    ],
+    "languages": [
+      "English",
+      "Chewa"
+    ],
+    "borders": [
+      "MOZ",
+      "TZA",
+      "ZMB"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MW",
+      "Republic of Malawi"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MY",
+    "cca3": "MYS",
+    "nameCommon": "Malaysia",
+    "nameOfficial": "Malaysia",
+    "capital": "Kuala Lumpur",
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "continent": "Asia",
+    "latitude": 2.5,
+    "longitude": 112.5,
+    "area": 330803,
+    "population": null,
+    "flagEmoji": "🇲🇾",
+    "currencies": [
+      {
+        "code": "MYR",
+        "name": "Malaysian ringgit",
+        "symbol": "RM"
+      }
+    ],
+    "languages": [
+      "English",
+      "Malay"
+    ],
+    "borders": [
+      "BRN",
+      "IDN",
+      "THA"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MY"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MV",
+    "cca3": "MDV",
+    "nameCommon": "Maldives",
+    "nameOfficial": "Republic of the Maldives",
+    "capital": "Malé",
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "continent": "Asia",
+    "latitude": 3.25,
+    "longitude": 73,
+    "area": 300,
+    "population": null,
+    "flagEmoji": "🇲🇻",
+    "currencies": [
+      {
+        "code": "MVR",
+        "name": "Maldivian rufiyaa",
+        "symbol": ".ރ"
+      }
+    ],
+    "languages": [
+      "Maldivian"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MV",
+      "Maldive Islands",
+      "Republic of the Maldives",
+      "Dhivehi Raajjeyge Jumhooriyya"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "ML",
+    "cca3": "MLI",
+    "nameCommon": "Mali",
+    "nameOfficial": "Republic of Mali",
+    "capital": "Bamako",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 17,
+    "longitude": -4,
+    "area": 1240192,
+    "population": null,
+    "flagEmoji": "🇲🇱",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "French"
+    ],
+    "borders": [
+      "DZA",
+      "BFA",
+      "GIN",
+      "CIV",
+      "MRT",
+      "NER",
+      "SEN"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "ML",
+      "Republic of Mali",
+      "République du Mali"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MT",
+    "cca3": "MLT",
+    "nameCommon": "Malta",
+    "nameOfficial": "Republic of Malta",
+    "capital": "Valletta",
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "continent": "Europe",
+    "latitude": 35.83333333,
+    "longitude": 14.58333333,
+    "area": 316,
+    "population": null,
+    "flagEmoji": "🇲🇹",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "English",
+      "Maltese"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MT",
+      "Republic of Malta",
+      "Repubblika ta' Malta"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MH",
+    "cca3": "MHL",
+    "nameCommon": "Marshall Islands",
+    "nameOfficial": "Republic of the Marshall Islands",
+    "capital": "Majuro",
+    "region": "Oceania",
+    "subregion": "Micronesia",
+    "continent": "Oceania",
+    "latitude": 9,
+    "longitude": 168,
+    "area": 181,
+    "population": null,
+    "flagEmoji": "🇲🇭",
+    "currencies": [
+      {
+        "code": "USD",
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English",
+      "Marshallese"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MH",
+      "Republic of the Marshall Islands",
+      "Aolepān Aorōkin M̧ajeļ"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MR",
+    "cca3": "MRT",
+    "nameCommon": "Mauritania",
+    "nameOfficial": "Islamic Republic of Mauritania",
+    "capital": "Nouakchott",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 20,
+    "longitude": -12,
+    "area": 1030700,
+    "population": null,
+    "flagEmoji": "🇲🇷",
+    "currencies": [
+      {
+        "code": "MRU",
+        "name": "Mauritanian ouguiya",
+        "symbol": "UM"
+      }
+    ],
+    "languages": [
+      "Arabic"
+    ],
+    "borders": [
+      "DZA",
+      "MLI",
+      "SEN",
+      "ESH"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MR",
+      "Islamic Republic of Mauritania",
+      "al-Jumhūriyyah al-ʾIslāmiyyah al-Mūrītāniyyah"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MU",
+    "cca3": "MUS",
+    "nameCommon": "Mauritius",
+    "nameOfficial": "Republic of Mauritius",
+    "capital": "Port Louis",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": -20.28333333,
+    "longitude": 57.55,
+    "area": 2040,
+    "population": null,
+    "flagEmoji": "🇲🇺",
+    "currencies": [
+      {
+        "code": "MUR",
+        "name": "Mauritian rupee",
+        "symbol": "₨"
+      }
+    ],
+    "languages": [
+      "English",
+      "French",
+      "Mauritian Creole"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MU",
+      "Republic of Mauritius",
+      "République de Maurice"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MX",
+    "cca3": "MEX",
+    "nameCommon": "Mexico",
+    "nameOfficial": "United Mexican States",
+    "capital": "Mexico City",
+    "region": "Americas",
+    "subregion": "North America",
+    "continent": "North America",
+    "latitude": 23,
+    "longitude": -102,
+    "area": 1964375,
+    "population": null,
+    "flagEmoji": "🇲🇽",
+    "currencies": [
+      {
+        "code": "MXN",
+        "name": "Mexican peso",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "borders": [
+      "BLZ",
+      "GTM",
+      "USA"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MX",
+      "Mexicanos",
+      "United Mexican States",
+      "Estados Unidos Mexicanos"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "FM",
+    "cca3": "FSM",
+    "nameCommon": "Micronesia",
+    "nameOfficial": "Federated States of Micronesia",
+    "capital": "Palikir",
+    "region": "Oceania",
+    "subregion": "Micronesia",
+    "continent": "Oceania",
+    "latitude": 6.91666666,
+    "longitude": 158.25,
+    "area": 702,
+    "population": null,
+    "flagEmoji": "🇫🇲",
+    "currencies": [],
+    "languages": [
+      "English"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "FM",
+      "Federated States of Micronesia",
+      "Micronesia, Federated States of"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MD",
+    "cca3": "MDA",
+    "nameCommon": "Moldova",
+    "nameOfficial": "Republic of Moldova",
+    "capital": "Chișinău",
+    "region": "Europe",
+    "subregion": "Eastern Europe",
+    "continent": "Europe",
+    "latitude": 47,
+    "longitude": 29,
+    "area": 33846,
+    "population": null,
+    "flagEmoji": "🇲🇩",
+    "currencies": [
+      {
+        "code": "MDL",
+        "name": "Moldovan leu",
+        "symbol": "L"
+      }
+    ],
+    "languages": [
+      "Moldavian"
+    ],
+    "borders": [
+      "ROU",
+      "UKR"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MD",
+      "Moldova, Republic of",
+      "Republic of Moldova",
+      "Republica Moldova"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MC",
+    "cca3": "MCO",
+    "nameCommon": "Monaco",
+    "nameOfficial": "Principality of Monaco",
+    "capital": "Monaco",
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "continent": "Europe",
+    "latitude": 43.73333333,
+    "longitude": 7.4,
+    "area": 2.02,
+    "population": null,
+    "flagEmoji": "🇲🇨",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "French"
+    ],
+    "borders": [
+      "FRA"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MC",
+      "Principality of Monaco",
+      "Principauté de Monaco"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MN",
+    "cca3": "MNG",
+    "nameCommon": "Mongolia",
+    "nameOfficial": "Mongolia",
+    "capital": "Ulan Bator",
+    "region": "Asia",
+    "subregion": "Eastern Asia",
+    "continent": "Asia",
+    "latitude": 46,
+    "longitude": 105,
+    "area": 1564110,
+    "population": null,
+    "flagEmoji": "🇲🇳",
+    "currencies": [
+      {
+        "code": "MNT",
+        "name": "Mongolian tögrög",
+        "symbol": "₮"
+      }
+    ],
+    "languages": [
+      "Mongolian"
+    ],
+    "borders": [
+      "CHN",
+      "RUS"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MN"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "ME",
+    "cca3": "MNE",
+    "nameCommon": "Montenegro",
+    "nameOfficial": "Montenegro",
+    "capital": "Podgorica",
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "continent": "Europe",
+    "latitude": 42.5,
+    "longitude": 19.3,
+    "area": 13812,
+    "population": null,
+    "flagEmoji": "🇲🇪",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Montenegrin"
+    ],
+    "borders": [
+      "ALB",
+      "BIH",
+      "HRV",
+      "UNK",
+      "SRB"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "ME",
+      "Crna Gora"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MA",
+    "cca3": "MAR",
+    "nameCommon": "Morocco",
+    "nameOfficial": "Kingdom of Morocco",
+    "capital": "Rabat",
+    "region": "Africa",
+    "subregion": "Northern Africa",
+    "continent": "Africa",
+    "latitude": 32,
+    "longitude": -5,
+    "area": 446550,
+    "population": null,
+    "flagEmoji": "🇲🇦",
+    "currencies": [
+      {
+        "code": "MAD",
+        "name": "Moroccan dirham",
+        "symbol": "د.م."
+      }
+    ],
+    "languages": [
+      "Arabic",
+      "Berber"
+    ],
+    "borders": [
+      "DZA",
+      "ESH",
+      "ESP"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MA",
+      "Kingdom of Morocco",
+      "Al-Mamlakah al-Maġribiyah"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MZ",
+    "cca3": "MOZ",
+    "nameCommon": "Mozambique",
+    "nameOfficial": "Republic of Mozambique",
+    "capital": "Maputo",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": -18.25,
+    "longitude": 35,
+    "area": 801590,
+    "population": null,
+    "flagEmoji": "🇲🇿",
+    "currencies": [
+      {
+        "code": "MZN",
+        "name": "Mozambican metical",
+        "symbol": "MT"
+      }
+    ],
+    "languages": [
+      "Portuguese"
+    ],
+    "borders": [
+      "MWI",
+      "ZAF",
+      "SWZ",
+      "TZA",
+      "ZMB",
+      "ZWE"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MZ",
+      "Republic of Mozambique",
+      "República de Moçambique"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MM",
+    "cca3": "MMR",
+    "nameCommon": "Myanmar",
+    "nameOfficial": "Republic of the Union of Myanmar",
+    "capital": "Naypyidaw",
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "continent": "Asia",
+    "latitude": 22,
+    "longitude": 98,
+    "area": 676578,
+    "population": null,
+    "flagEmoji": "🇲🇲",
+    "currencies": [
+      {
+        "code": "MMK",
+        "name": "Burmese kyat",
+        "symbol": "Ks"
+      }
+    ],
+    "languages": [
+      "Burmese"
+    ],
+    "borders": [
+      "BGD",
+      "CHN",
+      "IND",
+      "LAO",
+      "THA"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MM",
+      "Burma",
+      "Republic of the Union of Myanmar",
+      "Pyidaunzu Thanmăda Myăma Nainngandaw"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "NA",
+    "cca3": "NAM",
+    "nameCommon": "Namibia",
+    "nameOfficial": "Republic of Namibia",
+    "capital": "Windhoek",
+    "region": "Africa",
+    "subregion": "Southern Africa",
+    "continent": "Africa",
+    "latitude": -22,
+    "longitude": 17,
+    "area": 825615,
+    "population": null,
+    "flagEmoji": "🇳🇦",
+    "currencies": [
+      {
+        "code": "NAD",
+        "name": "Namibian dollar",
+        "symbol": "$"
+      },
+      {
+        "code": "ZAR",
+        "name": "South African rand",
+        "symbol": "R"
+      }
+    ],
+    "languages": [
+      "Afrikaans",
+      "German",
+      "English",
+      "Herero",
+      "Khoekhoe",
+      "Kwangali",
+      "Lozi",
+      "Ndonga",
+      "Tswana"
+    ],
+    "borders": [
+      "AGO",
+      "BWA",
+      "ZAF",
+      "ZMB"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "NA",
+      "Namibië",
+      "Republic of Namibia"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "NR",
+    "cca3": "NRU",
+    "nameCommon": "Nauru",
+    "nameOfficial": "Republic of Nauru",
+    "capital": "Yaren",
+    "region": "Oceania",
+    "subregion": "Micronesia",
+    "continent": "Oceania",
+    "latitude": -0.53333333,
+    "longitude": 166.91666666,
+    "area": 21,
+    "population": null,
+    "flagEmoji": "🇳🇷",
+    "currencies": [
+      {
+        "code": "AUD",
+        "name": "Australian dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English",
+      "Nauru"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "NR",
+      "Naoero",
+      "Pleasant Island",
+      "Republic of Nauru",
+      "Ripublik Naoero"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "NP",
+    "cca3": "NPL",
+    "nameCommon": "Nepal",
+    "nameOfficial": "Federal Democratic Republic of Nepal",
+    "capital": "Kathmandu",
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "continent": "Asia",
+    "latitude": 28,
+    "longitude": 84,
+    "area": 147181,
+    "population": null,
+    "flagEmoji": "🇳🇵",
+    "currencies": [
+      {
+        "code": "NPR",
+        "name": "Nepalese rupee",
+        "symbol": "₨"
+      }
+    ],
+    "languages": [
+      "Nepali"
+    ],
+    "borders": [
+      "CHN",
+      "IND"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "NP",
+      "Federal Democratic Republic of Nepal",
+      "Loktāntrik Ganatantra Nepāl"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "NL",
+    "cca3": "NLD",
+    "nameCommon": "Netherlands",
+    "nameOfficial": "Kingdom of the Netherlands",
+    "capital": "Amsterdam",
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "continent": "Europe",
+    "latitude": 52.5,
+    "longitude": 5.75,
+    "area": 41850,
+    "population": null,
+    "flagEmoji": "🇳🇱",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Dutch"
+    ],
+    "borders": [
+      "BEL",
+      "DEU"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "NL",
+      "Holland",
+      "Nederland",
+      "The Netherlands"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "NZ",
+    "cca3": "NZL",
+    "nameCommon": "New Zealand",
+    "nameOfficial": "New Zealand",
+    "capital": "Wellington",
+    "region": "Oceania",
+    "subregion": "Australia and New Zealand",
+    "continent": "Oceania",
+    "latitude": -41,
+    "longitude": 174,
+    "area": 270467,
+    "population": null,
+    "flagEmoji": "🇳🇿",
+    "currencies": [
+      {
+        "code": "NZD",
+        "name": "New Zealand dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English",
+      "Māori",
+      "New Zealand Sign Language"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "NZ",
+      "Aotearoa"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "NI",
+    "cca3": "NIC",
+    "nameCommon": "Nicaragua",
+    "nameOfficial": "Republic of Nicaragua",
+    "capital": "Managua",
+    "region": "Americas",
+    "subregion": "Central America",
+    "continent": "North America",
+    "latitude": 13,
+    "longitude": -85,
+    "area": 130373,
+    "population": null,
+    "flagEmoji": "🇳🇮",
+    "currencies": [
+      {
+        "code": "NIO",
+        "name": "Nicaraguan córdoba",
+        "symbol": "C$"
+      }
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "borders": [
+      "CRI",
+      "HND"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "NI",
+      "Republic of Nicaragua",
+      "República de Nicaragua"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "NE",
+    "cca3": "NER",
+    "nameCommon": "Niger",
+    "nameOfficial": "Republic of Niger",
+    "capital": "Niamey",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 16,
+    "longitude": 8,
+    "area": 1267000,
+    "population": null,
+    "flagEmoji": "🇳🇪",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "French"
+    ],
+    "borders": [
+      "DZA",
+      "BEN",
+      "BFA",
+      "TCD",
+      "LBY",
+      "MLI",
+      "NGA"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "NE",
+      "Nijar"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "NG",
+    "cca3": "NGA",
+    "nameCommon": "Nigeria",
+    "nameOfficial": "Federal Republic of Nigeria",
+    "capital": "Abuja",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 10,
+    "longitude": 8,
+    "area": 923768,
+    "population": null,
+    "flagEmoji": "🇳🇬",
+    "currencies": [
+      {
+        "code": "NGN",
+        "name": "Nigerian naira",
+        "symbol": "₦"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [
+      "BEN",
+      "CMR",
+      "TCD",
+      "NER"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "NG",
+      "Nijeriya",
+      "Naíjíríà",
+      "Federal Republic of Nigeria"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "KP",
+    "cca3": "PRK",
+    "nameCommon": "North Korea",
+    "nameOfficial": "Democratic People's Republic of Korea",
+    "capital": "Pyongyang",
+    "region": "Asia",
+    "subregion": "Eastern Asia",
+    "continent": "Asia",
+    "latitude": 40,
+    "longitude": 127,
+    "area": 120538,
+    "population": null,
+    "flagEmoji": "🇰🇵",
+    "currencies": [
+      {
+        "code": "KPW",
+        "name": "North Korean won",
+        "symbol": "₩"
+      }
+    ],
+    "languages": [
+      "Korean"
+    ],
+    "borders": [
+      "CHN",
+      "KOR",
+      "RUS"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "KP",
+      "Democratic People's Republic of Korea",
+      "DPRK",
+      "조선민주주의인민공화국",
+      "Chosŏn Minjujuŭi Inmin Konghwaguk",
+      "Korea, Democratic People's Republic of",
+      "북한",
+      "북조선"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "MK",
+    "cca3": "MKD",
+    "nameCommon": "North Macedonia",
+    "nameOfficial": "Republic of North Macedonia",
+    "capital": "Skopje",
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "continent": "Europe",
+    "latitude": 41.83333333,
+    "longitude": 22,
+    "area": 25713,
+    "population": null,
+    "flagEmoji": "🇲🇰",
+    "currencies": [
+      {
+        "code": "MKD",
+        "name": "denar",
+        "symbol": "den"
+      }
+    ],
+    "languages": [
+      "Macedonian"
+    ],
+    "borders": [
+      "ALB",
+      "BGR",
+      "GRC",
+      "UNK",
+      "SRB"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "MK",
+      "The former Yugoslav Republic of Macedonia",
+      "Republic of North Macedonia",
+      "Macedonia, The Former Yugoslav Republic of",
+      "Република Северна Македонија",
+      "Macedonia"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "NO",
+    "cca3": "NOR",
+    "nameCommon": "Norway",
+    "nameOfficial": "Kingdom of Norway",
+    "capital": "Oslo",
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "continent": "Europe",
+    "latitude": 62,
+    "longitude": 10,
+    "area": 323802,
+    "population": null,
+    "flagEmoji": "🇳🇴",
+    "currencies": [
+      {
+        "code": "NOK",
+        "name": "Norwegian krone",
+        "symbol": "kr"
+      }
+    ],
+    "languages": [
+      "Norwegian Nynorsk",
+      "Norwegian Bokmål",
+      "Sami"
+    ],
+    "borders": [
+      "FIN",
+      "SWE",
+      "RUS"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "NO",
+      "Norge",
+      "Noreg",
+      "Kingdom of Norway",
+      "Kongeriket Norge",
+      "Kongeriket Noreg"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "OM",
+    "cca3": "OMN",
+    "nameCommon": "Oman",
+    "nameOfficial": "Sultanate of Oman",
+    "capital": "Muscat",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 21,
+    "longitude": 57,
+    "area": 309500,
+    "population": null,
+    "flagEmoji": "🇴🇲",
+    "currencies": [
+      {
+        "code": "OMR",
+        "name": "Omani rial",
+        "symbol": "ر.ع."
+      }
+    ],
+    "languages": [
+      "Arabic"
+    ],
+    "borders": [
+      "SAU",
+      "ARE",
+      "YEM"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "OM",
+      "Sultanate of Oman",
+      "Salṭanat ʻUmān"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "PK",
+    "cca3": "PAK",
+    "nameCommon": "Pakistan",
+    "nameOfficial": "Islamic Republic of Pakistan",
+    "capital": "Islamabad",
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "continent": "Asia",
+    "latitude": 30,
+    "longitude": 70,
+    "area": 881912,
+    "population": null,
+    "flagEmoji": "🇵🇰",
+    "currencies": [
+      {
+        "code": "PKR",
+        "name": "Pakistani rupee",
+        "symbol": "₨"
+      }
+    ],
+    "languages": [
+      "English",
+      "Urdu"
+    ],
+    "borders": [
+      "AFG",
+      "CHN",
+      "IND",
+      "IRN"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "PK",
+      "Pākistān",
+      "Islamic Republic of Pakistan",
+      "Islāmī Jumhūriya'eh Pākistān"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "PW",
+    "cca3": "PLW",
+    "nameCommon": "Palau",
+    "nameOfficial": "Republic of Palau",
+    "capital": "Ngerulmud",
+    "region": "Oceania",
+    "subregion": "Micronesia",
+    "continent": "Oceania",
+    "latitude": 7.5,
+    "longitude": 134.5,
+    "area": 459,
+    "population": null,
+    "flagEmoji": "🇵🇼",
+    "currencies": [
+      {
+        "code": "USD",
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English",
+      "Palauan"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "PW",
+      "Republic of Palau",
+      "Beluu er a Belau"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "PS",
+    "cca3": "PSE",
+    "nameCommon": "Palestine",
+    "nameOfficial": "State of Palestine",
+    "capital": "Ramallah",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 31.9,
+    "longitude": 35.2,
+    "area": 6220,
+    "population": null,
+    "flagEmoji": "🇵🇸",
+    "currencies": [
+      {
+        "code": "EGP",
+        "name": "Egyptian pound",
+        "symbol": "E£"
+      },
+      {
+        "code": "ILS",
+        "name": "Israeli new shekel",
+        "symbol": "₪"
+      },
+      {
+        "code": "JOD",
+        "name": "Jordanian dinar",
+        "symbol": "JD"
+      }
+    ],
+    "languages": [
+      "Arabic"
+    ],
+    "borders": [
+      "ISR",
+      "EGY",
+      "JOR"
+    ],
+    "landlocked": false,
+    "independent": false,
+    "unMember": false,
+    "altSpellings": [
+      "PS",
+      "Palestine, State of",
+      "State of Palestine",
+      "Dawlat Filasṭin"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "PA",
+    "cca3": "PAN",
+    "nameCommon": "Panama",
+    "nameOfficial": "Republic of Panama",
+    "capital": "Panama City",
+    "region": "Americas",
+    "subregion": "Central America",
+    "continent": "North America",
+    "latitude": 9,
+    "longitude": -80,
+    "area": 75417,
+    "population": null,
+    "flagEmoji": "🇵🇦",
+    "currencies": [
+      {
+        "code": "PAB",
+        "name": "Panamanian balboa",
+        "symbol": "B/."
+      },
+      {
+        "code": "USD",
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "borders": [
+      "COL",
+      "CRI"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "PA",
+      "Republic of Panama",
+      "República de Panamá"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "PG",
+    "cca3": "PNG",
+    "nameCommon": "Papua New Guinea",
+    "nameOfficial": "Independent State of Papua New Guinea",
+    "capital": "Port Moresby",
+    "region": "Oceania",
+    "subregion": "Melanesia",
+    "continent": "Oceania",
+    "latitude": -6,
+    "longitude": 147,
+    "area": 462840,
+    "population": null,
+    "flagEmoji": "🇵🇬",
+    "currencies": [
+      {
+        "code": "PGK",
+        "name": "Papua New Guinean kina",
+        "symbol": "K"
+      }
+    ],
+    "languages": [
+      "English",
+      "Hiri Motu",
+      "Tok Pisin"
+    ],
+    "borders": [
+      "IDN"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "PG",
+      "Independent State of Papua New Guinea",
+      "Independen Stet bilong Papua Niugini"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "PY",
+    "cca3": "PRY",
+    "nameCommon": "Paraguay",
+    "nameOfficial": "Republic of Paraguay",
+    "capital": "Asunción",
+    "region": "Americas",
+    "subregion": "South America",
+    "continent": "South America",
+    "latitude": -23,
+    "longitude": -58,
+    "area": 406752,
+    "population": null,
+    "flagEmoji": "🇵🇾",
+    "currencies": [
+      {
+        "code": "PYG",
+        "name": "Paraguayan guaraní",
+        "symbol": "₲"
+      }
+    ],
+    "languages": [
+      "Guaraní",
+      "Spanish"
+    ],
+    "borders": [
+      "ARG",
+      "BOL",
+      "BRA"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "PY",
+      "Republic of Paraguay",
+      "República del Paraguay",
+      "Tetã Paraguái"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "PE",
+    "cca3": "PER",
+    "nameCommon": "Peru",
+    "nameOfficial": "Republic of Peru",
+    "capital": "Lima",
+    "region": "Americas",
+    "subregion": "South America",
+    "continent": "South America",
+    "latitude": -10,
+    "longitude": -76,
+    "area": 1285216,
+    "population": null,
+    "flagEmoji": "🇵🇪",
+    "currencies": [
+      {
+        "code": "PEN",
+        "name": "Peruvian sol",
+        "symbol": "S/."
+      }
+    ],
+    "languages": [
+      "Aymara",
+      "Quechua",
+      "Spanish"
+    ],
+    "borders": [
+      "BOL",
+      "BRA",
+      "CHL",
+      "COL",
+      "ECU"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "PE",
+      "Republic of Peru",
+      "República del Perú"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "PH",
+    "cca3": "PHL",
+    "nameCommon": "Philippines",
+    "nameOfficial": "Republic of the Philippines",
+    "capital": "Manila",
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "continent": "Asia",
+    "latitude": 13,
+    "longitude": 122,
+    "area": 342353,
+    "population": null,
+    "flagEmoji": "🇵🇭",
+    "currencies": [
+      {
+        "code": "PHP",
+        "name": "Philippine peso",
+        "symbol": "₱"
+      }
+    ],
+    "languages": [
+      "English",
+      "Filipino"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "PH",
+      "Republic of the Philippines",
+      "Repúblika ng Pilipinas"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "PL",
+    "cca3": "POL",
+    "nameCommon": "Poland",
+    "nameOfficial": "Republic of Poland",
+    "capital": "Warsaw",
+    "region": "Europe",
+    "subregion": "Central Europe",
+    "continent": "Europe",
+    "latitude": 52,
+    "longitude": 20,
+    "area": 312679,
+    "population": null,
+    "flagEmoji": "🇵🇱",
+    "currencies": [
+      {
+        "code": "PLN",
+        "name": "Polish złoty",
+        "symbol": "zł"
+      }
+    ],
+    "languages": [
+      "Polish"
+    ],
+    "borders": [
+      "BLR",
+      "CZE",
+      "DEU",
+      "LTU",
+      "RUS",
+      "SVK",
+      "UKR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "PL",
+      "Republic of Poland",
+      "Rzeczpospolita Polska"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "PT",
+    "cca3": "PRT",
+    "nameCommon": "Portugal",
+    "nameOfficial": "Portuguese Republic",
+    "capital": "Lisbon",
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "continent": "Europe",
+    "latitude": 39.5,
+    "longitude": -8,
+    "area": 92090,
+    "population": null,
+    "flagEmoji": "🇵🇹",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Portuguese"
+    ],
+    "borders": [
+      "ESP"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "PT",
+      "Portuguesa",
+      "Portuguese Republic",
+      "República Portuguesa"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "QA",
+    "cca3": "QAT",
+    "nameCommon": "Qatar",
+    "nameOfficial": "State of Qatar",
+    "capital": "Doha",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 25.5,
+    "longitude": 51.25,
+    "area": 11586,
+    "population": null,
+    "flagEmoji": "🇶🇦",
+    "currencies": [
+      {
+        "code": "QAR",
+        "name": "Qatari riyal",
+        "symbol": "ر.ق"
+      }
+    ],
+    "languages": [
+      "Arabic"
+    ],
+    "borders": [
+      "SAU"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "QA",
+      "State of Qatar",
+      "Dawlat Qaṭar"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "RO",
+    "cca3": "ROU",
+    "nameCommon": "Romania",
+    "nameOfficial": "Romania",
+    "capital": "Bucharest",
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "continent": "Europe",
+    "latitude": 46,
+    "longitude": 25,
+    "area": 238391,
+    "population": null,
+    "flagEmoji": "🇷🇴",
+    "currencies": [
+      {
+        "code": "RON",
+        "name": "Romanian leu",
+        "symbol": "lei"
+      }
+    ],
+    "languages": [
+      "Romanian"
+    ],
+    "borders": [
+      "BGR",
+      "HUN",
+      "MDA",
+      "SRB",
+      "UKR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "RO",
+      "Rumania",
+      "Roumania",
+      "România"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "RU",
+    "cca3": "RUS",
+    "nameCommon": "Russia",
+    "nameOfficial": "Russian Federation",
+    "capital": "Moscow",
+    "region": "Europe",
+    "subregion": "Eastern Europe",
+    "continent": "Europe",
+    "latitude": 60,
+    "longitude": 100,
+    "area": 17098242,
+    "population": null,
+    "flagEmoji": "🇷🇺",
+    "currencies": [
+      {
+        "code": "RUB",
+        "name": "Russian ruble",
+        "symbol": "₽"
+      }
+    ],
+    "languages": [
+      "Russian"
+    ],
+    "borders": [
+      "AZE",
+      "BLR",
+      "CHN",
+      "EST",
+      "FIN",
+      "GEO",
+      "KAZ",
+      "PRK",
+      "LVA",
+      "LTU",
+      "MNG",
+      "NOR",
+      "POL",
+      "UKR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "RU",
+      "Russian Federation",
+      "Российская Федерация"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "RW",
+    "cca3": "RWA",
+    "nameCommon": "Rwanda",
+    "nameOfficial": "Republic of Rwanda",
+    "capital": "Kigali",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": -2,
+    "longitude": 30,
+    "area": 26338,
+    "population": null,
+    "flagEmoji": "🇷🇼",
+    "currencies": [
+      {
+        "code": "RWF",
+        "name": "Rwandan franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "English",
+      "French",
+      "Kinyarwanda"
+    ],
+    "borders": [
+      "BDI",
+      "COD",
+      "TZA",
+      "UGA"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "RW",
+      "Republic of Rwanda",
+      "Repubulika y'u Rwanda",
+      "République du Rwanda"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "KN",
+    "cca3": "KNA",
+    "nameCommon": "Saint Kitts and Nevis",
+    "nameOfficial": "Federation of Saint Christopher and Nevis",
+    "capital": "Basseterre",
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "continent": "North America",
+    "latitude": 17.33333333,
+    "longitude": -62.75,
+    "area": 261,
+    "population": null,
+    "flagEmoji": "🇰🇳",
+    "currencies": [
+      {
+        "code": "XCD",
+        "name": "Eastern Caribbean dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "KN",
+      "Federation of Saint Christopher and Nevis"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "LC",
+    "cca3": "LCA",
+    "nameCommon": "Saint Lucia",
+    "nameOfficial": "Saint Lucia",
+    "capital": "Castries",
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "continent": "North America",
+    "latitude": 13.88333333,
+    "longitude": -60.96666666,
+    "area": 616,
+    "population": null,
+    "flagEmoji": "🇱🇨",
+    "currencies": [
+      {
+        "code": "XCD",
+        "name": "Eastern Caribbean dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "LC"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "VC",
+    "cca3": "VCT",
+    "nameCommon": "Saint Vincent and the Grenadines",
+    "nameOfficial": "Saint Vincent and the Grenadines",
+    "capital": "Kingstown",
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "continent": "North America",
+    "latitude": 13.25,
+    "longitude": -61.2,
+    "area": 389,
+    "population": null,
+    "flagEmoji": "🇻🇨",
+    "currencies": [
+      {
+        "code": "XCD",
+        "name": "Eastern Caribbean dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "VC"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "WS",
+    "cca3": "WSM",
+    "nameCommon": "Samoa",
+    "nameOfficial": "Independent State of Samoa",
+    "capital": "Apia",
+    "region": "Oceania",
+    "subregion": "Polynesia",
+    "continent": "Oceania",
+    "latitude": -13.58333333,
+    "longitude": -172.33333333,
+    "area": 2842,
+    "population": null,
+    "flagEmoji": "🇼🇸",
+    "currencies": [
+      {
+        "code": "WST",
+        "name": "Samoan tālā",
+        "symbol": "T"
+      }
+    ],
+    "languages": [
+      "English",
+      "Samoan"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "WS",
+      "Independent State of Samoa",
+      "Malo Saʻoloto Tutoʻatasi o Sāmoa"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SM",
+    "cca3": "SMR",
+    "nameCommon": "San Marino",
+    "nameOfficial": "Most Serene Republic of San Marino",
+    "capital": "City of San Marino",
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "continent": "Europe",
+    "latitude": 43.76666666,
+    "longitude": 12.41666666,
+    "area": 61,
+    "population": null,
+    "flagEmoji": "🇸🇲",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Italian"
+    ],
+    "borders": [
+      "ITA"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SM",
+      "Republic of San Marino",
+      "Repubblica di San Marino"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SA",
+    "cca3": "SAU",
+    "nameCommon": "Saudi Arabia",
+    "nameOfficial": "Kingdom of Saudi Arabia",
+    "capital": "Riyadh",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 25,
+    "longitude": 45,
+    "area": 2149690,
+    "population": null,
+    "flagEmoji": "🇸🇦",
+    "currencies": [
+      {
+        "code": "SAR",
+        "name": "Saudi riyal",
+        "symbol": "ر.س"
+      }
+    ],
+    "languages": [
+      "Arabic"
+    ],
+    "borders": [
+      "IRQ",
+      "JOR",
+      "KWT",
+      "OMN",
+      "QAT",
+      "ARE",
+      "YEM"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "Saudi",
+      "SA",
+      "Kingdom of Saudi Arabia",
+      "Al-Mamlakah al-‘Arabiyyah as-Su‘ūdiyyah"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SN",
+    "cca3": "SEN",
+    "nameCommon": "Senegal",
+    "nameOfficial": "Republic of Senegal",
+    "capital": "Dakar",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 14,
+    "longitude": -14,
+    "area": 196722,
+    "population": null,
+    "flagEmoji": "🇸🇳",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "French"
+    ],
+    "borders": [
+      "GMB",
+      "GIN",
+      "GNB",
+      "MLI",
+      "MRT"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SN",
+      "Republic of Senegal",
+      "République du Sénégal"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "RS",
+    "cca3": "SRB",
+    "nameCommon": "Serbia",
+    "nameOfficial": "Republic of Serbia",
+    "capital": "Belgrade",
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "continent": "Europe",
+    "latitude": 44,
+    "longitude": 21,
+    "area": 88361,
+    "population": null,
+    "flagEmoji": "🇷🇸",
+    "currencies": [
+      {
+        "code": "RSD",
+        "name": "Serbian dinar",
+        "symbol": "дин."
+      }
+    ],
+    "languages": [
+      "Serbian"
+    ],
+    "borders": [
+      "BIH",
+      "BGR",
+      "HRV",
+      "HUN",
+      "UNK",
+      "MKD",
+      "MNE",
+      "ROU"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "RS",
+      "Srbija",
+      "Republika Srbija",
+      "Србија",
+      "Република Србија",
+      "Republic of Serbia"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SC",
+    "cca3": "SYC",
+    "nameCommon": "Seychelles",
+    "nameOfficial": "Republic of Seychelles",
+    "capital": "Victoria",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": -4.58333333,
+    "longitude": 55.66666666,
+    "area": 452,
+    "population": null,
+    "flagEmoji": "🇸🇨",
+    "currencies": [
+      {
+        "code": "SCR",
+        "name": "Seychellois rupee",
+        "symbol": "₨"
+      }
+    ],
+    "languages": [
+      "Seychellois Creole",
+      "English",
+      "French"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SC",
+      "Republic of Seychelles",
+      "Repiblik Sesel",
+      "République des Seychelles"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SL",
+    "cca3": "SLE",
+    "nameCommon": "Sierra Leone",
+    "nameOfficial": "Republic of Sierra Leone",
+    "capital": "Freetown",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 8.5,
+    "longitude": -11.5,
+    "area": 71740,
+    "population": null,
+    "flagEmoji": "🇸🇱",
+    "currencies": [
+      {
+        "code": "SLE",
+        "name": "Sierra Leonean leone",
+        "symbol": "Le"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [
+      "GIN",
+      "LBR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SL",
+      "Republic of Sierra Leone"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SG",
+    "cca3": "SGP",
+    "nameCommon": "Singapore",
+    "nameOfficial": "Republic of Singapore",
+    "capital": "Singapore",
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "continent": "Asia",
+    "latitude": 1.36666666,
+    "longitude": 103.8,
+    "area": 710,
+    "population": null,
+    "flagEmoji": "🇸🇬",
+    "currencies": [
+      {
+        "code": "SGD",
+        "name": "Singapore dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English",
+      "Malay",
+      "Tamil",
+      "Chinese"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SG",
+      "Singapura",
+      "Republik Singapura",
+      "新加坡共和国"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SK",
+    "cca3": "SVK",
+    "nameCommon": "Slovakia",
+    "nameOfficial": "Slovak Republic",
+    "capital": "Bratislava",
+    "region": "Europe",
+    "subregion": "Central Europe",
+    "continent": "Europe",
+    "latitude": 48.66666666,
+    "longitude": 19.5,
+    "area": 49037,
+    "population": null,
+    "flagEmoji": "🇸🇰",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Slovak"
+    ],
+    "borders": [
+      "AUT",
+      "CZE",
+      "HUN",
+      "POL",
+      "UKR"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SK",
+      "Slovak Republic",
+      "Slovenská republika"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SI",
+    "cca3": "SVN",
+    "nameCommon": "Slovenia",
+    "nameOfficial": "Republic of Slovenia",
+    "capital": "Ljubljana",
+    "region": "Europe",
+    "subregion": "Central Europe",
+    "continent": "Europe",
+    "latitude": 46.11666666,
+    "longitude": 14.81666666,
+    "area": 20273,
+    "population": null,
+    "flagEmoji": "🇸🇮",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Slovene"
+    ],
+    "borders": [
+      "AUT",
+      "HRV",
+      "ITA",
+      "HUN"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SI",
+      "Republic of Slovenia",
+      "Republika Slovenija"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SB",
+    "cca3": "SLB",
+    "nameCommon": "Solomon Islands",
+    "nameOfficial": "Solomon Islands",
+    "capital": "Honiara",
+    "region": "Oceania",
+    "subregion": "Melanesia",
+    "continent": "Oceania",
+    "latitude": -8,
+    "longitude": 159,
+    "area": 28896,
+    "population": null,
+    "flagEmoji": "🇸🇧",
+    "currencies": [
+      {
+        "code": "SBD",
+        "name": "Solomon Islands dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SB"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SO",
+    "cca3": "SOM",
+    "nameCommon": "Somalia",
+    "nameOfficial": "Federal Republic of Somalia",
+    "capital": "Mogadishu",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": 10,
+    "longitude": 49,
+    "area": 637657,
+    "population": null,
+    "flagEmoji": "🇸🇴",
+    "currencies": [
+      {
+        "code": "SOS",
+        "name": "Somali shilling",
+        "symbol": "Sh"
+      }
+    ],
+    "languages": [
+      "Arabic",
+      "Somali"
+    ],
+    "borders": [
+      "DJI",
+      "ETH",
+      "KEN"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SO",
+      "aṣ-Ṣūmāl",
+      "Federal Republic of Somalia",
+      "Jamhuuriyadda Federaalka Soomaaliya",
+      "Jumhūriyyat aṣ-Ṣūmāl al-Fiderāliyya"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "ZA",
+    "cca3": "ZAF",
+    "nameCommon": "South Africa",
+    "nameOfficial": "Republic of South Africa",
+    "capital": "Pretoria",
+    "region": "Africa",
+    "subregion": "Southern Africa",
+    "continent": "Africa",
+    "latitude": -29,
+    "longitude": 24,
+    "area": 1221037,
+    "population": null,
+    "flagEmoji": "🇿🇦",
+    "currencies": [
+      {
+        "code": "ZAR",
+        "name": "South African rand",
+        "symbol": "R"
+      }
+    ],
+    "languages": [
+      "Afrikaans",
+      "English",
+      "Southern Ndebele",
+      "Northern Sotho",
+      "Southern Sotho",
+      "Swazi",
+      "Tswana",
+      "Tsonga",
+      "Venda",
+      "Xhosa",
+      "Zulu"
+    ],
+    "borders": [
+      "BWA",
+      "LSO",
+      "MOZ",
+      "NAM",
+      "SWZ",
+      "ZWE"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "ZA",
+      "RSA",
+      "Suid-Afrika",
+      "Republic of South Africa"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "KR",
+    "cca3": "KOR",
+    "nameCommon": "South Korea",
+    "nameOfficial": "Republic of Korea",
+    "capital": "Seoul",
+    "region": "Asia",
+    "subregion": "Eastern Asia",
+    "continent": "Asia",
+    "latitude": 37,
+    "longitude": 127.5,
+    "area": 100210,
+    "population": null,
+    "flagEmoji": "🇰🇷",
+    "currencies": [
+      {
+        "code": "KRW",
+        "name": "South Korean won",
+        "symbol": "₩"
+      }
+    ],
+    "languages": [
+      "Korean"
+    ],
+    "borders": [
+      "PRK"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "KR",
+      "Korea, Republic of",
+      "Republic of Korea",
+      "남한",
+      "남조선"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SS",
+    "cca3": "SSD",
+    "nameCommon": "South Sudan",
+    "nameOfficial": "Republic of South Sudan",
+    "capital": "Juba",
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "continent": "Africa",
+    "latitude": 7,
+    "longitude": 30,
+    "area": 619745,
+    "population": null,
+    "flagEmoji": "🇸🇸",
+    "currencies": [
+      {
+        "code": "SSP",
+        "name": "South Sudanese pound",
+        "symbol": "£"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [
+      "CAF",
+      "COD",
+      "ETH",
+      "KEN",
+      "SDN",
+      "UGA"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SS"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "ES",
+    "cca3": "ESP",
+    "nameCommon": "Spain",
+    "nameOfficial": "Kingdom of Spain",
+    "capital": "Madrid",
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "continent": "Europe",
+    "latitude": 40,
+    "longitude": -4,
+    "area": 505992,
+    "population": null,
+    "flagEmoji": "🇪🇸",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "borders": [
+      "AND",
+      "FRA",
+      "GIB",
+      "PRT",
+      "MAR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "ES",
+      "Kingdom of Spain",
+      "Reino de España"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "LK",
+    "cca3": "LKA",
+    "nameCommon": "Sri Lanka",
+    "nameOfficial": "Democratic Socialist Republic of Sri Lanka",
+    "capital": "Colombo",
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "continent": "Asia",
+    "latitude": 7,
+    "longitude": 81,
+    "area": 65610,
+    "population": null,
+    "flagEmoji": "🇱🇰",
+    "currencies": [
+      {
+        "code": "LKR",
+        "name": "Sri Lankan rupee",
+        "symbol": "Rs රු"
+      }
+    ],
+    "languages": [
+      "Sinhala",
+      "Tamil"
+    ],
+    "borders": [
+      "IND"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "LK",
+      "ilaṅkai",
+      "Democratic Socialist Republic of Sri Lanka"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SD",
+    "cca3": "SDN",
+    "nameCommon": "Sudan",
+    "nameOfficial": "Republic of the Sudan",
+    "capital": "Khartoum",
+    "region": "Africa",
+    "subregion": "Northern Africa",
+    "continent": "Africa",
+    "latitude": 15,
+    "longitude": 30,
+    "area": 1886068,
+    "population": null,
+    "flagEmoji": "🇸🇩",
+    "currencies": [
+      {
+        "code": "SDG",
+        "name": "Sudanese pound",
+        "symbol": "PT"
+      }
+    ],
+    "languages": [
+      "Arabic",
+      "English"
+    ],
+    "borders": [
+      "CAF",
+      "TCD",
+      "EGY",
+      "ERI",
+      "ETH",
+      "LBY",
+      "SSD"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SD",
+      "Republic of the Sudan",
+      "Jumhūrīyat as-Sūdān"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SR",
+    "cca3": "SUR",
+    "nameCommon": "Suriname",
+    "nameOfficial": "Republic of Suriname",
+    "capital": "Paramaribo",
+    "region": "Americas",
+    "subregion": "South America",
+    "continent": "South America",
+    "latitude": 4,
+    "longitude": -56,
+    "area": 163820,
+    "population": null,
+    "flagEmoji": "🇸🇷",
+    "currencies": [
+      {
+        "code": "SRD",
+        "name": "Surinamese dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Dutch"
+    ],
+    "borders": [
+      "BRA",
+      "GUF",
+      "GUY"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SR",
+      "Sarnam",
+      "Sranangron",
+      "Republic of Suriname",
+      "Republiek Suriname"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SE",
+    "cca3": "SWE",
+    "nameCommon": "Sweden",
+    "nameOfficial": "Kingdom of Sweden",
+    "capital": "Stockholm",
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "continent": "Europe",
+    "latitude": 62,
+    "longitude": 15,
+    "area": 450295,
+    "population": null,
+    "flagEmoji": "🇸🇪",
+    "currencies": [
+      {
+        "code": "SEK",
+        "name": "Swedish krona",
+        "symbol": "kr"
+      }
+    ],
+    "languages": [
+      "Swedish"
+    ],
+    "borders": [
+      "FIN",
+      "NOR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SE",
+      "Kingdom of Sweden",
+      "Konungariket Sverige"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "CH",
+    "cca3": "CHE",
+    "nameCommon": "Switzerland",
+    "nameOfficial": "Swiss Confederation",
+    "capital": "Bern",
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "continent": "Europe",
+    "latitude": 47,
+    "longitude": 8,
+    "area": 41284,
+    "population": null,
+    "flagEmoji": "🇨🇭",
+    "currencies": [
+      {
+        "code": "CHF",
+        "name": "Swiss franc",
+        "symbol": "Fr."
+      }
+    ],
+    "languages": [
+      "French",
+      "Swiss German",
+      "Italian",
+      "Romansh"
+    ],
+    "borders": [
+      "AUT",
+      "FRA",
+      "ITA",
+      "LIE",
+      "DEU"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "CH",
+      "Swiss Confederation",
+      "Schweiz",
+      "Suisse",
+      "Svizzera",
+      "Svizra"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "SY",
+    "cca3": "SYR",
+    "nameCommon": "Syria",
+    "nameOfficial": "Syrian Arab Republic",
+    "capital": "Damascus",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 35,
+    "longitude": 38,
+    "area": 185180,
+    "population": null,
+    "flagEmoji": "🇸🇾",
+    "currencies": [
+      {
+        "code": "SYP",
+        "name": "Syrian pound",
+        "symbol": "£"
+      }
+    ],
+    "languages": [
+      "Arabic"
+    ],
+    "borders": [
+      "IRQ",
+      "ISR",
+      "JOR",
+      "LBN",
+      "TUR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "SY",
+      "Syrian Arab Republic",
+      "Al-Jumhūrīyah Al-ʻArabīyah As-Sūrīyah"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "ST",
+    "cca3": "STP",
+    "nameCommon": "São Tomé and Príncipe",
+    "nameOfficial": "Democratic Republic of São Tomé and Príncipe",
+    "capital": "São Tomé",
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "continent": "Africa",
+    "latitude": 1,
+    "longitude": 7,
+    "area": 964,
+    "population": null,
+    "flagEmoji": "🇸🇹",
+    "currencies": [
+      {
+        "code": "STN",
+        "name": "São Tomé and Príncipe dobra",
+        "symbol": "Db"
+      }
+    ],
+    "languages": [
+      "Portuguese"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "ST",
+      "Democratic Republic of São Tomé and Príncipe",
+      "Sao Tome and Principe",
+      "República Democrática de São Tomé e Príncipe"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "TJ",
+    "cca3": "TJK",
+    "nameCommon": "Tajikistan",
+    "nameOfficial": "Republic of Tajikistan",
+    "capital": "Dushanbe",
+    "region": "Asia",
+    "subregion": "Central Asia",
+    "continent": "Asia",
+    "latitude": 39,
+    "longitude": 71,
+    "area": 143100,
+    "population": null,
+    "flagEmoji": "🇹🇯",
+    "currencies": [
+      {
+        "code": "TJS",
+        "name": "Tajikistani somoni",
+        "symbol": "ЅМ"
+      }
+    ],
+    "languages": [
+      "Russian",
+      "Tajik"
+    ],
+    "borders": [
+      "AFG",
+      "CHN",
+      "KGZ",
+      "UZB"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "TJ",
+      "Toçikiston",
+      "Republic of Tajikistan",
+      "Ҷумҳурии Тоҷикистон",
+      "Çumhuriyi Toçikiston"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "TZ",
+    "cca3": "TZA",
+    "nameCommon": "Tanzania",
+    "nameOfficial": "United Republic of Tanzania",
+    "capital": "Dodoma",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": -6,
+    "longitude": 35,
+    "area": 945087,
+    "population": null,
+    "flagEmoji": "🇹🇿",
+    "currencies": [
+      {
+        "code": "TZS",
+        "name": "Tanzanian shilling",
+        "symbol": "Sh"
+      }
+    ],
+    "languages": [
+      "English",
+      "Swahili"
+    ],
+    "borders": [
+      "BDI",
+      "COD",
+      "KEN",
+      "MWI",
+      "MOZ",
+      "RWA",
+      "UGA",
+      "ZMB"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "TZ",
+      "Tanzania, United Republic of",
+      "United Republic of Tanzania",
+      "Jamhuri ya Muungano wa Tanzania"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "TH",
+    "cca3": "THA",
+    "nameCommon": "Thailand",
+    "nameOfficial": "Kingdom of Thailand",
+    "capital": "Bangkok",
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "continent": "Asia",
+    "latitude": 15,
+    "longitude": 100,
+    "area": 513120,
+    "population": null,
+    "flagEmoji": "🇹🇭",
+    "currencies": [
+      {
+        "code": "THB",
+        "name": "Thai baht",
+        "symbol": "฿"
+      }
+    ],
+    "languages": [
+      "Thai"
+    ],
+    "borders": [
+      "MMR",
+      "KHM",
+      "LAO",
+      "MYS"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "TH",
+      "Prathet",
+      "Thai",
+      "Kingdom of Thailand",
+      "ราชอาณาจักรไทย",
+      "Ratcha Anachak Thai"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "TL",
+    "cca3": "TLS",
+    "nameCommon": "Timor-Leste",
+    "nameOfficial": "Democratic Republic of Timor-Leste",
+    "capital": "Dili",
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "continent": "Asia",
+    "latitude": -8.83333333,
+    "longitude": 125.91666666,
+    "area": 14874,
+    "population": null,
+    "flagEmoji": "🇹🇱",
+    "currencies": [
+      {
+        "code": "USD",
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Portuguese",
+      "Tetum"
+    ],
+    "borders": [
+      "IDN"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "TL",
+      "East Timor",
+      "Timor",
+      "Democratic Republic of Timor-Leste",
+      "República Democrática de Timor-Leste",
+      "Repúblika Demokrátika Timór-Leste",
+      "Timór Lorosa'e",
+      "Timor Lorosae"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "TG",
+    "cca3": "TGO",
+    "nameCommon": "Togo",
+    "nameOfficial": "Togolese Republic",
+    "capital": "Lomé",
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "continent": "Africa",
+    "latitude": 8,
+    "longitude": 1.16666666,
+    "area": 56785,
+    "population": null,
+    "flagEmoji": "🇹🇬",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "symbol": "Fr"
+      }
+    ],
+    "languages": [
+      "French"
+    ],
+    "borders": [
+      "BEN",
+      "BFA",
+      "GHA"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "TG",
+      "Togolese",
+      "Togolese Republic",
+      "République Togolaise"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "TO",
+    "cca3": "TON",
+    "nameCommon": "Tonga",
+    "nameOfficial": "Kingdom of Tonga",
+    "capital": "Nuku'alofa",
+    "region": "Oceania",
+    "subregion": "Polynesia",
+    "continent": "Oceania",
+    "latitude": -20,
+    "longitude": -175,
+    "area": 747,
+    "population": null,
+    "flagEmoji": "🇹🇴",
+    "currencies": [
+      {
+        "code": "TOP",
+        "name": "Tongan paʻanga",
+        "symbol": "T$"
+      }
+    ],
+    "languages": [
+      "English",
+      "Tongan"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "TO"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "TT",
+    "cca3": "TTO",
+    "nameCommon": "Trinidad and Tobago",
+    "nameOfficial": "Republic of Trinidad and Tobago",
+    "capital": "Port of Spain",
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "continent": "North America",
+    "latitude": 11,
+    "longitude": -61,
+    "area": 5130,
+    "population": null,
+    "flagEmoji": "🇹🇹",
+    "currencies": [
+      {
+        "code": "TTD",
+        "name": "Trinidad and Tobago dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "TT",
+      "Republic of Trinidad and Tobago"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "TN",
+    "cca3": "TUN",
+    "nameCommon": "Tunisia",
+    "nameOfficial": "Tunisian Republic",
+    "capital": "Tunis",
+    "region": "Africa",
+    "subregion": "Northern Africa",
+    "continent": "Africa",
+    "latitude": 34,
+    "longitude": 9,
+    "area": 163610,
+    "population": null,
+    "flagEmoji": "🇹🇳",
+    "currencies": [
+      {
+        "code": "TND",
+        "name": "Tunisian dinar",
+        "symbol": "د.ت"
+      }
+    ],
+    "languages": [
+      "Arabic"
+    ],
+    "borders": [
+      "DZA",
+      "LBY"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "TN",
+      "Republic of Tunisia",
+      "al-Jumhūriyyah at-Tūnisiyyah"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "TM",
+    "cca3": "TKM",
+    "nameCommon": "Turkmenistan",
+    "nameOfficial": "Turkmenistan",
+    "capital": "Ashgabat",
+    "region": "Asia",
+    "subregion": "Central Asia",
+    "continent": "Asia",
+    "latitude": 40,
+    "longitude": 60,
+    "area": 488100,
+    "population": null,
+    "flagEmoji": "🇹🇲",
+    "currencies": [
+      {
+        "code": "TMT",
+        "name": "Turkmenistan manat",
+        "symbol": "m"
+      }
+    ],
+    "languages": [
+      "Russian",
+      "Turkmen"
+    ],
+    "borders": [
+      "AFG",
+      "IRN",
+      "KAZ",
+      "UZB"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "TM"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "TV",
+    "cca3": "TUV",
+    "nameCommon": "Tuvalu",
+    "nameOfficial": "Tuvalu",
+    "capital": "Funafuti",
+    "region": "Oceania",
+    "subregion": "Polynesia",
+    "continent": "Oceania",
+    "latitude": -8,
+    "longitude": 178,
+    "area": 26,
+    "population": null,
+    "flagEmoji": "🇹🇻",
+    "currencies": [
+      {
+        "code": "AUD",
+        "name": "Australian dollar",
+        "symbol": "$"
+      },
+      {
+        "code": "TVD",
+        "name": "Tuvaluan dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English",
+      "Tuvaluan"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "TV"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "TR",
+    "cca3": "TUR",
+    "nameCommon": "Türkiye",
+    "nameOfficial": "Republic of Türkiye",
+    "capital": "Ankara",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 39,
+    "longitude": 35,
+    "area": 783562,
+    "population": null,
+    "flagEmoji": "🇹🇷",
+    "currencies": [
+      {
+        "code": "TRY",
+        "name": "Turkish lira",
+        "symbol": "₺"
+      }
+    ],
+    "languages": [
+      "Turkish"
+    ],
+    "borders": [
+      "ARM",
+      "AZE",
+      "BGR",
+      "GEO",
+      "GRC",
+      "IRN",
+      "IRQ",
+      "SYR"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "TR",
+      "Turkiye",
+      "Republic of Turkey",
+      "Türkiye Cumhuriyeti"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "UG",
+    "cca3": "UGA",
+    "nameCommon": "Uganda",
+    "nameOfficial": "Republic of Uganda",
+    "capital": "Kampala",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": 1,
+    "longitude": 32,
+    "area": 241550,
+    "population": null,
+    "flagEmoji": "🇺🇬",
+    "currencies": [
+      {
+        "code": "UGX",
+        "name": "Ugandan shilling",
+        "symbol": "Sh"
+      }
+    ],
+    "languages": [
+      "English",
+      "Swahili"
+    ],
+    "borders": [
+      "COD",
+      "KEN",
+      "RWA",
+      "SSD",
+      "TZA"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "UG",
+      "Republic of Uganda",
+      "Jamhuri ya Uganda"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "UA",
+    "cca3": "UKR",
+    "nameCommon": "Ukraine",
+    "nameOfficial": "Ukraine",
+    "capital": "Kyiv",
+    "region": "Europe",
+    "subregion": "Eastern Europe",
+    "continent": "Europe",
+    "latitude": 49,
+    "longitude": 32,
+    "area": 603500,
+    "population": null,
+    "flagEmoji": "🇺🇦",
+    "currencies": [
+      {
+        "code": "UAH",
+        "name": "Ukrainian hryvnia",
+        "symbol": "₴"
+      }
+    ],
+    "languages": [
+      "Ukrainian"
+    ],
+    "borders": [
+      "BLR",
+      "HUN",
+      "MDA",
+      "POL",
+      "ROU",
+      "RUS",
+      "SVK"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "UA",
+      "Ukrayina"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "AE",
+    "cca3": "ARE",
+    "nameCommon": "United Arab Emirates",
+    "nameOfficial": "United Arab Emirates",
+    "capital": "Abu Dhabi",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 24,
+    "longitude": 54,
+    "area": 83600,
+    "population": null,
+    "flagEmoji": "🇦🇪",
+    "currencies": [
+      {
+        "code": "AED",
+        "name": "United Arab Emirates dirham",
+        "symbol": "د.إ"
+      }
+    ],
+    "languages": [
+      "Arabic"
+    ],
+    "borders": [
+      "OMN",
+      "SAU"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "AE",
+      "UAE",
+      "Emirates"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "GB",
+    "cca3": "GBR",
+    "nameCommon": "United Kingdom",
+    "nameOfficial": "United Kingdom of Great Britain and Northern Ireland",
+    "capital": "London",
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "continent": "Europe",
+    "latitude": 54,
+    "longitude": -2,
+    "area": 242900,
+    "population": null,
+    "flagEmoji": "🇬🇧",
+    "currencies": [
+      {
+        "code": "GBP",
+        "name": "British pound",
+        "symbol": "£"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [
+      "IRL"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "GB",
+      "UK",
+      "Great Britain"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "US",
+    "cca3": "USA",
+    "nameCommon": "United States",
+    "nameOfficial": "United States of America",
+    "capital": "Washington D.C.",
+    "region": "Americas",
+    "subregion": "North America",
+    "continent": "North America",
+    "latitude": 38,
+    "longitude": -97,
+    "area": 9372610,
+    "population": null,
+    "flagEmoji": "🇺🇸",
+    "currencies": [
+      {
+        "code": "USD",
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [
+      "CAN",
+      "MEX"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "US",
+      "USA",
+      "United States of America"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "UY",
+    "cca3": "URY",
+    "nameCommon": "Uruguay",
+    "nameOfficial": "Oriental Republic of Uruguay",
+    "capital": "Montevideo",
+    "region": "Americas",
+    "subregion": "South America",
+    "continent": "South America",
+    "latitude": -33,
+    "longitude": -56,
+    "area": 181034,
+    "population": null,
+    "flagEmoji": "🇺🇾",
+    "currencies": [
+      {
+        "code": "UYU",
+        "name": "Uruguayan peso",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "borders": [
+      "ARG",
+      "BRA"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "UY",
+      "Oriental Republic of Uruguay",
+      "República Oriental del Uruguay"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "UZ",
+    "cca3": "UZB",
+    "nameCommon": "Uzbekistan",
+    "nameOfficial": "Republic of Uzbekistan",
+    "capital": "Tashkent",
+    "region": "Asia",
+    "subregion": "Central Asia",
+    "continent": "Asia",
+    "latitude": 41,
+    "longitude": 64,
+    "area": 447400,
+    "population": null,
+    "flagEmoji": "🇺🇿",
+    "currencies": [
+      {
+        "code": "UZS",
+        "name": "Uzbekistani soʻm",
+        "symbol": "so'm"
+      }
+    ],
+    "languages": [
+      "Russian",
+      "Uzbek"
+    ],
+    "borders": [
+      "AFG",
+      "KAZ",
+      "KGZ",
+      "TJK",
+      "TKM"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "UZ",
+      "Republic of Uzbekistan",
+      "O‘zbekiston Respublikasi",
+      "Ўзбекистон Республикаси"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "VU",
+    "cca3": "VUT",
+    "nameCommon": "Vanuatu",
+    "nameOfficial": "Republic of Vanuatu",
+    "capital": "Port Vila",
+    "region": "Oceania",
+    "subregion": "Melanesia",
+    "continent": "Oceania",
+    "latitude": -16,
+    "longitude": 167,
+    "area": 12189,
+    "population": null,
+    "flagEmoji": "🇻🇺",
+    "currencies": [
+      {
+        "code": "VUV",
+        "name": "Vanuatu vatu",
+        "symbol": "Vt"
+      }
+    ],
+    "languages": [
+      "Bislama",
+      "English",
+      "French"
+    ],
+    "borders": [],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "VU",
+      "Republic of Vanuatu",
+      "Ripablik blong Vanuatu",
+      "République de Vanuatu"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "VA",
+    "cca3": "VAT",
+    "nameCommon": "Vatican City",
+    "nameOfficial": "Vatican City State",
+    "capital": "Vatican City",
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "continent": "Europe",
+    "latitude": 41.9,
+    "longitude": 12.45,
+    "area": 0.44,
+    "population": null,
+    "flagEmoji": "🇻🇦",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      }
+    ],
+    "languages": [
+      "Italian",
+      "Latin"
+    ],
+    "borders": [
+      "ITA"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "VA",
+      "Holy See (Vatican City State)",
+      "Vatican City State",
+      "Vatican",
+      "Stato della Città del Vaticano"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "VE",
+    "cca3": "VEN",
+    "nameCommon": "Venezuela",
+    "nameOfficial": "Bolivarian Republic of Venezuela",
+    "capital": "Caracas",
+    "region": "Americas",
+    "subregion": "South America",
+    "continent": "South America",
+    "latitude": 8,
+    "longitude": -66,
+    "area": 916445,
+    "population": null,
+    "flagEmoji": "🇻🇪",
+    "currencies": [
+      {
+        "code": "VES",
+        "name": "Venezuelan bolívar soberano",
+        "symbol": "Bs.S."
+      }
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "borders": [
+      "BRA",
+      "COL",
+      "GUY"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "VE",
+      "Bolivarian Republic of Venezuela",
+      "Venezuela, Bolivarian Republic of",
+      "República Bolivariana de Venezuela"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "VN",
+    "cca3": "VNM",
+    "nameCommon": "Vietnam",
+    "nameOfficial": "Socialist Republic of Vietnam",
+    "capital": "Hanoi",
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "continent": "Asia",
+    "latitude": 16.16666666,
+    "longitude": 107.83333333,
+    "area": 331212,
+    "population": null,
+    "flagEmoji": "🇻🇳",
+    "currencies": [
+      {
+        "code": "VND",
+        "name": "Vietnamese đồng",
+        "symbol": "₫"
+      }
+    ],
+    "languages": [
+      "Vietnamese"
+    ],
+    "borders": [
+      "KHM",
+      "CHN",
+      "LAO"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "VN",
+      "Socialist Republic of Vietnam",
+      "Cộng hòa Xã hội chủ nghĩa Việt Nam",
+      "Viet Nam"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "YE",
+    "cca3": "YEM",
+    "nameCommon": "Yemen",
+    "nameOfficial": "Republic of Yemen",
+    "capital": "Sana'a",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "continent": "Asia",
+    "latitude": 15,
+    "longitude": 48,
+    "area": 527968,
+    "population": null,
+    "flagEmoji": "🇾🇪",
+    "currencies": [
+      {
+        "code": "YER",
+        "name": "Yemeni rial",
+        "symbol": "﷼"
+      }
+    ],
+    "languages": [
+      "Arabic"
+    ],
+    "borders": [
+      "OMN",
+      "SAU"
+    ],
+    "landlocked": false,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "YE",
+      "Yemeni Republic",
+      "al-Jumhūriyyah al-Yamaniyyah"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "ZM",
+    "cca3": "ZMB",
+    "nameCommon": "Zambia",
+    "nameOfficial": "Republic of Zambia",
+    "capital": "Lusaka",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": -15,
+    "longitude": 30,
+    "area": 752612,
+    "population": null,
+    "flagEmoji": "🇿🇲",
+    "currencies": [
+      {
+        "code": "ZMW",
+        "name": "Zambian kwacha",
+        "symbol": "ZK"
+      }
+    ],
+    "languages": [
+      "English"
+    ],
+    "borders": [
+      "AGO",
+      "BWA",
+      "COD",
+      "MWI",
+      "MOZ",
+      "NAM",
+      "TZA",
+      "ZWE"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "ZM",
+      "Republic of Zambia"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  },
+  {
+    "cca2": "ZW",
+    "cca3": "ZWE",
+    "nameCommon": "Zimbabwe",
+    "nameOfficial": "Republic of Zimbabwe",
+    "capital": "Harare",
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "continent": "Africa",
+    "latitude": -20,
+    "longitude": 30,
+    "area": 390757,
+    "population": null,
+    "flagEmoji": "🇿🇼",
+    "currencies": [
+      {
+        "code": "BWP",
+        "name": "Botswana pula",
+        "symbol": "P"
+      },
+      {
+        "code": "CNY",
+        "name": "Chinese yuan",
+        "symbol": "¥"
+      },
+      {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€"
+      },
+      {
+        "code": "GBP",
+        "name": "British pound",
+        "symbol": "£"
+      },
+      {
+        "code": "INR",
+        "name": "Indian rupee",
+        "symbol": "₹"
+      },
+      {
+        "code": "JPY",
+        "name": "Japanese yen",
+        "symbol": "¥"
+      },
+      {
+        "code": "USD",
+        "name": "United States dollar",
+        "symbol": "$"
+      },
+      {
+        "code": "ZAR",
+        "name": "South African rand",
+        "symbol": "Rs"
+      },
+      {
+        "code": "ZWB",
+        "name": "Zimbabwean bonds",
+        "symbol": "$"
+      }
+    ],
+    "languages": [
+      "Chibarwe",
+      "English",
+      "Kalanga",
+      "Khoisan",
+      "Ndau",
+      "Northern Ndebele",
+      "Chewa",
+      "Shona",
+      "Sotho",
+      "Tonga",
+      "Tswana",
+      "Tsonga",
+      "Venda",
+      "Xhosa",
+      "Zimbabwean Sign Language"
+    ],
+    "borders": [
+      "BWA",
+      "MOZ",
+      "ZAF",
+      "ZMB"
+    ],
+    "landlocked": true,
+    "independent": true,
+    "unMember": true,
+    "altSpellings": [
+      "ZW",
+      "Republic of Zimbabwe"
+    ],
+    "landmarks": [],
+    "emojiClues": []
+  }
+]

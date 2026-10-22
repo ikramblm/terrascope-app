@@ -1,0 +1,202 @@
+import 'package:flutter/material.dart';
+
+import '../../../../../core/widgets/app_background.dart';
+import '../../../../../core/widgets/color_back_button.dart';
+import '../../../../../core/widgets/max_width_box.dart';
+import '../../../../../core/widgets/surrender_button.dart';
+import '../../../../games/guess_outline/data/country_outline_repository.dart';
+import '../../../domain/game_result.dart';
+import '../../../presentation/screens/game_results_view.dart';
+import '../../../presentation/widgets/score_header.dart';
+import '../../../presentation/widgets/timer_bar.dart';
+import '../../../sound/sound_service.dart';
+import '../../location_engine.dart';
+import '../widgets/world_tap_map.dart';
+
+/// Guess by Location: a country's name appears, one tap on the world
+/// map is the guess — right only if it lands on that country — the same
+/// engine-drives-the-state / screen-swaps-playing-for-results shape as
+/// every other mode's shared game screen.
+class LocationGameScreen extends StatefulWidget {
+  const LocationGameScreen({
+    super.key,
+    required this.engineBuilder,
+    required this.outlines,
+    required this.onSessionComplete,
+  });
+
+  final LocationEngine Function() engineBuilder;
+  final Map<String, CountryOutline> outlines;
+  final void Function(GameResult result) onSessionComplete;
+
+  @override
+  State<LocationGameScreen> createState() => _LocationGameScreenState();
+}
+
+class _LocationGameScreenState extends State<LocationGameScreen> {
+  late LocationEngine _engine;
+  bool _resultRecorded = false;
+  int _lastCelebratedIndex = -1;
+
+  @override
+  void initState() {
+    super.initState();
+    _engine = widget.engineBuilder()..addListener(_onEngineTick);
+    _engine.start();
+  }
+
+  void _onEngineTick() {
+    // Fires for both a tapped guess and a timeout — either way,
+    // [LocationEngine.answered] just flipped true for this round, so
+    // this is the one moment to play the right/wrong sound, keyed off
+    // currentIndex so it never repeats on the timer's own ticks.
+    if (_engine.answered && _engine.currentIndex != _lastCelebratedIndex) {
+      _lastCelebratedIndex = _engine.currentIndex;
+      if (_engine.lastGuessWasCorrect) {
+        SoundService.instance.playCorrect(comboLevel: _engine.combo);
+      } else {
+        SoundService.instance.playWrong();
+      }
+    }
+    if (_engine.isComplete && !_resultRecorded) {
+      _resultRecorded = true;
+      SoundService.instance.playComplete();
+      widget.onSessionComplete(_engine.buildResult());
+    }
+    setState(() {});
+  }
+
+  void _handleGuess(double lon, double lat) {
+    _engine.submitGuess(lon, lat);
+  }
+
+  void _playAgain() {
+    _engine.removeListener(_onEngineTick);
+    _engine.dispose();
+    setState(() {
+      _resultRecorded = false;
+      _lastCelebratedIndex = -1;
+      _engine = widget.engineBuilder()..addListener(_onEngineTick);
+      _engine.start();
+    });
+  }
+
+  @override
+  void dispose() {
+    _engine.removeListener(_onEngineTick);
+    _engine.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Guess by Location'),
+        leading: const ColorBackButton(),
+        actions: [
+          if (!_engine.isComplete)
+            SurrenderButton(onSurrender: _engine.surrender),
+        ],
+      ),
+      body: AppBackground(
+        child: SafeArea(
+          child: MaxWidthBox(
+            child: _engine.isComplete
+                ? GameResultsView(
+                    result: _engine.buildResult(),
+                    onPlayAgain: _playAgain,
+                  )
+                : _PlayingView(
+                    engine: _engine,
+                    outlines: widget.outlines,
+                    onGuess: _handleGuess,
+                  ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PlayingView extends StatelessWidget {
+  const _PlayingView({
+    required this.engine,
+    required this.outlines,
+    required this.onGuess,
+  });
+
+  final LocationEngine engine;
+  final Map<String, CountryOutline> outlines;
+  final void Function(double lon, double lat) onGuess;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final distance = engine.lastDistanceKm;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ScoreHeader(
+            score: engine.score,
+            questionNumber: engine.currentIndex + 1,
+            totalQuestions: engine.totalQuestions,
+          ),
+          const SizedBox(height: 12),
+          RepaintBoundary(
+            child: TimerBar(
+              remaining: engine.timeRemaining,
+              total: engine.timeAllotted,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Where is ${engine.currentTarget.nameCommon}?',
+            style: theme.textTheme.headlineSmall,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 12),
+          // The map gets whatever room is left below the header — sized
+          // by Expanded, but never stretched off its own aspect ratio
+          // (WorldTapMap enforces that itself). Pinch/scroll zoom stays
+          // inside this same box, never a separate popup. Keyed by
+          // round so a zoom/pan from a previous question doesn't carry
+          // over — each new question starts fully fit-to-box again.
+          Expanded(
+            child: WorldTapMap(
+              key: ValueKey(engine.currentIndex),
+              outlines: outlines,
+              enabled: !engine.answered,
+              onGuess: onGuess,
+              guessLon: engine.lastGuessLon,
+              guessLat: engine.lastGuessLat,
+              actualLon: engine.answered
+                  ? engine.currentTarget.longitude
+                  : null,
+              actualLat: engine.answered ? engine.currentTarget.latitude : null,
+              highlightCca3: engine.currentTarget.cca3,
+              isCorrect: engine.answered ? engine.lastGuessWasCorrect : null,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            !engine.answered
+                ? 'Tap inside the country · pinch to zoom for small ones'
+                : distance == null
+                ? "Time's up — it's highlighted in red."
+                : engine.lastGuessWasCorrect
+                ? 'Correct! · +${engine.lastRoundScore} pts'
+                : '${distance.round()} km off · +${engine.lastRoundScore} pts',
+            textAlign: TextAlign.center,
+            style: engine.answered
+                ? theme.textTheme.titleMedium
+                : theme.textTheme.bodySmall,
+          ),
+        ],
+      ),
+    );
+  }
+}
