@@ -146,7 +146,12 @@ class _PlayingView extends StatelessWidget {
             totalQuestions: engine.totalQuestions,
           ),
           const SizedBox(height: 12),
-          TimerBar(remaining: engine.timeRemaining, total: engine.timeAllotted),
+          RepaintBoundary(
+            child: TimerBar(
+              remaining: engine.timeRemaining,
+              total: engine.timeAllotted,
+            ),
+          ),
           const SizedBox(height: 16),
           Text(
             'Where is ${engine.currentTarget.nameCommon}?',

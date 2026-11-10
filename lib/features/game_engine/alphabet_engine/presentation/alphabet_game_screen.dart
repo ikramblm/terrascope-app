@@ -159,11 +159,22 @@ class _PlayingView extends StatelessWidget {
     final theme = Theme.of(context);
     final feedbackColor = showWrongFlash ? AppColors.coral : null;
 
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
+    // Scrollable (with the page's full height as a minimum) so that when
+    // the on-screen keyboard opens on a short phone the content scrolls
+    // instead of overflowing — that overflow was the layout glitch.
+    return LayoutBuilder(
+      builder: (context, constraints) => SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: (constraints.maxHeight - 28)
+                .clamp(0.0, double.infinity)
+                .toDouble(),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             decoration: BoxDecoration(
@@ -283,7 +294,9 @@ class _PlayingView extends StatelessWidget {
             icon: const Icon(Icons.skip_next_rounded),
             label: const Text('Skip this letter'),
           ),
-        ],
+            ],
+          ),
+        ),
       ),
     );
   }

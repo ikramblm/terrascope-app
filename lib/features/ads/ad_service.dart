@@ -17,7 +17,12 @@ class AdService {
 
   final ValueNotifier<bool> ready = ValueNotifier<bool>(false);
 
+  /// True where the law requires an always-available way to revisit the
+  /// consent choice (the Profile screen shows its entry point then).
+  final ValueNotifier<bool> privacyOptionsRequired = ValueNotifier<bool>(false);
+
   bool _started = false;
+  bool _sdkStarted = false;
 
   Future<void> initialize() async {
     if (_started) return;
@@ -40,17 +45,46 @@ class AdService {
       );
       await dismissed.future;
 
-      if (!await ConsentInformation.instance.canRequestAds()) return;
-
-      // A family-friendly quiz: only allow ads rated suitable for
-      // general audiences.
-      await MobileAds.instance.updateRequestConfiguration(
-        RequestConfiguration(maxAdContentRating: MaxAdContentRating.g),
-      );
-      await MobileAds.instance.initialize();
-      ready.value = true;
+      await _refreshPrivacyOptions();
+      await _startSdkIfAllowed();
     } catch (_) {
       // Ads are a bonus: any failure just means no ads, never a crash.
     }
+  }
+
+  /// Reopens Google's privacy options form so the player can change their
+  /// consent, then starts ads if the new choice allows them.
+  Future<void> showPrivacyOptions() async {
+    try {
+      final dismissed = Completer<void>();
+      ConsentForm.showPrivacyOptionsForm((FormError? error) {
+        dismissed.complete();
+      });
+      await dismissed.future;
+      await _startSdkIfAllowed();
+    } catch (_) {
+      // Never let the consent UI break the app.
+    }
+  }
+
+  Future<void> _refreshPrivacyOptions() async {
+    privacyOptionsRequired.value =
+        await ConsentInformation.instance
+            .getPrivacyOptionsRequirementStatus() ==
+        PrivacyOptionsRequirementStatus.required;
+  }
+
+  Future<void> _startSdkIfAllowed() async {
+    if (_sdkStarted) return;
+    if (!await ConsentInformation.instance.canRequestAds()) return;
+    _sdkStarted = true;
+
+    // A family-friendly quiz: only allow ads rated suitable for
+    // general audiences.
+    await MobileAds.instance.updateRequestConfiguration(
+      RequestConfiguration(maxAdContentRating: MaxAdContentRating.g),
+    );
+    await MobileAds.instance.initialize();
+    ready.value = true;
   }
 }

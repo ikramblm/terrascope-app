@@ -28,7 +28,13 @@ class LocationEngine extends ChangeNotifier {
     required this.targets,
     required this.difficulty,
     this.outlines = const {},
-  }) : timeRemaining = Duration(seconds: difficulty.secondsPerQuestion);
+    int? secondsPerQuestion,
+  }) : _secondsPerQuestion = secondsPerQuestion ?? difficulty.secondsPerQuestion,
+       timeRemaining = Duration(
+         seconds: secondsPerQuestion ?? difficulty.secondsPerQuestion,
+       );
+
+  final int _secondsPerQuestion;
 
   final List<Country> targets;
   final GameDifficulty difficulty;
@@ -101,7 +107,7 @@ class LocationEngine extends ChangeNotifier {
 
   Country get currentTarget => targets[currentIndex];
   int get totalQuestions => targets.length;
-  Duration get timeAllotted => Duration(seconds: difficulty.secondsPerQuestion);
+  Duration get timeAllotted => Duration(seconds: _secondsPerQuestion);
   Duration get elapsed => _clockElapsed;
 
   /// Rounds actually resolved — equal to [totalQuestions] after a normal

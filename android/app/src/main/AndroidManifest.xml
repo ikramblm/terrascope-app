@@ -33,6 +33,13 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <!-- AdMob App ID (the `~` one) for the TerraScope app in this
+             project's AdMob account. The banner *unit* ID (the `/` one)
+             lives in lib/features/ads/ad_config.dart and must belong to
+             the same publisher number. -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7551414300470852~9329627811"/>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

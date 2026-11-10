@@ -1,33 +1,52 @@
-/// AdMob configuration — the ONLY place you need to edit to go live.
+import 'package:flutter/foundation.dart';
+
+/// AdMob configuration — the ONLY place to edit to go live.
 ///
-/// 1. Create an AdMob account (admob.google.com) and add the app
-///    "TerraScope" (Android, package com.terrascope.terrascope_app).
-/// 2. Copy the **App ID** (ca-app-pub-…~…) into
-///    android/app/src/main/AndroidManifest.xml (the APPLICATION_ID tag).
-/// 3. Create one **Banner** ad unit and paste its ID below.
-/// 4. Set [useTestAds] to false, then build the release bundle.
+/// Debug and profile builds ALWAYS show Google's sample ads, and release
+/// builds ALWAYS use [productionBannerId]. There is no flag to forget:
+/// you can never ship test ads by accident, and you can never click your
+/// own live ads while developing (AdMob bans accounts for that).
 ///
-/// While [useTestAds] is true the app shows Google's sample ads, which
-/// are safe to click and earn nothing. Never ship the production build
-/// with test ads, and never click your own live ads (AdMob bans
-/// accounts for it).
+/// To go live:
+/// 1. In AdMob (admob.google.com) → Apps → TerraScope → Ad units → Add ad
+///    unit → **Banner**. Copy the unit ID, which looks like
+///    `ca-app-pub-1234567890123456/1234567890` (a slash, not a tilde).
+/// 2. Paste it into [productionBannerId] below.
+/// 3. The App ID in android/app/src/main/AndroidManifest.xml must belong
+///    to the same AdMob account (same 16-digit publisher number).
+///
+/// While [productionBannerId] is empty or malformed, release builds show
+/// no ads at all rather than failing to load them forever.
 class AdConfig {
   const AdConfig._();
 
-  /// Flip to false for the real, paying release build.
-  static const bool useTestAds = true;
-
-  /// Your real banner ad unit ID from AdMob.
-  static const String _productionBannerId = 'ca-app-pub-XXXXXXXXXXXXXXXX/YYYYYYYYYY';
+  /// Your real banner ad unit ID from AdMob (format `ca-app-pub-…/…`).
+  static const String productionBannerId =
+      'ca-app-pub-7551414300470852/4207264235';
 
   /// Google's official sample banner unit for Android.
-  static const String _testBannerId = 'ca-app-pub-3940256099942544/6300978111';
+  static const String testBannerId = 'ca-app-pub-3940256099942544/6300978111';
 
-  static String get bannerUnitId =>
-      useTestAds ? _testBannerId : _productionBannerId;
+  static final RegExp _unitIdPattern = RegExp(r'^ca-app-pub-\d{16}/\d{10}$');
 
-  /// False while the production ID is still the placeholder, so a build
-  /// made before step 3 simply shows no ads instead of failing.
-  static bool get isConfigured =>
-      useTestAds || !_productionBannerId.contains('XXXX');
+  /// An ad *unit* ID has a slash; an AdMob *App* ID has a tilde
+  /// (`ca-app-pub-…~…`) and is not valid here.
+  static bool isValidUnitId(String id) => _unitIdPattern.hasMatch(id);
+
+  /// The banner unit to request for the given build mode, or null when no
+  /// ads should be shown.
+  static String? resolveBannerId({
+    required bool releaseMode,
+    required String production,
+  }) {
+    if (!releaseMode) return testBannerId;
+    return isValidUnitId(production) ? production : null;
+  }
+
+  static String? get bannerUnitId => resolveBannerId(
+    releaseMode: kReleaseMode,
+    production: productionBannerId,
+  );
+
+  static bool get isConfigured => bannerUnitId != null;
 }

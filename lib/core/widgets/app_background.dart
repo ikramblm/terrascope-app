@@ -23,22 +23,35 @@ class AppBackground extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        const DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [AppColors.bgGradientTop, AppColors.bgGradientBottom],
-            ),
-          ),
-        ),
-        Positioned(
-          top: -globeSize * 0.32,
-          right: -globeSize * 0.38,
-          child: GlobeGrid(
-            size: globeSize,
-            color: theme.colorScheme.outline.withValues(alpha: 0.10),
-            strokeWidth: 1.2,
+        // Static backdrop in its own layer: the game timer repaints ten
+        // times a second, and without this boundary the gradient and the
+        // big globe were redrawn with it every time.
+        RepaintBoundary(
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              const DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      AppColors.bgGradientTop,
+                      AppColors.bgGradientBottom,
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                top: -globeSize * 0.32,
+                right: -globeSize * 0.38,
+                child: GlobeGrid(
+                  size: globeSize,
+                  color: theme.colorScheme.outline.withValues(alpha: 0.10),
+                  strokeWidth: 1.2,
+                ),
+              ),
+            ],
           ),
         ),
         child,

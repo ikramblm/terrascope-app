@@ -12,6 +12,7 @@ import '../../../../game_engine/logic/multiple_choice_generator.dart';
 import '../../../../game_engine/presentation/screens/difficulty_select_screen.dart';
 import '../../../../game_engine/presentation/screens/multiple_choice_game_screen.dart';
 import '../../../../player/providers/player_providers.dart';
+import '../../../../game_engine/logic/country_difficulty.dart';
 
 const int _questionsPerGame = 10;
 
@@ -103,12 +104,16 @@ class GuessCluesScreen extends ConsumerWidget {
   ) {
     final clueCount = _clueCountFor(difficulty);
     final questions = MultipleChoiceGenerator().generate(
-      pool: countries,
+      pool: CountryDifficulty.filter(countries, difficulty),
       distractorPool: countries,
       count: _questionsPerGame,
       difficulty: difficulty,
       promptFor: (c) => _cluesFor(c).take(clueCount).join(' · '),
     );
-    return MultipleChoiceEngine(questions: questions, difficulty: difficulty);
+    return MultipleChoiceEngine(
+      questions: questions,
+      difficulty: difficulty,
+      secondsPerQuestion: CountryDifficulty.standardSeconds,
+    );
   }
 }

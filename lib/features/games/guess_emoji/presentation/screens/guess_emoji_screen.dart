@@ -15,6 +15,7 @@ import '../../../../game_engine/presentation/screens/difficulty_select_screen.da
 import '../../../../game_engine/presentation/screens/multiple_choice_game_screen.dart';
 import '../../../../player/providers/player_providers.dart';
 import '../../providers/emoji_clue_providers.dart';
+import '../../../../game_engine/logic/country_difficulty.dart';
 
 const int _questionsPerGame = 10;
 
@@ -77,13 +78,17 @@ class GuessEmojiScreen extends ConsumerWidget {
   ) {
     final random = Random();
     final questions = MultipleChoiceGenerator(random: random).generate(
-      pool: eligible,
+      pool: CountryDifficulty.filter(eligible, difficulty),
       distractorPool: fullPool,
       count: _questionsPerGame,
       difficulty: difficulty,
       promptFor: (c) => _pickClue(clues, c.cca3, random),
     );
-    return MultipleChoiceEngine(questions: questions, difficulty: difficulty);
+    return MultipleChoiceEngine(
+      questions: questions,
+      difficulty: difficulty,
+      secondsPerQuestion: CountryDifficulty.standardSeconds,
+    );
   }
 
   String _pickClue(

@@ -10,6 +10,7 @@ import '../../../../game_engine/location_engine/presentation/screens/location_ga
 import '../../../../game_engine/presentation/screens/difficulty_select_screen.dart';
 import '../../../../player/providers/player_providers.dart';
 import '../../../guess_outline/providers/country_outline_providers.dart';
+import '../../../../game_engine/logic/country_difficulty.dart';
 
 const int _questionsPerGame = 10;
 
@@ -44,10 +45,11 @@ class GuessLocationScreen extends ConsumerWidget {
                 LocationGameScreen(
                   engineBuilder: () => LocationEngine(
                     targets: (List.of(
-                      eligible,
+                      CountryDifficulty.filter(eligible, difficulty),
                     )..shuffle()).take(_questionsPerGame).toList(),
                     difficulty: difficulty,
                     outlines: outlines,
+                    secondsPerQuestion: CountryDifficulty.standardSeconds,
                   ),
                   outlines: outlines,
                   onSessionComplete: (GameResult result) {

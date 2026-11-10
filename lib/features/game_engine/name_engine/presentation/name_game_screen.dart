@@ -182,11 +182,22 @@ class _PlayingView extends StatelessWidget {
     final accent = accentForCategory(GameCategory.name);
     final feedbackColor = _feedbackColor(context);
 
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
+    // Scrollable (with the page's full height as a minimum) so that when
+    // the on-screen keyboard opens on a short phone the content scrolls
+    // instead of overflowing — that overflow was the layout glitch.
+    return LayoutBuilder(
+      builder: (context, constraints) => SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: (constraints.maxHeight - 28)
+                .clamp(0.0, double.infinity)
+                .toDouble(),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -285,38 +296,39 @@ class _PlayingView extends StatelessWidget {
               label: const Text("I'm Done"),
             ),
           const SizedBox(height: 16),
-          Expanded(
-            child: engine.foundCount == 0
-                ? Center(
+          engine.foundCount == 0
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  child: Center(
                     child: Text(
                       'Countries you find will appear here.',
                       style: theme.textTheme.bodyMedium,
                       textAlign: TextAlign.center,
                     ),
-                  )
-                : SingleChildScrollView(
-                    child: Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: [
-                        for (final country in engine.foundCountriesSorted)
-                          Chip(
-                            label: Text(country.nameCommon),
-                            backgroundColor: AppColors.green.withValues(
-                              alpha: 0.12,
-                            ),
-                            side: BorderSide.none,
-                            avatar: const Icon(
-                              Icons.check_circle,
-                              color: AppColors.green,
-                              size: 18,
-                            ),
-                          ),
-                      ],
-                    ),
                   ),
+                )
+              : Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    for (final country in engine.foundCountriesSorted)
+                      Chip(
+                        label: Text(country.nameCommon),
+                        backgroundColor: AppColors.green.withValues(
+                          alpha: 0.12,
+                        ),
+                        side: BorderSide.none,
+                        avatar: const Icon(
+                          Icons.check_circle,
+                          color: AppColors.green,
+                          size: 18,
+                        ),
+                      ),
+                  ],
+                ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

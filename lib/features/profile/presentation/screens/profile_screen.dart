@@ -6,6 +6,7 @@ import '../../../../core/widgets/app_background.dart';
 import '../../../../core/widgets/fade_slide_in.dart';
 import '../../../../core/widgets/max_width_box.dart';
 import '../../../../core/widgets/stat_card.dart';
+import '../../../ads/privacy_choices_card.dart';
 import '../../../player/domain/achievement.dart';
 import '../../../player/domain/player_level.dart';
 import '../../../player/domain/player_profile.dart';
@@ -70,19 +71,19 @@ class ProfileScreen extends ConsumerWidget {
                     const FadeSlideIn(index: 2, child: DuelEntryCard()),
                     const SizedBox(height: 12),
                     const FadeSlideIn(index: 3, child: SoundToggleCard()),
+                    const PrivacyChoicesCard(),
                     const SizedBox(height: 20),
                     FadeSlideIn(
                       index: 4,
                       child: GridView(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 12,
-                              crossAxisSpacing: 12,
-                              mainAxisExtent: scaledExtent(context, 128),
-                            ),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 12,
+                          crossAxisSpacing: 12,
+                          mainAxisExtent: scaledExtent(context, 128),
+                        ),
                         children: [
                           StatCard(
                             icon: Icons.monetization_on_rounded,
@@ -178,13 +179,12 @@ class ProfileScreen extends ConsumerWidget {
                       child: GridView(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              mainAxisSpacing: 10,
-                              crossAxisSpacing: 10,
-                              mainAxisExtent: scaledExtent(context, 164),
-                            ),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                          mainAxisExtent: scaledExtent(context, 164),
+                        ),
                         children: [
                           for (final achievement in kAchievements)
                             AchievementBadgeTile(

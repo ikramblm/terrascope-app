@@ -22,7 +22,10 @@ class SoundService {
   /// tapping an answer that's also the moment `playCorrect` fires), and
   /// sharing one player would have each cut the other off mid-sample.
   final AudioPlayer _tapPlayer = AudioPlayer()
-    ..setReleaseMode(ReleaseMode.stop);
+    ..setReleaseMode(ReleaseMode.stop)
+    // SoundPool on Android: starts instantly instead of preparing a
+    // MediaPlayer on every tap, which made taps feel laggy.
+    ..setPlayerMode(PlayerMode.lowLatency);
 
   /// [comboLevel] steps the pitch up for consecutive correct answers —
   /// the same one `correct.wav` sample, just played back faster (which

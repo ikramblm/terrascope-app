@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/theme/app_colors.dart';
+import '../../ads/ad_service.dart';
+import '../../ads/banner_ad_widget.dart';
 import '../../games/data/quick_play.dart';
 import '../../player/presentation/widgets/streak_badge.dart';
 
@@ -26,19 +28,45 @@ class AppShell extends StatelessWidget {
       // drawn on top is unaffected by whatever each tab paints beneath
       // it, so this one placement covers all four tabs with no
       // per-screen edits.
-      body: Stack(
-        children: [
-          navigationShell,
-          const SafeArea(
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(0, 12, 16, 0),
-                child: StreakBadge(),
+      // Ads sit in a strip at the very top of the four tab screens only
+      // (never during a game, never next to the nav buttons, so no
+      // accidental taps). Until ads are ready the layout is exactly as
+      // it was: the strip is empty and the content keeps its own safe
+      // area.
+      body: ValueListenableBuilder<bool>(
+        valueListenable: AdService.instance.ready,
+        builder: (context, adsOn, _) => Column(
+          children: [
+            adsOn ? const _AdStrip() : const SizedBox.shrink(),
+            Expanded(
+              child: MediaQuery.removePadding(
+                context: context,
+                removeTop: adsOn,
+                // The streak badge sits in a Stack layer *above*
+                // navigationShell, not behind it — unlike AppBackground
+                // (a background texture, which a nested Scaffold's
+                // opaque fill would hide), an overlay drawn on top is
+                // unaffected by whatever each tab paints beneath it, so
+                // this one placement covers all four tabs with no
+                // per-screen edits.
+                child: Stack(
+                  children: [
+                    navigationShell,
+                    const SafeArea(
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(0, 12, 16, 0),
+                          child: StreakBadge(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       floatingActionButton: _PlayFab(onTap: () => launchQuickPlay(context)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -52,6 +80,24 @@ class AppShell extends StatelessWidget {
           // grid is the tab's whole identity.
           initialLocation:
               index == 1 || index == navigationShell.currentIndex,
+        ),
+      ),
+    );
+  }
+}
+
+class _AdStrip extends StatelessWidget {
+  const _AdStrip();
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: ColoredBox(
+        color: AppColors.bgGradientTop,
+        child: const SafeArea(
+          bottom: false,
+          child: Center(child: BannerAdWidget()),
         ),
       ),
     );

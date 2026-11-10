@@ -228,7 +228,12 @@ class _QuestionView extends StatelessWidget {
             centerLabel: centerLabelBuilder?.call(engine),
           ),
           const SizedBox(height: 12),
-          TimerBar(remaining: engine.timeRemaining, total: engine.timeAllotted),
+          RepaintBoundary(
+            child: TimerBar(
+              remaining: engine.timeRemaining,
+              total: engine.timeAllotted,
+            ),
+          ),
           const SizedBox(height: 12),
           ComboBanner(combo: engine.combo),
           const SizedBox(height: 8),

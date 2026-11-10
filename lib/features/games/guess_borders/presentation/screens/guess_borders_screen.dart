@@ -12,6 +12,7 @@ import '../../../../game_engine/logic/multiple_choice_generator.dart';
 import '../../../../game_engine/presentation/screens/difficulty_select_screen.dart';
 import '../../../../game_engine/presentation/screens/multiple_choice_game_screen.dart';
 import '../../../../player/providers/player_providers.dart';
+import '../../../../game_engine/logic/country_difficulty.dart';
 
 const int _questionsPerGame = 10;
 
@@ -69,13 +70,17 @@ class GuessBordersScreen extends ConsumerWidget {
     GameDifficulty difficulty,
   ) {
     final questions = MultipleChoiceGenerator().generate(
-      pool: eligible,
+      pool: CountryDifficulty.filter(eligible, difficulty),
       distractorPool: fullPool,
       count: _questionsPerGame,
       difficulty: difficulty,
       promptFor: (c) =>
           c.borders.map((code) => byCca3[code]?.nameCommon ?? code).join(' · '),
     );
-    return MultipleChoiceEngine(questions: questions, difficulty: difficulty);
+    return MultipleChoiceEngine(
+      questions: questions,
+      difficulty: difficulty,
+      secondsPerQuestion: CountryDifficulty.standardSeconds,
+    );
   }
 }

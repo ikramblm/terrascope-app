@@ -60,7 +60,7 @@ class DifficultySelectScreen extends StatelessWidget {
                   OptionTile(
                     title: difficulty.label,
                     subtitle:
-                        '${difficulty.secondsPerQuestion}s per question · ${difficulty.basePoints} base pts',
+                        '${difficulty.description} · ${difficulty.basePoints} base pts',
                     icon: _iconFor(difficulty),
                     color: _accentFor(difficulty),
                     onTap: () => onSelect(difficulty),

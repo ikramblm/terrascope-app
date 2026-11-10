@@ -17,6 +17,7 @@ import '../../../../game_engine/presentation/screens/multiple_choice_game_screen
 import '../../../../player/providers/player_providers.dart';
 import '../../providers/country_outline_providers.dart';
 import '../widgets/country_outline_shape.dart';
+import '../../../../game_engine/logic/country_difficulty.dart';
 
 const int _questionsPerGame = 10;
 
@@ -79,7 +80,7 @@ class GuessOutlineScreen extends ConsumerWidget {
     GameDifficulty difficulty,
   ) {
     final questions = MultipleChoiceGenerator(random: Random()).generate(
-      pool: eligible,
+      pool: CountryDifficulty.filter(eligible, difficulty),
       distractorPool: fullPool,
       count: _questionsPerGame,
       difficulty: difficulty,
@@ -89,6 +90,10 @@ class GuessOutlineScreen extends ConsumerWidget {
       // always text).
       promptFor: (c) => c.cca3,
     );
-    return MultipleChoiceEngine(questions: questions, difficulty: difficulty);
+    return MultipleChoiceEngine(
+      questions: questions,
+      difficulty: difficulty,
+      secondsPerQuestion: CountryDifficulty.standardSeconds,
+    );
   }
 }

@@ -51,3 +51,9 @@ app.*.map.json
 /android/app/upload-keystore.jks
 *.jks
 *.keystore
+# Catch renamed copies too (e.g. "key (2).properties" from a duplicated
+# upload) — a plain key.properties rule missed one and leaked a password.
+/android/key*.properties
+/android/local*.properties
+* (2)*
+DEPLOYMENT.md

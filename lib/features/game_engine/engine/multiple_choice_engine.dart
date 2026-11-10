@@ -23,7 +23,16 @@ class MultipleChoiceEngine extends ChangeNotifier {
     required this.difficulty,
     this.suddenDeath = false,
     this.globalTimeLimit,
-  }) : timeRemaining = Duration(seconds: difficulty.secondsPerQuestion);
+    int? secondsPerQuestion,
+  }) : _secondsPerQuestion = secondsPerQuestion ?? difficulty.secondsPerQuestion,
+       timeRemaining = Duration(
+         seconds: secondsPerQuestion ?? difficulty.secondsPerQuestion,
+       );
+
+  /// Clock for each question. Defaults to the difficulty's own clock;
+  /// the Easy/Medium/Hard games pass a shared one, because there the
+  /// level is about the countries, not the speed.
+  final int _secondsPerQuestion;
 
   final List<MultipleChoiceQuestion> questions;
   final GameDifficulty difficulty;
@@ -78,7 +87,7 @@ class MultipleChoiceEngine extends ChangeNotifier {
 
   MultipleChoiceQuestion get currentQuestion => questions[currentIndex];
   int get totalQuestions => questions.length;
-  Duration get timeAllotted => Duration(seconds: difficulty.secondsPerQuestion);
+  Duration get timeAllotted => Duration(seconds: _secondsPerQuestion);
   Duration get elapsed => _clockElapsed;
 
   void start() {

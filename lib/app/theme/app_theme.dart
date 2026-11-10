@@ -82,7 +82,7 @@ abstract class AppTheme {
       scaffoldBackgroundColor: background,
       textTheme: textTheme,
       fontFamily: textTheme.bodyMedium?.fontFamily,
-      splashFactory: InkSparkle.splashFactory,
+      splashFactory: InkRipple.splashFactory,
       appBarTheme: AppBarTheme(
         backgroundColor: background,
         foregroundColor: textPrimary,
