@@ -79,5 +79,39 @@ void main() {
         reason: 'banner unit and manifest App ID are from different accounts',
       );
     });
+    test('production interstitial and rewarded units match the App ID account', () {
+      for (final id in [
+        AdConfig.productionInterstitialId,
+        AdConfig.productionRewardedId,
+      ]) {
+        if (id.isEmpty) continue; // not created yet: release shows none
+        expect(AdConfig.isValidUnitId(id), isTrue);
+        expect(
+          id.startsWith('${appIdMatch!.group(1)}/'),
+          isTrue,
+          reason: '$id is from a different AdMob account than the manifest',
+        );
+      }
+      expect(AdConfig.isValidUnitId(AdConfig.productionInterstitialId), isTrue);
+    });
+
+    test('debug builds use Google test units for every format', () {
+      expect(
+        AdConfig.resolveId(
+          releaseMode: false,
+          production: AdConfig.productionInterstitialId,
+          test: AdConfig.testInterstitialId,
+        ),
+        AdConfig.testInterstitialId,
+      );
+      expect(
+        AdConfig.resolveId(
+          releaseMode: true,
+          production: '',
+          test: AdConfig.testRewardedId,
+        ),
+        isNull,
+      );
+    });
   });
 }

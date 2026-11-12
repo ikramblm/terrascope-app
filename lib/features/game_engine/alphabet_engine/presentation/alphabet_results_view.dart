@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/router/route_paths.dart';
+import '../../../ads/game_end_ads_section.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/stat_card.dart';
 import '../../../games/data/quick_play.dart';
@@ -93,6 +94,7 @@ class AlphabetResultsView extends ConsumerWidget {
           const SizedBox(height: 16),
           XpProgressBar(profile: profile),
           const SizedBox(height: 20),
+          const GameEndAds(),
           ElevatedButton(
             onPressed: onPlayAgain,
             style: ElevatedButton.styleFrom(

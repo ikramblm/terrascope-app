@@ -98,6 +98,20 @@ class PlayerProfileNotifier extends Notifier<PlayerProfile> {
   /// [state] below (coins/title/freeze), never just a cosmetic claim.
   ChestReward? lastChestReward;
 
+  /// Coins the last session paid out (base + chest) — what a rewarded ad
+  /// would double — and whether that bonus was already claimed.
+  int lastSessionCoins = 0;
+  bool lastSessionBonusClaimed = false;
+
+  /// Grants the rewarded-ad bonus: one more copy of the last session's
+  /// coins. Once per session; a second call does nothing.
+  void claimDoubleCoins() {
+    if (lastSessionBonusClaimed || lastSessionCoins <= 0) return;
+    lastSessionBonusClaimed = true;
+    state = state.copyWith(coins: state.coins + lastSessionCoins);
+    _persist();
+  }
+
   /// Applies a completed game session's outcome: XP, coins, streak, a
   /// mystery-chest roll, and newly-discovered countries. Called once
   /// per session by every game mode via the shared game engine — the
@@ -116,6 +130,8 @@ class PlayerProfileNotifier extends Notifier<PlayerProfile> {
       ownedTitles: state.unlockedCosmeticTitles,
     );
     lastChestReward = chest;
+    lastSessionCoins = coinsEarned + chest.bonusCoins;
+    lastSessionBonusClaimed = false;
 
     state = state.copyWith(
       totalXp: state.totalXp + result.xpEarned,

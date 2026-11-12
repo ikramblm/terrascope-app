@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/app.dart';
 import 'features/ads/ad_service.dart';
+import 'features/ads/game_end_ads.dart';
 import 'features/notifications/services/notification_service.dart';
 import 'features/player/data/player_profile_repository.dart';
 import 'features/player/providers/player_providers.dart';
@@ -35,6 +36,8 @@ void main() async {
   // Consent form + ads SDK start in the background; the app never waits
   // for them (and never fails if they do).
   unawaited(AdService.instance.initialize());
+  InterstitialManager.instance.start();
+  RewardedManager.instance.start();
 
   runApp(
     ProviderScope(
