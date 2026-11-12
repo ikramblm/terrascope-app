@@ -57,3 +57,6 @@ app.*.map.json
 /android/local*.properties
 * (2)*
 DEPLOYMENT.md
+
+# Gradle output for the Android project root
+/android/build/

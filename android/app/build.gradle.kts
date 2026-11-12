@@ -53,6 +53,12 @@ android {
 
     buildTypes {
         release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
             // Falls back to the debug key only when no upload keystore is
             // configured (e.g. a fresh checkout without key.properties),
             // so `flutter run --release` still works for local testing —
